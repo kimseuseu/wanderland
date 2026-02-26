@@ -8,9 +8,8 @@ export function Modal({ open, onClose, title, children }) {
     <div
       style={{
         position: 'fixed', inset: 0, zIndex: 1000,
-        display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
         background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(16px)',
-        paddingTop: 68, overflowY: 'auto',
       }}
       onClick={onClose}
     >
@@ -20,8 +19,7 @@ export function Modal({ open, onClose, title, children }) {
         style={{
           background: 'var(--bg-secondary)', border: '1px solid var(--border)',
           borderRadius: 16, width: '94%', maxWidth: 820,
-          maxHeight: 'calc(100vh - 90px)', overflow: 'auto', padding: '28px 32px',
-          marginBottom: 24, flexShrink: 0,
+          maxHeight: '88vh', overflow: 'auto', padding: '28px 32px',
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
