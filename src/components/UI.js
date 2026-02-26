@@ -19,8 +19,8 @@ export function Modal({ open, onClose, title, children }) {
         onClick={(e) => e.stopPropagation()}
         style={{
           background: 'var(--bg-secondary)', border: '1px solid var(--border)',
-          borderRadius: 16, width: '94%', maxWidth: 620,
-          maxHeight: 'calc(100vh - 90px)', overflow: 'auto', padding: '26px 28px',
+          borderRadius: 16, width: '94%', maxWidth: 820,
+          maxHeight: 'calc(100vh - 90px)', overflow: 'auto', padding: '28px 32px',
           marginBottom: 24, flexShrink: 0,
         }}
       >

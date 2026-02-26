@@ -6,20 +6,23 @@ import { Modal, Input, TextArea, Button, Tag, Section, Chip } from './UI';
 import { BUILDS as INITIAL_BUILDS } from '@/data';
 
 const typeColor = (t) => t === '섬광' ? '#88ccff' : t === '클래식' ? '#ffcc44' : t === '신판' ? '#88ff88' : 'var(--text-secondary)';
+const catColor = { '총기': '#ff6b6b', '원소': '#88ccff', '하이브리드': '#cc88ff' };
+const categories = ['전체', '총기', '원소', '하이브리드'];
+const weaponTypes = ['전체', '권총', '산탄총', '기관단총', '돌격소총', '저격소총', '경기관총', '석궁'];
 
 export default function BuildsPage() {
   const [builds, setBuilds] = useState(INITIAL_BUILDS);
   const [sel, setSel] = useState(null);
   const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('all');
+  const [catFilter, setCatFilter] = useState('전체');
+  const [weaponFilter, setWeaponFilter] = useState('전체');
 
   const filtered = builds.filter((b) => {
-    const ms = b.name.includes(search) || b.author.includes(search) || b.mainWeapon.includes(search) || b.tags.some((t) => t.includes(search));
-    const mf = filter === 'all' || b.tags.includes(filter);
-    return ms && mf;
+    const ms = b.name.includes(search) || b.author.includes(search) || b.mainWeapon.includes(search) || (b.tags && b.tags.some((t) => t.includes(search)));
+    const mc = catFilter === '전체' || b.category === catFilter;
+    const mw = weaponFilter === '전체' || b.weaponType === weaponFilter;
+    return ms && mc && mw;
   });
-
-  const tags = ['all', 'PvE', 'PvP', '저격', '레이드', '딜러', '탱커', '서포터'];
 
   return (
     <div className="fade-in">
@@ -37,13 +40,27 @@ export default function BuildsPage() {
           <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="무기, 작성자, 태그 검색..."
             style={{ width: '100%', padding: '9px 13px 9px 38px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', borderRadius: 10, color: 'var(--text-primary)', fontSize: 14, fontFamily: 'var(--font-body)', outline: 'none' }} />
         </div>
-        <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
-          {tags.map((t) => (
-            <button key={t} onClick={() => setFilter(t)}
-              style={{ padding: '4px 13px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: '1px solid', cursor: 'pointer', transition: 'all 0.2s', fontFamily: 'var(--font-body)', background: filter === t ? '#fff' : 'transparent', color: filter === t ? '#000' : 'var(--text-muted)', borderColor: filter === t ? '#fff' : 'var(--border)' }}>
-              {t === 'all' ? '전체' : t}
-            </button>
-          ))}
+        <div style={{ marginBottom: 8 }}>
+          <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>대분류</div>
+          <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
+            {categories.map((c) => (
+              <button key={c} onClick={() => setCatFilter(c)}
+                style={{ padding: '4px 13px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: '1px solid', cursor: 'pointer', transition: 'all 0.2s', fontFamily: 'var(--font-body)', background: catFilter === c ? (catColor[c] || '#fff') : 'transparent', color: catFilter === c ? (c === '전체' ? '#000' : '#000') : (catColor[c] || 'var(--text-muted)'), borderColor: catFilter === c ? (catColor[c] || '#fff') : 'var(--border)' }}>
+                {c}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div>
+          <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>무기 종류</div>
+          <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
+            {weaponTypes.map((w) => (
+              <button key={w} onClick={() => setWeaponFilter(w)}
+                style={{ padding: '4px 13px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: '1px solid', cursor: 'pointer', transition: 'all 0.2s', fontFamily: 'var(--font-body)', background: weaponFilter === w ? '#fff' : 'transparent', color: weaponFilter === w ? '#000' : 'var(--text-muted)', borderColor: weaponFilter === w ? '#fff' : 'var(--border)' }}>
+                {w}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -78,7 +95,11 @@ export default function BuildsPage() {
                   <div style={{ fontWeight: 700, marginTop: 1 }}>{b.subWeapon}</div>
                 </div>
               </div>
-              <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 10 }}>{b.tags?.map((t) => <Tag key={t}>{t}</Tag>)}</div>
+              <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 10 }}>
+                {b.category && <Tag color={catColor[b.category]}>{b.category}</Tag>}
+                {b.weaponType && <Tag>{b.weaponType}</Tag>}
+                {b.tags?.map((t) => <Tag key={t}>{t}</Tag>)}
+              </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 10, borderTop: '1px solid var(--border)' }}>
                 <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>♥ {b.likes}</span>
                 <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>상세보기 →</span>
@@ -95,6 +116,8 @@ export default function BuildsPage() {
             {/* Header info */}
             <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 20, flexWrap: 'wrap' }}>
               {sel.grade && <Tag color="#ffd700">{sel.grade}</Tag>}
+              {sel.category && <Tag color={catColor[sel.category]}>{sel.category}</Tag>}
+              {sel.weaponType && <Tag>{sel.weaponType}</Tag>}
               {sel.tags?.map((t) => <Tag key={t}>{t}</Tag>)}
               <span style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginLeft: 'auto' }}>{sel.author} · {sel.date}</span>
             </div>
