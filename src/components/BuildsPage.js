@@ -56,37 +56,77 @@ function StatRow({ label, value, accent }) {
 function BuildDetail({ build, onBack }) {
   return (
     <div className="fade-in">
-      {/* ── Header ── */}
-      <div style={{ marginBottom: 28 }}>
-        <button
-          onClick={onBack}
-          style={{
-            background: 'none', border: 'none', color: 'var(--text-muted)',
-            cursor: 'pointer', padding: '4px 0', fontSize: 13, fontFamily: 'var(--font-body)',
-            display: 'flex', alignItems: 'center', gap: 4, marginBottom: 18,
-            transition: 'color 0.2s',
-          }}
-          onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
-          onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
-        >
-          <Icons.ChevronLeft /> 빌드 목록으로
-        </button>
+      {/* ── Back button ── */}
+      <button
+        onClick={onBack}
+        style={{
+          background: 'none', border: 'none', color: 'var(--text-muted)',
+          cursor: 'pointer', padding: '4px 0', fontSize: 13, fontFamily: 'var(--font-body)',
+          display: 'flex', alignItems: 'center', gap: 4, marginBottom: 14,
+          transition: 'color 0.2s',
+        }}
+        onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+        onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+      >
+        <Icons.ChevronLeft /> 빌드 목록으로
+      </button>
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12 }}>
-          <div>
-            <h2 style={{ fontSize: 24, fontWeight: 800, fontFamily: 'var(--font-display)', marginBottom: 10 }}>
-              {build.name}
-            </h2>
-            <div style={{ display: 'flex', gap: 6, alignItems: 'center', flexWrap: 'wrap' }}>
-              {build.grade && <Tag color="#ffd700">{build.grade}</Tag>}
-              {build.category && <Tag color={catColor[build.category]}>{build.category}</Tag>}
-              {build.weaponType && <Tag>{build.weaponType}</Tag>}
-              {build.tags?.map((t) => <Tag key={t}>{t}</Tag>)}
-            </div>
+      {/* ── Hero Banner with weapon image ── */}
+      <div style={{
+        position: 'relative', borderRadius: 14, overflow: 'hidden',
+        marginBottom: 20, border: '1px solid var(--border)',
+        background: 'var(--bg-card)',
+      }}>
+        {build.image && (
+          <div style={{
+            height: 220, overflow: 'hidden',
+            background: 'var(--bg-tertiary)',
+          }}>
+            <img
+              src={build.image} alt={build.name}
+              style={{
+                width: '100%', height: '100%', objectFit: 'cover',
+                opacity: 0.5, filter: 'blur(2px) saturate(0.8)',
+              }}
+            />
+            {/* Gradient overlay */}
+            <div style={{
+              position: 'absolute', inset: 0,
+              background: 'linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.85) 70%, var(--bg-card) 100%)',
+            }} />
+            {/* Weapon image - sharp, centered */}
+            <img
+              src={build.image} alt=""
+              style={{
+                position: 'absolute', top: '50%', left: '50%',
+                transform: 'translate(-50%, -60%)',
+                height: 140, objectFit: 'contain',
+                filter: 'drop-shadow(0 4px 24px rgba(0,0,0,0.6))',
+              }}
+            />
           </div>
-          <div style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', textAlign: 'right' }}>
-            <div style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>{build.author}</div>
-            <div style={{ marginTop: 2 }}>{build.date}</div>
+        )}
+        {/* Build info overlay */}
+        <div style={{
+          padding: build.image ? '0 24px 20px' : '20px 24px',
+          position: 'relative',
+        }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 12 }}>
+            <div>
+              <h2 style={{ fontSize: 24, fontWeight: 800, fontFamily: 'var(--font-display)', marginBottom: 10 }}>
+                {build.name}
+              </h2>
+              <div style={{ display: 'flex', gap: 6, alignItems: 'center', flexWrap: 'wrap' }}>
+                {build.grade && <Tag color="#ffd700">{build.grade}</Tag>}
+                {build.category && <Tag color={catColor[build.category]}>{build.category}</Tag>}
+                {build.weaponType && <Tag>{build.weaponType}</Tag>}
+                {build.tags?.map((t) => <Tag key={t}>{t}</Tag>)}
+              </div>
+            </div>
+            <div style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', textAlign: 'right', paddingBottom: 2 }}>
+              <div style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>{build.author}</div>
+              <div style={{ marginTop: 2 }}>{build.date}</div>
+            </div>
           </div>
         </div>
       </div>
