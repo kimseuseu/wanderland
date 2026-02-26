@@ -24,7 +24,7 @@ export default function HomePage({ onNavigate }) {
       alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '40px 20px',
     }}>
       <div style={{ marginBottom: 44 }}>
-        <img src="/images/logo.jpg" alt="Wanderland" style={{ height: 72, marginBottom: 18, filter: 'brightness(1.1)' }} />
+        <img src="/images/logo.png" alt="Wanderland" style={{ height: 72, marginBottom: 18, filter: 'brightness(1.1)' }} />
         <div style={{ width: 36, height: 1, background: 'var(--text-muted)', margin: '0 auto 12px' }} />
         <p style={{ fontSize: 13, color: 'var(--text-secondary)', letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 700, fontFamily: 'var(--font-display)' }}>
           낙원 하이브 — Once Human

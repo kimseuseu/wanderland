@@ -13,7 +13,7 @@ export default function MembersPage() {
   const [showAdd, setShowAdd] = useState(false);
   const [sel, setSel] = useState(null);
   const [search, setSearch] = useState('');
-  const [form, setForm] = useState({ name: '', role: '신입사원', level: '1', deviance: '0', note: '' });
+  const [form, setForm] = useState({ name: '', role: '신입사원', scenario: '혹독한 겨울', note: '' });
 
   const filtered = members
     .filter((m) => m.name.toLowerCase().includes(search.toLowerCase()) || m.role.includes(search))
@@ -21,9 +21,9 @@ export default function MembersPage() {
 
   const add = () => {
     if (!form.name) return;
-    setMembers([...members, { ...form, id: Date.now(), level: +form.level || 1, deviance: +form.deviance || 0, joinDate: new Date().toISOString().split('T')[0] }]);
+    setMembers([...members, { ...form, id: Date.now(), joinDate: new Date().toISOString().split('T')[0] }]);
     setShowAdd(false);
-    setForm({ name: '', role: '신입사원', level: '1', deviance: '0', note: '' });
+    setForm({ name: '', role: '신입사원', scenario: '혹독한 겨울', note: '' });
   };
 
   return (
@@ -59,13 +59,8 @@ export default function MembersPage() {
                 <Tag color={rc[m.role]}>{m.role}</Tag>
               </div>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, fontSize: 11 }}>
-              <div style={{ padding: '5px 8px', background: 'var(--bg-tertiary)', borderRadius: 6, textAlign: 'center' }}>
-                <div style={{ color: 'var(--text-muted)' }}>레벨</div><div style={{ fontWeight: 700, marginTop: 1 }}>{m.level}</div>
-              </div>
-              <div style={{ padding: '5px 8px', background: 'var(--bg-tertiary)', borderRadius: 6, textAlign: 'center' }}>
-                <div style={{ color: 'var(--text-muted)' }}>디비전스</div><div style={{ fontWeight: 700, marginTop: 1 }}>{m.deviance}</div>
-              </div>
+            <div style={{ padding: '5px 8px', background: 'var(--bg-tertiary)', borderRadius: 6, textAlign: 'center', fontSize: 11 }}>
+              <div style={{ color: 'var(--text-muted)' }}>시나리오</div><div style={{ fontWeight: 700, marginTop: 1 }}>{m.scenario}</div>
             </div>
           </div>
         ))}
@@ -85,13 +80,11 @@ export default function MembersPage() {
                 <Tag color={rc[sel.role]}>{sel.role}</Tag>
               </div>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 18 }}>
-              {[['레벨', sel.level], ['디비전스', sel.deviance]].map(([l, v]) => (
-                <div key={l} style={{ padding: 12, background: 'var(--bg-tertiary)', borderRadius: 8, textAlign: 'center' }}>
-                  <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 3, textTransform: 'uppercase', letterSpacing: '0.05em' }}>{l}</div>
-                  <div style={{ fontSize: 20, fontWeight: 800, fontFamily: 'var(--font-display)' }}>{v}</div>
-                </div>
-              ))}
+            <div style={{ marginBottom: 18 }}>
+              <div style={{ padding: 12, background: 'var(--bg-tertiary)', borderRadius: 8, textAlign: 'center' }}>
+                <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 3, textTransform: 'uppercase', letterSpacing: '0.05em' }}>시나리오</div>
+                <div style={{ fontSize: 20, fontWeight: 800, fontFamily: 'var(--font-display)' }}>{sel.scenario}</div>
+              </div>
             </div>
             {sel.note && <div style={{ padding: 12, background: 'var(--bg-tertiary)', borderRadius: 8, fontSize: 14, color: 'var(--text-secondary)', marginBottom: 12 }}>{sel.note}</div>}
             <div style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>가입일: {sel.joinDate}</div>
@@ -113,10 +106,7 @@ export default function MembersPage() {
             ))}
           </div>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
-          <Input label="레벨" value={form.level} onChange={(e) => setForm({ ...form, level: e.target.value })} />
-          <Input label="디비전스" value={form.deviance} onChange={(e) => setForm({ ...form, deviance: e.target.value })} />
-        </div>
+        <Input label="시나리오" value={form.scenario} onChange={(e) => setForm({ ...form, scenario: e.target.value })} placeholder="현재 시나리오" />
         <TextArea label="메모" value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })} placeholder="선택" />
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 6 }}>
           <Button variant="secondary" onClick={() => setShowAdd(false)}>취소</Button>

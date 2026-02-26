@@ -29,7 +29,7 @@ export default function Page() {
       }}>
         <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 52 }}>
           <div onClick={() => setPage('home')} style={{ cursor: 'pointer' }}>
-            <img src="/images/logo.jpg" alt="Wanderland" style={{ height: 26, filter: 'brightness(1.1)' }} />
+            <img src="/images/logo.png" alt="Wanderland" style={{ height: 26, filter: 'brightness(1.1)' }} />
           </div>
           <div style={{ display: 'flex', gap: 1 }}>
             {nav.map((n) => (
