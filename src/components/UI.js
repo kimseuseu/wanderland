@@ -21,7 +21,7 @@ export function Modal({ open, onClose, title, children }) {
         style={{
           background: 'var(--bg-secondary)', border: '1px solid var(--border)',
           borderRadius: 16, width: '94%', maxWidth: 860,
-          maxHeight: 'calc(100vh - 88px)', overflowY: 'auto',
+          height: 'calc(100vh - 88px)',
           padding: '28px 32px',
           display: 'flex', flexDirection: 'column',
         }}
