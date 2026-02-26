@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Icons } from './Icons';
-import { Modal, Input, TextArea, Button, Tag, Section, Chip } from './UI';
+import { Tag } from './UI';
 import { BUILDS as INITIAL_BUILDS } from '@/data';
 
 const typeColor = (t) => t === '섬광' ? '#88ccff' : t === '클래식' ? '#ffcc44' : t === '신판' ? '#88ff88' : 'var(--text-secondary)';
@@ -10,13 +10,295 @@ const catColor = { '총기': '#ff6b6b', '원소': '#88ccff', '하이브리드': 
 const categories = ['전체', '총기', '원소', '하이브리드'];
 const weaponTypes = ['전체', '권총', '산탄총', '기관단총', '돌격소총', '저격소총', '경기관총', '석궁'];
 
+/* ─── Panel: 게임 UI 스타일 패널 ─── */
+function Panel({ title, icon, accent, children, style }) {
+  return (
+    <div style={{
+      background: 'var(--bg-card)', border: '1px solid var(--border)',
+      borderRadius: 12, overflow: 'hidden', ...style,
+    }}>
+      {title && (
+        <div style={{
+          padding: '12px 16px', borderBottom: '1px solid var(--border)',
+          display: 'flex', alignItems: 'center', gap: 8,
+          background: 'rgba(255,255,255,0.02)',
+        }}>
+          {icon && <span style={{ color: accent || 'var(--text-muted)', display: 'flex' }}>{icon}</span>}
+          <span style={{
+            fontSize: 11, fontWeight: 700, color: accent || 'var(--text-muted)',
+            textTransform: 'uppercase', letterSpacing: '0.1em',
+          }}>{title}</span>
+        </div>
+      )}
+      <div style={{ padding: '14px 16px' }}>
+        {children}
+      </div>
+    </div>
+  );
+}
+
+/* ─── Stat Row: 인게임 스탯 행 ─── */
+function StatRow({ label, value, accent }) {
+  return (
+    <div style={{
+      display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+      padding: '8px 12px', background: 'var(--bg-tertiary)', borderRadius: 6, marginBottom: 4,
+    }}>
+      <span style={{ fontSize: 11, color: 'var(--text-muted)', fontWeight: 600 }}>{label}</span>
+      <span style={{ fontSize: 13, fontWeight: 700, color: accent || 'var(--text-primary)' }}>{value}</span>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════
+   빌드 상세 페이지
+   ═══════════════════════════════════════════ */
+function BuildDetail({ build, onBack }) {
+  return (
+    <div className="fade-in">
+      {/* ── Header ── */}
+      <div style={{ marginBottom: 28 }}>
+        <button
+          onClick={onBack}
+          style={{
+            background: 'none', border: 'none', color: 'var(--text-muted)',
+            cursor: 'pointer', padding: '4px 0', fontSize: 13, fontFamily: 'var(--font-body)',
+            display: 'flex', alignItems: 'center', gap: 4, marginBottom: 18,
+            transition: 'color 0.2s',
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.color = 'var(--text-primary)'}
+          onMouseLeave={(e) => e.currentTarget.style.color = 'var(--text-muted)'}
+        >
+          <Icons.ChevronLeft /> 빌드 목록으로
+        </button>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12 }}>
+          <div>
+            <h2 style={{ fontSize: 24, fontWeight: 800, fontFamily: 'var(--font-display)', marginBottom: 10 }}>
+              {build.name}
+            </h2>
+            <div style={{ display: 'flex', gap: 6, alignItems: 'center', flexWrap: 'wrap' }}>
+              {build.grade && <Tag color="#ffd700">{build.grade}</Tag>}
+              {build.category && <Tag color={catColor[build.category]}>{build.category}</Tag>}
+              {build.weaponType && <Tag>{build.weaponType}</Tag>}
+              {build.tags?.map((t) => <Tag key={t}>{t}</Tag>)}
+            </div>
+          </div>
+          <div style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', textAlign: 'right' }}>
+            <div style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>{build.author}</div>
+            <div style={{ marginTop: 2 }}>{build.date}</div>
+          </div>
+        </div>
+      </div>
+
+      {/* ── 2-Column Layout ── */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+
+        {/* ▸ Left Column: 무기 + 전투 세팅 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+
+          {/* 무기 */}
+          <Panel title="무기" icon={<Icons.Sword />} accent="#ff6b6b">
+            <div style={{
+              padding: '14px 16px', background: 'var(--bg-tertiary)',
+              borderRadius: 8, marginBottom: 8,
+              borderLeft: '3px solid #ff6b6b',
+              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+            }}>
+              <div>
+                <div style={{ fontSize: 10, color: '#ff6b6b', fontWeight: 700, letterSpacing: '0.1em', marginBottom: 3 }}>MAIN</div>
+                <div style={{ fontSize: 16, fontWeight: 700 }}>{build.mainWeapon}</div>
+              </div>
+              <div style={{
+                width: 24, height: 24, borderRadius: 4,
+                background: 'rgba(255,107,107,0.12)', border: '1px solid rgba(255,107,107,0.2)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 11, fontWeight: 800, color: '#ff6b6b',
+              }}>1</div>
+            </div>
+            <div style={{
+              padding: '14px 16px', background: 'var(--bg-tertiary)',
+              borderRadius: 8,
+              borderLeft: '3px solid #4488ff',
+              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+            }}>
+              <div>
+                <div style={{ fontSize: 10, color: '#4488ff', fontWeight: 700, letterSpacing: '0.1em', marginBottom: 3 }}>SUB</div>
+                <div style={{ fontSize: 16, fontWeight: 700 }}>{build.subWeapon}</div>
+              </div>
+              <div style={{
+                width: 24, height: 24, borderRadius: 4,
+                background: 'rgba(68,136,255,0.12)', border: '1px solid rgba(68,136,255,0.2)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                fontSize: 11, fontWeight: 800, color: '#4488ff',
+              }}>2</div>
+            </div>
+          </Panel>
+
+          {/* 튜닝 & 감염물 */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
+            {build.tuning && (
+              <Panel title="튜닝" accent="#88ccff">
+                {build.tuning.map((t, i) => (
+                  <div key={i} style={{
+                    padding: '8px 12px', background: 'var(--bg-tertiary)',
+                    borderRadius: 6, fontSize: 13, fontWeight: 600, marginBottom: 4,
+                  }}>{t}</div>
+                ))}
+              </Panel>
+            )}
+            {build.infections && (
+              <Panel title="감염물" accent="#cc88ff">
+                {build.infections.map((x, i) => (
+                  <div key={i} style={{
+                    padding: '8px 12px', background: 'var(--bg-tertiary)',
+                    borderRadius: 6, fontSize: 13, fontWeight: 600, marginBottom: 4,
+                  }}>{x}</div>
+                ))}
+              </Panel>
+            )}
+          </div>
+
+          {/* 도핑 */}
+          {build.doping && (
+            <Panel title="도핑" accent="var(--success)">
+              {build.doping.map((d, i) => (
+                <div key={i} style={{
+                  padding: '8px 12px', background: 'var(--bg-tertiary)',
+                  borderRadius: 6, fontSize: 13, fontWeight: 600, marginBottom: 4,
+                }}>{d}</div>
+              ))}
+            </Panel>
+          )}
+        </div>
+
+        {/* ▸ Right Column: 방어구 + 접미사 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+
+          {/* 방어구 */}
+          {build.armorSet && (
+            <Panel title="방어구" icon={<Icons.Shield />} accent="#ffd700">
+              <div style={{
+                padding: '14px 16px', background: 'var(--bg-tertiary)',
+                borderRadius: 8, borderLeft: '3px solid #ffd700', marginBottom: 10,
+              }}>
+                <div style={{ fontSize: 16, fontWeight: 700 }}>{build.armorSet}</div>
+              </div>
+              {build.armorOptions && build.armorOptions.map((o, i) => (
+                <div key={i} style={{
+                  padding: '8px 12px', background: 'var(--bg-tertiary)',
+                  borderRadius: 6, fontSize: 13, color: 'var(--text-secondary)',
+                  display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4,
+                }}>
+                  <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#ffd700', flexShrink: 0 }} />
+                  {o}
+                </div>
+              ))}
+            </Panel>
+          )}
+
+          {/* 가죽 장비 */}
+          {build.leather && (
+            <Panel title="가죽 장비" accent="#c8a87c">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(85px, 1fr))', gap: 6 }}>
+                {build.leather.map((l, i) => (
+                  <div key={i} style={{
+                    padding: '10px 8px', background: 'var(--bg-tertiary)',
+                    borderRadius: 8, textAlign: 'center',
+                    border: '1px solid var(--border)',
+                  }}>
+                    <div style={{ fontSize: 9, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.04em', marginBottom: 4 }}>{l.part}</div>
+                    <div style={{ fontSize: 12, fontWeight: 700 }}>{l.name}</div>
+                  </div>
+                ))}
+              </div>
+            </Panel>
+          )}
+
+          {/* 접미사 구성 */}
+          {build.suffixes && (
+            <Panel title="접미사 구성" accent="var(--warning)">
+              <div style={{ borderRadius: 8, overflow: 'hidden', border: '1px solid var(--border)' }}>
+                <div style={{
+                  display: 'grid', gridTemplateColumns: '60px 1fr 1fr 44px',
+                  padding: '8px 12px', background: 'rgba(255,255,255,0.03)',
+                  fontSize: 10, color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '0.06em',
+                }}>
+                  <span>부위</span><span>접미사</span><span>키워드</span><span>타입</span>
+                </div>
+                {build.suffixes.map((s, i) => (
+                  <div key={i} style={{
+                    display: 'grid', gridTemplateColumns: '60px 1fr 1fr 44px',
+                    padding: '7px 12px', borderTop: '1px solid var(--border)',
+                    fontSize: 11, alignItems: 'center',
+                    background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)',
+                  }}>
+                    <span style={{ fontWeight: 700 }}>{s.part}</span>
+                    <span style={{ color: 'var(--text-secondary)' }}>{s.suffix}</span>
+                    <span style={{ color: 'var(--warning)', fontWeight: 600 }}>{s.keyword}</span>
+                    <span style={{
+                      fontSize: 9, fontWeight: 700, color: typeColor(s.type),
+                      padding: '2px 5px', background: `${typeColor(s.type)}12`,
+                      borderRadius: 3, textAlign: 'center',
+                    }}>{s.type}</span>
+                  </div>
+                ))}
+              </div>
+            </Panel>
+          )}
+        </div>
+      </div>
+
+      {/* ── Full-width: 모듈 + 메모 ── */}
+      {build.modules && (
+        <Panel title="모듈 접미" accent="var(--warning)" style={{ marginTop: 14 }}>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            {build.modules.map((m, i) => (
+              <div key={i} style={{
+                padding: '8px 14px', background: 'var(--bg-tertiary)',
+                borderRadius: 6, fontSize: 13, fontWeight: 600,
+                color: 'var(--warning)', border: '1px solid rgba(255,170,68,0.15)',
+              }}>{m}</div>
+            ))}
+          </div>
+        </Panel>
+      )}
+
+      {build.notes && (
+        <div style={{
+          background: 'var(--bg-card)', border: '1px solid var(--border)',
+          borderLeft: '3px solid var(--text-muted)',
+          borderRadius: 12, padding: '20px', marginTop: 14,
+        }}>
+          <div style={{
+            fontSize: 11, fontWeight: 700, color: 'var(--text-muted)',
+            letterSpacing: '0.08em', marginBottom: 10,
+          }}>NOTES</div>
+          <div style={{ fontSize: 14, lineHeight: 1.9, color: 'var(--text-secondary)', whiteSpace: 'pre-wrap' }}>
+            {build.notes}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════
+   빌드 목록 페이지
+   ═══════════════════════════════════════════ */
 export default function BuildsPage() {
-  const [builds, setBuilds] = useState(INITIAL_BUILDS);
+  const [builds] = useState(INITIAL_BUILDS);
   const [sel, setSel] = useState(null);
   const [search, setSearch] = useState('');
   const [catFilter, setCatFilter] = useState('전체');
   const [weaponFilter, setWeaponFilter] = useState('전체');
 
+  /* 상세 페이지 */
+  if (sel) {
+    return <BuildDetail build={sel} onBack={() => setSel(null)} />;
+  }
+
+  /* 목록 필터링 */
   const filtered = builds.filter((b) => {
     const ms = b.name.includes(search) || b.author.includes(search) || b.mainWeapon.includes(search) || (b.tags && b.tags.some((t) => t.includes(search)));
     const mc = catFilter === '전체' || b.category === catFilter;
@@ -45,7 +327,7 @@ export default function BuildsPage() {
           <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
             {categories.map((c) => (
               <button key={c} onClick={() => setCatFilter(c)}
-                style={{ padding: '4px 13px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: '1px solid', cursor: 'pointer', transition: 'all 0.2s', fontFamily: 'var(--font-body)', background: catFilter === c ? (catColor[c] || '#fff') : 'transparent', color: catFilter === c ? (c === '전체' ? '#000' : '#000') : (catColor[c] || 'var(--text-muted)'), borderColor: catFilter === c ? (catColor[c] || '#fff') : 'var(--border)' }}>
+                style={{ padding: '4px 13px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: '1px solid', cursor: 'pointer', transition: 'all 0.2s', fontFamily: 'var(--font-body)', background: catFilter === c ? (catColor[c] || '#fff') : 'transparent', color: catFilter === c ? '#000' : (catColor[c] || 'var(--text-muted)'), borderColor: catFilter === c ? (catColor[c] || '#fff') : 'var(--border)' }}>
                 {c}
               </button>
             ))}
@@ -108,123 +390,6 @@ export default function BuildsPage() {
           </div>
         ))}
       </div>
-
-      {/* Detail Modal */}
-      <Modal open={!!sel} onClose={() => setSel(null)} title={sel?.name || ''}>
-        {sel && (
-          <div>
-            {/* Header info */}
-            <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 20, flexWrap: 'wrap' }}>
-              {sel.grade && <Tag color="#ffd700">{sel.grade}</Tag>}
-              {sel.category && <Tag color={catColor[sel.category]}>{sel.category}</Tag>}
-              {sel.weaponType && <Tag>{sel.weaponType}</Tag>}
-              {sel.tags?.map((t) => <Tag key={t}>{t}</Tag>)}
-              <span style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginLeft: 'auto' }}>{sel.author} · {sel.date}</span>
-            </div>
-
-            {/* Weapons - side by side */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 20 }}>
-              <div style={{ padding: '14px 16px', background: 'var(--bg-tertiary)', borderRadius: 10, borderLeft: '3px solid #ff6b6b' }}>
-                <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>메인 무기</div>
-                <div style={{ fontSize: 15, fontWeight: 700 }}>{sel.mainWeapon}</div>
-              </div>
-              <div style={{ padding: '14px 16px', background: 'var(--bg-tertiary)', borderRadius: 10, borderLeft: '3px solid #4488ff' }}>
-                <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>서브 무기</div>
-                <div style={{ fontSize: 15, fontWeight: 700 }}>{sel.subWeapon}</div>
-              </div>
-            </div>
-
-            {/* Tuning & Modules & Infections & Doping - compact grid */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 20 }}>
-              {sel.tuning && (
-                <div style={{ padding: '12px 14px', background: 'var(--bg-tertiary)', borderRadius: 10 }}>
-                  <div style={{ fontSize: 10, color: '#88ccff', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>튜닝</div>
-                  <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>{sel.tuning.map((t, i) => <Chip key={i} accent="#88ccff">{t}</Chip>)}</div>
-                </div>
-              )}
-              {sel.infections && (
-                <div style={{ padding: '12px 14px', background: 'var(--bg-tertiary)', borderRadius: 10 }}>
-                  <div style={{ fontSize: 10, color: '#cc88ff', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>감염물</div>
-                  <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>{sel.infections.map((x, i) => <Chip key={i} accent="#cc88ff">{x}</Chip>)}</div>
-                </div>
-              )}
-            </div>
-
-            {sel.modules && (
-              <div style={{ padding: '12px 14px', background: 'var(--bg-tertiary)', borderRadius: 10, marginBottom: 20 }}>
-                <div style={{ fontSize: 10, color: 'var(--warning)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>모듈 접미</div>
-                <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>{sel.modules.map((m, i) => <Chip key={i} accent="var(--warning)">{m}</Chip>)}</div>
-              </div>
-            )}
-
-            {sel.doping && (
-              <div style={{ padding: '12px 14px', background: 'var(--bg-tertiary)', borderRadius: 10, marginBottom: 20 }}>
-                <div style={{ fontSize: 10, color: 'var(--success)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>도핑</div>
-                <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>{sel.doping.map((d, i) => <Chip key={i} accent="var(--success)">{d}</Chip>)}</div>
-              </div>
-            )}
-
-            {/* Armor Set */}
-            {sel.armorSet && (
-              <div style={{ padding: '14px 16px', background: 'var(--bg-tertiary)', borderRadius: 10, marginBottom: 20, borderLeft: '3px solid #ffd700' }}>
-                <div style={{ fontSize: 10, color: '#ffd700', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>방어구 세트</div>
-                <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 8 }}>{sel.armorSet}</div>
-                {sel.armorOptions?.map((o, i) => (
-                  <div key={i} style={{ fontSize: 13, color: 'var(--text-secondary)', padding: '2px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
-                    <span style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--text-muted)', flexShrink: 0 }} />
-                    {o}
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Suffix Table */}
-            {sel.suffixes && (
-              <div style={{ marginBottom: 20 }}>
-                <div style={{ fontSize: 10, color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10, paddingLeft: 2 }}>장비 접미사 구성</div>
-                <div style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid var(--border)' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '72px 1fr 1fr 52px', gap: 0, padding: '10px 14px', background: 'rgba(255,255,255,0.03)', fontSize: 10, color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
-                    <span>부위</span><span>접미사</span><span>키워드</span><span>타입</span>
-                  </div>
-                  {sel.suffixes.map((s, i) => (
-                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '72px 1fr 1fr 52px', gap: 0, padding: '9px 14px', borderTop: '1px solid var(--border)', fontSize: 13, alignItems: 'center', background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)' }}>
-                      <span style={{ fontWeight: 700, fontSize: 12, color: 'var(--text-primary)' }}>{s.part}</span>
-                      <span style={{ color: 'var(--text-secondary)', fontSize: 12 }}>{s.suffix}</span>
-                      <span style={{ color: 'var(--warning)', fontSize: 12, fontWeight: 600 }}>{s.keyword}</span>
-                      <span style={{ fontSize: 10, fontWeight: 700, color: typeColor(s.type), padding: '2px 6px', background: `${typeColor(s.type)}12`, borderRadius: 4, textAlign: 'center' }}>{s.type}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Leather */}
-            {sel.leather && (
-              <div style={{ marginBottom: 20 }}>
-                <div style={{ fontSize: 10, color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10, paddingLeft: 2 }}>가죽 장비</div>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: 6 }}>
-                  {sel.leather.map((l, i) => (
-                    <div key={i} style={{ padding: '10px 12px', background: 'var(--bg-tertiary)', borderRadius: 8, textAlign: 'center' }}>
-                      <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{l.part}</div>
-                      <div style={{ fontSize: 13, fontWeight: 700, marginTop: 3 }}>{l.name}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* Notes */}
-            {sel.notes && (
-              <div style={{ padding: '14px 16px', background: 'var(--bg-tertiary)', borderRadius: 10, marginBottom: 16, borderLeft: '3px solid var(--text-muted)' }}>
-                <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>메모</div>
-                <div style={{ fontSize: 13, lineHeight: 1.8, color: 'var(--text-secondary)', whiteSpace: 'pre-wrap' }}>
-                  {sel.notes}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-      </Modal>
     </div>
   );
 }
