@@ -92,107 +92,113 @@ export default function BuildsPage() {
       <Modal open={!!sel} onClose={() => setSel(null)} title={sel?.name || ''}>
         {sel && (
           <div>
-            {sel.image && (
-              <div style={{ borderRadius: 10, overflow: 'hidden', marginBottom: 18, background: 'var(--bg-tertiary)' }}>
-                <img src={sel.image} alt="" style={{ width: '100%', height: 160, objectFit: 'cover', opacity: 0.9 }} />
-              </div>
-            )}
-
-            <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 16, flexWrap: 'wrap' }}>
+            {/* Header info */}
+            <div style={{ display: 'flex', gap: 6, alignItems: 'center', marginBottom: 20, flexWrap: 'wrap' }}>
               {sel.grade && <Tag color="#ffd700">{sel.grade}</Tag>}
               {sel.tags?.map((t) => <Tag key={t}>{t}</Tag>)}
               <span style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginLeft: 'auto' }}>{sel.author} · {sel.date}</span>
             </div>
 
-            <Section icon="🔫" title="무기">
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
-                <div style={{ padding: '10px 12px', background: 'var(--bg-tertiary)', borderRadius: 8 }}>
-                  <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 2 }}>메인 무기</div>
-                  <div style={{ fontSize: 14, fontWeight: 700 }}>{sel.mainWeapon}</div>
-                </div>
-                <div style={{ padding: '10px 12px', background: 'var(--bg-tertiary)', borderRadius: 8 }}>
-                  <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 2 }}>서브 무기</div>
-                  <div style={{ fontSize: 14, fontWeight: 700 }}>{sel.subWeapon}</div>
-                </div>
+            {/* Weapons - side by side */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 20 }}>
+              <div style={{ padding: '14px 16px', background: 'var(--bg-tertiary)', borderRadius: 10, borderLeft: '3px solid #ff6b6b' }}>
+                <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>메인 무기</div>
+                <div style={{ fontSize: 15, fontWeight: 700 }}>{sel.mainWeapon}</div>
               </div>
-            </Section>
+              <div style={{ padding: '14px 16px', background: 'var(--bg-tertiary)', borderRadius: 10, borderLeft: '3px solid #4488ff' }}>
+                <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>서브 무기</div>
+                <div style={{ fontSize: 15, fontWeight: 700 }}>{sel.subWeapon}</div>
+              </div>
+            </div>
 
-            {sel.tuning && (
-              <Section icon="🎯" title="튜닝">
-                <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>{sel.tuning.map((t, i) => <Chip key={i} accent="#88ccff">{t}</Chip>)}</div>
-              </Section>
-            )}
+            {/* Tuning & Modules & Infections & Doping - compact grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginBottom: 20 }}>
+              {sel.tuning && (
+                <div style={{ padding: '12px 14px', background: 'var(--bg-tertiary)', borderRadius: 10 }}>
+                  <div style={{ fontSize: 10, color: '#88ccff', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>튜닝</div>
+                  <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>{sel.tuning.map((t, i) => <Chip key={i} accent="#88ccff">{t}</Chip>)}</div>
+                </div>
+              )}
+              {sel.infections && (
+                <div style={{ padding: '12px 14px', background: 'var(--bg-tertiary)', borderRadius: 10 }}>
+                  <div style={{ fontSize: 10, color: '#cc88ff', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>감염물</div>
+                  <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>{sel.infections.map((x, i) => <Chip key={i} accent="#cc88ff">{x}</Chip>)}</div>
+                </div>
+              )}
+            </div>
 
             {sel.modules && (
-              <Section icon="🧩" title="모듈 접미">
-                <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>{sel.modules.map((m, i) => <Chip key={i} accent="var(--warning)">{m}</Chip>)}</div>
-              </Section>
-            )}
-
-            {sel.infections && (
-              <Section icon="🦠" title="감염물">
-                <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>{sel.infections.map((x, i) => <Chip key={i} accent="#cc88ff">{x}</Chip>)}</div>
-              </Section>
+              <div style={{ padding: '12px 14px', background: 'var(--bg-tertiary)', borderRadius: 10, marginBottom: 20 }}>
+                <div style={{ fontSize: 10, color: 'var(--warning)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>모듈 접미</div>
+                <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>{sel.modules.map((m, i) => <Chip key={i} accent="var(--warning)">{m}</Chip>)}</div>
+              </div>
             )}
 
             {sel.doping && (
-              <Section icon="🍖" title="도핑">
-                <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>{sel.doping.map((d, i) => <Chip key={i} accent="var(--success)">{d}</Chip>)}</div>
-              </Section>
+              <div style={{ padding: '12px 14px', background: 'var(--bg-tertiary)', borderRadius: 10, marginBottom: 20 }}>
+                <div style={{ fontSize: 10, color: 'var(--success)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>도핑</div>
+                <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>{sel.doping.map((d, i) => <Chip key={i} accent="var(--success)">{d}</Chip>)}</div>
+              </div>
             )}
 
+            {/* Armor Set */}
             {sel.armorSet && (
-              <Section icon="🦺" title="방어구 세트">
-                <div style={{ padding: '10px 12px', background: 'var(--bg-tertiary)', borderRadius: 8 }}>
-                  <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 6 }}>{sel.armorSet}</div>
-                  {sel.armorOptions?.map((o, i) => <div key={i} style={{ fontSize: 13, color: 'var(--text-secondary)', padding: '3px 0' }}>· {o}</div>)}
-                </div>
-              </Section>
+              <div style={{ padding: '14px 16px', background: 'var(--bg-tertiary)', borderRadius: 10, marginBottom: 20, borderLeft: '3px solid #ffd700' }}>
+                <div style={{ fontSize: 10, color: '#ffd700', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>방어구 세트</div>
+                <div style={{ fontSize: 15, fontWeight: 700, marginBottom: 8 }}>{sel.armorSet}</div>
+                {sel.armorOptions?.map((o, i) => (
+                  <div key={i} style={{ fontSize: 13, color: 'var(--text-secondary)', padding: '2px 0', display: 'flex', alignItems: 'center', gap: 6 }}>
+                    <span style={{ width: 4, height: 4, borderRadius: '50%', background: 'var(--text-muted)', flexShrink: 0 }} />
+                    {o}
+                  </div>
+                ))}
+              </div>
             )}
 
+            {/* Suffix Table */}
             {sel.suffixes && (
-              <Section icon="🔧" title="장비 접미사 구성">
+              <div style={{ marginBottom: 20 }}>
+                <div style={{ fontSize: 10, color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10, paddingLeft: 2 }}>장비 접미사 구성</div>
                 <div style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid var(--border)' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: '80px 1fr 1fr 60px', gap: 8, padding: '8px 12px', background: 'var(--bg-tertiary)', fontSize: 11, color: 'var(--text-muted)', fontWeight: 600 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '72px 1fr 1fr 52px', gap: 0, padding: '10px 14px', background: 'rgba(255,255,255,0.03)', fontSize: 10, color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                     <span>부위</span><span>접미사</span><span>키워드</span><span>타입</span>
                   </div>
                   {sel.suffixes.map((s, i) => (
-                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '80px 1fr 1fr 60px', gap: 8, padding: '7px 12px', borderTop: '1px solid var(--border)', fontSize: 13, alignItems: 'center' }}>
-                      <span style={{ fontWeight: 600, fontSize: 12 }}>{s.part}</span>
-                      <span style={{ color: 'var(--text-secondary)' }}>{s.suffix}</span>
+                    <div key={i} style={{ display: 'grid', gridTemplateColumns: '72px 1fr 1fr 52px', gap: 0, padding: '9px 14px', borderTop: '1px solid var(--border)', fontSize: 13, alignItems: 'center', background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)' }}>
+                      <span style={{ fontWeight: 700, fontSize: 12, color: 'var(--text-primary)' }}>{s.part}</span>
+                      <span style={{ color: 'var(--text-secondary)', fontSize: 12 }}>{s.suffix}</span>
                       <span style={{ color: 'var(--warning)', fontSize: 12, fontWeight: 600 }}>{s.keyword}</span>
-                      <span style={{ fontSize: 11, fontWeight: 600, color: typeColor(s.type) }}>{s.type}</span>
+                      <span style={{ fontSize: 10, fontWeight: 700, color: typeColor(s.type), padding: '2px 6px', background: `${typeColor(s.type)}12`, borderRadius: 4, textAlign: 'center' }}>{s.type}</span>
                     </div>
                   ))}
                 </div>
-              </Section>
+              </div>
             )}
 
+            {/* Leather */}
             {sel.leather && (
-              <Section icon="🧵" title="가죽 장비">
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 6 }}>
+              <div style={{ marginBottom: 20 }}>
+                <div style={{ fontSize: 10, color: 'var(--text-secondary)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 10, paddingLeft: 2 }}>가죽 장비</div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: 6 }}>
                   {sel.leather.map((l, i) => (
-                    <div key={i} style={{ padding: '8px 10px', background: 'var(--bg-tertiary)', borderRadius: 6 }}>
-                      <div style={{ fontSize: 11, color: 'var(--text-muted)' }}>{l.part}</div>
-                      <div style={{ fontSize: 13, fontWeight: 700, marginTop: 1 }}>{l.name}</div>
+                    <div key={i} style={{ padding: '10px 12px', background: 'var(--bg-tertiary)', borderRadius: 8, textAlign: 'center' }}>
+                      <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.04em' }}>{l.part}</div>
+                      <div style={{ fontSize: 13, fontWeight: 700, marginTop: 3 }}>{l.name}</div>
                     </div>
                   ))}
                 </div>
-              </Section>
+              </div>
             )}
 
+            {/* Notes */}
             {sel.notes && (
-              <Section icon="📝" title="추가 정보">
-                <div style={{ padding: 12, background: 'var(--bg-tertiary)', borderRadius: 8, fontSize: 13, lineHeight: 1.8, color: 'var(--text-secondary)', whiteSpace: 'pre-wrap' }}>
+              <div style={{ padding: '14px 16px', background: 'var(--bg-tertiary)', borderRadius: 10, marginBottom: 16, borderLeft: '3px solid var(--text-muted)' }}>
+                <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>메모</div>
+                <div style={{ fontSize: 13, lineHeight: 1.8, color: 'var(--text-secondary)', whiteSpace: 'pre-wrap' }}>
                   {sel.notes}
                 </div>
-              </Section>
+              </div>
             )}
-
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 8 }}>
-              <Button variant="secondary" style={{ padding: '7px 14px', fontSize: 12 }}><Icons.Share /> 공유</Button>
-              <Button variant="secondary" style={{ padding: '7px 14px', fontSize: 12 }}><Icons.Copy /> 복사</Button>
-            </div>
           </div>
         )}
       </Modal>
