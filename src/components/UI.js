@@ -7,9 +7,10 @@ export function Modal({ open, onClose, title, children }) {
   return (
     <div
       style={{
-        position: 'fixed', inset: 0, zIndex: 1000,
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(16px)',
+        position: 'fixed', inset: 0, zIndex: 9999,
+        display: 'flex', flexDirection: 'column', alignItems: 'center',
+        background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(16px)',
+        overflowY: 'auto', padding: '64px 0 24px',
       }}
       onClick={onClose}
     >
@@ -18,8 +19,8 @@ export function Modal({ open, onClose, title, children }) {
         onClick={(e) => e.stopPropagation()}
         style={{
           background: 'var(--bg-secondary)', border: '1px solid var(--border)',
-          borderRadius: 16, width: '94%', maxWidth: 820,
-          maxHeight: '88vh', overflow: 'auto', padding: '28px 32px',
+          borderRadius: 16, width: '94%', maxWidth: 860,
+          padding: '28px 32px', flexShrink: 0,
         }}
       >
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
