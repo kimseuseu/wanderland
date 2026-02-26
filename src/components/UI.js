@@ -9,8 +9,9 @@ export function Modal({ open, onClose, title, children }) {
       style={{
         position: 'fixed', inset: 0, zIndex: 9999,
         display: 'flex', flexDirection: 'column', alignItems: 'center',
+        justifyContent: 'flex-start',
         background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(16px)',
-        overflowY: 'auto', padding: '64px 0 24px',
+        padding: '64px 0 24px',
       }}
       onClick={onClose}
     >
@@ -20,10 +21,12 @@ export function Modal({ open, onClose, title, children }) {
         style={{
           background: 'var(--bg-secondary)', border: '1px solid var(--border)',
           borderRadius: 16, width: '94%', maxWidth: 860,
-          padding: '28px 32px', flexShrink: 0,
+          maxHeight: 'calc(100vh - 88px)', overflowY: 'auto',
+          padding: '28px 32px',
+          display: 'flex', flexDirection: 'column',
         }}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20, flexShrink: 0 }}>
           <h3 style={{ fontSize: 17, fontFamily: 'var(--font-display)', fontWeight: 800 }}>{title}</h3>
           <button
             onClick={onClose}
@@ -32,7 +35,9 @@ export function Modal({ open, onClose, title, children }) {
             <Icons.X />
           </button>
         </div>
-        {children}
+        <div style={{ overflowY: 'auto', flex: 1 }}>
+          {children}
+        </div>
       </div>
     </div>
   );
