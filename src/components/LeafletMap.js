@@ -4,7 +4,7 @@ import { useEffect, useRef, useCallback } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const TILE_URL = 'https://cdn.th.gl/once-human/map-tiles/default/{z}/{x}/{y}.webp';
+const TILE_URL = 'https://cdn.th.gl/once-human/map-tiles/default/{z}/{y}/{x}.webp';
 const TILE_SIZE = 512;
 const MIN_ZOOM = 0;
 const MAX_NATIVE_ZOOM = 4;
