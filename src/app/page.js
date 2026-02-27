@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { Icons } from '@/components/Icons';
 import HomePage from '@/components/HomePage';
 import BuildsPage from '@/components/BuildsPage';
-import MapPage from '@/components/MapPage';
 import MembersPage from '@/components/MembersPage';
 import BlacklistPage from '@/components/BlacklistPage';
 import AboutPage from '@/components/AboutPage';
@@ -15,7 +15,7 @@ const nav = [
   { key: 'home', icon: <Icons.Home />, label: '홈' },
   { key: 'about', icon: <Icons.Info />, label: '소개' },
   { key: 'builds', icon: <Icons.Build />, label: '빌드' },
-  { key: 'map', icon: <Icons.Map />, label: '지도', locked: true },
+  { key: 'map', icon: <Icons.Map />, label: '지도', href: '/map' },
   { key: 'members', icon: <Icons.Users />, label: '하이브원' },
   { key: 'blacklist', icon: <Icons.Ban />, label: '블랙리스트', locked: true },
 ];
@@ -24,6 +24,7 @@ export default function Page() {
   const [page, setPage] = useState('home');
   const { data: session, status } = useSession();
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const router = useRouter();
 
   return (
     <div style={{ minHeight: '100vh', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
@@ -43,7 +44,7 @@ export default function Page() {
             {nav.map((n) => (
               <button
                 key={n.key}
-                onClick={() => setPage(n.key)}
+                onClick={() => n.href ? router.push(n.href) : setPage(n.key)}
                 style={{
                   display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
                   padding: '6px 10px', borderRadius: 8, fontSize: 12,
@@ -167,7 +168,6 @@ export default function Page() {
       <main style={{ maxWidth: 1200, margin: '0 auto', padding: '26px 24px 56px' }}>
         {page === 'home' && <HomePage onNavigate={setPage} />}
         {page === 'builds' && <BuildsPage />}
-        {page === 'map' && <AuthGate><MapPage /></AuthGate>}
         {page === 'members' && <MembersPage />}
         {page === 'blacklist' && <AuthGate><BlacklistPage /></AuthGate>}
         {page === 'about' && <AboutPage />}

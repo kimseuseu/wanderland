@@ -7,7 +7,8 @@ import 'leaflet/dist/leaflet.css';
 const TILE_URL = 'https://cdn.th.gl/once-human/map-tiles/default/{z}/{x}/{y}.webp';
 const TILE_SIZE = 512;
 const MIN_ZOOM = 0;
-const MAX_ZOOM = 4;
+const MAX_NATIVE_ZOOM = 4;
+const MAX_ZOOM = 6;
 // At zoom 0, 1 tile of 512px → bounds [0,0] to [-512, 512] in CRS.Simple
 const MAP_SIZE = 512;
 
@@ -53,6 +54,8 @@ export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }
       crs: L.CRS.Simple,
       minZoom: MIN_ZOOM,
       maxZoom: MAX_ZOOM,
+      zoomSnap: 1,
+      zoomDelta: 1,
       zoomControl: false,
       attributionControl: false,
     });
@@ -63,6 +66,7 @@ export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }
       tileSize: TILE_SIZE,
       minZoom: MIN_ZOOM,
       maxZoom: MAX_ZOOM,
+      maxNativeZoom: MAX_NATIVE_ZOOM,
       noWrap: true,
     }).addTo(map);
 

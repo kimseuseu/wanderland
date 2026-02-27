@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Icons } from './Icons';
 
 const cardAccents = {
@@ -12,6 +13,7 @@ const cardAccents = {
 
 export default function HomePage({ onNavigate }) {
   const [counts, setCounts] = useState({ members: 0, builds: 0 });
+  const router = useRouter();
 
   useEffect(() => {
     Promise.all([
@@ -24,7 +26,7 @@ export default function HomePage({ onNavigate }) {
 
   const navItems = [
     { icon: <Icons.Build />, label: '장비 빌드', page: 'builds', desc: '빌드 공유 & 탐색' },
-    { icon: <Icons.Map />, label: '게임 지도', page: 'map', desc: '지역 정보 기록' },
+    { icon: <Icons.Map />, label: '게임 지도', page: 'map', desc: '지역 정보 기록', href: '/map' },
     { icon: <Icons.Users />, label: '하이브원', page: 'members', desc: '멤버 현황' },
     { icon: <Icons.Ban />, label: '블랙리스트', page: 'blacklist', desc: '주의 유저 관리' },
   ];
@@ -84,7 +86,7 @@ export default function HomePage({ onNavigate }) {
         {navItems.map((t, i) => (
           <div
             key={i}
-            onClick={() => onNavigate(t.page)}
+            onClick={() => t.href ? router.push(t.href) : onNavigate(t.page)}
             className="nav-card fade-in"
             style={{
               '--card-accent': cardAccents[t.page],
