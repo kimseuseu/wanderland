@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useSession } from 'next-auth/react';
 import { Icons } from './Icons';
-import { Tag } from './UI';
+import { Tag, Button } from './UI';
 import { useApi } from '@/hooks/useApi';
+import BuildCreateForm from './BuildCreateForm';
 
 const typeColor = (t) => t === '섬광' ? '#88ccff' : t === '클래식' ? '#ffcc44' : t === '신판' ? '#88ff88' : 'var(--text-secondary)';
 const catColor = { '총기': '#ff6b6b', '원소': '#88ccff', '하이브리드': '#cc88ff' };
@@ -317,15 +319,22 @@ function BuildDetail({ build, onBack }) {
    빌드 목록 페이지
    ═══════════════════════════════════════════ */
 export default function BuildsPage() {
-  const { data: builds, loading } = useApi('/api/builds');
+  const { data: session } = useSession();
+  const { data: builds, loading, mutate } = useApi('/api/builds');
   const [sel, setSel] = useState(null);
+  const [mode, setMode] = useState('list'); // list | detail | create
   const [search, setSearch] = useState('');
   const [catFilter, setCatFilter] = useState('전체');
   const [weaponFilter, setWeaponFilter] = useState('전체');
 
   /* 상세 페이지 */
-  if (sel) {
-    return <BuildDetail build={sel} onBack={() => setSel(null)} />;
+  if (mode === 'detail' && sel) {
+    return <BuildDetail build={sel} onBack={() => { setSel(null); setMode('list'); }} />;
+  }
+
+  /* 작성 폼 */
+  if (mode === 'create') {
+    return <BuildCreateForm onBack={() => setMode('list')} onCreated={() => { mutate(); setMode('list'); }} />;
   }
 
   /* 로딩 */
@@ -352,6 +361,9 @@ export default function BuildsPage() {
           <h2 style={{ fontSize: 22, fontWeight: 800, fontFamily: 'var(--font-display)' }}>장비 빌드</h2>
           <p style={{ color: 'var(--text-muted)', fontSize: 13, marginTop: 3 }}>{filtered.length}개의 빌드</p>
         </div>
+        {session?.isMember && (
+          <Button onClick={() => setMode('create')}><Icons.Plus /> 빌드 작성</Button>
+        )}
       </div>
 
       {/* Search & Filter */}
@@ -390,7 +402,7 @@ export default function BuildsPage() {
         {filtered.map((b, i) => (
           <div key={b.id} className="fade-in build-card"
             style={{ animationDelay: `${i * 0.04}s`, background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 14, overflow: 'hidden', cursor: 'pointer', transition: 'all 0.25s' }}
-            onClick={() => setSel(b)}
+            onClick={() => { setSel(b); setMode('detail'); }}
             onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--border-hover)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
             onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'translateY(0)'; }}>
             {b.image && (

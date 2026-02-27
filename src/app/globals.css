@@ -360,4 +360,17 @@ body {
     padding-bottom: 0 !important;
     padding-left: 0 !important;
   }
+  .suffix-row {
+    grid-template-columns: 1fr !important;
+    gap: 4px !important;
+  }
+  .form-grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ─── Form select dark theme ─── */
+option {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
 }
