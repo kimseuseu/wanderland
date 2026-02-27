@@ -7,9 +7,11 @@ import BuildsPage from '@/components/BuildsPage';
 import MapPage from '@/components/MapPage';
 import MembersPage from '@/components/MembersPage';
 import BlacklistPage from '@/components/BlacklistPage';
+import AboutPage from '@/components/AboutPage';
 
 const nav = [
   { key: 'home', icon: <Icons.Home />, label: '홈' },
+  { key: 'about', icon: <Icons.Info />, label: '소개' },
   { key: 'builds', icon: <Icons.Build />, label: '빌드' },
   { key: 'map', icon: <Icons.Map />, label: '지도' },
   { key: 'members', icon: <Icons.Users />, label: '하이브원' },
@@ -63,6 +65,7 @@ export default function Page() {
         {page === 'map' && <MapPage />}
         {page === 'members' && <MembersPage />}
         {page === 'blacklist' && <BlacklistPage />}
+        {page === 'about' && <AboutPage />}
       </main>
 
       {/* Footer */}
