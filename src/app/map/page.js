@@ -2,12 +2,22 @@
 
 import { useState } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Icons } from '@/components/Icons';
 import { Modal, Input, TextArea, Button } from '@/components/UI';
 import { useApi } from '@/hooks/useApi';
 import AuthGate from '@/components/AuthGate';
+
+const nav = [
+  { key: 'home', icon: <Icons.Home />, label: '홈', href: '/' },
+  { key: 'about', icon: <Icons.Info />, label: '소개', href: '/' },
+  { key: 'builds', icon: <Icons.Build />, label: '빌드', href: '/' },
+  { key: 'map', icon: <Icons.Map />, label: '지도', href: '/map' },
+  { key: 'members', icon: <Icons.Users />, label: '하이브원', href: '/' },
+  { key: 'blacklist', icon: <Icons.Ban />, label: '블랙리스트', href: '/' },
+];
 
 const LeafletMap = dynamic(() => import('@/components/LeafletMap'), {
   ssr: false,
@@ -206,32 +216,45 @@ function MapContent() {
 export default function MapPageRoute() {
   const { data: session, status } = useSession();
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const router = useRouter();
 
   return (
     <div style={{ height: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
-      {/* Nav Bar */}
+      {/* Nav Bar - same as main page */}
       <nav style={{
         background: 'rgba(10,10,10,0.92)', backdropFilter: 'blur(20px)',
         borderBottom: '1px solid var(--border)', padding: '0 16px',
         flexShrink: 0,
       }}>
-        <div style={{ maxWidth: '100%', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 48, padding: '0 8px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', cursor: 'pointer', textDecoration: 'none' }}>
-              <img src="/images/logo.png" alt="Wanderland" style={{ height: 22, filter: 'brightness(1.1)' }} />
-            </Link>
-            <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <Icons.Map />
-              <span style={{ fontSize: 14, fontWeight: 700, fontFamily: 'var(--font-display)' }}>게임 지도</span>
-            </div>
+        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 48 }}>
+          <div onClick={() => router.push('/')} style={{ cursor: 'pointer', flexShrink: 0 }}>
+            <img src="/images/logo.png" alt="Wanderland" style={{ height: 22, filter: 'brightness(1.1)' }} />
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ fontSize: 11, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>
-              지도를 클릭하여 핀 추가
-            </span>
-            <div style={{ width: 1, height: 20, background: 'var(--border)' }} />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 0 }}>
+            {nav.map((n) => (
+              <button
+                key={n.key}
+                onClick={() => router.push(n.href)}
+                style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
+                  padding: '6px 10px', borderRadius: 8, fontSize: 12,
+                  fontWeight: 600, border: 'none', cursor: 'pointer',
+                  transition: 'all 0.2s', fontFamily: 'var(--font-body)',
+                  background: n.key === 'map' ? 'var(--accent-dim)' : 'transparent',
+                  color: n.key === 'map' ? '#fff' : 'var(--text-muted)',
+                  whiteSpace: 'nowrap',
+                }}
+                onMouseEnter={(e) => { if (n.key !== 'map') e.currentTarget.style.color = 'var(--text-secondary)'; }}
+                onMouseLeave={(e) => { if (n.key !== 'map') e.currentTarget.style.color = 'var(--text-muted)'; }}
+              >
+                {n.icon}
+                <span className="nav-label">{n.label}</span>
+              </button>
+            ))}
+
+            <div style={{ width: 1, height: 20, background: 'var(--border)', margin: '0 8px', flexShrink: 0 }} />
+
             {status === 'loading' ? (
               <div style={{ width: 28, height: 28, borderRadius: '50%', background: 'var(--bg-tertiary)' }} />
             ) : session ? (
@@ -297,18 +320,18 @@ export default function MapPageRoute() {
               <button
                 onClick={() => signIn('discord')}
                 style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 5,
+                  display: 'flex', alignItems: 'center', gap: 5,
                   padding: '5px 12px', borderRadius: 8,
                   background: '#5865F2', color: '#fff',
                   border: 'none', cursor: 'pointer',
                   fontSize: 12, fontWeight: 600, fontFamily: 'var(--font-body)',
-                  transition: 'all 0.2s',
+                  transition: 'all 0.2s', whiteSpace: 'nowrap',
                 }}
                 onMouseEnter={(e) => { e.currentTarget.style.background = '#4752C4'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.background = '#5865F2'; }}
               >
                 <Icons.Discord />
-                로그인
+                <span className="nav-label">로그인</span>
               </button>
             )}
           </div>
