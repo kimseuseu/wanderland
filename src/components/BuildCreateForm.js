@@ -13,6 +13,16 @@ const suffixTypes = ['섬광', '클래식', '신판'];
 const typeColor = (t) => t === '섬광' ? '#88ccff' : t === '클래식' ? '#ffcc44' : t === '신판' ? '#88ff88' : 'var(--text-secondary)';
 const tagOptions = ['PvE', 'PvP', '시즌', '뉴비추천', '상위자'];
 
+/* ── 부위 프리셋 ── */
+const SUFFIX_PARTS = [
+  { part: '무기', type: '섬광' }, { part: '보조무기', type: '섬광' },
+  { part: '헬멧', type: '클래식' }, { part: '마스크', type: '클래식' }, { part: '상의', type: '클래식' },
+  { part: '하의', type: '신판' }, { part: '장갑', type: '신판' }, { part: '신발', type: '신판' },
+];
+const LEATHER_PARTS = ['머리', '마스크', '상하의', '장갑', '신발'];
+const NUMS = ['①', '②', '③', '④', '⑤', '⑥', '⑦', '⑧', '⑨', '⑩'];
+const bp = (part) => part.replace(/[①②③④⑤⑥⑦⑧⑨⑩]$/, '');
+
 /* ── 스타일 상수 ── */
 const labelStyle = {
   display: 'block', fontSize: 11, color: 'var(--text-secondary)',
@@ -93,8 +103,8 @@ export default function BuildCreateForm({ onBack, onCreated }) {
     category: '', weaponType: '', image: '',
     tuning: [''], modules: [''], infections: [''], doping: [''],
     armorSet: '', armorOptions: [''],
-    suffixes: [{ part: '', suffix: '', keyword: '', type: '섬광' }],
-    leather: [{ part: '', name: '' }],
+    suffixes: SUFFIX_PARTS.map((d) => ({ part: d.part, suffix: '', keyword: '', type: d.type })),
+    leather: LEATHER_PARTS.map((p) => ({ part: p, name: '' })),
     tags: [], notes: '',
   });
 
@@ -117,6 +127,49 @@ export default function BuildCreateForm({ onBack, onCreated }) {
     setForm((p) => ({ ...p, tags: p.tags.includes(tag) ? p.tags.filter((t) => t !== tag) : [...p.tags, tag] }));
 
   const set = (key, val) => setForm((p) => ({ ...p, [key]: val }));
+
+  /* ── 부위별 추가/삭제 (자동 넘버링) ── */
+  const renumber = (arr, base) => {
+    const indices = arr.reduce((a, item, i) => bp(item.part) === base ? [...a, i] : a, []);
+    if (indices.length === 1) { arr[indices[0]].part = base; }
+    else { indices.forEach((idx, n) => { arr[idx].part = base + NUMS[n]; }); }
+  };
+
+  const addSuffixFor = (base) => {
+    setForm((p) => {
+      const s = [...p.suffixes.map((x) => ({ ...x }))];
+      const last = s.reduce((a, x, i) => bp(x.part) === base ? i : a, -1);
+      s.splice(last + 1, 0, { part: base, suffix: '', keyword: '', type: '섬광' });
+      renumber(s, base);
+      return { ...p, suffixes: s };
+    });
+  };
+  const removeSuffixAt = (index) => {
+    setForm((p) => {
+      const base = bp(p.suffixes[index].part);
+      const s = p.suffixes.filter((_, i) => i !== index).map((x) => ({ ...x }));
+      renumber(s, base);
+      return { ...p, suffixes: s };
+    });
+  };
+
+  const addLeatherFor = (base) => {
+    setForm((p) => {
+      const l = [...p.leather.map((x) => ({ ...x }))];
+      const last = l.reduce((a, x, i) => bp(x.part) === base ? i : a, -1);
+      l.splice(last + 1, 0, { part: base, name: '' });
+      renumber(l, base);
+      return { ...p, leather: l };
+    });
+  };
+  const removeLeatherAt = (index) => {
+    setForm((p) => {
+      const base = bp(p.leather[index].part);
+      const l = p.leather.filter((_, i) => i !== index).map((x) => ({ ...x }));
+      renumber(l, base);
+      return { ...p, leather: l };
+    });
+  };
 
   /* ── 제출 ── */
   const handleSubmit = async () => {
@@ -255,23 +308,38 @@ export default function BuildCreateForm({ onBack, onCreated }) {
         {/* 방어구 옵션 */}
         <DynList label="ARMOR OPTIONS" field="armorOptions" accent="#ffd700" placeholder="예: 세이버3 + 어둠2" />
 
-        {/* 가죽 장비 */}
+        {/* 가죽 장비 — 부위별 프리셋 */}
         <div style={{ marginBottom: 13 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5 }}>
-            <label style={{ ...labelStyle, color: '#c8a87c', marginBottom: 0 }}>LEATHER</label>
-            <button type="button" onClick={() => addObjArr('leather', { part: '', name: '' })} style={addBtnStyle}><Icons.Plus /> 추가</button>
-          </div>
-          {form.leather.map((l, i) => (
-            <div key={i} style={{ display: 'grid', gridTemplateColumns: '120px 1fr 32px', gap: 6, marginBottom: 6, alignItems: 'center' }}>
-              <input value={l.part} onChange={(e) => updateObjArr('leather', i, 'part', e.target.value)}
-                placeholder="부위" style={inputStyle} />
-              <input value={l.name} onChange={(e) => updateObjArr('leather', i, 'name', e.target.value)}
-                placeholder="이름" style={inputStyle} />
-              {form.leather.length > 1 && (
-                <button type="button" onClick={() => removeObjArr('leather', i)} style={removeBtnStyle}><Icons.X /></button>
-              )}
-            </div>
-          ))}
+          <label style={{ ...labelStyle, color: '#c8a87c', marginBottom: 12 }}>LEATHER</label>
+          {LEATHER_PARTS.map((baseName) => {
+            const indices = form.leather.reduce((a, l, i) => bp(l.part) === baseName ? [...a, i] : a, []);
+            return (
+              <div key={baseName} style={{
+                padding: '10px 14px', background: 'var(--bg-tertiary)',
+                border: '1px solid var(--border)', borderRadius: 10, marginBottom: 6,
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: indices.length > 0 ? 8 : 0 }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: '#c8a87c' }}>{baseName}</span>
+                  <button type="button" onClick={() => addLeatherFor(baseName)}
+                    style={{ ...addBtnStyle, padding: '2px 6px', fontSize: 10 }}><Icons.Plus /></button>
+                </div>
+                {indices.map((idx) => {
+                  const l = form.leather[idx];
+                  const count = indices.length;
+                  return (
+                    <div key={idx} style={{ display: 'flex', gap: 6, marginBottom: 4, alignItems: 'center' }}>
+                      {count > 1 && <span style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 700, width: 16, flexShrink: 0 }}>{NUMS[indices.indexOf(idx)]}</span>}
+                      <input value={l.name} onChange={(e) => updateObjArr('leather', idx, 'name', e.target.value)}
+                        placeholder="가죽 장비 이름" style={inputStyle} />
+                      {count > 1 && (
+                        <button type="button" onClick={() => removeLeatherAt(idx)} style={removeBtnStyle}><Icons.X /></button>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
         </div>
       </SectionCard>
 
@@ -280,48 +348,53 @@ export default function BuildCreateForm({ onBack, onCreated }) {
         {/* 모듈 */}
         <DynList label="MODULES" field="modules" accent="#ffaa44" placeholder="예: 섬광 프로스트 볼텍스" />
 
-        {/* 접미사 테이블 */}
+        {/* 접미사 테이블 — 부위별 프리셋 */}
         <div style={{ marginBottom: 13 }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
-            <label style={{ ...labelStyle, color: '#ffaa44', marginBottom: 0 }}>SUFFIX TABLE</label>
-            <button type="button" onClick={() => addObjArr('suffixes', { part: '', suffix: '', keyword: '', type: '섬광' })} style={addBtnStyle}><Icons.Plus /> 추가</button>
-          </div>
-
-          {/* 헤더 */}
-          <div className="suffix-row" style={{ display: 'grid', gridTemplateColumns: '90px 1fr 1fr 80px 32px', gap: 6, marginBottom: 6 }}>
-            <span style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.06em' }}>부위</span>
-            <span style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.06em' }}>접미사</span>
-            <span style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.06em' }}>키워드</span>
-            <span style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.06em' }}>타입</span>
-            <span />
-          </div>
-
-          {form.suffixes.map((s, i) => (
-            <div key={i} className="suffix-row" style={{
-              display: 'grid', gridTemplateColumns: '90px 1fr 1fr 80px 32px',
-              gap: 6, marginBottom: 6, alignItems: 'center',
-            }}>
-              <input value={s.part} onChange={(e) => updateObjArr('suffixes', i, 'part', e.target.value)}
-                placeholder="무기" style={inputStyle} />
-              <input value={s.suffix} onChange={(e) => updateObjArr('suffixes', i, 'suffix', e.target.value)}
-                placeholder="접미사명" style={inputStyle} />
-              <input value={s.keyword} onChange={(e) => updateObjArr('suffixes', i, 'keyword', e.target.value)}
-                placeholder="키워드" style={inputStyle} />
-              <select value={s.type} onChange={(e) => updateObjArr('suffixes', i, 'type', e.target.value)}
-                style={{
-                  padding: '9px 6px', background: 'var(--bg-tertiary)',
-                  border: `1px solid ${typeColor(s.type)}30`,
-                  borderRadius: 8, color: typeColor(s.type),
-                  fontSize: 12, fontWeight: 600, fontFamily: 'var(--font-body)',
-                  outline: 'none', cursor: 'pointer',
-                }}>
-                {suffixTypes.map((t) => <option key={t} value={t}>{t}</option>)}
-              </select>
-              {form.suffixes.length > 1 && (
-                <button type="button" onClick={() => removeObjArr('suffixes', i)} style={removeBtnStyle}><Icons.X /></button>
-              )}
-            </div>
-          ))}
+          <label style={{ ...labelStyle, color: '#ffaa44', marginBottom: 12 }}>SUFFIX TABLE</label>
+          {SUFFIX_PARTS.map(({ part: baseName }) => {
+            const indices = form.suffixes.reduce((a, s, i) => bp(s.part) === baseName ? [...a, i] : a, []);
+            return (
+              <div key={baseName} style={{
+                padding: '12px 14px', background: 'var(--bg-tertiary)',
+                border: '1px solid var(--border)', borderRadius: 10, marginBottom: 6,
+              }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                  <span style={{ fontSize: 12, fontWeight: 700, color: '#ffaa44' }}>{baseName}</span>
+                  <button type="button" onClick={() => addSuffixFor(baseName)}
+                    style={{ ...addBtnStyle, padding: '2px 6px', fontSize: 10 }}><Icons.Plus /></button>
+                </div>
+                {indices.map((idx) => {
+                  const s = form.suffixes[idx];
+                  const count = indices.length;
+                  return (
+                    <div key={idx} className="suffix-row" style={{
+                      display: 'grid', gridTemplateColumns: count > 1 ? '16px 1fr 1fr 80px 32px' : '1fr 1fr 80px',
+                      gap: 6, marginBottom: 4, alignItems: 'center',
+                    }}>
+                      {count > 1 && <span style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 700 }}>{NUMS[indices.indexOf(idx)]}</span>}
+                      <input value={s.suffix} onChange={(e) => updateObjArr('suffixes', idx, 'suffix', e.target.value)}
+                        placeholder="접미사" style={inputStyle} />
+                      <input value={s.keyword} onChange={(e) => updateObjArr('suffixes', idx, 'keyword', e.target.value)}
+                        placeholder="키워드" style={inputStyle} />
+                      <select value={s.type} onChange={(e) => updateObjArr('suffixes', idx, 'type', e.target.value)}
+                        style={{
+                          padding: '9px 6px', background: 'var(--bg-card)',
+                          border: `1px solid ${typeColor(s.type)}30`,
+                          borderRadius: 8, color: typeColor(s.type),
+                          fontSize: 12, fontWeight: 600, fontFamily: 'var(--font-body)',
+                          outline: 'none', cursor: 'pointer',
+                        }}>
+                        {suffixTypes.map((t) => <option key={t} value={t}>{t}</option>)}
+                      </select>
+                      {count > 1 && (
+                        <button type="button" onClick={() => removeSuffixAt(idx)} style={removeBtnStyle}><Icons.X /></button>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            );
+          })}
         </div>
       </SectionCard>
 
