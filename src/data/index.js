@@ -981,43 +981,7 @@ export const BUILDS = [
   },
 ];
 
-export const BLACKLIST = [
-  {
-    id: 1,
-    name: "xDarkKill3r",
-    uuid: "OH-29481-KR",
-    alts: "킬러봇, DK_서브",
-    clan: "무소속",
-    incident:
-      "레이드 중 아이템 먹튀 후 탈퇴. 하이브 창고에서 희귀 자원 다수 도난.",
-    severity: "high",
-    date: "2026-02-22",
-    reporter: "간편",
-  },
-  {
-    id: 2,
-    name: "트롤마스터",
-    uuid: "OH-10283-KR",
-    alts: "트롤킹, 어그로꾼",
-    clan: "다크나이츠",
-    incident:
-      "지속적인 아군 공격 및 건축물 파괴. 여러 하이브에서 동일 신고 접수.",
-    severity: "high",
-    date: "2026-02-19",
-    reporter: "딸기코",
-  },
-  {
-    id: 3,
-    name: "거래사기꾼",
-    uuid: "OH-55102-KR",
-    alts: "정직한상인",
-    clan: "무소속",
-    incident: "거래소에서 사기 거래 반복. 레어 아이템 거래 후 잠수.",
-    severity: "medium",
-    date: "2026-02-14",
-    reporter: "씨뽀",
-  },
-];
+export const BLACKLIST = [];
 
 export const MEMBERS = [
   { id: 1, name: "간편", role: "낙원가이드", scenario: "혹독한 겨울", joinDate: "2025-01-15", note: "하이브장" },
@@ -1027,6 +991,7 @@ export const MEMBERS = [
   { id: 5, name: "찌콩", role: "베테랑사원", scenario: "혹독한 겨울", joinDate: "2025-02-15", note: "" },
   { id: 6, name: "빙박", role: "베테랑사원", scenario: "혹독한 겨울", joinDate: "2025-03-01", note: "" },
   { id: 7, name: "Ahyr", role: "베테랑사원", scenario: "혹독한 겨울", joinDate: "2025-03-10", note: "" },
+  { id: 8, name: "광인", role: "베테랑사원", scenario: "혹독한 겨울", joinDate: "2026-02-27", note: "" },
 ];
 
 export const MAP_PINS = [
