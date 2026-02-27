@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Icons } from './Icons';
 import { Modal, Input, TextArea, Button } from './UI';
@@ -21,13 +21,17 @@ const LeafletMap = dynamic(() => import('./LeafletMap'), {
   ),
 });
 
+const SCENARIOS = ['무한의꿈', '혹독한겨울', '터치오브스카이', '비정상수용'];
+const PIN_COLORS = ['#44ff88', '#ff4444', '#ffaa44', '#4488ff', '#ffffff', '#ff44ff', '#a855f7', '#06b6d4'];
+const DEFAULT_FORM = { label: '', note: '', color: '#44ff88', scenario: '무한의꿈', server: '' };
+
 export default function MapPage() {
   const { data: session } = useSession();
   const { data: pins, loading, mutate } = useApi('/api/map-pins');
   const [showAdd, setShowAdd] = useState(false);
   const [sel, setSel] = useState(null);
   const [np, setNp] = useState(null);
-  const [form, setForm] = useState({ label: '', note: '', color: '#44ff88' });
+  const [form, setForm] = useState({ ...DEFAULT_FORM });
 
   const handleMapClick = (pct) => {
     setNp(pct);
@@ -40,11 +44,11 @@ export default function MapPage() {
       await fetch('/api/map-pins', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...np, ...form, author: session?.user?.name || '익명' }),
+        body: JSON.stringify({ ...np, ...form, server: form.server ? parseInt(form.server) : null, author: session?.user?.name || '익명' }),
       });
       mutate();
     } catch (e) { console.error(e); }
-    setShowAdd(false); setNp(null); setForm({ label: '', note: '', color: '#44ff88' });
+    setShowAdd(false); setNp(null); setForm({ ...DEFAULT_FORM });
   };
 
   const deletePin = async (id) => {
@@ -55,7 +59,6 @@ export default function MapPage() {
     setSel(null);
   };
 
-  const colors = ['#44ff88', '#ff4444', '#ffaa44', '#4488ff', '#ffffff', '#ff44ff'];
   const pinList = pins || [];
 
   if (loading) {
@@ -103,12 +106,19 @@ export default function MapPage() {
       <Modal open={!!sel} onClose={() => setSel(null)} title={sel?.label || ''}>
         {sel && (
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14, flexWrap: 'wrap' }}>
               <div style={{ width: 10, height: 10, borderRadius: '50%', background: sel.color }} />
               <span style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>({sel.x.toFixed(1)}, {sel.y.toFixed(1)})</span>
+              {sel.scenario && (
+                <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 4, background: 'var(--accent-dim)', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                  {sel.scenario}{sel.server ? ` · ${sel.server}서버` : ''}
+                </span>
+              )}
             </div>
-            <div style={{ padding: 12, background: 'var(--bg-tertiary)', borderRadius: 8, fontSize: 14, lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: 14 }}>{sel.note}</div>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            {sel.note && (
+              <div style={{ padding: 12, background: 'var(--bg-tertiary)', borderRadius: 8, fontSize: 14, lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: 14 }}>{sel.note}</div>
+            )}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>by {sel.author}</span>
               <Button variant="danger" onClick={() => deletePin(sel.id)} style={{ padding: '5px 12px', fontSize: 12 }}><Icons.Trash /> 삭제</Button>
             </div>
@@ -120,12 +130,33 @@ export default function MapPage() {
       <Modal open={showAdd} onClose={() => { setShowAdd(false); setNp(null); }} title="새 핀 추가">
         <Input label="장소 이름" value={form.label} onChange={(e) => setForm({ ...form, label: e.target.value })} placeholder="예: 보스 스폰 지점" />
         <TextArea label="메모" value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })} placeholder="정보..." />
-        <div style={{ marginBottom: 14 }}>
-          <label style={{ display: 'block', fontSize: 11, color: 'var(--text-secondary)', marginBottom: 6, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>핀 색상</label>
+        <div style={{ marginBottom: 13 }}>
+          <label style={{ display: 'block', fontSize: 11, color: 'var(--text-secondary)', marginBottom: 5, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>핀 색상</label>
           <div style={{ display: 'flex', gap: 7 }}>
-            {colors.map((c) => <button key={c} onClick={() => setForm({ ...form, color: c })} style={{ width: 26, height: 26, borderRadius: '50%', background: c, border: form.color === c ? '3px solid #fff' : '3px solid transparent', cursor: 'pointer' }} />)}
+            {PIN_COLORS.map((c) => (
+              <button key={c} onClick={() => setForm({ ...form, color: c })} style={{
+                width: 26, height: 26, borderRadius: '50%', background: c,
+                border: form.color === c ? '3px solid #fff' : '3px solid transparent',
+                cursor: 'pointer', transition: 'transform 0.15s',
+              }} />
+            ))}
           </div>
         </div>
+        <div style={{ marginBottom: 13 }}>
+          <label style={{ display: 'block', fontSize: 11, color: 'var(--text-secondary)', marginBottom: 5, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>시나리오</label>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            {SCENARIOS.map((s) => (
+              <button key={s} onClick={() => setForm({ ...form, scenario: s })} style={{
+                padding: '6px 12px', borderRadius: 6, fontSize: 12, fontWeight: 600,
+                fontFamily: 'var(--font-body)', cursor: 'pointer', transition: 'all 0.15s',
+                background: form.scenario === s ? '#fff' : 'var(--bg-tertiary)',
+                color: form.scenario === s ? '#000' : 'var(--text-secondary)',
+                border: form.scenario === s ? '1px solid #fff' : '1px solid var(--border)',
+              }}>{s}</button>
+            ))}
+          </div>
+        </div>
+        <Input label="서버" type="number" value={form.server} onChange={(e) => setForm({ ...form, server: e.target.value })} placeholder="서버 번호 입력" />
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
           <Button variant="secondary" onClick={() => { setShowAdd(false); setNp(null); }}>취소</Button>
           <Button onClick={addPin}>추가</Button>

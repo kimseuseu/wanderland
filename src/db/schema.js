@@ -54,4 +54,6 @@ export const mapPins = pgTable('map_pins', {
   author: text('author'),
   note: text('note'),
   color: text('color').default('#44ff88'),
+  scenario: text('scenario'),
+  server: integer('server'),
 });

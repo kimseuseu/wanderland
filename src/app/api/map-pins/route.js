@@ -40,6 +40,8 @@ export async function POST(req) {
       author: body.author || session.user?.name || '익명',
       note: body.note || '',
       color: body.color || '#44ff88',
+      scenario: body.scenario || null,
+      server: body.server ? parseInt(body.server) : null,
     }).returning();
     return NextResponse.json(result[0], { status: 201 });
   } catch (error) {

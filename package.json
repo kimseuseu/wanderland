@@ -5,9 +5,11 @@
   "description": "낙원 하이브 - Once Human 클랜 웹사이트",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/migrate.js && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:push": "drizzle-kit push",
+    "db:generate": "drizzle-kit generate"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",

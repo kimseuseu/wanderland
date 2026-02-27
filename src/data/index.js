@@ -994,10 +994,4 @@ export const MEMBERS = [
   { id: 8, name: "광인", role: "베테랑사원", scenario: "혹독한 겨울", joinDate: "2026-02-27", note: "" },
 ];
 
-export const MAP_PINS = [
-  { id: 1, x: 25, y: 30, label: "희귀 광물 채집지", author: "간편", note: "밤 시간에만 스폰. 디비전스 몬스터 주의", color: "#44ff88" },
-  { id: 2, x: 55, y: 45, label: "보스 스폰 지점", author: "씨뽀", note: "매 30분마다 리젠. 4인 파티 권장", color: "#ff4444" },
-  { id: 3, x: 70, y: 25, label: "안전 거래소", author: "딸기코", note: "PvP 비활성 구역. 거래 시 이곳 추천", color: "#ffaa44" },
-  { id: 4, x: 40, y: 65, label: "크레이들 업그레이드", author: "빙박", note: "Lv.5 크레이들 부품 드랍 확인됨", color: "#4488ff" },
-  { id: 5, x: 15, y: 70, label: "낙원 하이브 기지", author: "간편", note: "우리 메인 기지. 방어 시설 완비", color: "#ffffff" },
-];
+export const MAP_PINS = [];
