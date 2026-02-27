@@ -255,41 +255,62 @@ function BuildDetail({ build, onBack }) {
             </Panel>
           )}
 
-          {/* 접미사 구성 */}
-          {build.suffixes && (
-            <Panel title="접미사 구성" accent="var(--warning)">
-              <div style={{ borderRadius: 8, overflow: 'hidden', border: '1px solid var(--border)' }}>
-                <div style={{
-                  display: 'grid', gridTemplateColumns: '60px 1fr 1fr 44px',
-                  padding: '8px 12px', background: 'rgba(255,255,255,0.03)',
-                  fontSize: 10, color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '0.06em',
-                }}>
-                  <span>부위</span><span>접미사</span><span>키워드</span><span>타입</span>
-                </div>
-                {build.suffixes.map((s, i) => (
-                  <div key={i} style={{
-                    display: 'grid', gridTemplateColumns: '60px 1fr 1fr 44px',
-                    padding: '7px 12px', borderTop: '1px solid var(--border)',
-                    fontSize: 11, alignItems: 'center',
-                    background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)',
-                  }}>
-                    <span style={{ fontWeight: 700 }}>{s.part}</span>
-                    <span style={{ color: 'var(--text-secondary)' }}>{s.suffix}</span>
-                    <span style={{ color: 'var(--warning)', fontWeight: 600 }}>{s.keyword}</span>
-                    <span style={{
-                      fontSize: 9, fontWeight: 700, color: typeColor(s.type),
-                      padding: '2px 5px', background: `${typeColor(s.type)}12`,
-                      borderRadius: 3, textAlign: 'center',
-                    }}>{s.type}</span>
-                  </div>
-                ))}
-              </div>
-            </Panel>
-          )}
         </div>
       </div>
 
-      {/* ── Full-width: 모듈 + 메모 ── */}
+      {/* ── Full-width: 모듈 구성 (메인 섹션) ── */}
+      {build.suffixes && (
+        <div style={{
+          marginTop: 20,
+          background: 'var(--bg-card)',
+          border: '1.5px solid rgba(255,170,68,0.25)',
+          borderRadius: 14,
+          padding: '24px 28px',
+          boxShadow: '0 2px 20px rgba(255,170,68,0.06)',
+        }}>
+          <div style={{
+            display: 'flex', alignItems: 'center', gap: 10, marginBottom: 18,
+          }}>
+            <div style={{
+              width: 4, height: 22, borderRadius: 2, background: 'var(--warning)',
+            }} />
+            <h3 style={{
+              fontSize: 17, fontWeight: 800, fontFamily: 'var(--font-display)',
+              color: 'var(--text-primary)', margin: 0,
+            }}>모듈 구성</h3>
+          </div>
+          <div style={{ borderRadius: 10, overflow: 'hidden', border: '1px solid var(--border)' }}>
+            <div style={{
+              display: 'grid', gridTemplateColumns: '72px 1fr 1fr 56px',
+              padding: '10px 16px', background: 'rgba(255,170,68,0.06)',
+              fontSize: 11, color: 'var(--text-muted)', fontWeight: 700, letterSpacing: '0.08em',
+              textTransform: 'uppercase',
+            }}>
+              <span>부위</span><span>접미사</span><span>키워드</span><span>타입</span>
+            </div>
+            {build.suffixes.map((s, i) => (
+              <div key={i} style={{
+                display: 'grid', gridTemplateColumns: '72px 1fr 1fr 56px',
+                padding: '11px 16px', borderTop: '1px solid var(--border)',
+                fontSize: 13, alignItems: 'center',
+                background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.018)',
+                transition: 'background 0.15s',
+              }}>
+                <span style={{ fontWeight: 800, fontSize: 12 }}>{s.part}</span>
+                <span style={{ color: 'var(--text-secondary)', fontWeight: 500 }}>{s.suffix}</span>
+                <span style={{ color: 'var(--warning)', fontWeight: 700 }}>{s.keyword}</span>
+                <span style={{
+                  fontSize: 10, fontWeight: 700, color: typeColor(s.type),
+                  padding: '3px 8px', background: `${typeColor(s.type)}15`,
+                  borderRadius: 4, textAlign: 'center',
+                }}>{s.type}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* ── Full-width: 모듈 접미 + 메모 ── */}
       {build.modules && (
         <Panel title="모듈 접미" accent="var(--warning)" style={{ marginTop: 14 }}>
           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
