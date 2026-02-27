@@ -3,25 +3,53 @@
 import { useState } from 'react';
 import { Icons } from './Icons';
 import { Modal, Input, TextArea, Button, Tag } from './UI';
-import { BLACKLIST as INITIAL } from '@/data';
+import { useSession } from 'next-auth/react';
+import { useApi } from '@/hooks/useApi';
 
 const sv = { high: { l: '위험', c: 'var(--danger)' }, medium: { l: '주의', c: 'var(--warning)' }, low: { l: '경고', c: 'var(--text-secondary)' } };
 
 export default function BlacklistPage() {
-  const [list, setList] = useState(INITIAL);
+  const { data: session } = useSession();
+  const { data: list, loading, mutate } = useApi('/api/blacklist');
   const [showAdd, setShowAdd] = useState(false);
   const [sel, setSel] = useState(null);
   const [search, setSearch] = useState('');
   const [form, setForm] = useState({ name: '', uuid: '', alts: '', clan: '', incident: '', severity: 'medium' });
 
-  const filtered = list.filter((b) => b.name.includes(search) || b.uuid.includes(search) || b.alts.includes(search) || b.clan.includes(search));
+  const items = list || [];
+  const filtered = items.filter((b) =>
+    (b.name || '').includes(search) || (b.uuid || '').includes(search) || (b.alts || '').includes(search) || (b.clan || '').includes(search)
+  );
 
-  const add = () => {
+  const add = async () => {
     if (!form.name) return;
-    setList([{ ...form, id: Date.now(), date: new Date().toISOString().split('T')[0], reporter: '나' }, ...list]);
+    try {
+      await fetch('/api/blacklist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, reporter: session?.user?.name || '익명' }),
+      });
+      mutate();
+    } catch (e) { console.error(e); }
     setShowAdd(false);
     setForm({ name: '', uuid: '', alts: '', clan: '', incident: '', severity: 'medium' });
   };
+
+  const remove = async (id) => {
+    try {
+      await fetch(`/api/blacklist/${id}`, { method: 'DELETE' });
+      mutate();
+    } catch (e) { console.error(e); }
+    setSel(null);
+  };
+
+  if (loading) {
+    return (
+      <div style={{ textAlign: 'center', padding: '80px 20px', color: 'var(--text-muted)' }}>
+        <div style={{ fontSize: 13, fontFamily: 'var(--font-mono)', animation: 'pulse 1.5s ease-in-out infinite' }}>불러오는 중...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="fade-in">
@@ -55,7 +83,7 @@ export default function BlacklistPage() {
             </div>
             <span style={{ fontSize: 12, color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>{item.uuid}</span>
             <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>{item.clan}</span>
-            <Tag color={sv[item.severity].c}>{sv[item.severity].l}</Tag>
+            <Tag color={sv[item.severity]?.c || 'var(--text-muted)'}>{sv[item.severity]?.l || '?'}</Tag>
             <span style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{item.date}</span>
           </div>
         ))}
@@ -72,7 +100,7 @@ export default function BlacklistPage() {
                 <h3 style={{ fontSize: 17, fontWeight: 800, fontFamily: 'var(--font-display)' }}>{sel.name}</h3>
                 <span style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{sel.uuid}</span>
               </div>
-              <div style={{ marginLeft: 'auto' }}><Tag color={sv[sel.severity].c}>{sv[sel.severity].l}</Tag></div>
+              <div style={{ marginLeft: 'auto' }}><Tag color={sv[sel.severity]?.c || 'var(--text-muted)'}>{sv[sel.severity]?.l || '?'}</Tag></div>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 18 }}>
               <div style={{ padding: '9px 12px', background: 'var(--bg-tertiary)', borderRadius: 8 }}>
@@ -90,7 +118,7 @@ export default function BlacklistPage() {
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>신고: {sel.reporter} · {sel.date}</span>
-              <Button variant="danger" style={{ padding: '5px 12px', fontSize: 12 }}><Icons.Trash /> 삭제</Button>
+              <Button variant="danger" onClick={() => remove(sel.id)} style={{ padding: '5px 12px', fontSize: 12 }}><Icons.Trash /> 삭제</Button>
             </div>
           </div>
         )}

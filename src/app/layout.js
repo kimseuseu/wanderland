@@ -1,4 +1,5 @@
 import './globals.css';
+import AuthProvider from '@/components/AuthProvider';
 
 export const metadata = {
   title: 'WANDERLAND — 낙원 하이브',
@@ -17,7 +18,9 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }

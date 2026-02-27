@@ -1,7 +1,7 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Icons } from './Icons';
-import { MEMBERS, BUILDS, BLACKLIST } from '@/data';
 
 const cardAccents = {
   builds: '#ffaa44',
@@ -11,6 +11,17 @@ const cardAccents = {
 };
 
 export default function HomePage({ onNavigate }) {
+  const [counts, setCounts] = useState({ members: 0, builds: 0 });
+
+  useEffect(() => {
+    Promise.all([
+      fetch('/api/members').then((r) => r.ok ? r.json() : []),
+      fetch('/api/builds').then((r) => r.ok ? r.json() : []),
+    ]).then(([m, b]) => {
+      setCounts({ members: m.length || 0, builds: b.length || 0 });
+    }).catch(() => {});
+  }, []);
+
   const navItems = [
     { icon: <Icons.Build />, label: '장비 빌드', page: 'builds', desc: '빌드 공유 & 탐색' },
     { icon: <Icons.Map />, label: '게임 지도', page: 'map', desc: '지역 정보 기록' },
@@ -19,9 +30,8 @@ export default function HomePage({ onNavigate }) {
   ];
 
   const stats = [
-    { value: `${MEMBERS.length}명`, label: '하이브원', color: '#6488ff' },
-    { value: `${BUILDS.length}개`, label: '빌드', color: '#ffaa44' },
-    { value: `${BLACKLIST.length}명`, label: '블랙리스트', color: '#ff5566' },
+    { value: `${counts.members}명`, label: '하이브원', color: '#6488ff' },
+    { value: `${counts.builds}개`, label: '빌드', color: '#ffaa44' },
   ];
 
   return (

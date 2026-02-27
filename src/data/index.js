@@ -2,7 +2,7 @@ export const BUILDS = [
   {
     id: 1,
     name: "SKS 탐색자 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/sks-build.png",
     mainWeapon: "SKS - 탐색자",
     subWeapon: "리커브석궁",
@@ -48,7 +48,7 @@ export const BUILDS = [
   {
     id: 2,
     name: "P90-홀로그램 공명 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/p90-build.png",
     mainWeapon: "P90 - 홀로그램",
     subWeapon: "Tec9 / 분근 / 리커브석궁",
@@ -86,7 +86,7 @@ export const BUILDS = [
     ],
     notes:
       "부옵: 상위자 > 크리티컬데미지 > 총기데미지 순으로 셋팅\n\n· 트레킹 부츠: 헌터마크 대상뎀이 합연산이며 약점댐증\n· 카우보이 부츠: 워페어 곱연산이며 단순댐증, 딜은 카우보이가 우세\n· 튜닝 설계도는 기본적으로 대형 + 크확을 사용하되 부옵보다 \"무기 데미지\"가 높은걸 사용\n· 탄창스왑용 세트가 있다면 돌격 + 크확을 사용\n· 저주인형 기본 사용 (총기 및 트랜스 취약18% + 추가 취약60%)\n· 위시메이커 사용시 무기 튜닝을 돌격 + 크확으로 사용\n· 도핑에 고기류가 많이 들어가는데 사슴고기로 공통 사용 가능\n· 딜 고점: 워페어(거북) / 패스트거너(토끼) / 오렌지쥬스(수분) 또는 싱거운 요리(포만감)으로 도핑 추가 가능",
-    category: "딜러",
+    category: "총기",
     weaponType: "기관단총",
     tags: ["PvE"],
     likes: 0,
@@ -95,7 +95,7 @@ export const BUILDS = [
   {
     id: 3,
     name: "컴파운드 석궁 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/compound-bow-build.png",
     mainWeapon: "컴파운드 석궁",
     subWeapon: "리커브석궁 / 타이탄 / 죠스데글",
@@ -133,7 +133,7 @@ export const BUILDS = [
     ],
     notes:
       "탄창 계산 시 \"탄창용량 1.50\"을 넘겨야 함\n\n· 엘리트 세팅: 하의 재보급\n· 상위자 세팅: 하의 크리티컬 서지\n· 모듈은 구판 신판 섞어서 사용하면 됨\n· 보조무기는 리커브석궁 / 타이탄 / 죠스데글 중 취향껏",
-    category: "딜러",
+    category: "원소",
     weaponType: "석궁",
     tags: ["PvE"],
     likes: 0,
@@ -142,7 +142,7 @@ export const BUILDS = [
   {
     id: 4,
     name: "임계펄스 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/critical-pulse-build.png",
     mainWeapon: "임계펄스",
     subWeapon: "보조무기 취향",
@@ -180,16 +180,16 @@ export const BUILDS = [
     ],
     notes:
       "탄창 계산 시 \"탄창용량 1.50\"을 넘겨야 함\n\n· 엘리트 세팅: 하의 재보급\n· 상위자 세팅: 하의 트랜스 증폭\n· 보조무기는 취향",
-    category: "딜러",
+    category: "원소",
     weaponType: "석궁",
-    tags: ["PvE", "원소"],
+    tags: ["PvE"],
     likes: 0,
     date: "2026-02-27",
   },
   {
     id: 5,
     name: "분노의 근원 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/mps5-build.png",
     mainWeapon: "MPS5 - 분노의 근원",
     subWeapon: "P90 (에땁)",
@@ -236,7 +236,7 @@ export const BUILDS = [
   {
     id: 6,
     name: "백상아리 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/deagle-build.png",
     mainWeapon: "데저트이글 - 백상아리",
     subWeapon: "에땁 / SN700 타이탄테일",
@@ -283,7 +283,7 @@ export const BUILDS = [
   {
     id: 7,
     name: "작별선물 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/revolver-build.png",
     mainWeapon: "리볼버 - 작별선물",
     subWeapon: "리커브석궁",
@@ -330,7 +330,7 @@ export const BUILDS = [
   {
     id: 8,
     name: "위험물 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/g17-build.png",
     mainWeapon: "G17 - 위험물",
     subWeapon: "에땁 / 에케 / 죠스데글 / 벡터",
@@ -377,7 +377,7 @@ export const BUILDS = [
   {
     id: 9,
     name: "부식 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/aa12-build.png",
     mainWeapon: "AA12 - 부식",
     subWeapon: "에땁 / 리커브석궁 (만하임)",
@@ -424,7 +424,7 @@ export const BUILDS = [
   {
     id: 10,
     name: "파멸의 전조 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/barrel-build.png",
     mainWeapon: "배럴 - 파멸의 전조",
     subWeapon: "Tec9",
@@ -472,7 +472,7 @@ export const BUILDS = [
   {
     id: 11,
     name: "크릉 곰이다! 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/mps5-bear-build.png",
     mainWeapon: "MPS5 - 크릉 곰이다!",
     subWeapon: "에땁",
@@ -520,7 +520,7 @@ export const BUILDS = [
   {
     id: 12,
     name: "외부공간 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/mp7-outerspace-build.png",
     mainWeapon: "MP7 - 외부공간",
     subWeapon: "에땁",
@@ -559,7 +559,7 @@ export const BUILDS = [
   {
     id: 13,
     name: "화이트샤크 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/vector-whiteshark-build.png",
     mainWeapon: "벡터 - 화이트샤크",
     subWeapon: "에땁 or 글록 or 타이탄",
@@ -597,7 +597,7 @@ export const BUILDS = [
   {
     id: 14,
     name: "심연의 응시 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/akm-abyss-build.png",
     mainWeapon: "AKM - 심연의 응시",
     subWeapon: "에땁",
@@ -636,7 +636,7 @@ export const BUILDS = [
   {
     id: 15,
     name: "사일런트 리턴 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/m416-silent-return-build.png",
     mainWeapon: "M416 - 사일런트 리턴",
     subWeapon: "에땁",
@@ -675,7 +675,7 @@ export const BUILDS = [
   {
     id: 16,
     name: "최후의 용기 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/scar-last-courage-build.png",
     mainWeapon: "SCAR - 최후의 용기",
     subWeapon: "리커브 석궁",
@@ -714,7 +714,7 @@ export const BUILDS = [
   {
     id: 17,
     name: "곧 폭발이야! 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/kvd-explosion-build.png",
     mainWeapon: "KVD - 곧 폭발이야!",
     subWeapon: "에땁",
@@ -752,7 +752,7 @@ export const BUILDS = [
   {
     id: 18,
     name: "포식자 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/mg4-predator-build.png",
     mainWeapon: "MG4 - 포식자",
     subWeapon: "에땁",
@@ -790,7 +790,7 @@ export const BUILDS = [
   {
     id: 19,
     name: "패러독스 메모리 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/mg4-paradox-build.png",
     mainWeapon: "MG4 - 패러독스 메모리",
     subWeapon: "에땁",
@@ -828,7 +828,7 @@ export const BUILDS = [
   {
     id: 20,
     name: "명중 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/awm-hit-build.png",
     mainWeapon: "AWM - 명중",
     subWeapon: "보라데글 or 리커브 석궁",
@@ -866,7 +866,7 @@ export const BUILDS = [
   {
     id: 21,
     name: "문어! 구이링! 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/mk14-octopus-build.png",
     mainWeapon: "MK14 - 문어! 구이링!",
     subWeapon: "에땁",
@@ -905,7 +905,7 @@ export const BUILDS = [
   {
     id: 22,
     name: "루퍼스 빌드",
-    author: "춘영",
+    author: "간편",
     image: "/images/m82a1-rupus-build.png",
     mainWeapon: "M82A1 : 루퍼스",
     subWeapon: "에땁",
@@ -944,7 +944,7 @@ export const BUILDS = [
   {
     id: 23,
     name: "문어! 구이링! 빌드 (신판)",
-    author: "춘영",
+    author: "간편",
     image: "/images/mk14-octopus-build.png",
     mainWeapon: "MK14 - 문어! 구이링!",
     subWeapon: "리커브 석궁",

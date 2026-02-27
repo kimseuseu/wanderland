@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Icons } from './Icons';
 import { Tag } from './UI';
-import { BUILDS as INITIAL_BUILDS } from '@/data';
+import { useApi } from '@/hooks/useApi';
 
 const typeColor = (t) => t === '섬광' ? '#88ccff' : t === '클래식' ? '#ffcc44' : t === '신판' ? '#88ff88' : 'var(--text-secondary)';
 const catColor = { '총기': '#ff6b6b', '원소': '#88ccff', '하이브리드': '#cc88ff' };
@@ -317,7 +317,7 @@ function BuildDetail({ build, onBack }) {
    빌드 목록 페이지
    ═══════════════════════════════════════════ */
 export default function BuildsPage() {
-  const [builds] = useState(INITIAL_BUILDS);
+  const { data: builds, loading } = useApi('/api/builds');
   const [sel, setSel] = useState(null);
   const [search, setSearch] = useState('');
   const [catFilter, setCatFilter] = useState('전체');
@@ -326,6 +326,15 @@ export default function BuildsPage() {
   /* 상세 페이지 */
   if (sel) {
     return <BuildDetail build={sel} onBack={() => setSel(null)} />;
+  }
+
+  /* 로딩 */
+  if (loading || !builds) {
+    return (
+      <div style={{ textAlign: 'center', padding: '80px 20px', color: 'var(--text-muted)' }}>
+        <div style={{ fontSize: 13, fontFamily: 'var(--font-mono)', animation: 'pulse 1.5s ease-in-out infinite' }}>빌드 불러오는 중...</div>
+      </div>
+    );
   }
 
   /* 목록 필터링 */

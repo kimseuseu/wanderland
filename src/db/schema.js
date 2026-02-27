@@ -1,0 +1,57 @@
+import { pgTable, serial, text, integer, timestamp, jsonb, real } from 'drizzle-orm/pg-core';
+
+export const builds = pgTable('builds', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  author: text('author').notNull(),
+  image: text('image'),
+  mainWeapon: text('main_weapon').notNull(),
+  subWeapon: text('sub_weapon'),
+  grade: text('grade'),
+  tuning: jsonb('tuning'),
+  modules: jsonb('modules'),
+  infections: jsonb('infections'),
+  doping: jsonb('doping'),
+  armorSet: text('armor_set'),
+  armorOptions: jsonb('armor_options'),
+  suffixes: jsonb('suffixes'),
+  leather: jsonb('leather'),
+  notes: text('notes'),
+  category: text('category'),
+  weaponType: text('weapon_type'),
+  tags: jsonb('tags'),
+  likes: integer('likes').default(0),
+  date: text('date'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+export const members = pgTable('members', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  role: text('role').notNull(),
+  scenario: text('scenario'),
+  joinDate: text('join_date'),
+  note: text('note'),
+});
+
+export const blacklist = pgTable('blacklist', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  uuid: text('uuid'),
+  alts: text('alts'),
+  clan: text('clan'),
+  incident: text('incident'),
+  severity: text('severity').default('medium'),
+  date: text('date'),
+  reporter: text('reporter'),
+});
+
+export const mapPins = pgTable('map_pins', {
+  id: serial('id').primaryKey(),
+  x: real('x').notNull(),
+  y: real('y').notNull(),
+  label: text('label').notNull(),
+  author: text('author'),
+  note: text('note'),
+  color: text('color').default('#44ff88'),
+});

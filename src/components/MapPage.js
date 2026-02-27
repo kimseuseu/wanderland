@@ -3,10 +3,12 @@
 import { useState, useRef, useCallback } from 'react';
 import { Icons } from './Icons';
 import { Modal, Input, TextArea, Button } from './UI';
-import { MAP_PINS as INITIAL } from '@/data';
+import { useSession } from 'next-auth/react';
+import { useApi } from '@/hooks/useApi';
 
 export default function MapPage() {
-  const [pins, setPins] = useState(INITIAL);
+  const { data: session } = useSession();
+  const { data: pins, loading, mutate } = useApi('/api/map-pins');
   const [showAdd, setShowAdd] = useState(false);
   const [sel, setSel] = useState(null);
   const [np, setNp] = useState(null);
@@ -20,20 +22,44 @@ export default function MapPage() {
     setShowAdd(true);
   }, []);
 
-  const addPin = () => {
+  const addPin = async () => {
     if (!form.label || !np) return;
-    setPins([...pins, { id: Date.now(), ...np, ...form, author: '나' }]);
+    try {
+      await fetch('/api/map-pins', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...np, ...form, author: session?.user?.name || '익명' }),
+      });
+      mutate();
+    } catch (e) { console.error(e); }
     setShowAdd(false); setNp(null); setForm({ label: '', note: '', color: '#44ff88' });
   };
 
+  const deletePin = async (id) => {
+    try {
+      await fetch(`/api/map-pins/${id}`, { method: 'DELETE' });
+      mutate();
+    } catch (e) { console.error(e); }
+    setSel(null);
+  };
+
   const colors = ['#44ff88', '#ff4444', '#ffaa44', '#4488ff', '#ffffff', '#ff44ff'];
+  const pinList = pins || [];
+
+  if (loading) {
+    return (
+      <div style={{ textAlign: 'center', padding: '80px 20px', color: 'var(--text-muted)' }}>
+        <div style={{ fontSize: 13, fontFamily: 'var(--font-mono)', animation: 'pulse 1.5s ease-in-out infinite' }}>지도 불러오는 중...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="fade-in">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 22, flexWrap: 'wrap', gap: 14 }}>
         <div>
           <h2 style={{ fontSize: 22, fontWeight: 800, fontFamily: 'var(--font-display)' }}>게임 지도</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: 13, marginTop: 3 }}>지도를 클릭하여 핀 추가 · {pins.length}개</p>
+          <p style={{ color: 'var(--text-muted)', fontSize: 13, marginTop: 3 }}>지도를 클릭하여 핀 추가 · {pinList.length}개</p>
         </div>
       </div>
 
@@ -51,7 +77,7 @@ export default function MapPage() {
           {['A', 'B', 'C', 'D'].map((s, i) => (
             <div key={s} style={{ position: 'absolute', top: i < 2 ? '10%' : '55%', left: i % 2 === 0 ? '10%' : '55%', fontSize: 11, color: 'rgba(255,255,255,0.08)', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>SECTOR {s}</div>
           ))}
-          {pins.map((p) => (
+          {pinList.map((p) => (
             <div key={p.id} onClick={(e) => { e.stopPropagation(); setSel(p); }}
               style={{ position: 'absolute', left: `${p.x}%`, top: `${p.y}%`, transform: 'translate(-50%,-100%)', cursor: 'pointer', zIndex: 10, transition: 'transform 0.2s' }}
               onMouseEnter={(e) => e.currentTarget.style.transform = 'translate(-50%,-100%) scale(1.3)'}
@@ -68,7 +94,7 @@ export default function MapPage() {
         {/* Pin List */}
         <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 14, padding: 12, maxHeight: 440, overflow: 'auto' }}>
           <h3 style={{ fontSize: 13, fontWeight: 700, fontFamily: 'var(--font-display)', marginBottom: 12 }}>핀 목록</h3>
-          {pins.map((p) => (
+          {pinList.map((p) => (
             <div key={p.id} onClick={() => setSel(p)}
               style={{ padding: '7px 9px', borderRadius: 8, marginBottom: 3, cursor: 'pointer', transition: 'all 0.2s', background: sel?.id === p.id ? 'var(--bg-tertiary)' : 'transparent' }}
               onMouseEnter={(e) => { if (sel?.id !== p.id) e.currentTarget.style.background = 'var(--accent-dim)'; }}
@@ -94,7 +120,7 @@ export default function MapPage() {
             <div style={{ padding: 12, background: 'var(--bg-tertiary)', borderRadius: 8, fontSize: 14, lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: 14 }}>{sel.note}</div>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>by {sel.author}</span>
-              <Button variant="danger" onClick={() => { setPins(pins.filter((x) => x.id !== sel.id)); setSel(null); }} style={{ padding: '5px 12px', fontSize: 12 }}><Icons.Trash /> 삭제</Button>
+              <Button variant="danger" onClick={() => deletePin(sel.id)} style={{ padding: '5px 12px', fontSize: 12 }}><Icons.Trash /> 삭제</Button>
             </div>
           </div>
         )}

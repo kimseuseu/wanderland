@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { MEMBERS } from '@/data';
+// removed MEMBERS import - no longer showing count
 
 const sections = [
   {
@@ -28,8 +28,8 @@ const sections = [
   {
     id: 'creed',
     label: '04',
-    title: '우리의',
-    highlight: '신조',
+    title: '운영',
+    highlight: '방침',
     accent: '#44ff88',
   },
 ];
@@ -120,7 +120,7 @@ export default function AboutPage() {
           <div className="about-reveal" style={{ opacity: 0, transform: 'translateY(40px)', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)' }}>
             <p style={{ fontSize: 18, color: 'var(--text-secondary)', lineHeight: 2, fontWeight: 400 }}>
               문명이 무너진 세계에<br />
-              동화 속 <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>원더랜드</span>는 없다.
+              동화 속 <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>원더랜드</span>는 없습니다.
             </p>
           </div>
 
@@ -148,11 +148,11 @@ export default function AboutPage() {
           <div className="about-reveal" style={{ opacity: 0, transform: 'translateY(40px)', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s', marginTop: 48 }}>
             <p style={{ fontSize: 16, color: 'var(--text-secondary)', lineHeight: 2.2 }}>
               정처 없이 떠도는 방랑자들이<br />
-              마침내 뿌리를 내린 곳.
+              마침내 뿌리를 내린 곳입니다.
             </p>
             <p style={{ fontSize: 16, color: 'var(--text-secondary)', lineHeight: 2.2, marginTop: 16 }}>
-              종말 이후의 황무지에서 서로를 발견하고,<br />
-              함께 일어서기로 한 자들의 거점.
+              종말 이후의 세계에서 서로를 발견하고,<br />
+              함께하기로 한 이들의 거점입니다.
             </p>
           </div>
 
@@ -162,7 +162,7 @@ export default function AboutPage() {
             }}>
               <p style={{ fontSize: 15, color: 'var(--text-muted)', fontStyle: 'italic', lineHeight: 1.8 }}>
                 "완벽한 낙원은 아니지만,<br />
-                우리가 만들어가는 낙원."
+                함께 만들어가는 곳입니다."
               </p>
             </div>
           </div>
@@ -191,23 +191,22 @@ export default function AboutPage() {
           <div className="about-reveal" style={{ opacity: 0, transform: 'translateY(40px)', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)' }}>
             <p style={{ fontSize: 16, color: 'var(--text-secondary)', lineHeight: 2.2 }}>
               Once Human의{' '}
-              <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}>혹독한 겨울</span>{' '}
-              시나리오에서<br />활동하는 하이브.
+              <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}>여러 시나리오</span>에서<br />활동 중인 하이브,
             </p>
           </div>
 
           <div className="about-reveal" style={{ opacity: 0, transform: 'translateY(40px)', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s', marginTop: 40 }}>
             <p style={{ fontSize: 16, color: 'var(--text-secondary)', lineHeight: 2.2 }}>
-              2025년 1월, 간편과 춘영이 세운<br />
-              작은 거점에서 시작해<br />
-              지금은 <span style={{ color: '#6488ff', fontWeight: 700, fontSize: 20 }}>{MEMBERS.length}명</span>의 하이브원이 함께하고 있다.
+              2025년 1월, 간편이 세운<br />
+              거점에서 시작해<br />
+              지금은 여러 하이브원이 함께하고 있습니다.
             </p>
           </div>
 
           <div className="about-reveal" style={{ opacity: 0, transform: 'translateY(40px)', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s', marginTop: 40 }}>
             <p style={{ fontSize: 16, color: 'var(--text-secondary)', lineHeight: 2.2 }}>
-              엔드게임 공략부터 빌드 연구, 자원 확보까지 —<br />
-              각자의 강점을 살려 하이브를 운영하고 있다.
+              인게임 공략부터 빌드 연구, 정보 확보까지 —<br />
+              각자의 강점을 살려 하이브를 운영합니다.
             </p>
           </div>
 
@@ -221,8 +220,8 @@ export default function AboutPage() {
               </div>
               <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.8 }}>
                 이 웹사이트는 하이브원들의 빌드 정보를 한눈에 모아보고,
-                게임 내 유용한 위치 정보를 공유하며,
-                함께 성장하기 위해 만들어졌다.
+                게임 내 유용한 정보를 공유하며,
+                함께 성장하기 위해 만들어졌습니다.
               </p>
             </div>
           </div>
@@ -240,18 +239,18 @@ export default function AboutPage() {
         }}>
           <div style={{ fontSize: 11, color: '#44ff88', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', marginBottom: 12 }}>03</div>
           <h2 style={{ fontSize: 'clamp(24px, 4vw, 40px)', fontWeight: 900, fontFamily: 'var(--font-display)', lineHeight: 1.2 }}>
-            우리의
+            운영
           </h2>
           <h2 style={{ fontSize: 'clamp(24px, 4vw, 40px)', fontWeight: 900, fontFamily: 'var(--font-display)', lineHeight: 1.2, color: '#44ff88' }}>
-            신조
+            방침
           </h2>
         </div>
 
         <div style={{ flex: 1, paddingTop: '22vh', paddingBottom: '20vh', paddingRight: 20, paddingLeft: 40 }}>
           {[
-            { num: 'I', title: '자유로운 방랑', desc: '정해진 길은 없다.\n각자의 플레이스타일을 존중하고,\n함께 더 먼 곳을 탐험한다.', color: '#ffaa44' },
-            { num: 'II', title: '정보의 공유', desc: '혼자 알면 지식, 함께 나누면 전력.\n빌드와 공략을 아낌없이 공유한다.', color: '#6488ff' },
-            { num: 'III', title: '신뢰와 결속', desc: '하이브원은 곧 전우.\n서로의 등을 지키며\n종말의 세계를 함께 걸어간다.', color: '#44ff88' },
+            { num: 'I', title: '자유로운 플레이', desc: '정해진 방식은 없습니다.\n각자의 플레이스타일을 존중하며,\n편하게 즐기는 것을 우선합니다.', color: '#ffaa44' },
+            { num: 'II', title: '정보 공유', desc: '알게 된 건 같이 나눕니다.\n빌드, 공략, 팁 등을\n서로 공유하며 함께 성장합니다.', color: '#6488ff' },
+            { num: 'III', title: '기본적인 매너', desc: '서로 기분 좋게 게임하는 게 목표입니다.\n기본적인 매너와 배려만 지켜주시면\n충분합니다.', color: '#44ff88' },
           ].map((creed, i) => (
             <div
               key={i}
@@ -297,7 +296,7 @@ export default function AboutPage() {
           fontStyle: 'italic', fontFamily: 'var(--font-display)',
           fontWeight: 300,
         }}>
-          "종말은 끝이 아니다.<br />방랑의 시작이다."
+          "방랑 끝에 찾은 곳,<br />여기가 낙원입니다."
         </p>
         <p style={{
           fontSize: 11, color: 'var(--text-muted)', marginTop: 16,
