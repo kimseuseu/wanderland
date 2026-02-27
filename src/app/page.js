@@ -25,30 +25,31 @@ export default function Page() {
       <nav style={{
         position: 'sticky', top: 0, zIndex: 100,
         background: 'rgba(10,10,10,0.92)', backdropFilter: 'blur(20px)',
-        borderBottom: '1px solid var(--border)', padding: '0 24px',
+        borderBottom: '1px solid var(--border)', padding: '0 16px',
       }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 52 }}>
-          <div onClick={() => setPage('home')} style={{ cursor: 'pointer' }}>
-            <img src="/images/logo.png" alt="Wanderland" style={{ height: 26, filter: 'brightness(1.1)' }} />
+        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 48 }}>
+          <div onClick={() => setPage('home')} style={{ cursor: 'pointer', flexShrink: 0 }}>
+            <img src="/images/logo.png" alt="Wanderland" style={{ height: 22, filter: 'brightness(1.1)' }} />
           </div>
-          <div style={{ display: 'flex', gap: 1 }}>
+          <div style={{ display: 'flex', gap: 0 }}>
             {nav.map((n) => (
               <button
                 key={n.key}
                 onClick={() => setPage(n.key)}
                 style={{
-                  display: 'flex', alignItems: 'center', gap: 5,
-                  padding: '6px 13px', borderRadius: 8, fontSize: 13,
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
+                  padding: '6px 10px', borderRadius: 8, fontSize: 12,
                   fontWeight: 600, border: 'none', cursor: 'pointer',
                   transition: 'all 0.2s', fontFamily: 'var(--font-body)',
                   background: page === n.key ? 'var(--accent-dim)' : 'transparent',
                   color: page === n.key ? '#fff' : 'var(--text-muted)',
+                  whiteSpace: 'nowrap',
                 }}
                 onMouseEnter={(e) => { if (page !== n.key) e.currentTarget.style.color = 'var(--text-secondary)'; }}
                 onMouseLeave={(e) => { if (page !== n.key) e.currentTarget.style.color = 'var(--text-muted)'; }}
               >
                 {n.icon}
-                <span>{n.label}</span>
+                <span className="nav-label">{n.label}</span>
               </button>
             ))}
           </div>

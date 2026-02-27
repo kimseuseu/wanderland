@@ -319,3 +319,33 @@ body {
   height: 24px;
   background: var(--border);
 }
+
+/* ─── Mobile Responsive ─── */
+@media (max-width: 640px) {
+  .nav-label {
+    display: none;
+  }
+  .builds-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+  }
+  .build-card {
+    border-radius: 10px !important;
+  }
+  .build-card-img {
+    height: 90px !important;
+  }
+  .build-card-body {
+    padding: 10px !important;
+  }
+  .build-card-title {
+    font-size: 12px !important;
+    line-height: 1.3;
+  }
+  .build-card-weapons {
+    grid-template-columns: 1fr !important;
+    gap: 3px !important;
+    font-size: 10px !important;
+    margin-bottom: 6px !important;
+  }
+}
