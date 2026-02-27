@@ -1,10 +1,25 @@
 'use client';
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useMemo } from 'react';
+import dynamic from 'next/dynamic';
 import { Icons } from './Icons';
 import { Modal, Input, TextArea, Button } from './UI';
 import { useSession } from 'next-auth/react';
 import { useApi } from '@/hooks/useApi';
+
+const LeafletMap = dynamic(() => import('./LeafletMap'), {
+  ssr: false,
+  loading: () => (
+    <div style={{
+      width: '100%', minHeight: 500, borderRadius: 14,
+      background: 'var(--bg-card)', border: '1px solid var(--border)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      color: 'var(--text-muted)', fontSize: 13,
+    }}>
+      지도 로딩 중...
+    </div>
+  ),
+});
 
 export default function MapPage() {
   const { data: session } = useSession();
@@ -13,14 +28,11 @@ export default function MapPage() {
   const [sel, setSel] = useState(null);
   const [np, setNp] = useState(null);
   const [form, setForm] = useState({ label: '', note: '', color: '#44ff88' });
-  const mr = useRef(null);
 
-  const mc = useCallback((e) => {
-    if (!mr.current) return;
-    const r = mr.current.getBoundingClientRect();
-    setNp({ x: ((e.clientX - r.left) / r.width) * 100, y: ((e.clientY - r.top) / r.height) * 100 });
+  const handleMapClick = (pct) => {
+    setNp(pct);
     setShowAdd(true);
-  }, []);
+  };
 
   const addPin = async () => {
     if (!form.label || !np) return;
@@ -65,34 +77,12 @@ export default function MapPage() {
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 260px', gap: 14, alignItems: 'start' }}>
         {/* Map */}
-        <div ref={mr} onClick={mc} style={{ position: 'relative', width: '100%', paddingBottom: '70%', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 14, cursor: 'crosshair', overflow: 'hidden' }}>
-          <svg style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.1 }}>
-            {Array.from({ length: 10 }, (_, i) => (
-              <g key={i}>
-                <line x1={`${(i + 1) * 10}%`} y1="0" x2={`${(i + 1) * 10}%`} y2="100%" stroke="#444" strokeWidth="0.5" />
-                <line x1="0" y1={`${(i + 1) * 10}%`} x2="100%" y2={`${(i + 1) * 10}%`} stroke="#444" strokeWidth="0.5" />
-              </g>
-            ))}
-          </svg>
-          {['A', 'B', 'C', 'D'].map((s, i) => (
-            <div key={s} style={{ position: 'absolute', top: i < 2 ? '10%' : '55%', left: i % 2 === 0 ? '10%' : '55%', fontSize: 11, color: 'rgba(255,255,255,0.08)', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>SECTOR {s}</div>
-          ))}
-          {pinList.map((p) => (
-            <div key={p.id} onClick={(e) => { e.stopPropagation(); setSel(p); }}
-              style={{ position: 'absolute', left: `${p.x}%`, top: `${p.y}%`, transform: 'translate(-50%,-100%)', cursor: 'pointer', zIndex: 10, transition: 'transform 0.2s' }}
-              onMouseEnter={(e) => e.currentTarget.style.transform = 'translate(-50%,-100%) scale(1.3)'}
-              onMouseLeave={(e) => e.currentTarget.style.transform = 'translate(-50%,-100%) scale(1)'}>
-              <div style={{ position: 'relative' }}>
-                <div style={{ width: 8, height: 8, borderRadius: '50%', background: p.color, boxShadow: `0 0 10px ${p.color}50`, border: '2px solid var(--bg-primary)' }} />
-                <div style={{ position: 'absolute', top: -20, left: '50%', transform: 'translateX(-50%)', whiteSpace: 'nowrap', fontSize: 10, color: p.color, fontWeight: 700, textShadow: '0 1px 6px rgba(0,0,0,0.9)' }}>{p.label}</div>
-              </div>
-            </div>
-          ))}
-          {np && <div style={{ position: 'absolute', left: `${np.x}%`, top: `${np.y}%`, transform: 'translate(-50%,-50%)', width: 12, height: 12, borderRadius: '50%', border: '2px solid #fff', animation: 'pulse 1s infinite' }} />}
+        <div style={{ height: 560 }}>
+          <LeafletMap pins={pins} selectedPin={sel} onMapClick={handleMapClick} onPinClick={setSel} />
         </div>
 
         {/* Pin List */}
-        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 14, padding: 12, maxHeight: 440, overflow: 'auto' }}>
+        <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 14, padding: 12, maxHeight: 560, overflow: 'auto' }}>
           <h3 style={{ fontSize: 13, fontWeight: 700, fontFamily: 'var(--font-display)', marginBottom: 12 }}>핀 목록</h3>
           {pinList.map((p) => (
             <div key={p.id} onClick={() => setSel(p)}

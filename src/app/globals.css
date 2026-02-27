@@ -159,6 +159,7 @@ html {
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
+}
   font-family: var(--font-body);
   line-height: 1.5;
   min-height: 100vh;
@@ -373,4 +374,41 @@ body {
 option {
   background: var(--bg-tertiary);
   color: var(--text-primary);
+}
+
+/* ─── Leaflet Map Overrides ─── */
+.leaflet-container {
+  background: var(--bg-card) !important;
+  font-family: var(--font-body) !important;
+}
+
+.leaflet-control-zoom a {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border) !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: var(--bg-tertiary) !important;
+}
+
+.pin-tooltip {
+  background: rgba(10, 10, 10, 0.9) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text-primary) !important;
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  font-family: var(--font-body) !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5) !important;
+}
+
+.pin-tooltip::before {
+  border-top-color: rgba(10, 10, 10, 0.9) !important;
+}
+
+.custom-pin {
+  background: none !important;
+  border: none !important;
 }
