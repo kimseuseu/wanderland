@@ -8,32 +8,25 @@ async function migrate() {
 
   const sql = neon(process.env.DATABASE_URL);
 
-  const migrations = [
-    {
-      name: 'add_map_pins_scenario_server',
-      up: `
-        ALTER TABLE map_pins ADD COLUMN IF NOT EXISTS scenario text;
-        ALTER TABLE map_pins ADD COLUMN IF NOT EXISTS server integer;
-      `,
-    },
-    {
-      name: 'clear_old_default_pins',
-      up: `DELETE FROM map_pins WHERE id IN (1, 2, 3, 4, 5);`,
-    },
-  ];
+  try {
+    await sql`ALTER TABLE map_pins ADD COLUMN IF NOT EXISTS scenario text`;
+    console.log('[migrate] Added scenario column');
+  } catch (err) {
+    console.log('[migrate] scenario column:', err.message);
+  }
 
-  for (const m of migrations) {
-    try {
-      await sql(m.up);
-      console.log(`[migrate] Applied: ${m.name}`);
-    } catch (err) {
-      // Column already exists or other non-fatal error
-      if (err.message?.includes('already exists')) {
-        console.log(`[migrate] Skipped (already applied): ${m.name}`);
-      } else {
-        console.error(`[migrate] Error in ${m.name}:`, err.message);
-      }
-    }
+  try {
+    await sql`ALTER TABLE map_pins ADD COLUMN IF NOT EXISTS server integer`;
+    console.log('[migrate] Added server column');
+  } catch (err) {
+    console.log('[migrate] server column:', err.message);
+  }
+
+  try {
+    await sql`DELETE FROM map_pins WHERE id IN (1, 2, 3, 4, 5)`;
+    console.log('[migrate] Cleared old default pins');
+  } catch (err) {
+    console.log('[migrate] clear pins:', err.message);
   }
 
   console.log('[migrate] Done');
