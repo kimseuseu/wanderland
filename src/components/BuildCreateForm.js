@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 import { Icons } from './Icons';
 import { TextArea, Button } from './UI';
@@ -97,6 +97,9 @@ export default function BuildCreateForm({ onBack, onCreated }) {
   const { data: session } = useSession();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [dragOver, setDragOver] = useState(false);
+  const fileInputRef = useRef(null);
 
   const [form, setForm] = useState({
     name: '', mainWeapon: '', subWeapon: '', grade: '전설',
@@ -127,6 +130,25 @@ export default function BuildCreateForm({ onBack, onCreated }) {
     setForm((p) => ({ ...p, tags: p.tags.includes(tag) ? p.tags.filter((t) => t !== tag) : [...p.tags, tag] }));
 
   const set = (key, val) => setForm((p) => ({ ...p, [key]: val }));
+
+  /* ── 이미지 업로드 ── */
+  const uploadImage = async (file) => {
+    if (!file || !file.type.startsWith('image/')) return;
+    if (file.size > 10 * 1024 * 1024) { setError('이미지는 10MB 이하만 가능합니다.'); return; }
+    setUploading(true);
+    setError(null);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch('/api/upload', { method: 'POST', body: fd });
+      if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(d.error || '업로드 실패'); }
+      const { url } = await res.json();
+      set('image', url);
+    } catch (e) { setError(e.message); }
+    finally { setUploading(false); }
+  };
+  const onDrop = (e) => { e.preventDefault(); setDragOver(false); const f = e.dataTransfer.files[0]; if (f) uploadImage(f); };
+  const onPaste = (e) => { const items = e.clipboardData?.items; if (!items) return; for (const item of items) { if (item.type.startsWith('image/')) { e.preventDefault(); uploadImage(item.getAsFile()); return; } } };
 
   /* ── 부위별 추가/삭제 (자동 넘버링) ── */
   const renumber = (arr, base) => {
@@ -257,11 +279,48 @@ export default function BuildCreateForm({ onBack, onCreated }) {
             placeholder="예: SKS 탐색자 빌드" style={inputStyle} />
         </div>
 
-        {/* 이미지 URL */}
+        {/* 이미지 업로드 */}
         <div style={{ marginBottom: 13 }}>
-          <label style={labelStyle}>이미지 URL</label>
-          <input value={form.image} onChange={(e) => set('image', e.target.value)}
-            placeholder="https://... (선택사항)" style={inputStyle} />
+          <label style={labelStyle}>이미지</label>
+          {form.image ? (
+            <div style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', border: '1px solid var(--border)', marginBottom: 6 }}>
+              <img src={form.image} alt="미리보기" style={{ width: '100%', maxHeight: 200, objectFit: 'cover', display: 'block' }} />
+              <button type="button" onClick={() => set('image', '')}
+                style={{
+                  position: 'absolute', top: 8, right: 8, width: 28, height: 28, borderRadius: 6,
+                  background: 'rgba(0,0,0,0.7)', border: 'none', color: '#fff',
+                  cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                <Icons.X />
+              </button>
+            </div>
+          ) : (
+            <div
+              onDrop={onDrop}
+              onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+              onDragLeave={() => setDragOver(false)}
+              onPaste={onPaste}
+              onClick={() => fileInputRef.current?.click()}
+              tabIndex={0}
+              style={{
+                padding: '28px 16px', borderRadius: 10, textAlign: 'center', cursor: 'pointer',
+                border: `2px dashed ${dragOver ? '#88ccff' : 'var(--border)'}`,
+                background: dragOver ? 'rgba(136,204,255,0.04)' : 'var(--bg-tertiary)',
+                transition: 'all 0.2s',
+              }}>
+              <input ref={fileInputRef} type="file" accept="image/*" hidden
+                onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadImage(f); e.target.value = ''; }} />
+              {uploading ? (
+                <div style={{ fontSize: 13, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>업로드 중...</div>
+              ) : (
+                <>
+                  <div style={{ fontSize: 24, marginBottom: 6, opacity: 0.4 }}>📷</div>
+                  <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>클릭, 드래그 또는 붙여넣기로 이미지 업로드</div>
+                  <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 4, opacity: 0.6 }}>PNG, JPG, WebP · 최대 10MB</div>
+                </>
+              )}
+            </div>
+          )}
         </div>
 
         {/* 등급 */}
