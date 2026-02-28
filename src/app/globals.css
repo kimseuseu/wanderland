@@ -471,8 +471,9 @@ option {
   padding: 28px 28px;
   margin-bottom: 24px;
   border-radius: 16px;
-  background: linear-gradient(135deg, rgba(255,68,68,0.06) 0%, rgba(255,68,68,0.02) 50%, rgba(20,20,20,0.8) 100%);
-  border: 1px solid rgba(255,68,68,0.1);
+  background: linear-gradient(135deg, rgba(255,68,68,0.08) 0%, rgba(255,50,50,0.04) 40%, rgba(20,20,20,0.9) 100%);
+  border: 1px solid rgba(255,68,68,0.12);
+  box-shadow: 0 0 60px rgba(255,68,68,0.04);
   overflow: hidden;
 }
 .bl-hero::before {
@@ -530,7 +531,8 @@ option {
   bottom: -8px;
   width: 4px; height: 4px;
   border-radius: 50%;
-  background: rgba(255,68,68,0.35);
+  background: rgba(255,68,68,0.45);
+  box-shadow: 0 0 6px rgba(255,68,68,0.3);
   animation: bl-float 6s ease-in-out infinite;
 }
 
@@ -565,7 +567,7 @@ option {
 .bl-stat-icon {
   color: var(--stat-accent, var(--danger));
   margin-bottom: 10px;
-  opacity: 0.7;
+  opacity: 0.85;
 }
 .bl-stat-value {
   font-size: 28px;
@@ -820,18 +822,19 @@ option {
   align-items: center;
   justify-content: center;
   padding: 80px 20px;
-  gap: 8px;
+  gap: 10px;
 }
 .bl-empty-icon {
-  width: 56px; height: 56px;
+  width: 60px; height: 60px;
   border-radius: 16px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--border);
+  background: rgba(255,68,68,0.05);
+  border: 1px solid rgba(255,68,68,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-muted);
-  margin-bottom: 8px;
+  color: rgba(255,68,68,0.4);
+  margin-bottom: 10px;
+  animation: bl-skull-bob 3s ease-in-out infinite;
 }
 .bl-empty p {
   font-size: 15px;
