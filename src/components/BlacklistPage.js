@@ -1,10 +1,12 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef, useCallback } from 'react';
 import { Icons } from './Icons';
 import { Modal, Input, TextArea, Button } from './UI';
 import { useSession } from 'next-auth/react';
 import { useApi } from '@/hooks/useApi';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 /* ────────── Inline SVG Icons ────────── */
 const SkullIcon = ({ size = 20 }) => (
@@ -41,6 +43,26 @@ const ClipboardIcon = ({ size = 14 }) => (
 );
 const ChevronIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="9 18 15 12 9 6" /></svg>
+);
+const BoldIcon = () => <span style={{ fontWeight: 900, fontSize: 14 }}>B</span>;
+const ItalicIcon = () => <span style={{ fontStyle: 'italic', fontWeight: 700, fontSize: 14 }}>I</span>;
+const HeadingIcon = () => <span style={{ fontWeight: 800, fontSize: 12 }}>H</span>;
+const HrIcon = () => <span style={{ fontSize: 16, lineHeight: 1 }}>—</span>;
+const LinkIcon = ({ size = 14 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
+    <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
+  </svg>
+);
+const UploadIcon = ({ size = 20 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" /><polyline points="17 8 12 3 7 8" /><line x1="12" y1="3" x2="12" y2="15" />
+  </svg>
+);
+const DocIcon = ({ size = 14 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" />
+  </svg>
 );
 
 /* ────────── Floating Particles Background ────────── */
@@ -108,7 +130,239 @@ function EntryCard({ item, index, onClick }) {
 
       <div className="bl-card-footer">
         <span className="bl-card-date"><CalendarIcon /> {item.date}</span>
-        {item.image && <span className="bl-card-has-image"><ImageIcon /> 증거</span>}
+        <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
+          {item.content && <span className="bl-card-has-image"><DocIcon /> 본문</span>}
+          {item.image && <span className="bl-card-has-image"><ImageIcon /> 증거</span>}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ────────── Markdown Editor ────────── */
+function MarkdownEditor({ value, onChange }) {
+  const [tab, setTab] = useState('write');
+  const [showImgPopover, setShowImgPopover] = useState(false);
+  const [imgMode, setImgMode] = useState('url');
+  const [imgUrl, setImgUrl] = useState('');
+  const [uploading, setUploading] = useState(false);
+  const [dragOver, setDragOver] = useState(false);
+  const textareaRef = useRef(null);
+  const fileInputRef = useRef(null);
+
+  const insertAtCursor = useCallback((text) => {
+    const ta = textareaRef.current;
+    if (!ta) { onChange(value + text); return; }
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const newVal = value.slice(0, start) + text + value.slice(end);
+    onChange(newVal);
+    setTimeout(() => {
+      ta.focus();
+      ta.selectionStart = ta.selectionEnd = start + text.length;
+    }, 0);
+  }, [value, onChange]);
+
+  const wrapSelection = useCallback((before, after) => {
+    const ta = textareaRef.current;
+    if (!ta) return;
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const selected = value.slice(start, end);
+    const text = selected || '텍스트';
+    const newVal = value.slice(0, start) + before + text + after + value.slice(end);
+    onChange(newVal);
+    setTimeout(() => {
+      ta.focus();
+      ta.selectionStart = start + before.length;
+      ta.selectionEnd = start + before.length + text.length;
+    }, 0);
+  }, [value, onChange]);
+
+  const toolbarActions = [
+    { icon: <BoldIcon />, action: () => wrapSelection('**', '**'), title: '굵게' },
+    { icon: <ItalicIcon />, action: () => wrapSelection('*', '*'), title: '기울임' },
+    { icon: <HeadingIcon />, action: () => insertAtCursor('\n### '), title: '제목' },
+    'sep',
+    { icon: <HrIcon />, action: () => insertAtCursor('\n---\n'), title: '구분선' },
+    { icon: <LinkIcon />, action: () => wrapSelection('[', '](url)'), title: '링크' },
+    'sep',
+    { icon: <ImageIcon size={14} />, action: () => setShowImgPopover(!showImgPopover), title: '이미지', id: 'img' },
+  ];
+
+  const uploadImage = async (file) => {
+    if (!file || !file.type.startsWith('image/')) return;
+    if (file.size > 10 * 1024 * 1024) return;
+    setUploading(true);
+    try {
+      const fd = new FormData();
+      fd.append('file', file);
+      fd.append('prefix', 'blacklist');
+      const res = await fetch('/api/upload', { method: 'POST', body: fd });
+      if (!res.ok) throw new Error('업로드 실패');
+      const { url } = await res.json();
+      insertAtCursor(`\n![이미지](${url})\n`);
+      setShowImgPopover(false);
+      setImgUrl('');
+    } catch (e) { console.error(e); }
+    finally { setUploading(false); }
+  };
+
+  const insertImgUrl = () => {
+    if (!imgUrl.trim()) return;
+    insertAtCursor(`\n![이미지](${imgUrl.trim()})\n`);
+    setShowImgPopover(false);
+    setImgUrl('');
+  };
+
+  const handlePaste = (e) => {
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    for (const item of items) {
+      if (item.type.startsWith('image/')) {
+        e.preventDefault();
+        uploadImage(item.getAsFile());
+        return;
+      }
+    }
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    setDragOver(false);
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) {
+      uploadImage(file);
+    }
+  };
+
+  return (
+    <div style={{ marginBottom: 14 }}>
+      <label className="bl-editor-label">상세 내용</label>
+      <div className="bl-editor-wrap">
+        {/* Header: Tabs */}
+        <div className="bl-editor-header">
+          <div className="bl-editor-tabs">
+            <button className={`bl-editor-tab${tab === 'write' ? ' active' : ''}`} onClick={() => setTab('write')}>작성</button>
+            <button className={`bl-editor-tab${tab === 'preview' ? ' active' : ''}`} onClick={() => setTab('preview')}>미리보기</button>
+          </div>
+        </div>
+
+        {/* Toolbar (write mode only) */}
+        {tab === 'write' && (
+          <div className="bl-editor-toolbar" style={{ position: 'relative' }}>
+            {toolbarActions.map((a, i) =>
+              a === 'sep' ? (
+                <div key={i} className="bl-editor-toolbar-sep" />
+              ) : (
+                <button
+                  key={i}
+                  className={`bl-editor-toolbar-btn${a.id === 'img' && showImgPopover ? ' active' : ''}`}
+                  onClick={a.action}
+                  title={a.title}
+                >
+                  {a.icon}
+                </button>
+              )
+            )}
+
+            {/* Image Popover */}
+            {showImgPopover && (
+              <>
+                <div className="bl-img-popover-overlay" onClick={() => setShowImgPopover(false)} />
+                <div className="bl-img-popover">
+                  <div className="bl-img-popover-title">이미지 추가</div>
+
+                  {/* URL Option */}
+                  <div className="bl-img-option" onClick={() => setImgMode('url')}>
+                    <div className={`bl-img-option-radio${imgMode === 'url' ? ' selected' : ''}`} />
+                    <span className="bl-img-option-label">URL 입력</span>
+                  </div>
+                  {imgMode === 'url' && (
+                    <>
+                      <input
+                        className="bl-img-url-input"
+                        placeholder="https://example.com/image.png"
+                        value={imgUrl}
+                        onChange={(e) => setImgUrl(e.target.value)}
+                        onKeyDown={(e) => e.key === 'Enter' && insertImgUrl()}
+                      />
+                      <div className="bl-img-popover-actions">
+                        <Button variant="secondary" onClick={() => setShowImgPopover(false)} style={{ padding: '5px 12px', fontSize: 11 }}>취소</Button>
+                        <Button variant="danger" onClick={insertImgUrl} style={{ padding: '5px 12px', fontSize: 11 }}>삽입</Button>
+                      </div>
+                    </>
+                  )}
+
+                  {/* Upload Option */}
+                  <div className="bl-img-option" onClick={() => setImgMode('upload')}>
+                    <div className={`bl-img-option-radio${imgMode === 'upload' ? ' selected' : ''}`} />
+                    <span className="bl-img-option-label">파일 업로드</span>
+                  </div>
+                  {imgMode === 'upload' && (
+                    <>
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        onChange={(e) => { const f = e.target.files[0]; if (f) uploadImage(f); }}
+                      />
+                      <div
+                        className={`bl-img-upload-zone${dragOver ? ' dragover' : ''}`}
+                        onClick={() => fileInputRef.current?.click()}
+                        onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                        onDragLeave={() => setDragOver(false)}
+                        onDrop={(e) => { e.preventDefault(); setDragOver(false); const f = e.dataTransfer.files[0]; if (f) uploadImage(f); }}
+                      >
+                        <div className="bl-img-upload-zone-icon"><UploadIcon /></div>
+                        {uploading ? '업로드 중...' : '클릭 또는 드래그하여 업로드'}
+                        <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 4 }}>10MB 이하 이미지</div>
+                      </div>
+                    </>
+                  )}
+                </div>
+              </>
+            )}
+          </div>
+        )}
+
+        {/* Content Area */}
+        {tab === 'write' ? (
+          <textarea
+            ref={textareaRef}
+            className="bl-editor-textarea"
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            onPaste={handlePaste}
+            onDrop={handleDrop}
+            onDragOver={(e) => e.preventDefault()}
+            placeholder="마크다운 형식으로 상세 내용을 작성하세요...&#10;&#10;**굵게**, *기울임*, ### 제목, - 목록&#10;이미지: 툴바의 이미지 버튼 또는 Ctrl+V로 붙여넣기"
+          />
+        ) : (
+          <div className="bl-editor-preview">
+            {value ? (
+              <div className="bl-markdown-body">
+                <ReactMarkdown
+                  remarkPlugins={[remarkGfm]}
+                  components={{
+                    img: ({ src, alt }) => (
+                      <div className="bl-markdown-img-wrap">
+                        <img src={src} alt={alt || ''} className="bl-markdown-img" loading="lazy" />
+                      </div>
+                    ),
+                  }}
+                >
+                  {value}
+                </ReactMarkdown>
+              </div>
+            ) : (
+              <div style={{ color: 'var(--text-muted)', fontSize: 13, padding: '20px 0', textAlign: 'center' }}>
+                미리보기할 내용이 없습니다
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -121,8 +375,10 @@ export default function BlacklistPage() {
   const [showAdd, setShowAdd] = useState(false);
   const [sel, setSel] = useState(null);
   const [search, setSearch] = useState('');
-  const [form, setForm] = useState({ name: '', uuid: '', alts: '', clan: '', incident: '' });
-  const [editItem, setEditItem] = useState(null); // null = 신규, object = 수정 모드
+  const [form, setForm] = useState({ name: '', uuid: '', alts: '', clan: '', incident: '', content: '' });
+  const [editItem, setEditItem] = useState(null);
+
+  const EMPTY_FORM = { name: '', uuid: '', alts: '', clan: '', incident: '', content: '' };
 
   const items = list || [];
   const filtered = useMemo(() => {
@@ -162,6 +418,7 @@ export default function BlacklistPage() {
       alts: item.alts || '',
       clan: item.clan || '',
       incident: item.incident || '',
+      content: item.content || '',
     });
     setEditItem(item);
     setShowAdd(true);
@@ -188,7 +445,7 @@ export default function BlacklistPage() {
     } catch (e) { console.error(e); }
     setShowAdd(false);
     setEditItem(null);
-    setForm({ name: '', uuid: '', alts: '', clan: '', incident: '' });
+    setForm({ ...EMPTY_FORM });
   };
 
   const remove = async (id) => {
@@ -329,6 +586,29 @@ export default function BlacklistPage() {
               </div>
             </div>
 
+            {/* Markdown Content */}
+            {sel.content && (
+              <div className="bl-detail-section">
+                <div className="bl-detail-section-title">
+                  <DocIcon /> 상세 내용
+                </div>
+                <div className="bl-markdown-body">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      img: ({ src, alt }) => (
+                        <div className="bl-markdown-img-wrap">
+                          <img src={src} alt={alt || ''} className="bl-markdown-img" loading="lazy" />
+                        </div>
+                      ),
+                    }}
+                  >
+                    {sel.content}
+                  </ReactMarkdown>
+                </div>
+              </div>
+            )}
+
             {sel.image && (
               <div className="bl-detail-section">
                 <div className="bl-detail-section-title">
@@ -358,7 +638,7 @@ export default function BlacklistPage() {
       </Modal>
 
       {/* Add/Edit Modal */}
-      <Modal open={showAdd} onClose={() => { setShowAdd(false); setEditItem(null); setForm({ name: '', uuid: '', alts: '', clan: '', incident: '' }); }} title={editItem ? '블랙리스트 수정' : '블랙리스트 등록'}>
+      <Modal open={showAdd} onClose={() => { setShowAdd(false); setEditItem(null); setForm({ ...EMPTY_FORM }); }} title={editItem ? '블랙리스트 수정' : '블랙리스트 등록'}>
         <div className="bl-add-form">
           <div className="bl-add-form-header">
             <div className="bl-add-form-icon"><SkullIcon size={24} /></div>
@@ -370,9 +650,16 @@ export default function BlacklistPage() {
             <Input label="소속 하이브" value={form.clan} onChange={(e) => setForm({ ...form, clan: e.target.value })} placeholder="하이브명" />
           </div>
           <Input label="부캐" value={form.alts} onChange={(e) => setForm({ ...form, alts: e.target.value })} placeholder="쉼표로 구분 (선택)" />
-          <TextArea label="사건 개요 *" value={form.incident} onChange={(e) => setForm({ ...form, incident: e.target.value })} placeholder="어떤 사건이 있었는지 자세히 기록해주세요..." />
+          <TextArea label="사건 개요 *" value={form.incident} onChange={(e) => setForm({ ...form, incident: e.target.value })} placeholder="어떤 사건이 있었는지 간략히 기록해주세요..." />
+
+          {/* Markdown Editor */}
+          <MarkdownEditor
+            value={form.content}
+            onChange={(val) => setForm({ ...form, content: val })}
+          />
+
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 8 }}>
-            <Button variant="secondary" onClick={() => { setShowAdd(false); setEditItem(null); setForm({ name: '', uuid: '', alts: '', clan: '', incident: '' }); }}>취소</Button>
+            <Button variant="secondary" onClick={() => { setShowAdd(false); setEditItem(null); setForm({ ...EMPTY_FORM }); }}>취소</Button>
             <Button variant="danger" onClick={addOrUpdate}>{editItem ? '수정' : '등록'}</Button>
           </div>
         </div>

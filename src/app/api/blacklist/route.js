@@ -39,6 +39,7 @@ export async function POST(req) {
       alts: body.alts || '',
       clan: body.clan || '',
       incident: body.incident || '',
+      content: body.content || '',
       date: body.date || new Date().toISOString().split('T')[0],
       reporter: body.reporter || session.user?.name || '익명',
       discordId: session.discordId || null,

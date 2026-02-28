@@ -57,6 +57,13 @@ async function migrate() {
     console.log('[migrate] map_pins discord_id:', err.message);
   }
 
+  try {
+    await sql`ALTER TABLE blacklist ADD COLUMN IF NOT EXISTS content text`;
+    console.log('[migrate] Added blacklist content column');
+  } catch (err) {
+    console.log('[migrate] blacklist content:', err.message);
+  }
+
   console.log('[migrate] Done');
 }
 

@@ -26,7 +26,8 @@ export async function POST(req) {
       return NextResponse.json({ error: '파일 크기는 10MB 이하여야 합니다.' }, { status: 400 });
     }
 
-    const blob = await put(`builds/${Date.now()}-${file.name}`, file, {
+    const prefix = formData.get('prefix') || 'builds';
+    const blob = await put(`${prefix}/${Date.now()}-${file.name}`, file, {
       access: 'public',
     });
 

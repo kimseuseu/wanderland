@@ -31,6 +31,7 @@ export async function PUT(req, { params }) {
         alts: body.alts || '',
         clan: body.clan || '',
         incident: body.incident || '',
+        content: body.content !== undefined ? body.content : (existing[0].content || ''),
         image: body.image !== undefined ? body.image : existing[0].image,
       })
       .where(eq(blacklist.id, parsedId))
