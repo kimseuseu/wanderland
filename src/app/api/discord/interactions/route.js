@@ -14,12 +14,6 @@ const RESPONSE_TYPE = {
   MODAL: 9,
 };
 
-const SEVERITY_LABELS = {
-  low: '🟢 낮음',
-  medium: '🟡 중간',
-  high: '🔴 높음',
-};
-
 function hexToUint8Array(hex) {
   const bytes = new Uint8Array(hex.length / 2);
   for (let i = 0; i < hex.length; i += 2) {
@@ -133,18 +127,6 @@ function openBlacklistModal() {
             max_length: 1000,
           }],
         },
-        {
-          type: 1,
-          components: [{
-            type: 4,
-            custom_id: 'severity',
-            label: '심각도',
-            style: 1,
-            required: false,
-            placeholder: 'low / medium / high (기본: medium)',
-            max_length: 10,
-          }],
-        },
       ],
     },
   });
@@ -178,13 +160,6 @@ async function handleModalSubmit(interaction) {
     }
   }
 
-  // Validate severity
-  const validSeverities = ['low', 'medium', 'high'];
-  let severity = (fields.severity || 'medium').toLowerCase().trim();
-  if (!validSeverities.includes(severity)) {
-    severity = 'medium';
-  }
-
   try {
     const { db } = await import('@/db');
     const { blacklist } = await import('@/db/schema');
@@ -195,13 +170,11 @@ async function handleModalSubmit(interaction) {
       alts,
       clan,
       incident: fields.incident || '',
-      severity,
       date: new Date().toISOString().split('T')[0],
       reporter,
     }).returning();
 
     const saved = result[0];
-    const severityLabel = SEVERITY_LABELS[saved.severity] || saved.severity;
 
     return respond(
       `✅ **블랙리스트 #${saved.id} 등록 완료**\n\n` +
@@ -210,7 +183,6 @@ async function handleModalSubmit(interaction) {
       (saved.clan ? `> **클랜:** ${saved.clan}\n` : '') +
       (saved.alts ? `> **부캐:** ${saved.alts}\n` : '') +
       `> **사건:** ${saved.incident}\n` +
-      `> **심각도:** ${severityLabel}\n` +
       `> **등록일:** ${saved.date}\n` +
       `> **등록자:** ${reporter}\n\n` +
       `📸 스크린샷을 추가하려면 \`/blacklist-image\` 명령어에 이미지를 첨부해주세요.`

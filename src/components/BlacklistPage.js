@@ -2,11 +2,9 @@
 
 import { useState } from 'react';
 import { Icons } from './Icons';
-import { Modal, Input, TextArea, Button, Tag } from './UI';
+import { Modal, Input, TextArea, Button } from './UI';
 import { useSession } from 'next-auth/react';
 import { useApi } from '@/hooks/useApi';
-
-const sv = { high: { l: '위험', c: 'var(--danger)' }, medium: { l: '주의', c: 'var(--warning)' }, low: { l: '경고', c: 'var(--text-secondary)' } };
 
 export default function BlacklistPage() {
   const { data: session } = useSession();
@@ -14,7 +12,7 @@ export default function BlacklistPage() {
   const [showAdd, setShowAdd] = useState(false);
   const [sel, setSel] = useState(null);
   const [search, setSearch] = useState('');
-  const [form, setForm] = useState({ name: '', uuid: '', alts: '', clan: '', incident: '', severity: 'medium' });
+  const [form, setForm] = useState({ name: '', uuid: '', alts: '', clan: '', incident: '' });
 
   const items = list || [];
   const filtered = items.filter((b) =>
@@ -32,7 +30,7 @@ export default function BlacklistPage() {
       mutate();
     } catch (e) { console.error(e); }
     setShowAdd(false);
-    setForm({ name: '', uuid: '', alts: '', clan: '', incident: '', severity: 'medium' });
+    setForm({ name: '', uuid: '', alts: '', clan: '', incident: '' });
   };
 
   const remove = async (id) => {
@@ -68,12 +66,12 @@ export default function BlacklistPage() {
       </div>
 
       <div style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 14, overflow: 'hidden' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1.5fr 1.2fr .8fr 1fr', gap: 14, padding: '11px 18px', borderBottom: '1px solid var(--border)', fontSize: 11, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-          <span>닉네임</span><span>UUID</span><span>소속</span><span>위험도</span><span>등록일</span>
+        <div style={{ display: 'grid', gridTemplateColumns: '2fr 1.5fr 1.2fr 1fr', gap: 14, padding: '11px 18px', borderBottom: '1px solid var(--border)', fontSize: 11, color: 'var(--text-muted)', fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+          <span>닉네임</span><span>UUID</span><span>소속</span><span>등록일</span>
         </div>
         {filtered.map((item, i) => (
           <div key={item.id} className="fade-in"
-            style={{ animationDelay: `${i * 0.04}s`, display: 'grid', gridTemplateColumns: '2fr 1.5fr 1.2fr .8fr 1fr', gap: 14, padding: '12px 18px', borderBottom: '1px solid var(--border)', cursor: 'pointer', transition: 'background 0.2s', alignItems: 'center' }}
+            style={{ animationDelay: `${i * 0.04}s`, display: 'grid', gridTemplateColumns: '2fr 1.5fr 1.2fr 1fr', gap: 14, padding: '12px 18px', borderBottom: '1px solid var(--border)', cursor: 'pointer', transition: 'background 0.2s', alignItems: 'center' }}
             onClick={() => setSel(item)}
             onMouseEnter={(e) => e.currentTarget.style.background = 'var(--accent-dim)'}
             onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}>
@@ -83,7 +81,6 @@ export default function BlacklistPage() {
             </div>
             <span style={{ fontSize: 12, color: 'var(--text-secondary)', fontFamily: 'var(--font-mono)' }}>{item.uuid}</span>
             <span style={{ fontSize: 13, color: 'var(--text-secondary)' }}>{item.clan}</span>
-            <Tag color={sv[item.severity]?.c || 'var(--text-muted)'}>{sv[item.severity]?.l || '?'}</Tag>
             <span style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{item.date}</span>
           </div>
         ))}
@@ -100,7 +97,6 @@ export default function BlacklistPage() {
                 <h3 style={{ fontSize: 17, fontWeight: 800, fontFamily: 'var(--font-display)' }}>{sel.name}</h3>
                 <span style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>{sel.uuid}</span>
               </div>
-              <div style={{ marginLeft: 'auto' }}><Tag color={sv[sel.severity]?.c || 'var(--text-muted)'}>{sv[sel.severity]?.l || '?'}</Tag></div>
             </div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginBottom: 18 }}>
               <div style={{ padding: '9px 12px', background: 'var(--bg-tertiary)', borderRadius: 8 }}>
@@ -131,17 +127,6 @@ export default function BlacklistPage() {
         <Input label="부캐" value={form.alts} onChange={(e) => setForm({ ...form, alts: e.target.value })} placeholder="쉼표 구분 (선택)" />
         <Input label="소속 하이브" value={form.clan} onChange={(e) => setForm({ ...form, clan: e.target.value })} placeholder="하이브명 또는 무소속" />
         <TextArea label="사건 개요" value={form.incident} onChange={(e) => setForm({ ...form, incident: e.target.value })} placeholder="상세 기록..." />
-        <div style={{ marginBottom: 13 }}>
-          <label style={{ display: 'block', fontSize: 11, color: 'var(--text-secondary)', marginBottom: 6, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>위험도</label>
-          <div style={{ display: 'flex', gap: 6 }}>
-            {['low', 'medium', 'high'].map((s) => (
-              <button key={s} onClick={() => setForm({ ...form, severity: s })}
-                style={{ flex: 1, padding: '7px', borderRadius: 8, fontSize: 12, fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-body)', background: form.severity === s ? `${sv[s].c}12` : 'var(--bg-tertiary)', color: form.severity === s ? sv[s].c : 'var(--text-muted)', border: `1px solid ${form.severity === s ? `${sv[s].c}25` : 'var(--border)'}` }}>
-                {sv[s].l}
-              </button>
-            ))}
-          </div>
-        </div>
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
           <Button variant="secondary" onClick={() => setShowAdd(false)}>취소</Button>
           <Button variant="danger" onClick={add}>등록</Button>

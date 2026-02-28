@@ -41,7 +41,6 @@ export const blacklist = pgTable('blacklist', {
   alts: text('alts'),
   clan: text('clan'),
   incident: text('incident'),
-  severity: text('severity').default('medium'),
   date: text('date'),
   reporter: text('reporter'),
   image: text('image'),

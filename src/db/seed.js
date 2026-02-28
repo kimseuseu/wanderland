@@ -73,7 +73,6 @@ async function seed() {
         alts: bl.alts || '',
         clan: bl.clan || '',
         incident: bl.incident || '',
-        severity: bl.severity || 'medium',
         date: bl.date,
         reporter: bl.reporter || '',
       });

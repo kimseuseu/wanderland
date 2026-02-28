@@ -39,7 +39,6 @@ export async function POST(req) {
       alts: body.alts || '',
       clan: body.clan || '',
       incident: body.incident || '',
-      severity: body.severity || 'medium',
       date: body.date || new Date().toISOString().split('T')[0],
       reporter: body.reporter || session.user?.name || '익명',
     }).returning();
