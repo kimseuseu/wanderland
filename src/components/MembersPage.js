@@ -1,139 +1,263 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Icons } from './Icons';
-import { Modal, Input, TextArea, Button, Tag } from './UI';
-import { useSession } from 'next-auth/react';
-import { useApi } from '@/hooks/useApi';
-
-const ro = { '가이드': 0, '베테랑사원': 1, '신입사원': 2, '휴직': 3 };
-const rc = { '가이드': '#ffd700', '베테랑사원': 'var(--success)', '신입사원': 'var(--text-secondary)', '휴직': 'var(--text-muted)' };
 
 export default function MembersPage() {
-  const { data: session } = useSession();
-  const { data: members, loading, mutate } = useApi('/api/members');
-  const [showAdd, setShowAdd] = useState(false);
-  const [sel, setSel] = useState(null);
+  const [guilds, setGuilds] = useState([]);
+  const [activeGuild, setActiveGuild] = useState(null);
+  const [members, setMembers] = useState([]);
+  const [roles, setRoles] = useState([]);
   const [search, setSearch] = useState('');
-  const [form, setForm] = useState({ name: '', role: '신입사원', scenario: '혹독한 겨울', note: '' });
+  const [loading, setLoading] = useState(true);
+  const [membersLoading, setMembersLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-  const items = members || [];
-  const filtered = items
-    .filter((m) => m.name.toLowerCase().includes(search.toLowerCase()) || m.role.includes(search))
-    .sort((a, b) => (ro[a.role] ?? 9) - (ro[b.role] ?? 9));
-
-  const add = async () => {
-    if (!form.name) return;
-    try {
-      await fetch('/api/members', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+  // 서버 목록 로드
+  useEffect(() => {
+    fetch('/api/discord-members?action=guilds')
+      .then((r) => {
+        if (r.status === 401) throw new Error('unauthorized');
+        if (!r.ok) throw new Error('fetch_error');
+        return r.json();
+      })
+      .then((data) => {
+        setGuilds(data);
+        if (data.length > 0) {
+          setActiveGuild(data[0].id);
+        }
+        setLoading(false);
+      })
+      .catch((e) => {
+        setError(e.message === 'unauthorized' ? 'unauthorized' : 'error');
+        setLoading(false);
       });
-      mutate();
-    } catch (e) { console.error(e); }
-    setShowAdd(false);
-    setForm({ name: '', role: '신입사원', scenario: '혹독한 겨울', note: '' });
-  };
+  }, []);
 
+  // 선택된 서버 멤버 로드
+  useEffect(() => {
+    if (!activeGuild) return;
+    setMembersLoading(true);
+    fetch(`/api/discord-members?action=members&guildId=${activeGuild}`)
+      .then((r) => {
+        if (!r.ok) throw new Error('fetch_error');
+        return r.json();
+      })
+      .then((data) => {
+        setMembers(data.members || []);
+        setRoles(data.roles || []);
+        setMembersLoading(false);
+      })
+      .catch(() => {
+        setMembers([]);
+        setRoles([]);
+        setMembersLoading(false);
+      });
+  }, [activeGuild]);
+
+  const activeGuildInfo = guilds.find((g) => g.id === activeGuild);
+
+  const filtered = members.filter((m) => {
+    if (!search) return true;
+    const q = search.toLowerCase();
+    return (
+      m.displayName.toLowerCase().includes(q) ||
+      m.username.toLowerCase().includes(q)
+    );
+  });
+
+  // 초기 로딩
   if (loading) {
     return (
-      <div style={{ textAlign: 'center', padding: '80px 20px', color: 'var(--text-muted)' }}>
-        <div style={{ fontSize: 13, fontFamily: 'var(--font-mono)', animation: 'pulse 1.5s ease-in-out infinite' }}>불러오는 중...</div>
+      <div className="mb-loading fade-in">
+        <div className="mb-loading-spinner" />
+        <div style={{ fontSize: 13, fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>
+          서버 정보를 불러오는 중...
+        </div>
+      </div>
+    );
+  }
+
+  // 인증 에러
+  if (error === 'unauthorized') {
+    return (
+      <div className="mb-empty fade-in">
+        <div className="mb-empty-icon"><Icons.Users /></div>
+        <p style={{ color: 'var(--text-secondary)', fontSize: 15 }}>
+          로그인이 필요합니다.
+        </p>
+        <p style={{ color: 'var(--text-muted)', fontSize: 13, marginTop: 6 }}>
+          Discord 계정으로 로그인하면 멤버 목록을 볼 수 있습니다.
+        </p>
+      </div>
+    );
+  }
+
+  // 기타 에러
+  if (error) {
+    return (
+      <div className="mb-empty fade-in">
+        <div className="mb-empty-icon"><Icons.Users /></div>
+        <p style={{ color: 'var(--text-secondary)', fontSize: 15 }}>
+          멤버 정보를 불러올 수 없습니다.
+        </p>
+      </div>
+    );
+  }
+
+  // 서버 없음
+  if (guilds.length === 0) {
+    return (
+      <div className="mb-empty fade-in">
+        <div className="mb-empty-icon"><Icons.Users /></div>
+        <p style={{ color: 'var(--text-secondary)', fontSize: 15 }}>
+          봇이 참여한 서버가 없습니다.
+        </p>
       </div>
     );
   }
 
   return (
     <div className="fade-in">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28, flexWrap: 'wrap', gap: 14 }}>
-        <div>
-          <h2 style={{ fontSize: 22, fontWeight: 800, fontFamily: 'var(--font-display)' }}>멤버</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: 13, marginTop: 3 }}>총 {items.length}명</p>
-        </div>
-        {session?.isMember && (
-          <Button onClick={() => setShowAdd(true)}><Icons.Plus /> 멤버 추가</Button>
-        )}
-      </div>
-
-      <div style={{ position: 'relative', marginBottom: 20 }}>
-        <div style={{ position: 'absolute', left: 13, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }}><Icons.Search /></div>
-        <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="이름, 직급 검색..."
-          style={{ width: '100%', padding: '9px 13px 9px 38px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', borderRadius: 10, color: 'var(--text-primary)', fontSize: 14, fontFamily: 'var(--font-body)', outline: 'none' }} />
-      </div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 10 }}>
-        {filtered.map((m, i) => (
-          <div key={m.id} className="fade-in"
-            style={{ animationDelay: `${i * 0.04}s`, background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 12, padding: 18, cursor: 'pointer', transition: 'all 0.25s' }}
-            onClick={() => setSel(m)}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--border-hover)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'translateY(0)'; }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 11, marginBottom: 12 }}>
-              <div style={{ width: 38, height: 38, borderRadius: '50%', background: `${rc[m.role]}14`, border: `1.5px solid ${rc[m.role]}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 15, fontWeight: 800, fontFamily: 'var(--font-display)', color: rc[m.role], flexShrink: 0 }}>{m.name[0]}</div>
-              <div style={{ flex: 1 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-                  <span style={{ fontSize: 15, fontWeight: 700 }}>{m.name}</span>
-                  {m.name === '간편' && <span style={{ color: '#ffd700' }}><Icons.Crown /></span>}
-                </div>
-                <Tag color={rc[m.role]}>{m.role}</Tag>
-              </div>
-            </div>
-            <div style={{ padding: '5px 8px', background: 'var(--bg-tertiary)', borderRadius: 6, textAlign: 'center', fontSize: 11 }}>
-              <div style={{ color: 'var(--text-muted)' }}>시나리오</div><div style={{ fontWeight: 700, marginTop: 1 }}>{m.scenario}</div>
-            </div>
+      {/* Hero */}
+      <div className="mb-hero">
+        <div className="mb-hero-content">
+          <div className="mb-hero-icon">
+            <Icons.Users />
           </div>
-        ))}
-      </div>
-
-      {/* Detail */}
-      <Modal open={!!sel} onClose={() => setSel(null)} title="멤버 상세">
-        {sel && (
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 22 }}>
-              <div style={{ width: 52, height: 52, borderRadius: '50%', background: `${rc[sel.role]}14`, border: `2px solid ${rc[sel.role]}35`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20, fontWeight: 800, fontFamily: 'var(--font-display)', color: rc[sel.role] }}>{sel.name[0]}</div>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                  <h3 style={{ fontSize: 19, fontWeight: 800, fontFamily: 'var(--font-display)' }}>{sel.name}</h3>
-                  {sel.name === '간편' && <span style={{ color: '#ffd700' }}><Icons.Crown /></span>}
-                </div>
-                <Tag color={rc[sel.role]}>{sel.role}</Tag>
-              </div>
-            </div>
-            <div style={{ marginBottom: 18 }}>
-              <div style={{ padding: 12, background: 'var(--bg-tertiary)', borderRadius: 8, textAlign: 'center' }}>
-                <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 3, textTransform: 'uppercase', letterSpacing: '0.05em' }}>시나리오</div>
-                <div style={{ fontSize: 20, fontWeight: 800, fontFamily: 'var(--font-display)' }}>{sel.scenario}</div>
-              </div>
-            </div>
-            {sel.note && <div style={{ padding: 12, background: 'var(--bg-tertiary)', borderRadius: 8, fontSize: 14, color: 'var(--text-secondary)', marginBottom: 12 }}>{sel.note}</div>}
-            <div style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>가입일: {sel.joinDate}</div>
+            <h2 className="mb-hero-title">멤버</h2>
+            <p className="mb-hero-sub">
+              {activeGuildInfo?.name || '서버'} 기준
+            </p>
           </div>
-        )}
-      </Modal>
+          <div style={{ marginLeft: 'auto', textAlign: 'right' }}>
+            <div className="mb-hero-count">
+              {membersLoading ? '—' : filtered.length}
+            </div>
+            <p className="mb-hero-sub">명</p>
+          </div>
+        </div>
+      </div>
 
-      {/* Add */}
-      {session?.isMember && (
-        <Modal open={showAdd} onClose={() => setShowAdd(false)} title="멤버 추가">
-          <Input label="닉네임" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="게임 내 닉네임" />
-          <div style={{ marginBottom: 13 }}>
-            <label style={{ display: 'block', fontSize: 11, color: 'var(--text-secondary)', marginBottom: 5, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>직급</label>
-            <div style={{ display: 'flex', gap: 5 }}>
-              {['가이드', '베테랑사원', '신입사원', '휴직'].map((r) => (
-                <button key={r} onClick={() => setForm({ ...form, role: r })}
-                  style={{ flex: 1, padding: '7px 3px', borderRadius: 8, fontSize: 11, fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-body)', background: form.role === r ? `${rc[r]}15` : 'var(--bg-tertiary)', color: form.role === r ? rc[r] : 'var(--text-muted)', border: `1px solid ${form.role === r ? `${rc[r]}30` : 'var(--border)'}` }}>
-                  {r}
-                </button>
-              ))}
+      {/* Server Tabs */}
+      {guilds.length > 1 && (
+        <div className="mb-tabs-wrap">
+          <div className="mb-tabs">
+            {guilds.map((g) => (
+              <button
+                key={g.id}
+                className={`mb-tab${activeGuild === g.id ? ' mb-tab--active' : ''}`}
+                onClick={() => {
+                  if (activeGuild !== g.id) {
+                    setActiveGuild(g.id);
+                    setSearch('');
+                  }
+                }}
+              >
+                {g.icon ? (
+                  <img src={g.icon} alt="" className="mb-tab-icon" />
+                ) : (
+                  <div className="mb-tab-icon mb-tab-icon--default">
+                    {g.name[0]}
+                  </div>
+                )}
+                <span className="mb-tab-name">{g.name}</span>
+                <span className="mb-tab-count">{g.memberCount}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Search */}
+      <div className="mb-search-wrap">
+        <div className="mb-search-icon"><Icons.Search /></div>
+        <input
+          className="mb-search-input"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="멤버 검색..."
+        />
+        {search && (
+          <button className="mb-search-clear" onClick={() => setSearch('')}>
+            ✕
+          </button>
+        )}
+      </div>
+
+      {/* Members Grid */}
+      {membersLoading ? (
+        <div className="mb-grid">
+          {Array.from({ length: 12 }).map((_, i) => (
+            <div key={i} className="mb-card mb-skeleton" style={{ animationDelay: `${i * 0.05}s` }}>
+              <div className="mb-card-header">
+                <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--bg-tertiary)' }} />
+                <div className="mb-card-info">
+                  <div style={{ width: '60%', height: 14, background: 'var(--bg-tertiary)', borderRadius: 4 }} />
+                  <div style={{ width: '40%', height: 10, background: 'var(--bg-tertiary)', borderRadius: 4, marginTop: 6 }} />
+                </div>
+              </div>
             </div>
-          </div>
-          <Input label="시나리오" value={form.scenario} onChange={(e) => setForm({ ...form, scenario: e.target.value })} placeholder="현재 시나리오" />
-          <TextArea label="메모" value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })} placeholder="선택" />
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 6 }}>
-            <Button variant="secondary" onClick={() => setShowAdd(false)}>취소</Button>
-            <Button onClick={add}>추가</Button>
-          </div>
-        </Modal>
+          ))}
+        </div>
+      ) : filtered.length === 0 ? (
+        <div className="mb-empty">
+          <div className="mb-empty-icon"><Icons.Search /></div>
+          <p style={{ color: 'var(--text-secondary)', fontSize: 14 }}>
+            {search ? `"${search}" 검색 결과가 없습니다.` : '멤버가 없습니다.'}
+          </p>
+        </div>
+      ) : (
+        <div className="mb-grid">
+          {filtered.map((m, i) => (
+            <div
+              key={m.id}
+              className="mb-card fade-in"
+              style={{ animationDelay: `${i * 0.02}s` }}
+            >
+              <div className="mb-card-header">
+                {m.avatar ? (
+                  <img src={m.avatar} alt="" className="mb-card-avatar" />
+                ) : (
+                  <div
+                    className="mb-card-avatar--default"
+                    style={{
+                      background: m.roles[0]?.color
+                        ? `${m.roles[0].color}18`
+                        : 'var(--bg-tertiary)',
+                      color: m.roles[0]?.color || 'var(--text-muted)',
+                    }}
+                  >
+                    {m.displayName[0]?.toUpperCase()}
+                  </div>
+                )}
+                <div className="mb-card-info">
+                  <div className="mb-card-name">{m.displayName}</div>
+                  {m.roles.length > 0 && (
+                    <span
+                      className="mb-card-role"
+                      style={{
+                        '--role-color': m.roles[0].color || 'var(--text-muted)',
+                      }}
+                    >
+                      {m.roles[0].name}
+                    </span>
+                  )}
+                </div>
+              </div>
+              {m.joinedAt && (
+                <div className="mb-card-date">
+                  가입: {new Date(m.joinedAt).toLocaleDateString('ko-KR', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                  })}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
