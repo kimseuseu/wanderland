@@ -93,6 +93,27 @@ function PillSelect({ label, options, value, onChange, colorMap }) {
   );
 }
 
+/* ── 동적 문자열 배열 UI ── */
+function DynList({ items, onUpdate, onAdd, onRemove, label, accent, placeholder }) {
+  return (
+    <div style={{ marginBottom: 13 }}>
+      <div className="bd-form-dynlist-header">
+        <label style={{ ...labelStyle, color: accent, marginBottom: 0 }}>{label}</label>
+        <button type="button" onClick={onAdd} className="bd-form-dynlist-add"><Icons.Plus /> 추가</button>
+      </div>
+      {items.map((item, i) => (
+        <div key={i} className="bd-form-dynlist-row">
+          <input value={item} onChange={(e) => onUpdate(i, e.target.value)}
+            placeholder={placeholder} style={inputStyle} />
+          {items.length > 1 && (
+            <button type="button" onClick={() => onRemove(i)} className="bd-form-dynlist-remove"><Icons.X /></button>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 /* ═══════════════════════════════════════════
    빌드 작성 폼
    ═══════════════════════════════════════════ */
@@ -261,27 +282,6 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
     }
   };
 
-  /* ── 동적 문자열 배열 UI ── */
-  function DynList({ label, field, accent, placeholder }) {
-    return (
-      <div style={{ marginBottom: 13 }}>
-        <div className="bd-form-dynlist-header">
-          <label style={{ ...labelStyle, color: accent, marginBottom: 0 }}>{label}</label>
-          <button type="button" onClick={() => addArr(field)} className="bd-form-dynlist-add"><Icons.Plus /> 추가</button>
-        </div>
-        {form[field].map((item, i) => (
-          <div key={i} className="bd-form-dynlist-row">
-            <input value={item} onChange={(e) => updateArr(field, i, e.target.value)}
-              placeholder={placeholder} style={inputStyle} />
-            {form[field].length > 1 && (
-              <button type="button" onClick={() => removeArr(field, i)} className="bd-form-dynlist-remove"><Icons.X /></button>
-            )}
-          </div>
-        ))}
-      </div>
-    );
-  }
-
   return (
     <div className="fade-in">
       {/* ── 뒤로 가기 ── */}
@@ -375,9 +375,9 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
         </div>
 
         {/* 동적 배열들 */}
-        <DynList label="TUNING" field="tuning" accent="#88ccff" placeholder="예: 안크크" />
-        <DynList label="INFECTION" field="infections" accent="#cc88ff" placeholder="예: 저주인형" />
-        <DynList label="DOPING" field="doping" accent="#44ff88" placeholder="예: 에드, 아드" />
+        <DynList label="TUNING" items={form.tuning} onUpdate={(i, v) => updateArr('tuning', i, v)} onAdd={() => addArr('tuning')} onRemove={(i) => removeArr('tuning', i)} accent="#88ccff" placeholder="예: 안크크" />
+        <DynList label="INFECTION" items={form.infections} onUpdate={(i, v) => updateArr('infections', i, v)} onAdd={() => addArr('infections')} onRemove={(i) => removeArr('infections', i)} accent="#cc88ff" placeholder="예: 저주인형" />
+        <DynList label="DOPING" items={form.doping} onUpdate={(i, v) => updateArr('doping', i, v)} onAdd={() => addArr('doping')} onRemove={(i) => removeArr('doping', i)} accent="#44ff88" placeholder="예: 에드, 아드" />
       </SectionCard>
 
       {/* ═══ 섹션 2: 방어구 & 가죽 장비 ═══ */}
@@ -390,7 +390,7 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
         </div>
 
         {/* 방어구 옵션 */}
-        <DynList label="ARMOR OPTIONS" field="armorOptions" accent="#ffd700" placeholder="예: 세이버3 + 어둠2" />
+        <DynList label="ARMOR OPTIONS" items={form.armorOptions} onUpdate={(i, v) => updateArr('armorOptions', i, v)} onAdd={() => addArr('armorOptions')} onRemove={(i) => removeArr('armorOptions', i)} accent="#ffd700" placeholder="예: 세이버3 + 어둠2" />
 
         {/* 가죽 장비 — 부위별 프리셋 */}
         <div style={{ marginBottom: 13 }}>
@@ -430,7 +430,7 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
       {/* ═══ 섹션 3: 모듈 구성 ═══ */}
       <SectionCard number="03" title="모듈 구성" accent="#ffaa44">
         {/* 모듈 */}
-        <DynList label="MODULES" field="modules" accent="#ffaa44" placeholder="예: 섬광 프로스트 볼텍스" />
+        <DynList label="MODULES" items={form.modules} onUpdate={(i, v) => updateArr('modules', i, v)} onAdd={() => addArr('modules')} onRemove={(i) => removeArr('modules', i)} accent="#ffaa44" placeholder="예: 섬광 프로스트 볼텍스" />
 
         {/* 접미사 테이블 — 부위별 프리셋 */}
         <div style={{ marginBottom: 13 }}>
