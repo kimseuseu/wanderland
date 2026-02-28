@@ -109,7 +109,8 @@ export const authOptions = {
                 if (!guild) return false;
                 if (guild.owner) return true;
                 const perms = BigInt(guild.permissions || '0');
-                const isAdm = (perms & BigInt(0x8)) !== BigInt(0);
+                // ADMINISTRATOR(0x8) 또는 MANAGE_GUILD(0x20)
+                const isAdm = (perms & BigInt(0x8)) !== BigInt(0) || (perms & BigInt(0x20)) !== BigInt(0);
                 console.log(`[auth] guild=${guild.name} owner=${guild.owner} perms=${guild.permissions} isAdmin=${isAdm}`);
                 return isAdm;
               });
