@@ -15,7 +15,7 @@ const nav = [
   { key: 'about', icon: <Icons.Info />, label: '소개', href: '/' },
   { key: 'builds', icon: <Icons.Build />, label: '빌드', href: '/' },
   { key: 'map', icon: <Icons.Map />, label: '지도', href: '/map' },
-  { key: 'members', icon: <Icons.Users />, label: '하이브원', href: '/' },
+  { key: 'members', icon: <Icons.Users />, label: '멤버', href: '/' },
   { key: 'blacklist', icon: <Icons.Ban />, label: '블랙리스트', href: '/' },
 ];
 

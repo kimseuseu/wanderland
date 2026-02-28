@@ -2,8 +2,8 @@ import './globals.css';
 import AuthProvider from '@/components/AuthProvider';
 
 export const metadata = {
-  title: 'WANDERLAND — 낙원 하이브',
-  description: 'Once Human 낙원 하이브 공식 웹사이트. 장비 빌드 공유, 게임 지도, 하이브원 관리, 블랙리스트.',
+  title: 'WANDERLAND — 프로젝트 낙원',
+  description: 'Once Human 프로젝트 낙원 공식 웹사이트. 장비 빌드 공유, 게임 지도, 멤버 관리, 블랙리스트.',
   icons: {
     icon: '/images/pabicon.png',
   },

@@ -27,12 +27,12 @@ export default function HomePage({ onNavigate }) {
   const navItems = [
     { icon: <Icons.Build />, label: '장비 빌드', page: 'builds', desc: '빌드 공유 & 탐색' },
     { icon: <Icons.Map />, label: '게임 지도', page: 'map', desc: '지역 정보 기록', href: '/map' },
-    { icon: <Icons.Users />, label: '하이브원', page: 'members', desc: '멤버 현황' },
+    { icon: <Icons.Users />, label: '멤버', page: 'members', desc: '멤버 현황' },
     { icon: <Icons.Ban />, label: '블랙리스트', page: 'blacklist', desc: '주의 유저 관리' },
   ];
 
   const stats = [
-    { value: `${counts.members}명`, label: '하이브원', color: '#6488ff' },
+    { value: `${counts.members}명`, label: '멤버', color: '#6488ff' },
     { value: `${counts.builds}개`, label: '빌드', color: '#ffaa44' },
   ];
 
@@ -62,13 +62,13 @@ export default function HomePage({ onNavigate }) {
             fontSize: 12, color: 'var(--text-secondary)', letterSpacing: '0.22em',
             textTransform: 'uppercase', fontWeight: 700, fontFamily: 'var(--font-display)',
           }}>
-            낙원 하이브 — Once Human
+            프로젝트 낙원 — Once Human
           </p>
           <p style={{
             fontSize: 11, color: 'var(--text-muted)', marginTop: 6,
             fontFamily: 'var(--font-mono)', letterSpacing: '0.04em',
           }}>
-            하이브장: 간편 · 제작: 춘영
+            운영: 간편 · 제작: 춘영
           </p>
         </div>
       </div>
@@ -78,7 +78,7 @@ export default function HomePage({ onNavigate }) {
         fontSize: 15, color: 'var(--text-secondary)', maxWidth: 420,
         lineHeight: 1.9, marginBottom: 48, fontWeight: 400,
       }}>
-        장비 빌드를 공유하고, 지도에 정보를 기록하고,<br />하이브원들과 함께 더 강해지세요.
+        장비 빌드를 공유하고, 지도에 정보를 기록하고,<br />멤버들과 함께 더 강해지세요.
       </p>
 
       {/* Navigation cards */}

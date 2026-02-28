@@ -46,7 +46,7 @@ export default function AuthGate({ children }) {
             color: 'var(--text-muted)', fontSize: 13, lineHeight: 1.7,
             marginBottom: 28,
           }}>
-            이 페이지는 낙원 하이브 디스코드 서버<br />멤버만 접근할 수 있습니다.
+            이 페이지는 등록된 디스코드 서버<br />멤버만 접근할 수 있습니다.
           </p>
           <button
             onClick={() => signIn('discord')}
@@ -94,7 +94,7 @@ export default function AuthGate({ children }) {
             color: 'var(--text-muted)', fontSize: 13, lineHeight: 1.7,
             marginBottom: 12,
           }}>
-            낙원 하이브 디스코드 서버에 가입된<br />멤버만 이용할 수 있습니다.
+            프로젝트 낙원에 등록된 디스코드 서버<br />멤버만 이용할 수 있습니다.
           </p>
           <p style={{
             color: 'var(--text-muted)', fontSize: 12,

@@ -984,9 +984,9 @@ export const BUILDS = [
 export const BLACKLIST = [];
 
 export const MEMBERS = [
-  { id: 1, name: "간편", role: "낙원가이드", scenario: "혹독한 겨울", joinDate: "2025-01-15", note: "하이브장" },
-  { id: 2, name: "춘영", role: "낙원가이드", scenario: "혹독한 겨울", joinDate: "2025-01-15", note: "웹사이트 제작자" },
-  { id: 3, name: "씨뽀", role: "낙원가이드", scenario: "혹독한 겨울", joinDate: "2025-02-01", note: "" },
+  { id: 1, name: "간편", role: "가이드", scenario: "혹독한 겨울", joinDate: "2025-01-15", note: "운영자" },
+  { id: 2, name: "춘영", role: "가이드", scenario: "혹독한 겨울", joinDate: "2025-01-15", note: "웹사이트 제작자" },
+  { id: 3, name: "씨뽀", role: "가이드", scenario: "혹독한 겨울", joinDate: "2025-02-01", note: "" },
   { id: 4, name: "딸기코", role: "베테랑사원", scenario: "혹독한 겨울", joinDate: "2025-02-10", note: "" },
   { id: 5, name: "찌콩", role: "베테랑사원", scenario: "혹독한 겨울", joinDate: "2025-02-15", note: "" },
   { id: 6, name: "빙박", role: "베테랑사원", scenario: "혹독한 겨울", joinDate: "2025-03-01", note: "" },

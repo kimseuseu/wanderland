@@ -6,8 +6,8 @@ import { Modal, Input, TextArea, Button, Tag } from './UI';
 import { useSession } from 'next-auth/react';
 import { useApi } from '@/hooks/useApi';
 
-const ro = { '낙원가이드': 0, '베테랑사원': 1, '신입사원': 2, '휴직': 3 };
-const rc = { '낙원가이드': '#ffd700', '베테랑사원': 'var(--success)', '신입사원': 'var(--text-secondary)', '휴직': 'var(--text-muted)' };
+const ro = { '가이드': 0, '베테랑사원': 1, '신입사원': 2, '휴직': 3 };
+const rc = { '가이드': '#ffd700', '베테랑사원': 'var(--success)', '신입사원': 'var(--text-secondary)', '휴직': 'var(--text-muted)' };
 
 export default function MembersPage() {
   const { data: session } = useSession();
@@ -48,7 +48,7 @@ export default function MembersPage() {
     <div className="fade-in">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28, flexWrap: 'wrap', gap: 14 }}>
         <div>
-          <h2 style={{ fontSize: 22, fontWeight: 800, fontFamily: 'var(--font-display)' }}>하이브원</h2>
+          <h2 style={{ fontSize: 22, fontWeight: 800, fontFamily: 'var(--font-display)' }}>멤버</h2>
           <p style={{ color: 'var(--text-muted)', fontSize: 13, marginTop: 3 }}>총 {items.length}명</p>
         </div>
         {session?.isMember && (
@@ -119,7 +119,7 @@ export default function MembersPage() {
           <div style={{ marginBottom: 13 }}>
             <label style={{ display: 'block', fontSize: 11, color: 'var(--text-secondary)', marginBottom: 5, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>직급</label>
             <div style={{ display: 'flex', gap: 5 }}>
-              {['낙원가이드', '베테랑사원', '신입사원', '휴직'].map((r) => (
+              {['가이드', '베테랑사원', '신입사원', '휴직'].map((r) => (
                 <button key={r} onClick={() => setForm({ ...form, role: r })}
                   style={{ flex: 1, padding: '7px 3px', borderRadius: 8, fontSize: 11, fontWeight: 600, cursor: 'pointer', fontFamily: 'var(--font-body)', background: form.role === r ? `${rc[r]}15` : 'var(--bg-tertiary)', color: form.role === r ? rc[r] : 'var(--text-muted)', border: `1px solid ${form.role === r ? `${rc[r]}30` : 'var(--border)'}` }}>
                   {r}

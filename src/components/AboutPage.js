@@ -19,10 +19,10 @@ const sections = [
     accent: '#ffaa44',
   },
   {
-    id: 'hive',
+    id: 'project',
     label: '03',
-    title: '낙원',
-    highlight: '하이브',
+    title: '프로젝트',
+    highlight: '낙원',
     accent: '#6488ff',
   },
   {
@@ -180,10 +180,10 @@ export default function AboutPage() {
         }}>
           <div style={{ fontSize: 11, color: '#ffaa44', fontFamily: 'var(--font-mono)', letterSpacing: '0.1em', marginBottom: 12 }}>02</div>
           <h2 style={{ fontSize: 'clamp(24px, 4vw, 40px)', fontWeight: 900, fontFamily: 'var(--font-display)', lineHeight: 1.2 }}>
-            낙원
+            프로젝트
           </h2>
           <h2 style={{ fontSize: 'clamp(24px, 4vw, 40px)', fontWeight: 900, fontFamily: 'var(--font-display)', lineHeight: 1.2, color: '#6488ff' }}>
-            하이브
+            낙원
           </h2>
         </div>
 
@@ -191,22 +191,22 @@ export default function AboutPage() {
           <div className="about-reveal" style={{ opacity: 0, transform: 'translateY(40px)', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)' }}>
             <p style={{ fontSize: 16, color: 'var(--text-secondary)', lineHeight: 2.2 }}>
               Once Human의{' '}
-              <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}>여러 시나리오</span>에서<br />활동 중인 하이브,
+              <span style={{ color: 'var(--text-primary)', fontWeight: 700 }}>다양한 커뮤니티</span>가<br />함께하는 플랫폼,
             </p>
           </div>
 
           <div className="about-reveal" style={{ opacity: 0, transform: 'translateY(40px)', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s', marginTop: 40 }}>
             <p style={{ fontSize: 16, color: 'var(--text-secondary)', lineHeight: 2.2 }}>
-              2025년 1월, 간편이 세운<br />
-              거점에서 시작해<br />
-              지금은 여러 하이브원이 함께하고 있습니다.
+              2025년 1월, 낙원 하이브에서 시작해<br />
+              지금은 여러 하이브, 클랜, 디스코드 서버가<br />
+              함께하고 있습니다.
             </p>
           </div>
 
           <div className="about-reveal" style={{ opacity: 0, transform: 'translateY(40px)', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.3s', marginTop: 40 }}>
             <p style={{ fontSize: 16, color: 'var(--text-secondary)', lineHeight: 2.2 }}>
               인게임 공략부터 빌드 연구, 정보 확보까지 —<br />
-              각자의 강점을 살려 하이브를 운영합니다.
+              각자의 강점을 살려 함께 성장합니다.
             </p>
           </div>
 
@@ -219,7 +219,7 @@ export default function AboutPage() {
                 WANDERLAND.GG
               </div>
               <p style={{ fontSize: 14, color: 'var(--text-secondary)', lineHeight: 1.8 }}>
-                이 웹사이트는 하이브원들의 빌드 정보를 한눈에 모아보고,
+                이 웹사이트는 멤버들의 빌드 정보를 한눈에 모아보고,
                 게임 내 유용한 정보를 공유하며,
                 함께 성장하기 위해 만들어졌습니다.
               </p>

@@ -513,7 +513,7 @@ export default function BlacklistPage() {
             <Input label="닉네임 *" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="게임 내 닉네임" />
             <div className="bl-form-grid">
               <Input label="UUID" value={form.uuid} onChange={(e) => setForm({ ...form, uuid: e.target.value })} placeholder="OH-XXXXX-KR" />
-              <Input label="소속 하이브" value={form.clan} onChange={(e) => setForm({ ...form, clan: e.target.value })} placeholder="하이브명" />
+              <Input label="소속 클랜" value={form.clan} onChange={(e) => setForm({ ...form, clan: e.target.value })} placeholder="클랜 / 하이브명" />
             </div>
             <Input label="부캐" value={form.alts} onChange={(e) => setForm({ ...form, alts: e.target.value })} placeholder="쉼표로 구분 (선택)" />
           </div>
@@ -554,7 +554,7 @@ export default function BlacklistPage() {
           </div>
           <div>
             <h2 className="bl-hero-title">BLACKLIST</h2>
-            <p className="bl-hero-sub">낙원에서 추방된 자들의 기록</p>
+            <p className="bl-hero-sub">추방된 자들의 기록</p>
           </div>
         </div>
         <Button variant="danger" onClick={openNewForm} style={{ position: 'relative', zIndex: 2 }}>
