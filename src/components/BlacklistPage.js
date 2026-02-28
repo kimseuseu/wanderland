@@ -122,6 +122,7 @@ export default function BlacklistPage() {
   const [sel, setSel] = useState(null);
   const [search, setSearch] = useState('');
   const [form, setForm] = useState({ name: '', uuid: '', alts: '', clan: '', incident: '' });
+  const [editItem, setEditItem] = useState(null); // null = 신규, object = 수정 모드
 
   const items = list || [];
   const filtered = useMemo(() => {
@@ -146,17 +147,46 @@ export default function BlacklistPage() {
     return { total: items.length, clans: clans.size, recent: thisMonth.length };
   }, [items]);
 
-  const add = async () => {
+  const checkOwner = (item) => {
+    if (!session || !item) return false;
+    if (item.discordId && session.discordId) return item.discordId === session.discordId;
+    if (!item.discordId && session.user?.name) return item.reporter === session.user.name;
+    return false;
+  };
+
+  const startEdit = (item) => {
+    setForm({
+      name: item.name || '',
+      uuid: item.uuid || '',
+      alts: item.alts || '',
+      clan: item.clan || '',
+      incident: item.incident || '',
+    });
+    setEditItem(item);
+    setShowAdd(true);
+    setSel(null);
+  };
+
+  const addOrUpdate = async () => {
     if (!form.name) return;
     try {
-      await fetch('/api/blacklist', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, reporter: session?.user?.name || '익명' }),
-      });
+      if (editItem) {
+        await fetch(`/api/blacklist/${editItem.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(form),
+        });
+      } else {
+        await fetch('/api/blacklist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...form, reporter: session?.user?.name || '익명' }),
+        });
+      }
       mutate();
     } catch (e) { console.error(e); }
     setShowAdd(false);
+    setEditItem(null);
     setForm({ name: '', uuid: '', alts: '', clan: '', incident: '' });
   };
 
@@ -311,20 +341,27 @@ export default function BlacklistPage() {
 
             <div className="bl-detail-actions">
               <Button variant="secondary" onClick={() => setSel(null)}>닫기</Button>
-              <Button variant="danger" onClick={() => remove(sel.id)}>
-                <Icons.Trash /> 삭제
-              </Button>
+              {checkOwner(sel) && (
+                <>
+                  <Button variant="secondary" onClick={() => startEdit(sel)}>
+                    <Icons.Edit /> 수정
+                  </Button>
+                  <Button variant="danger" onClick={() => remove(sel.id)}>
+                    <Icons.Trash /> 삭제
+                  </Button>
+                </>
+              )}
             </div>
           </div>
         )}
       </Modal>
 
-      {/* Add Modal */}
-      <Modal open={showAdd} onClose={() => setShowAdd(false)} title="블랙리스트 등록">
+      {/* Add/Edit Modal */}
+      <Modal open={showAdd} onClose={() => { setShowAdd(false); setEditItem(null); setForm({ name: '', uuid: '', alts: '', clan: '', incident: '' }); }} title={editItem ? '블랙리스트 수정' : '블랙리스트 등록'}>
         <div className="bl-add-form">
           <div className="bl-add-form-header">
             <div className="bl-add-form-icon"><SkullIcon size={24} /></div>
-            <p>새로운 블랙리스트 유저를 등록합니다</p>
+            <p>{editItem ? '블랙리스트 정보를 수정합니다' : '새로운 블랙리스트 유저를 등록합니다'}</p>
           </div>
           <Input label="닉네임 *" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="게임 내 닉네임" />
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
@@ -334,8 +371,8 @@ export default function BlacklistPage() {
           <Input label="부캐" value={form.alts} onChange={(e) => setForm({ ...form, alts: e.target.value })} placeholder="쉼표로 구분 (선택)" />
           <TextArea label="사건 개요 *" value={form.incident} onChange={(e) => setForm({ ...form, incident: e.target.value })} placeholder="어떤 사건이 있었는지 자세히 기록해주세요..." />
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 8 }}>
-            <Button variant="secondary" onClick={() => setShowAdd(false)}>취소</Button>
-            <Button variant="danger" onClick={add}>등록</Button>
+            <Button variant="secondary" onClick={() => { setShowAdd(false); setEditItem(null); setForm({ name: '', uuid: '', alts: '', clan: '', incident: '' }); }}>취소</Button>
+            <Button variant="danger" onClick={addOrUpdate}>{editItem ? '수정' : '등록'}</Button>
           </div>
         </div>
       </Modal>

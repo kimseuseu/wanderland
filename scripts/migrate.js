@@ -36,6 +36,20 @@ async function migrate() {
     console.log('[migrate] blacklist image:', err.message);
   }
 
+  try {
+    await sql`ALTER TABLE builds ADD COLUMN IF NOT EXISTS discord_id text`;
+    console.log('[migrate] Added builds discord_id column');
+  } catch (err) {
+    console.log('[migrate] builds discord_id:', err.message);
+  }
+
+  try {
+    await sql`ALTER TABLE blacklist ADD COLUMN IF NOT EXISTS discord_id text`;
+    console.log('[migrate] Added blacklist discord_id column');
+  } catch (err) {
+    console.log('[migrate] blacklist discord_id:', err.message);
+  }
+
   console.log('[migrate] Done');
 }
 

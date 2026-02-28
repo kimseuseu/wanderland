@@ -41,6 +41,7 @@ export async function POST(req) {
       incident: body.incident || '',
       date: body.date || new Date().toISOString().split('T')[0],
       reporter: body.reporter || session.user?.name || '익명',
+      discordId: session.discordId || null,
     }).returning();
     return NextResponse.json(result[0], { status: 201 });
   } catch (error) {

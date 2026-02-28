@@ -15,7 +15,7 @@ const weaponTypes = ['전체', '권총', '산탄총', '기관단총', '돌격소
 /* ═══════════════════════════════════════════
    빌드 상세 페이지 (Sticky Parallax)
    ═══════════════════════════════════════════ */
-function BuildDetail({ build, onBack }) {
+function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -311,6 +311,21 @@ function BuildDetail({ build, onBack }) {
           </div>
         </div>
       )}
+
+      {/* ═══ Edit / Delete ═══ */}
+      {canEdit && (
+        <div style={{
+          display: 'flex', gap: 8, justifyContent: 'center',
+          padding: '32px 0 16px', borderTop: '1px solid var(--border)', marginTop: 24,
+        }}>
+          <Button variant="secondary" onClick={onEdit}>
+            <Icons.Edit /> 수정
+          </Button>
+          <Button variant="danger" onClick={onDelete}>
+            <Icons.Trash /> 삭제
+          </Button>
+        </div>
+      )}
     </div>
   );
 }
@@ -322,14 +337,49 @@ export default function BuildsPage() {
   const { data: session } = useSession();
   const { data: builds, loading, mutate } = useApi('/api/builds');
   const [sel, setSel] = useState(null);
-  const [mode, setMode] = useState('list'); // list | detail | create
+  const [mode, setMode] = useState('list'); // list | detail | create | edit
   const [search, setSearch] = useState('');
   const [catFilter, setCatFilter] = useState('전체');
   const [weaponFilter, setWeaponFilter] = useState('전체');
+  const [editBuild, setEditBuild] = useState(null);
+
+  const checkOwner = (build) => {
+    if (!session || !build) return false;
+    if (build.discordId && session.discordId) return build.discordId === session.discordId;
+    if (!build.discordId && session.user?.name) return build.author === session.user.name;
+    return false;
+  };
 
   /* 상세 페이지 */
   if (mode === 'detail' && sel) {
-    return <BuildDetail build={sel} onBack={() => { setSel(null); setMode('list'); }} />;
+    return (
+      <BuildDetail
+        build={sel}
+        onBack={() => { setSel(null); setMode('list'); }}
+        canEdit={checkOwner(sel)}
+        onEdit={() => { setEditBuild(sel); setMode('edit'); }}
+        onDelete={async () => {
+          try {
+            await fetch(`/api/builds/${sel.id}`, { method: 'DELETE' });
+            mutate();
+          } catch (e) { console.error(e); }
+          setSel(null);
+          setMode('list');
+        }}
+      />
+    );
+  }
+
+  /* 수정 폼 */
+  if (mode === 'edit' && editBuild) {
+    return (
+      <BuildCreateForm
+        onBack={() => { setEditBuild(null); setMode('list'); }}
+        onCreated={() => { mutate(); setEditBuild(null); setMode('list'); }}
+        initialData={editBuild}
+        editId={editBuild.id}
+      />
+    );
   }
 
   /* 작성 폼 */

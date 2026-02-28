@@ -173,6 +173,8 @@ async function handleModalSubmit(interaction) {
     const { db } = await import('@/db');
     const { blacklist } = await import('@/db/schema');
 
+    const discordId = interaction.member?.user?.id || null;
+
     const result = await db.insert(blacklist).values({
       name: fields.name,
       uuid: fields.uuid || '',
@@ -181,6 +183,7 @@ async function handleModalSubmit(interaction) {
       incident: fields.incident || '',
       date: new Date().toISOString().split('T')[0],
       reporter,
+      discordId,
     }).returning();
 
     const saved = result[0];

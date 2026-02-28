@@ -4,6 +4,7 @@ export const builds = pgTable('builds', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
   author: text('author').notNull(),
+  discordId: text('discord_id'),
   image: text('image'),
   mainWeapon: text('main_weapon').notNull(),
   subWeapon: text('sub_weapon'),
@@ -43,6 +44,7 @@ export const blacklist = pgTable('blacklist', {
   incident: text('incident'),
   date: text('date'),
   reporter: text('reporter'),
+  discordId: text('discord_id'),
   image: text('image'),
 });
 

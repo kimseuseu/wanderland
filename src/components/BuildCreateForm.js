@@ -93,7 +93,7 @@ function PillSelect({ label, options, value, onChange, colorMap }) {
 /* ═══════════════════════════════════════════
    빌드 작성 폼
    ═══════════════════════════════════════════ */
-export default function BuildCreateForm({ onBack, onCreated }) {
+export default function BuildCreateForm({ onBack, onCreated, initialData, editId }) {
   const { data: session } = useSession();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
@@ -101,14 +101,41 @@ export default function BuildCreateForm({ onBack, onCreated }) {
   const [dragOver, setDragOver] = useState(false);
   const fileInputRef = useRef(null);
 
-  const [form, setForm] = useState({
-    name: '', mainWeapon: '', subWeapon: '', grade: '전설',
-    category: '', weaponType: '', image: '',
-    tuning: [''], modules: [''], infections: [''], doping: [''],
-    armorSet: '', armorOptions: [''],
-    suffixes: SUFFIX_PARTS.map((d) => ({ part: d.part, suffix: '', keyword: '', type: d.type })),
-    leather: LEATHER_PARTS.map((p) => ({ part: p, name: '' })),
-    tags: [], notes: '',
+  const [form, setForm] = useState(() => {
+    if (initialData) {
+      return {
+        name: initialData.name || '',
+        mainWeapon: initialData.mainWeapon || '',
+        subWeapon: initialData.subWeapon || '',
+        grade: initialData.grade || '전설',
+        category: initialData.category || '',
+        weaponType: initialData.weaponType || '',
+        image: initialData.image || '',
+        tuning: initialData.tuning?.length ? initialData.tuning : [''],
+        modules: initialData.modules?.length ? initialData.modules : [''],
+        infections: initialData.infections?.length ? initialData.infections : [''],
+        doping: initialData.doping?.length ? initialData.doping : [''],
+        armorSet: initialData.armorSet || '',
+        armorOptions: initialData.armorOptions?.length ? initialData.armorOptions : [''],
+        suffixes: initialData.suffixes?.length
+          ? initialData.suffixes
+          : SUFFIX_PARTS.map((d) => ({ part: d.part, suffix: '', keyword: '', type: d.type })),
+        leather: initialData.leather?.length
+          ? initialData.leather
+          : LEATHER_PARTS.map((p) => ({ part: p, name: '' })),
+        tags: initialData.tags || [],
+        notes: initialData.notes || '',
+      };
+    }
+    return {
+      name: '', mainWeapon: '', subWeapon: '', grade: '전설',
+      category: '', weaponType: '', image: '',
+      tuning: [''], modules: [''], infections: [''], doping: [''],
+      armorSet: '', armorOptions: [''],
+      suffixes: SUFFIX_PARTS.map((d) => ({ part: d.part, suffix: '', keyword: '', type: d.type })),
+      leather: LEATHER_PARTS.map((p) => ({ part: p, name: '' })),
+      tags: [], notes: '',
+    };
   });
 
   /* ── 배열 헬퍼 ── */
@@ -213,14 +240,18 @@ export default function BuildCreateForm({ onBack, onCreated }) {
         suffixes: form.suffixes.filter((s) => s.part.trim() || s.suffix.trim()),
         leather: form.leather.filter((l) => l.part.trim() || l.name.trim()),
       };
-      const res = await fetch('/api/builds', {
-        method: 'POST',
+
+      const url = editId ? `/api/builds/${editId}` : '/api/builds';
+      const method = editId ? 'PUT' : 'POST';
+
+      const res = await fetch(url, {
+        method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data.error || '빌드 생성에 실패했습니다.');
+        throw new Error(data.error || (editId ? '빌드 수정에 실패했습니다.' : '빌드 생성에 실패했습니다.'));
       }
       onCreated();
     } catch (e) {
@@ -267,7 +298,7 @@ export default function BuildCreateForm({ onBack, onCreated }) {
       </button>
 
       <h2 style={{ fontSize: 22, fontWeight: 800, fontFamily: 'var(--font-display)', marginBottom: 24 }}>
-        빌드 작성
+        {editId ? '빌드 수정' : '빌드 작성'}
       </h2>
 
       {/* ═══ 섹션 1: 기본 정보 + 무기 & 전투 ═══ */}
@@ -504,7 +535,7 @@ export default function BuildCreateForm({ onBack, onCreated }) {
       }}>
         <Button variant="secondary" onClick={onBack}>취소</Button>
         <Button onClick={handleSubmit} disabled={submitting}>
-          {submitting ? '저장 중...' : '빌드 저장'}
+          {submitting ? '저장 중...' : (editId ? '빌드 수정' : '빌드 저장')}
         </Button>
       </div>
     </div>

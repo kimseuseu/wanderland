@@ -9,7 +9,7 @@ async function getFromDB() {
     const { desc } = await import('drizzle-orm');
     const rows = await db.select().from(builds).orderBy(desc(builds.id));
     return rows.map((r) => ({
-      id: r.id, name: r.name, author: r.author, image: r.image,
+      id: r.id, name: r.name, author: r.author, discordId: r.discordId, image: r.image,
       mainWeapon: r.mainWeapon, subWeapon: r.subWeapon, grade: r.grade,
       tuning: r.tuning || [], modules: r.modules || [],
       infections: r.infections || [], doping: r.doping || [],
@@ -60,6 +60,7 @@ export async function POST(req) {
       tags: body.tags || [],
       likes: 0,
       date: new Date().toISOString().split('T')[0],
+      discordId: session.discordId || null,
     }).returning();
     return NextResponse.json(result[0], { status: 201 });
   } catch (error) {
