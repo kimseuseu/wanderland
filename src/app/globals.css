@@ -1492,23 +1492,26 @@ option {
   border-top: 1px solid var(--border);
 }
 
-/* ─── Editor Live Preview ─── */
-.bl-editor-live-preview {
-  border-top: 1px solid rgba(255,255,255,0.06);
-  background: rgba(255,255,255,0.02);
-  border-radius: 0 0 12px 12px;
-  padding: 14px 16px;
-  max-height: 400px;
-  overflow-y: auto;
+/* ─── Editor Inline Images ─── */
+.bl-editor-inline-images {
+  background: var(--bg-card);
+  border-top: 1px dashed rgba(255,255,255,0.08);
+  padding: 12px 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
-.bl-editor-live-preview-label {
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-bottom: 10px;
-  opacity: 0.6;
+.bl-editor-inline-img {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  max-width: 100%;
+}
+.bl-editor-inline-img img {
+  display: block;
+  max-width: 100%;
+  max-height: 260px;
+  object-fit: contain;
 }
 
 /* ─── Mobile: Form ─── */

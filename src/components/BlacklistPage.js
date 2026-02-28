@@ -284,26 +284,20 @@ function MarkdownEditor({ value, onChange }) {
               onDragOver={(e) => e.preventDefault()}
               placeholder="마크다운 형식으로 상세 내용을 작성하세요...&#10;&#10;**굵게**, *기울임*, ### 제목, - 목록&#10;이미지: 툴바의 이미지 버튼 또는 Ctrl+V로 붙여넣기"
             />
-            {/* 라이브 프리뷰 — 작성 중에도 렌더링된 결과 표시 */}
-            {value && (
-              <div className="bl-editor-live-preview">
-                <div className="bl-editor-live-preview-label">미리보기</div>
-                <div className="bl-markdown-body">
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    components={{
-                      img: ({ src, alt }) => (
-                        <div className="bl-markdown-img-wrap">
-                          <img src={src} alt={alt || ''} className="bl-markdown-img" loading="lazy" />
-                        </div>
-                      ),
-                    }}
-                  >
-                    {value}
-                  </ReactMarkdown>
+            {/* 인라인 이미지 프리뷰 — textarea 안에서 이미지만 바로 표시 */}
+            {(() => {
+              const imgs = [...(value || '').matchAll(/!\[[^\]]*\]\(([^)]+)\)/g)];
+              if (imgs.length === 0) return null;
+              return (
+                <div className="bl-editor-inline-images">
+                  {imgs.map((m, i) => (
+                    <div key={i} className="bl-editor-inline-img">
+                      <img src={m[1]} alt="" loading="lazy" />
+                    </div>
+                  ))}
                 </div>
-              </div>
-            )}
+              );
+            })()}
           </>
         ) : (
           <div className="bl-editor-preview">
