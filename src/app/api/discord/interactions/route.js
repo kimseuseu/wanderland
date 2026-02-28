@@ -77,12 +77,6 @@ async function getDesignatedChannel(guildId, feature = 'blacklist') {
  * /blacklist-channel → 현재 채널을 블랙리스트 검색 채널로 지정
  */
 async function handleBlacklistChannel(interaction) {
-  // 관리자 권한 체크 (ADMINISTRATOR = 0x8)
-  const permissions = BigInt(interaction.member?.permissions || '0');
-  if ((permissions & 0x8n) === 0n) {
-    return respond('❌ 관리자만 사용할 수 있는 명령어입니다.', true);
-  }
-
   const guildId = interaction.guild_id;
   const channelId = interaction.channel_id;
 
