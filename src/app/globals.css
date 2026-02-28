@@ -1419,6 +1419,108 @@ option {
   text-transform: uppercase;
 }
 
+/* ─── Full-page Form ─── */
+.bl-form-page {
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease;
+}
+.bl-form-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 13px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 24px;
+}
+.bl-form-back:hover {
+  background: rgba(255,68,68,0.08);
+  border-color: rgba(255,68,68,0.3);
+  color: #ff4444;
+}
+.bl-form-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #ff4444, #ff6666);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.bl-form-subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+.bl-form-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.bl-form-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff4444;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bl-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.bl-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+/* ─── Editor Live Preview ─── */
+.bl-editor-live-preview {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  border-radius: 0 0 12px 12px;
+  padding: 14px 16px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+.bl-editor-live-preview-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  opacity: 0.6;
+}
+
+/* ─── Mobile: Form ─── */
+@media (max-width: 640px) {
+  .bl-form-page { padding: 0 4px; }
+  .bl-form-section { padding: 16px; }
+  .bl-form-grid { grid-template-columns: 1fr; }
+  .bl-form-title { font-size: 20px; }
+  .bl-form-actions { flex-direction: column; }
+  .bl-form-actions button { width: 100%; }
+}
+
 /* ═══════════════════════════════════════════════════════
    MAP PAGE
    ═══════════════════════════════════════════════════════ */

@@ -273,16 +273,38 @@ function MarkdownEditor({ value, onChange }) {
 
         {/* Content Area */}
         {tab === 'write' ? (
-          <textarea
-            ref={textareaRef}
-            className="bl-editor-textarea"
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            onPaste={handlePaste}
-            onDrop={handleDrop}
-            onDragOver={(e) => e.preventDefault()}
-            placeholder="마크다운 형식으로 상세 내용을 작성하세요...&#10;&#10;**굵게**, *기울임*, ### 제목, - 목록&#10;이미지: 툴바의 이미지 버튼 또는 Ctrl+V로 붙여넣기"
-          />
+          <>
+            <textarea
+              ref={textareaRef}
+              className="bl-editor-textarea"
+              value={value}
+              onChange={(e) => onChange(e.target.value)}
+              onPaste={handlePaste}
+              onDrop={handleDrop}
+              onDragOver={(e) => e.preventDefault()}
+              placeholder="마크다운 형식으로 상세 내용을 작성하세요...&#10;&#10;**굵게**, *기울임*, ### 제목, - 목록&#10;이미지: 툴바의 이미지 버튼 또는 Ctrl+V로 붙여넣기"
+            />
+            {/* 라이브 프리뷰 — 작성 중에도 렌더링된 결과 표시 */}
+            {value && (
+              <div className="bl-editor-live-preview">
+                <div className="bl-editor-live-preview-label">미리보기</div>
+                <div className="bl-markdown-body">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      img: ({ src, alt }) => (
+                        <div className="bl-markdown-img-wrap">
+                          <img src={src} alt={alt || ''} className="bl-markdown-img" loading="lazy" />
+                        </div>
+                      ),
+                    }}
+                  >
+                    {value}
+                  </ReactMarkdown>
+                </div>
+              </div>
+            )}
+          </>
         ) : (
           <div className="bl-editor-preview">
             {value ? (
@@ -376,7 +398,7 @@ function MarkdownEditor({ value, onChange }) {
 export default function BlacklistPage() {
   const { data: session } = useSession();
   const { data: list, loading, mutate } = useApi('/api/blacklist');
-  const [showAdd, setShowAdd] = useState(false);
+  const [view, setView] = useState('list'); // 'list' | 'form'
   const [sel, setSel] = useState(null);
   const [search, setSearch] = useState('');
   const [form, setForm] = useState({ name: '', uuid: '', alts: '', clan: '', incident: '', content: '' });
@@ -425,8 +447,20 @@ export default function BlacklistPage() {
       content: item.content || '',
     });
     setEditItem(item);
-    setShowAdd(true);
+    setView('form');
     setSel(null);
+  };
+
+  const openNewForm = () => {
+    setForm({ ...EMPTY_FORM });
+    setEditItem(null);
+    setView('form');
+  };
+
+  const closeForm = () => {
+    setView('list');
+    setEditItem(null);
+    setForm({ ...EMPTY_FORM });
   };
 
   const addOrUpdate = async () => {
@@ -447,9 +481,7 @@ export default function BlacklistPage() {
       }
       mutate();
     } catch (e) { console.error(e); }
-    setShowAdd(false);
-    setEditItem(null);
-    setForm({ ...EMPTY_FORM });
+    closeForm();
   };
 
   const remove = async (id) => {
@@ -469,6 +501,54 @@ export default function BlacklistPage() {
     );
   }
 
+  /* ── 풀페이지 폼 (등록/수정) ── */
+  if (view === 'form') {
+    return (
+      <div className="bl-page fade-in">
+        <div className="bl-form-page">
+          <button className="bl-form-back" onClick={closeForm}>
+            ← 목록으로
+          </button>
+
+          <h2 className="bl-form-title">{editItem ? '블랙리스트 수정' : '블랙리스트 등록'}</h2>
+          <p className="bl-form-subtitle">{editItem ? '블랙리스트 정보를 수정합니다' : '새로운 블랙리스트 유저를 등록합니다'}</p>
+
+          {/* 기본 정보 섹션 */}
+          <div className="bl-form-section">
+            <div className="bl-form-section-title"><SkullIcon size={14} /> 기본 정보</div>
+            <Input label="닉네임 *" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="게임 내 닉네임" />
+            <div className="bl-form-grid">
+              <Input label="UUID" value={form.uuid} onChange={(e) => setForm({ ...form, uuid: e.target.value })} placeholder="OH-XXXXX-KR" />
+              <Input label="소속 하이브" value={form.clan} onChange={(e) => setForm({ ...form, clan: e.target.value })} placeholder="하이브명" />
+            </div>
+            <Input label="부캐" value={form.alts} onChange={(e) => setForm({ ...form, alts: e.target.value })} placeholder="쉼표로 구분 (선택)" />
+          </div>
+
+          {/* 사건 내용 섹션 */}
+          <div className="bl-form-section">
+            <div className="bl-form-section-title"><AlertIcon size={14} /> 사건 내용</div>
+            <TextArea label="사건 개요 *" value={form.incident} onChange={(e) => setForm({ ...form, incident: e.target.value })} placeholder="어떤 사건이 있었는지 간략히 기록해주세요..." />
+          </div>
+
+          {/* 상세 내용 (마크다운 에디터) 섹션 */}
+          <div className="bl-form-section">
+            <div className="bl-form-section-title"><DocIcon size={14} /> 상세 내용</div>
+            <MarkdownEditor
+              value={form.content}
+              onChange={(val) => setForm({ ...form, content: val })}
+            />
+          </div>
+
+          {/* 하단 버튼 */}
+          <div className="bl-form-actions">
+            <Button variant="secondary" onClick={closeForm}>취소</Button>
+            <Button variant="danger" onClick={addOrUpdate}>{editItem ? '수정' : '등록'}</Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bl-page fade-in">
       {/* Hero Header */}
@@ -483,7 +563,7 @@ export default function BlacklistPage() {
             <p className="bl-hero-sub">낙원에서 추방된 자들의 기록</p>
           </div>
         </div>
-        <Button variant="danger" onClick={() => setShowAdd(true)} style={{ position: 'relative', zIndex: 2 }}>
+        <Button variant="danger" onClick={openNewForm} style={{ position: 'relative', zIndex: 2 }}>
           <Icons.Plus /> 유저 등록
         </Button>
       </div>
@@ -641,33 +721,6 @@ export default function BlacklistPage() {
         )}
       </Modal>
 
-      {/* Add/Edit Modal */}
-      <Modal open={showAdd} onClose={() => { setShowAdd(false); setEditItem(null); setForm({ ...EMPTY_FORM }); }} title={editItem ? '블랙리스트 수정' : '블랙리스트 등록'}>
-        <div className="bl-add-form">
-          <div className="bl-add-form-header">
-            <div className="bl-add-form-icon"><SkullIcon size={24} /></div>
-            <p>{editItem ? '블랙리스트 정보를 수정합니다' : '새로운 블랙리스트 유저를 등록합니다'}</p>
-          </div>
-          <Input label="닉네임 *" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="게임 내 닉네임" />
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-            <Input label="UUID" value={form.uuid} onChange={(e) => setForm({ ...form, uuid: e.target.value })} placeholder="OH-XXXXX-KR" />
-            <Input label="소속 하이브" value={form.clan} onChange={(e) => setForm({ ...form, clan: e.target.value })} placeholder="하이브명" />
-          </div>
-          <Input label="부캐" value={form.alts} onChange={(e) => setForm({ ...form, alts: e.target.value })} placeholder="쉼표로 구분 (선택)" />
-          <TextArea label="사건 개요 *" value={form.incident} onChange={(e) => setForm({ ...form, incident: e.target.value })} placeholder="어떤 사건이 있었는지 간략히 기록해주세요..." />
-
-          {/* Markdown Editor */}
-          <MarkdownEditor
-            value={form.content}
-            onChange={(val) => setForm({ ...form, content: val })}
-          />
-
-          <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 8 }}>
-            <Button variant="secondary" onClick={() => { setShowAdd(false); setEditItem(null); setForm({ ...EMPTY_FORM }); }}>취소</Button>
-            <Button variant="danger" onClick={addOrUpdate}>{editItem ? '수정' : '등록'}</Button>
-          </div>
-        </div>
-      </Modal>
     </div>
   );
 }
