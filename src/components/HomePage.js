@@ -78,7 +78,7 @@ export default function HomePage({ onNavigate }) {
         fontSize: 15, color: 'var(--text-secondary)', maxWidth: 420,
         lineHeight: 1.9, marginBottom: 48, fontWeight: 400,
       }}>
-        장비 빌드를 공유하고, 지도에 정보를 기록하고,<br />멤버들과 함께 더 강해지세요.
+        빌드 공유, 좌표 기록, 블랙리스트 관리까지.<br />Once Human 커뮤니티 통합 플랫폼.
       </p>
 
       {/* Navigation cards */}

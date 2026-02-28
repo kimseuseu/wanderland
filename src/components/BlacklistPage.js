@@ -559,7 +559,7 @@ export default function BlacklistPage() {
           </div>
           <div>
             <h2 className="bl-hero-title">BLACKLIST</h2>
-            <p className="bl-hero-sub">추방된 자들의 기록</p>
+            <p className="bl-hero-sub">주의 유저 공유 목록</p>
           </div>
         </div>
         <Button variant="danger" onClick={openNewForm} style={{ position: 'relative', zIndex: 2 }}>
