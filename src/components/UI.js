@@ -35,7 +35,7 @@ export function Modal({ open, onClose, title, children }) {
             <Icons.X />
           </button>
         </div>
-        <div style={{ overflowY: 'auto', flex: 1 }}>
+        <div style={{ overflowY: 'auto', flex: 1, minHeight: 0 }}>
           {children}
         </div>
       </div>

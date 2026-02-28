@@ -147,8 +147,10 @@ function MarkdownEditor({ value, onChange }) {
   const [imgUrl, setImgUrl] = useState('');
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
+  const [popoverPos, setPopoverPos] = useState({ top: 0, right: 0 });
   const textareaRef = useRef(null);
   const fileInputRef = useRef(null);
+  const imgBtnRef = useRef(null);
 
   const insertAtCursor = useCallback((text) => {
     const ta = textareaRef.current;
@@ -179,6 +181,17 @@ function MarkdownEditor({ value, onChange }) {
     }, 0);
   }, [value, onChange]);
 
+  const toggleImgPopover = useCallback(() => {
+    if (!showImgPopover && imgBtnRef.current) {
+      const rect = imgBtnRef.current.getBoundingClientRect();
+      setPopoverPos({
+        top: rect.bottom + 4,
+        right: Math.max(8, window.innerWidth - rect.right),
+      });
+    }
+    setShowImgPopover(!showImgPopover);
+  }, [showImgPopover]);
+
   const toolbarActions = [
     { icon: <BoldIcon />, action: () => wrapSelection('**', '**'), title: '굵게' },
     { icon: <ItalicIcon />, action: () => wrapSelection('*', '*'), title: '기울임' },
@@ -187,7 +200,7 @@ function MarkdownEditor({ value, onChange }) {
     { icon: <HrIcon />, action: () => insertAtCursor('\n---\n'), title: '구분선' },
     { icon: <LinkIcon />, action: () => wrapSelection('[', '](url)'), title: '링크' },
     'sep',
-    { icon: <ImageIcon size={14} />, action: () => setShowImgPopover(!showImgPopover), title: '이미지', id: 'img' },
+    { icon: <ImageIcon size={14} />, action: toggleImgPopover, title: '이미지', id: 'img' },
   ];
 
   const uploadImage = async (file) => {
@@ -250,13 +263,14 @@ function MarkdownEditor({ value, onChange }) {
 
         {/* Toolbar (write mode only) */}
         {tab === 'write' && (
-          <div className="bl-editor-toolbar" style={{ position: 'relative' }}>
+          <div className="bl-editor-toolbar">
             {toolbarActions.map((a, i) =>
               a === 'sep' ? (
                 <div key={i} className="bl-editor-toolbar-sep" />
               ) : (
                 <button
                   key={i}
+                  ref={a.id === 'img' ? imgBtnRef : undefined}
                   className={`bl-editor-toolbar-btn${a.id === 'img' && showImgPopover ? ' active' : ''}`}
                   onClick={a.action}
                   title={a.title}
@@ -264,65 +278,6 @@ function MarkdownEditor({ value, onChange }) {
                   {a.icon}
                 </button>
               )
-            )}
-
-            {/* Image Popover */}
-            {showImgPopover && (
-              <>
-                <div className="bl-img-popover-overlay" onClick={() => setShowImgPopover(false)} />
-                <div className="bl-img-popover">
-                  <div className="bl-img-popover-title">이미지 추가</div>
-
-                  {/* URL Option */}
-                  <div className="bl-img-option" onClick={() => setImgMode('url')}>
-                    <div className={`bl-img-option-radio${imgMode === 'url' ? ' selected' : ''}`} />
-                    <span className="bl-img-option-label">URL 입력</span>
-                  </div>
-                  {imgMode === 'url' && (
-                    <>
-                      <input
-                        className="bl-img-url-input"
-                        placeholder="https://example.com/image.png"
-                        value={imgUrl}
-                        onChange={(e) => setImgUrl(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && insertImgUrl()}
-                      />
-                      <div className="bl-img-popover-actions">
-                        <Button variant="secondary" onClick={() => setShowImgPopover(false)} style={{ padding: '5px 12px', fontSize: 11 }}>취소</Button>
-                        <Button variant="danger" onClick={insertImgUrl} style={{ padding: '5px 12px', fontSize: 11 }}>삽입</Button>
-                      </div>
-                    </>
-                  )}
-
-                  {/* Upload Option */}
-                  <div className="bl-img-option" onClick={() => setImgMode('upload')}>
-                    <div className={`bl-img-option-radio${imgMode === 'upload' ? ' selected' : ''}`} />
-                    <span className="bl-img-option-label">파일 업로드</span>
-                  </div>
-                  {imgMode === 'upload' && (
-                    <>
-                      <input
-                        ref={fileInputRef}
-                        type="file"
-                        accept="image/*"
-                        style={{ display: 'none' }}
-                        onChange={(e) => { const f = e.target.files[0]; if (f) uploadImage(f); }}
-                      />
-                      <div
-                        className={`bl-img-upload-zone${dragOver ? ' dragover' : ''}`}
-                        onClick={() => fileInputRef.current?.click()}
-                        onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
-                        onDragLeave={() => setDragOver(false)}
-                        onDrop={(e) => { e.preventDefault(); setDragOver(false); const f = e.dataTransfer.files[0]; if (f) uploadImage(f); }}
-                      >
-                        <div className="bl-img-upload-zone-icon"><UploadIcon /></div>
-                        {uploading ? '업로드 중...' : '클릭 또는 드래그하여 업로드'}
-                        <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 4 }}>10MB 이하 이미지</div>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </>
             )}
           </div>
         )}
@@ -364,6 +319,66 @@ function MarkdownEditor({ value, onChange }) {
           </div>
         )}
       </div>
+
+      {/* Image Popover - rendered outside editor-wrap to avoid overflow clipping */}
+      {showImgPopover && (
+        <>
+          <div className="bl-img-popover-overlay" onClick={() => setShowImgPopover(false)} />
+          <div className="bl-img-popover" style={{ top: popoverPos.top, right: popoverPos.right }}>
+            <div className="bl-img-popover-title">이미지 추가</div>
+
+            {/* URL Option */}
+            <div className="bl-img-option" onClick={() => setImgMode('url')}>
+              <div className={`bl-img-option-radio${imgMode === 'url' ? ' selected' : ''}`} />
+              <span className="bl-img-option-label">URL 입력</span>
+            </div>
+            {imgMode === 'url' && (
+              <>
+                <input
+                  className="bl-img-url-input"
+                  placeholder="https://example.com/image.png"
+                  value={imgUrl}
+                  onChange={(e) => setImgUrl(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Enter' && insertImgUrl()}
+                  autoFocus
+                />
+                <div className="bl-img-popover-actions">
+                  <Button variant="secondary" onClick={() => setShowImgPopover(false)} style={{ padding: '5px 12px', fontSize: 11 }}>취소</Button>
+                  <Button variant="danger" onClick={insertImgUrl} style={{ padding: '5px 12px', fontSize: 11 }}>삽입</Button>
+                </div>
+              </>
+            )}
+
+            {/* Upload Option */}
+            <div className="bl-img-option" onClick={() => setImgMode('upload')}>
+              <div className={`bl-img-option-radio${imgMode === 'upload' ? ' selected' : ''}`} />
+              <span className="bl-img-option-label">파일 업로드</span>
+            </div>
+            {imgMode === 'upload' && (
+              <>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  style={{ display: 'none' }}
+                  onChange={(e) => { const f = e.target.files[0]; if (f) uploadImage(f); }}
+                />
+                <div
+                  className={`bl-img-upload-zone${dragOver ? ' dragover' : ''}`}
+                  onClick={() => fileInputRef.current?.click()}
+                  onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                  onDragLeave={() => setDragOver(false)}
+                  onDrop={(e) => { e.preventDefault(); setDragOver(false); const f = e.dataTransfer.files[0]; if (f) uploadImage(f); }}
+                >
+                  <div className="bl-img-upload-zone-icon"><UploadIcon /></div>
+                  {uploading ? '업로드 중...' : '클릭 또는 드래그하여 업로드'}
+                  <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 4 }}>10MB 이하 이미지</div>
+                </div>
+              </>
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 }
