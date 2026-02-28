@@ -1,14 +1,12 @@
 /**
- * Discord 슬래시 커맨드 등록 스크립트
+ * Discord 슬래시 커맨드 등록 스크립트 (글로벌)
  *
  * 사용법:
  *   node scripts/register-commands.js
  *
  * 필요한 환경변수 (.env.local 또는 시스템 환경변수):
- *   DISCORD_APP_ID         - Discord 애플리케이션 ID
- *   DISCORD_BOT_TOKEN      - Discord 봇 토큰
- *   DISCORD_GUILD_ID       - 첫 번째 서버 ID
- *   DISCORD_BOT_GUILD_ID_2 - 두 번째 서버 ID (선택)
+ *   DISCORD_APP_ID    - Discord 애플리케이션 ID
+ *   DISCORD_BOT_TOKEN - Discord 봇 토큰
  */
 
 const fs = require('fs');
@@ -59,37 +57,6 @@ const BLACKLIST_COMMAND = {
   ],
 };
 
-async function registerCommandsForGuild(guildId, guildLabel) {
-  const appId = process.env.DISCORD_APP_ID;
-  const token = process.env.DISCORD_BOT_TOKEN;
-
-  const url = `${DISCORD_API}/applications/${appId}/guilds/${guildId}/commands`;
-
-  console.log(`[${guildLabel}] 서버 ${guildId}에 커맨드 등록 중...`);
-
-  const res = await fetch(url, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bot ${token}`,
-    },
-    body: JSON.stringify([BLACKLIST_CHANNEL_COMMAND, BLACKLIST_COMMAND]),
-  });
-
-  if (!res.ok) {
-    const error = await res.text();
-    console.error(`[${guildLabel}] ❌ 등록 실패 (${res.status}):`, error);
-    return false;
-  }
-
-  const data = await res.json();
-  console.log(`[${guildLabel}] ✅ ${data.length}개 커맨드 등록 완료`);
-  for (const cmd of data) {
-    console.log(`  - /${cmd.name}: ${cmd.description}`);
-  }
-  return true;
-}
-
 async function main() {
   const { DISCORD_APP_ID, DISCORD_BOT_TOKEN, DISCORD_GUILD_ID, DISCORD_BOT_GUILD_ID_2 } = process.env;
 
@@ -98,24 +65,54 @@ async function main() {
     process.exit(1);
   }
 
-  if (!DISCORD_GUILD_ID) {
-    console.error('❌ DISCORD_GUILD_ID 환경변수가 필요합니다.');
+  console.log('🤖 Discord 글로벌 커맨드 등록을 시작합니다...\n');
+
+  // ── 1. 글로벌 커맨드 등록 (봇이 있는 모든 서버에 적용) ──
+  const globalUrl = `${DISCORD_API}/applications/${DISCORD_APP_ID}/commands`;
+
+  console.log('[글로벌] 커맨드 등록 중...');
+  const res = await fetch(globalUrl, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bot ${DISCORD_BOT_TOKEN}`,
+    },
+    body: JSON.stringify([BLACKLIST_CHANNEL_COMMAND, BLACKLIST_COMMAND]),
+  });
+
+  if (!res.ok) {
+    const error = await res.text();
+    console.error(`[글로벌] ❌ 등록 실패 (${res.status}):`, error);
     process.exit(1);
   }
 
-  console.log('🤖 Discord 슬래시 커맨드 등록을 시작합니다...\n');
-
-  // Register on first guild
-  await registerCommandsForGuild(DISCORD_GUILD_ID, '서버 1');
-
-  // Register on second guild if configured
-  if (DISCORD_BOT_GUILD_ID_2) {
-    await registerCommandsForGuild(DISCORD_BOT_GUILD_ID_2, '서버 2');
-  } else {
-    console.log('\n[서버 2] DISCORD_BOT_GUILD_ID_2가 설정되지 않아 건너뜁니다.');
+  const data = await res.json();
+  console.log(`[글로벌] ✅ ${data.length}개 커맨드 등록 완료`);
+  for (const cmd of data) {
+    console.log(`  - /${cmd.name}: ${cmd.description}`);
   }
 
-  console.log('\n✨ 완료!');
+  // ── 2. 기존 길드 커맨드 정리 (중복 방지) ──
+  const guildIds = [DISCORD_GUILD_ID, DISCORD_BOT_GUILD_ID_2].filter(Boolean);
+  for (const guildId of guildIds) {
+    const guildUrl = `${DISCORD_API}/applications/${DISCORD_APP_ID}/guilds/${guildId}/commands`;
+    console.log(`\n[길드 ${guildId}] 기존 길드 커맨드 정리 중...`);
+    const guildRes = await fetch(guildUrl, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bot ${DISCORD_BOT_TOKEN}`,
+      },
+      body: JSON.stringify([]), // 빈 배열 = 길드 커맨드 전부 삭제
+    });
+    if (guildRes.ok) {
+      console.log(`[길드 ${guildId}] ✅ 길드 커맨드 정리 완료`);
+    } else {
+      console.log(`[길드 ${guildId}] ⚠️ 정리 실패 (${guildRes.status}) — 무시하고 진행`);
+    }
+  }
+
+  console.log('\n✨ 완료! (글로벌 커맨드는 반영까지 최대 1시간 소요될 수 있습니다)');
 }
 
 main().catch((err) => {

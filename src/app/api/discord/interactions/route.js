@@ -44,14 +44,6 @@ async function verifyDiscordRequest(body, signature, timestamp) {
   }
 }
 
-function isAllowedGuild(guildId) {
-  const guilds = [
-    process.env.DISCORD_GUILD_ID,
-    process.env.DISCORD_BOT_GUILD_ID_2,
-  ].filter(Boolean);
-  if (guilds.length === 0) return true;
-  return guilds.includes(guildId);
-}
 
 function respond(content, ephemeral = false) {
   return NextResponse.json({
@@ -249,13 +241,6 @@ export async function POST(req) {
 
     // Slash commands
     if (interaction.type === INTERACTION_TYPE.APPLICATION_COMMAND) {
-      const guildOk = isAllowedGuild(interaction.guild_id);
-      console.log('[Discord] Guild:', interaction.guild_id, '→', guildOk);
-
-      if (!guildOk) {
-        return respond('❌ 이 서버에서는 사용할 수 없는 명령어입니다.', true);
-      }
-
       const { name } = interaction.data;
       console.log('[Discord] Command:', name);
 
