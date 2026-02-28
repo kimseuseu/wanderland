@@ -177,8 +177,10 @@ async function handleBlacklistSearch(interaction) {
     }
 
     if (results.length > 5) {
-      lines.push(`외 ${results.length - 5}건 — 웹사이트에서 전체 목록을 확인하세요.`);
+      lines.push(`외 ${results.length - 5}건`);
     }
+
+    lines.push(`🔗 [wanderland.gg에서 보기](https://wanderland.gg?page=blacklist&q=${encodeURIComponent(searchTerm)})`);
 
     return respond(lines.join('\n'));
   } catch (error) {

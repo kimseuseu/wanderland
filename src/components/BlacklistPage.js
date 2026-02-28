@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useRef, useCallback } from 'react';
+import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { Icons } from './Icons';
 import { Modal, Input, TextArea, Button } from './UI';
 import { useSession } from 'next-auth/react';
@@ -394,7 +394,12 @@ export default function BlacklistPage() {
   const { data: list, loading, mutate } = useApi('/api/blacklist');
   const [view, setView] = useState('list'); // 'list' | 'form'
   const [sel, setSel] = useState(null);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return new URLSearchParams(window.location.search).get('q') || '';
+    }
+    return '';
+  });
   const [form, setForm] = useState({ name: '', uuid: '', alts: '', clan: '', incident: '', content: '' });
   const [editItem, setEditItem] = useState(null);
 
