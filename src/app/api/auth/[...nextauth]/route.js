@@ -3,11 +3,34 @@ import DiscordProvider from 'next-auth/providers/discord';
 
 const BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
 const PRIMARY = process.env.DISCORD_GUILD_ID;
-const SECONDARY = process.env.DISCORD_BOT_GUILD_ID_2;
 
-/** 봇이 들어가 있는 서버 ID 목록 */
-function getBotGuildIds() {
-  return [PRIMARY, SECONDARY].filter(Boolean);
+/** 봇이 들어가 있는 서버 ID 목록을 Discord API로 자동 조회 (5분 캐시) */
+let _botGuildsCache = null;
+let _botGuildsCacheTime = 0;
+const CACHE_TTL = 5 * 60 * 1000; // 5분
+
+async function getBotGuildIds() {
+  if (!BOT_TOKEN) return [PRIMARY].filter(Boolean);
+
+  const now = Date.now();
+  if (_botGuildsCache && now - _botGuildsCacheTime < CACHE_TTL) {
+    return _botGuildsCache;
+  }
+
+  try {
+    const res = await fetch('https://discord.com/api/v10/users/@me/guilds', {
+      headers: { Authorization: `Bot ${BOT_TOKEN}` },
+    });
+    if (res.ok) {
+      const guilds = await res.json();
+      _botGuildsCache = guilds.map((g) => g.id);
+      _botGuildsCacheTime = now;
+      return _botGuildsCache;
+    }
+  } catch { /* fallback */ }
+
+  // API 실패 시 env fallback
+  return [PRIMARY].filter(Boolean);
 }
 
 /** 봇 토큰으로 특정 서버의 멤버 닉네임 조회 */
@@ -28,11 +51,11 @@ async function fetchNickname(guildId, userId) {
 
 /**
  * 다중 서버에서 닉네임 우선순위 결정
- * 주 서버 → 보조 서버 → 기타 순으로 닉네임 조회
+ * 주 서버(DISCORD_GUILD_ID) 우선 → 나머지 서버 순
  */
 async function resolveNickname(matchedGuildIds, userId, fallbackUsername) {
   const sorted = [...matchedGuildIds].sort((a, b) => {
-    const p = (id) => (id === PRIMARY ? 0 : id === SECONDARY ? 1 : 2);
+    const p = (id) => (id === PRIMARY ? 0 : 1);
     return p(a) - p(b);
   });
 
@@ -73,7 +96,7 @@ export const authOptions = {
           if (res.ok) {
             const userGuilds = await res.json();
             const userGuildIds = new Set(userGuilds.map((g) => g.id));
-            const botGuildIds = getBotGuildIds();
+            const botGuildIds = await getBotGuildIds();
 
             // 2. 봇 서버 ∩ 유저 서버 = 매칭된 서버
             const matchedGuildIds = botGuildIds.filter((id) => userGuildIds.has(id));
