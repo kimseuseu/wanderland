@@ -1,9 +1,39 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useSession } from 'next-auth/react';
 import { Icons } from './Icons';
 
 export default function MembersPage() {
+  const { data: session, status } = useSession();
+
+  // 비로그인 또는 비멤버 → 접근 차단
+  if (status === 'loading') {
+    return (
+      <div className="mb-loading fade-in">
+        <div className="mb-loading-spinner" />
+      </div>
+    );
+  }
+
+  if (!session?.isMember) {
+    return (
+      <div className="mb-empty fade-in">
+        <div className="mb-empty-icon"><Icons.Users /></div>
+        <p style={{ color: 'var(--text-secondary)', fontSize: 15 }}>
+          서버 멤버만 열람할 수 있습니다.
+        </p>
+        <p style={{ color: 'var(--text-muted)', fontSize: 13, marginTop: 6 }}>
+          Discord 계정으로 로그인해주세요.
+        </p>
+      </div>
+    );
+  }
+
+  return <MembersContent />;
+}
+
+function MembersContent() {
   const [guilds, setGuilds] = useState([]);
   const [activeGuild, setActiveGuild] = useState(null);
   const [members, setMembers] = useState([]);
