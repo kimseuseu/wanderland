@@ -196,19 +196,23 @@ function MarkdownEditor({ value, onChange }) {
 
   const uploadImage = async (file) => {
     if (!file || !file.type.startsWith('image/')) return;
-    if (file.size > 10 * 1024 * 1024) return;
+    if (file.size > 10 * 1024 * 1024) { alert('파일 크기는 10MB 이하여야 합니다.'); return; }
     setUploading(true);
     try {
       const fd = new FormData();
       fd.append('file', file);
       fd.append('prefix', 'blacklist');
       const res = await fetch('/api/upload', { method: 'POST', body: fd });
-      if (!res.ok) throw new Error('업로드 실패');
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        console.error('Upload failed:', res.status, errData);
+        throw new Error(errData.error || `업로드 실패 (${res.status})`);
+      }
       const { url } = await res.json();
       insertAtCursor(`\n![이미지](${url})\n`);
       setShowImgPopover(false);
       setImgUrl('');
-    } catch (e) { console.error(e); }
+    } catch (e) { console.error(e); alert(e.message || '업로드에 실패했습니다.'); }
     finally { setUploading(false); }
   };
 
