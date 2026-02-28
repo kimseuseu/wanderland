@@ -33,29 +33,37 @@ const inputStyle = {
   border: '1px solid var(--border)', borderRadius: 8, color: 'var(--text-primary)',
   fontSize: 14, fontFamily: 'var(--font-body)', outline: 'none', boxSizing: 'border-box',
 };
-const addBtnStyle = {
-  display: 'flex', alignItems: 'center', gap: 4,
-  padding: '3px 10px', borderRadius: 6, fontSize: 11, fontWeight: 600,
-  background: 'transparent', color: 'var(--text-muted)',
-  border: '1px solid var(--border)', cursor: 'pointer', fontFamily: 'var(--font-body)',
-};
-const removeBtnStyle = {
-  display: 'flex', alignItems: 'center', justifyContent: 'center',
-  width: 32, height: 32, borderRadius: 6, background: 'transparent',
-  border: '1px solid var(--border)', color: 'var(--text-muted)',
-  cursor: 'pointer', flexShrink: 0,
-};
+
+/* ── 진행 표시 바 ── */
+function FormProgress({ form }) {
+  const steps = [
+    { label: '기본 정보', filled: !!(form.name && form.mainWeapon) },
+    { label: '방어구', filled: !!(form.armorSet || form.leather.some((l) => l.name)) },
+    { label: '모듈', filled: form.suffixes.some((s) => s.suffix) },
+    { label: '노트', filled: !!(form.notes || form.tags.length) },
+  ];
+  return (
+    <div className="bd-form-progress">
+      {steps.map((step, i) => (
+        <div key={i} style={{ display: 'contents' }}>
+          <div className={`bd-form-progress-step${step.filled ? ' completed' : ''}`}>
+            <span className="bd-form-progress-check">{step.filled ? '✓' : i + 1}</span>
+            <span>{step.label}</span>
+          </div>
+          {i < steps.length - 1 && <div className="bd-form-progress-line" />}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 /* ── 섹션 카드 ── */
 function SectionCard({ number, title, accent, children }) {
   return (
-    <div style={{
-      background: 'var(--bg-card)', border: '1px solid var(--border)',
-      borderRadius: 14, padding: '24px 28px', marginBottom: 16,
-    }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 20 }}>
-        <span style={{ fontSize: 11, color: accent, fontFamily: 'var(--font-mono)', letterSpacing: '0.1em' }}>{number}</span>
-        <h3 style={{ fontSize: 16, fontWeight: 800, fontFamily: 'var(--font-display)' }}>{title}</h3>
+    <div className="bd-form-section">
+      <div className="bd-form-section-header" style={{ '--section-accent': accent }}>
+        <span className="bd-form-section-number">{number}</span>
+        <h3 className="bd-form-section-title">{title}</h3>
       </div>
       {children}
     </div>
@@ -73,14 +81,8 @@ function PillSelect({ label, options, value, onChange, colorMap }) {
           const c = colorMap?.[opt] || '#fff';
           return (
             <button key={opt} type="button" onClick={() => onChange(opt)}
-              style={{
-                padding: '4px 13px', borderRadius: 20, fontSize: 12, fontWeight: 600,
-                border: '1px solid', cursor: 'pointer', fontFamily: 'var(--font-body)',
-                transition: 'all 0.2s',
-                background: active ? c : 'transparent',
-                color: active ? '#000' : (colorMap ? c : 'var(--text-muted)'),
-                borderColor: active ? c : 'var(--border)',
-              }}>
+              className={`bd-filter-pill${active ? ' active' : ''}`}
+              style={active ? { background: c, borderColor: c, color: '#000' } : colorMap ? { color: c } : {}}>
               {opt}
             </button>
           );
@@ -148,8 +150,6 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
 
   const updateObjArr = (field, i, key, val) =>
     setForm((p) => ({ ...p, [field]: p[field].map((v, j) => j === i ? { ...v, [key]: val } : v) }));
-  const addObjArr = (field, def) =>
-    setForm((p) => ({ ...p, [field]: [...p[field], def] }));
   const removeObjArr = (field, i) =>
     setForm((p) => ({ ...p, [field]: p[field].filter((_, j) => j !== i) }));
 
@@ -265,16 +265,16 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
   function DynList({ label, field, accent, placeholder }) {
     return (
       <div style={{ marginBottom: 13 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5 }}>
+        <div className="bd-form-dynlist-header">
           <label style={{ ...labelStyle, color: accent, marginBottom: 0 }}>{label}</label>
-          <button type="button" onClick={() => addArr(field)} style={addBtnStyle}><Icons.Plus /> 추가</button>
+          <button type="button" onClick={() => addArr(field)} className="bd-form-dynlist-add"><Icons.Plus /> 추가</button>
         </div>
         {form[field].map((item, i) => (
-          <div key={i} style={{ display: 'flex', gap: 6, marginBottom: 6, alignItems: 'center' }}>
+          <div key={i} className="bd-form-dynlist-row">
             <input value={item} onChange={(e) => updateArr(field, i, e.target.value)}
               placeholder={placeholder} style={inputStyle} />
             {form[field].length > 1 && (
-              <button type="button" onClick={() => removeArr(field, i)} style={removeBtnStyle}><Icons.X /></button>
+              <button type="button" onClick={() => removeArr(field, i)} className="bd-form-dynlist-remove"><Icons.X /></button>
             )}
           </div>
         ))}
@@ -297,9 +297,12 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
         <Icons.ChevronLeft /> 빌드 목록으로
       </button>
 
-      <h2 style={{ fontSize: 22, fontWeight: 800, fontFamily: 'var(--font-display)', marginBottom: 24 }}>
+      <h2 style={{ fontSize: 22, fontWeight: 800, fontFamily: 'var(--font-display)', marginBottom: 20 }}>
         {editId ? '빌드 수정' : '빌드 작성'}
       </h2>
+
+      {/* ── 진행 표시 ── */}
+      <FormProgress form={form} />
 
       {/* ═══ 섹션 1: 기본 정보 + 무기 & 전투 ═══ */}
       <SectionCard number="01" title="기본 정보 + 무기 & 전투 세팅" accent="#ff6b6b">
@@ -314,40 +317,31 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
         <div style={{ marginBottom: 13 }}>
           <label style={labelStyle}>이미지</label>
           {form.image ? (
-            <div style={{ position: 'relative', borderRadius: 10, overflow: 'hidden', border: '1px solid var(--border)', marginBottom: 6 }}>
-              <img src={form.image} alt="미리보기" style={{ width: '100%', maxHeight: 200, objectFit: 'cover', display: 'block' }} />
-              <button type="button" onClick={() => set('image', '')}
-                style={{
-                  position: 'absolute', top: 8, right: 8, width: 28, height: 28, borderRadius: 6,
-                  background: 'rgba(0,0,0,0.7)', border: 'none', color: '#fff',
-                  cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}>
+            <div className="bd-form-upload-preview">
+              <img src={form.image} alt="미리보기" />
+              <button type="button" onClick={() => set('image', '')} className="bd-form-upload-remove">
                 <Icons.X />
               </button>
             </div>
           ) : (
             <div
+              className={`bd-form-upload-zone${dragOver ? ' dragover' : ''}`}
               onDrop={onDrop}
               onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
               onDragLeave={() => setDragOver(false)}
               onPaste={onPaste}
               onClick={() => fileInputRef.current?.click()}
               tabIndex={0}
-              style={{
-                padding: '28px 16px', borderRadius: 10, textAlign: 'center', cursor: 'pointer',
-                border: `2px dashed ${dragOver ? '#88ccff' : 'var(--border)'}`,
-                background: dragOver ? 'rgba(136,204,255,0.04)' : 'var(--bg-tertiary)',
-                transition: 'all 0.2s',
-              }}>
+            >
               <input ref={fileInputRef} type="file" accept="image/*" hidden
                 onChange={(e) => { const f = e.target.files?.[0]; if (f) uploadImage(f); e.target.value = ''; }} />
               {uploading ? (
-                <div style={{ fontSize: 13, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>업로드 중...</div>
+                <div style={{ fontSize: 13, color: '#00d4ff', fontFamily: 'var(--font-mono)' }}>업로드 중...</div>
               ) : (
                 <>
-                  <div style={{ fontSize: 24, marginBottom: 6, opacity: 0.4 }}>📷</div>
-                  <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>클릭, 드래그 또는 붙여넣기로 이미지 업로드</div>
-                  <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 4, opacity: 0.6 }}>PNG, JPG, WebP · 최대 10MB</div>
+                  <div className="bd-form-upload-icon">📷</div>
+                  <div className="bd-form-upload-text">클릭, 드래그 또는 붙여넣기로 이미지 업로드</div>
+                  <div className="bd-form-upload-hint">PNG, JPG, WebP · 최대 10MB</div>
                 </>
               )}
             </div>
@@ -408,21 +402,21 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
                 padding: '10px 14px', background: 'var(--bg-tertiary)',
                 border: '1px solid var(--border)', borderRadius: 10, marginBottom: 6,
               }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: indices.length > 0 ? 8 : 0 }}>
+                <div className="bd-form-dynlist-header" style={{ marginBottom: indices.length > 0 ? 8 : 0 }}>
                   <span style={{ fontSize: 12, fontWeight: 700, color: '#c8a87c' }}>{baseName}</span>
                   <button type="button" onClick={() => addLeatherFor(baseName)}
-                    style={{ ...addBtnStyle, padding: '2px 6px', fontSize: 10 }}><Icons.Plus /></button>
+                    className="bd-form-dynlist-add" style={{ padding: '2px 6px', fontSize: 10 }}><Icons.Plus /></button>
                 </div>
                 {indices.map((idx) => {
                   const l = form.leather[idx];
                   const count = indices.length;
                   return (
-                    <div key={idx} style={{ display: 'flex', gap: 6, marginBottom: 4, alignItems: 'center' }}>
+                    <div key={idx} className="bd-form-dynlist-row">
                       {count > 1 && <span style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 700, width: 16, flexShrink: 0 }}>{NUMS[indices.indexOf(idx)]}</span>}
                       <input value={l.name} onChange={(e) => updateObjArr('leather', idx, 'name', e.target.value)}
                         placeholder="가죽 장비 이름" style={inputStyle} />
                       {count > 1 && (
-                        <button type="button" onClick={() => removeLeatherAt(idx)} style={removeBtnStyle}><Icons.X /></button>
+                        <button type="button" onClick={() => removeLeatherAt(idx)} className="bd-form-dynlist-remove"><Icons.X /></button>
                       )}
                     </div>
                   );
@@ -448,10 +442,10 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
                 padding: '12px 14px', background: 'var(--bg-tertiary)',
                 border: '1px solid var(--border)', borderRadius: 10, marginBottom: 6,
               }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 8 }}>
+                <div className="bd-form-dynlist-header" style={{ marginBottom: 8 }}>
                   <span style={{ fontSize: 12, fontWeight: 700, color: '#ffaa44' }}>{baseName}</span>
                   <button type="button" onClick={() => addSuffixFor(baseName)}
-                    style={{ ...addBtnStyle, padding: '2px 6px', fontSize: 10 }}><Icons.Plus /></button>
+                    className="bd-form-dynlist-add" style={{ padding: '2px 6px', fontSize: 10 }}><Icons.Plus /></button>
                 </div>
                 {indices.map((idx) => {
                   const s = form.suffixes[idx];
@@ -477,7 +471,7 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
                         {suffixTypes.map((t) => <option key={t} value={t}>{t}</option>)}
                       </select>
                       {count > 1 && (
-                        <button type="button" onClick={() => removeSuffixAt(idx)} style={removeBtnStyle}><Icons.X /></button>
+                        <button type="button" onClick={() => removeSuffixAt(idx)} className="bd-form-dynlist-remove"><Icons.X /></button>
                       )}
                     </div>
                   );
@@ -489,21 +483,14 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
       </SectionCard>
 
       {/* ═══ 섹션 4: 노트 & 태그 ═══ */}
-      <SectionCard number="04" title="노트 & 태그" accent="#88ccff">
+      <SectionCard number="04" title="노트 & 태그" accent="#00d4ff">
         {/* 태그 토글 */}
         <div style={{ marginBottom: 13 }}>
           <label style={labelStyle}>태그</label>
           <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
             {tagOptions.map((tag) => (
               <button key={tag} type="button" onClick={() => toggleTag(tag)}
-                style={{
-                  padding: '4px 13px', borderRadius: 20, fontSize: 12, fontWeight: 600,
-                  border: '1px solid', cursor: 'pointer', fontFamily: 'var(--font-body)',
-                  transition: 'all 0.2s',
-                  background: form.tags.includes(tag) ? '#88ccff' : 'transparent',
-                  color: form.tags.includes(tag) ? '#000' : 'var(--text-muted)',
-                  borderColor: form.tags.includes(tag) ? '#88ccff' : 'var(--border)',
-                }}>
+                className={`bd-form-tag-toggle${form.tags.includes(tag) ? ' active' : ''}`}>
                 {tag}
               </button>
             ))}
@@ -519,20 +506,11 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
 
       {/* ── 에러 메시지 ── */}
       {error && (
-        <div style={{
-          padding: '12px 16px', background: 'rgba(255,68,68,0.06)',
-          border: '1px solid rgba(255,68,68,0.15)', borderRadius: 10,
-          color: '#ff4444', fontSize: 13, marginBottom: 16,
-        }}>
-          {error}
-        </div>
+        <div className="bd-form-error">{error}</div>
       )}
 
       {/* ── 제출 ── */}
-      <div style={{
-        display: 'flex', justifyContent: 'flex-end', gap: 8,
-        padding: '20px 0', borderTop: '1px solid var(--border)', marginTop: 8,
-      }}>
+      <div className="bd-form-actions">
         <Button variant="secondary" onClick={onBack}>취소</Button>
         <Button onClick={handleSubmit} disabled={submitting}>
           {submitting ? '저장 중...' : (editId ? '빌드 수정' : '빌드 저장')}

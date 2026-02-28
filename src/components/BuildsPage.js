@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useSession } from 'next-auth/react';
 import { Icons } from './Icons';
 import { Tag, Button } from './UI';
@@ -11,6 +11,78 @@ const typeColor = (t) => t === '섬광' ? '#88ccff' : t === '클래식' ? '#ffcc
 const catColor = { '총기': '#ff6b6b', '원소': '#88ccff', '하이브리드': '#cc88ff' };
 const categories = ['전체', '총기', '원소', '하이브리드'];
 const weaponTypes = ['전체', '권총', '산탄총', '기관단총', '돌격소총', '저격소총', '경기관총', '석궁'];
+const gradeColor = (g) => g === '전설' ? '#ffd700' : g === '영웅' ? '#cc88ff' : g === '희귀' ? '#4488ff' : 'var(--text-secondary)';
+
+/* ── Sub-components ── */
+function FloatingParticles() {
+  return (
+    <div className="bd-particles" aria-hidden="true">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div key={i} className="bd-particle" style={{
+          left: `${15 + i * 14}%`,
+          top: `${20 + (i % 3) * 25}%`,
+          animationDelay: `${i * 1.2}s`,
+          animationDuration: `${6 + i * 1.5}s`,
+        }} />
+      ))}
+    </div>
+  );
+}
+
+function StatCard({ icon, value, label, accent }) {
+  return (
+    <div className="bd-stat-card" style={{ '--stat-accent': accent }}>
+      <div className="bd-stat-icon">{icon}</div>
+      <div className="bd-stat-value">{value}</div>
+      <div className="bd-stat-label">{label}</div>
+    </div>
+  );
+}
+
+function BuildCard({ build, index, onClick }) {
+  const gc = gradeColor(build.grade);
+  return (
+    <div className="bd-card fade-in" style={{ animationDelay: `${index * 0.04}s` }} onClick={onClick}>
+      <div className="bd-card-glow" />
+      {build.image ? (
+        <div className="bd-card-image">
+          <img src={build.image} alt="" />
+          <div className="bd-card-image-overlay" />
+        </div>
+      ) : (
+        <div className="bd-card-no-image">⚔</div>
+      )}
+      {build.grade && (
+        <div className="bd-card-grade" style={{ '--grade-color': gc }}>{build.grade}</div>
+      )}
+      <div className="bd-card-body">
+        <div className="bd-card-name">{build.name}</div>
+        <div className="bd-card-meta">{build.author} · {build.date}</div>
+        <div className="bd-card-weapons">
+          <div className="bd-card-weapon">
+            <span className="bd-card-weapon-label">메인</span>
+            <div className="bd-card-weapon-value">{build.mainWeapon}</div>
+          </div>
+          {build.subWeapon && (
+            <div className="bd-card-weapon">
+              <span className="bd-card-weapon-label">서브</span>
+              <div className="bd-card-weapon-value">{build.subWeapon}</div>
+            </div>
+          )}
+        </div>
+        <div className="bd-card-tags">
+          {build.category && <Tag color={catColor[build.category]}>{build.category}</Tag>}
+          {build.weaponType && <Tag>{build.weaponType}</Tag>}
+          {build.tags?.map((t) => <Tag key={t}>{t}</Tag>)}
+        </div>
+        <div className="bd-card-footer">
+          <span className="bd-card-likes">♥ {build.likes || 0}</span>
+          <span className="bd-card-arrow">상세보기 →</span>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /* ═══════════════════════════════════════════
    빌드 상세 페이지 (Sticky Parallax)
@@ -67,6 +139,7 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
             <div style={{
               position: 'absolute', inset: 0,
               background: 'linear-gradient(180deg, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.7) 50%, var(--bg-card) 100%)',
+              backdropFilter: 'blur(2px)',
             }} />
             <img src={build.image} alt="" style={{
               position: 'absolute', top: '38%', left: '50%',
@@ -125,23 +198,25 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
               </div>
               <div style={{ width: 28, height: 28, borderRadius: 6, background: 'rgba(255,107,107,0.1)', border: '1px solid rgba(255,107,107,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800, color: '#ff6b6b' }}>1</div>
             </div>
-            <div style={{
-              padding: '16px 20px', background: 'var(--bg-card)', border: '1px solid var(--border)',
-              borderLeft: '3px solid #4488ff', borderRadius: 10,
-              display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-            }}>
-              <div>
-                <div style={{ fontSize: 10, color: '#4488ff', fontWeight: 700, letterSpacing: '0.1em', marginBottom: 4 }}>SUB</div>
-                <div style={{ fontSize: 17, fontWeight: 700 }}>{build.subWeapon}</div>
+            {build.subWeapon && (
+              <div style={{
+                padding: '16px 20px', background: 'var(--bg-card)', border: '1px solid var(--border)',
+                borderLeft: '3px solid #4488ff', borderRadius: 10,
+                display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+              }}>
+                <div>
+                  <div style={{ fontSize: 10, color: '#4488ff', fontWeight: 700, letterSpacing: '0.1em', marginBottom: 4 }}>SUB</div>
+                  <div style={{ fontSize: 17, fontWeight: 700 }}>{build.subWeapon}</div>
+                </div>
+                <div style={{ width: 28, height: 28, borderRadius: 6, background: 'rgba(68,136,255,0.1)', border: '1px solid rgba(68,136,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800, color: '#4488ff' }}>2</div>
               </div>
-              <div style={{ width: 28, height: 28, borderRadius: 6, background: 'rgba(68,136,255,0.1)', border: '1px solid rgba(68,136,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 12, fontWeight: 800, color: '#4488ff' }}>2</div>
-            </div>
+            )}
           </div>
 
           {/* 튜닝 & 감염물 */}
           <div className="build-reveal" style={{ opacity: 0, transform: 'translateY(40px)', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s', marginTop: 36 }}>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-              {build.tuning && (
+              {build.tuning?.length > 0 && (
                 <div>
                   <div style={{ fontSize: 10, color: '#88ccff', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', marginBottom: 10 }}>TUNING</div>
                   {build.tuning.map((t, i) => (
@@ -149,7 +224,7 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
                   ))}
                 </div>
               )}
-              {build.infections && (
+              {build.infections?.length > 0 && (
                 <div>
                   <div style={{ fontSize: 10, color: '#cc88ff', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', marginBottom: 10 }}>INFECTION</div>
                   {build.infections.map((x, i) => (
@@ -161,7 +236,7 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
           </div>
 
           {/* 도핑 */}
-          {build.doping && (
+          {build.doping?.length > 0 && (
             <div className="build-reveal" style={{ opacity: 0, transform: 'translateY(40px)', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s', marginTop: 36 }}>
               <div style={{ fontSize: 10, color: '#44ff88', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', marginBottom: 10 }}>DOPING</div>
               {build.doping.map((d, i) => (
@@ -191,7 +266,6 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
         </div>
 
         <div style={{ flex: 1, paddingTop: '14vh', paddingBottom: '12vh', paddingLeft: 32, paddingRight: 8 }}>
-          {/* 방어구 세트 */}
           {build.armorSet && (
             <div className="build-reveal" style={{ opacity: 0, transform: 'translateY(40px)', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)' }}>
               <div style={{ fontSize: 10, color: '#ffd700', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', marginBottom: 12 }}>ARMOR SET</div>
@@ -214,8 +288,7 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
             </div>
           )}
 
-          {/* 가죽 장비 */}
-          {build.leather && (
+          {build.leather?.length > 0 && (
             <div className="build-reveal" style={{ opacity: 0, transform: 'translateY(40px)', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s', marginTop: 36 }}>
               <div style={{ fontSize: 10, color: '#c8a87c', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', marginBottom: 12 }}>LEATHER</div>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: 8 }}>
@@ -238,7 +311,7 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
       <div className="shimmer-line" style={{ maxWidth: 120, margin: '0 auto' }} />
 
       {/* ═══ SECTION 3: 모듈 구성 ═══ */}
-      {build.suffixes && (
+      {build.suffixes?.length > 0 && (
         <div className="about-section" style={{ minHeight: '100vh', display: 'flex', position: 'relative' }}>
           <div className="about-sticky-left" style={{
             position: 'sticky', top: 48, height: 'fit-content',
@@ -251,8 +324,7 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
             <h2 style={{ fontSize: 'clamp(20px, 3.5vw, 34px)', fontWeight: 900, fontFamily: 'var(--font-display)', lineHeight: 1.2, color: '#ffaa44' }}>
               구성
             </h2>
-            {/* 모듈 접미 tags */}
-            {build.modules && (
+            {build.modules?.length > 0 && (
               <div style={{ marginTop: 24, display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                 {build.modules.map((m, i) => (
                   <div key={i} style={{
@@ -268,7 +340,6 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
           <div style={{ flex: 1, paddingTop: '14vh', paddingBottom: '12vh', paddingLeft: 32, paddingRight: 8 }}>
             <div className="build-reveal" style={{ opacity: 0, transform: 'translateY(40px)', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)' }}>
               <div style={{ fontSize: 10, color: '#ffaa44', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', marginBottom: 16 }}>SUFFIX TABLE</div>
-              {/* Suffix rows as individual cards */}
               {build.suffixes.map((s, i) => (
                 <div key={i} className="build-reveal" style={{
                   opacity: 0, transform: 'translateY(20px)',
@@ -337,7 +408,7 @@ export default function BuildsPage() {
   const { data: session } = useSession();
   const { data: builds, loading, mutate } = useApi('/api/builds');
   const [sel, setSel] = useState(null);
-  const [mode, setMode] = useState('list'); // list | detail | create | edit
+  const [mode, setMode] = useState('list');
   const [search, setSearch] = useState('');
   const [catFilter, setCatFilter] = useState('전체');
   const [weaponFilter, setWeaponFilter] = useState('전체');
@@ -350,6 +421,18 @@ export default function BuildsPage() {
     if (!build.discordId && session.user?.name) return build.author === session.user.name;
     return false;
   };
+
+  const stats = useMemo(() => {
+    if (!builds) return { total: 0, authors: 0, recent: 0 };
+    const authors = new Set(builds.map((b) => b.author));
+    const now = new Date();
+    const recent = builds.filter((b) => {
+      if (!b.date) return false;
+      const d = new Date(b.date);
+      return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+    });
+    return { total: builds.length, authors: authors.size, recent: recent.length };
+  }, [builds]);
 
   /* 상세 페이지 */
   if (mode === 'detail' && sel) {
@@ -391,7 +474,8 @@ export default function BuildsPage() {
   /* 로딩 */
   if (loading || !builds) {
     return (
-      <div style={{ textAlign: 'center', padding: '80px 20px', color: 'var(--text-muted)' }}>
+      <div className="bd-loading">
+        <div className="bd-loading-icon"><Icons.Build /></div>
         <div style={{ fontSize: 13, fontFamily: 'var(--font-mono)', animation: 'pulse 1.5s ease-in-out infinite' }}>빌드 불러오는 중...</div>
       </div>
     );
@@ -399,48 +483,74 @@ export default function BuildsPage() {
 
   /* 목록 필터링 */
   const filtered = builds.filter((b) => {
-    const ms = b.name.includes(search) || b.author.includes(search) || b.mainWeapon.includes(search) || (b.tags && b.tags.some((t) => t.includes(search)));
+    const s = search.toLowerCase();
+    const ms = !s || b.name?.toLowerCase().includes(s) || b.author?.toLowerCase().includes(s) || b.mainWeapon?.toLowerCase().includes(s) || (b.tags && b.tags.some((t) => t.toLowerCase().includes(s)));
     const mc = catFilter === '전체' || b.category === catFilter;
     const mw = weaponFilter === '전체' || b.weaponType === weaponFilter;
     return ms && mc && mw;
   });
 
   return (
-    <div className="fade-in">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28, flexWrap: 'wrap', gap: 14 }}>
-        <div>
-          <h2 style={{ fontSize: 22, fontWeight: 800, fontFamily: 'var(--font-display)' }}>장비 빌드</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: 13, marginTop: 3 }}>{filtered.length}개의 빌드</p>
+    <div className="bd-page fade-in">
+      {/* ═══ Hero ═══ */}
+      <div className="bd-hero">
+        <FloatingParticles />
+        <div className="bd-hero-content">
+          <div className="bd-hero-icon"><Icons.Build /></div>
+          <div className="bd-hero-title">BUILDS</div>
+          <div className="bd-hero-sub">장비 빌드 공유 · 최적의 세팅을 찾아보세요</div>
         </div>
-        {session?.isMember && (
-          <Button onClick={() => setMode('create')}><Icons.Plus /> 빌드 작성</Button>
-        )}
+        <div className="bd-hero-actions">
+          {session?.isMember && (
+            <Button onClick={() => setMode('create')}><Icons.Plus /> 빌드 작성</Button>
+          )}
+        </div>
       </div>
 
-      {/* Search & Filter */}
-      <div style={{ marginBottom: 20 }}>
-        <div style={{ position: 'relative', marginBottom: 12 }}>
-          <div style={{ position: 'absolute', left: 13, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }}><Icons.Search /></div>
-          <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="무기, 작성자, 태그 검색..."
-            style={{ width: '100%', padding: '9px 13px 9px 38px', background: 'var(--bg-tertiary)', border: '1px solid var(--border)', borderRadius: 10, color: 'var(--text-primary)', fontSize: 14, fontFamily: 'var(--font-body)', outline: 'none' }} />
-        </div>
-        <div style={{ marginBottom: 8 }}>
-          <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>대분류</div>
-          <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
+      {/* ═══ Stats ═══ */}
+      <div className="bd-stats">
+        <StatCard icon="⚔" value={stats.total} label="총 빌드" accent="#00d4ff" />
+        <StatCard icon="👤" value={stats.authors} label="작성자" accent="#cc88ff" />
+        <StatCard icon="📅" value={stats.recent} label="이번 달" accent="#ffaa44" />
+      </div>
+
+      {/* ═══ Search ═══ */}
+      <div className="bd-search-wrap">
+        <div className="bd-search-icon"><Icons.Search /></div>
+        <input
+          className="bd-search-input"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="무기, 작성자, 태그 검색..."
+        />
+      </div>
+
+      {/* ═══ Filters ═══ */}
+      <div className="bd-filters">
+        <div className="bd-filter-group">
+          <div className="bd-filter-label">대분류</div>
+          <div className="bd-filter-pills">
             {categories.map((c) => (
-              <button key={c} onClick={() => setCatFilter(c)}
-                style={{ padding: '4px 13px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: '1px solid', cursor: 'pointer', transition: 'all 0.2s', fontFamily: 'var(--font-body)', background: catFilter === c ? (catColor[c] || '#fff') : 'transparent', color: catFilter === c ? '#000' : (catColor[c] || 'var(--text-muted)'), borderColor: catFilter === c ? (catColor[c] || '#fff') : 'var(--border)' }}>
+              <button
+                key={c}
+                className={`bd-filter-pill${catFilter === c ? ' active' : ''}`}
+                onClick={() => setCatFilter(c)}
+                style={catFilter === c && catColor[c] ? { background: catColor[c], borderColor: catColor[c] } : catColor[c] ? { color: catColor[c] } : {}}
+              >
                 {c}
               </button>
             ))}
           </div>
         </div>
-        <div>
-          <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>무기 종류</div>
-          <div style={{ display: 'flex', gap: 5, flexWrap: 'wrap' }}>
+        <div className="bd-filter-group">
+          <div className="bd-filter-label">무기 종류</div>
+          <div className="bd-filter-pills">
             {weaponTypes.map((w) => (
-              <button key={w} onClick={() => setWeaponFilter(w)}
-                style={{ padding: '4px 13px', borderRadius: 20, fontSize: 12, fontWeight: 600, border: '1px solid', cursor: 'pointer', transition: 'all 0.2s', fontFamily: 'var(--font-body)', background: weaponFilter === w ? '#fff' : 'transparent', color: weaponFilter === w ? '#000' : 'var(--text-muted)', borderColor: weaponFilter === w ? '#fff' : 'var(--border)' }}>
+              <button
+                key={w}
+                className={`bd-filter-pill${weaponFilter === w ? ' active' : ''}`}
+                onClick={() => setWeaponFilter(w)}
+              >
                 {w}
               </button>
             ))}
@@ -448,50 +558,23 @@ export default function BuildsPage() {
         </div>
       </div>
 
-      {/* Cards */}
-      <div className="builds-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 12 }}>
-        {filtered.map((b, i) => (
-          <div key={b.id} className="fade-in build-card"
-            style={{ animationDelay: `${i * 0.04}s`, background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 14, overflow: 'hidden', cursor: 'pointer', transition: 'all 0.25s' }}
-            onClick={() => { setSel(b); setMode('detail'); }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--border-hover)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'translateY(0)'; }}>
-            {b.image && (
-              <div className="build-card-img" style={{ height: 140, background: 'var(--bg-tertiary)', overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <img src={b.image} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: 0.85 }} />
-              </div>
-            )}
-            <div className="build-card-body" style={{ padding: 18 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
-                <div>
-                  <h3 className="build-card-title" style={{ fontSize: 16, fontWeight: 700 }}>{b.name}</h3>
-                  <p style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 2, fontFamily: 'var(--font-mono)' }}>{b.author} · {b.date}</p>
-                </div>
-                {b.grade && <Tag color="#ffd700">{b.grade}</Tag>}
-              </div>
-              <div className="build-card-weapons" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, marginBottom: 10, fontSize: 12 }}>
-                <div style={{ padding: '5px 9px', background: 'var(--bg-tertiary)', borderRadius: 6 }}>
-                  <span style={{ color: 'var(--text-muted)' }}>메인</span>
-                  <div style={{ fontWeight: 700, marginTop: 1 }}>{b.mainWeapon}</div>
-                </div>
-                <div style={{ padding: '5px 9px', background: 'var(--bg-tertiary)', borderRadius: 6 }}>
-                  <span style={{ color: 'var(--text-muted)' }}>서브</span>
-                  <div style={{ fontWeight: 700, marginTop: 1 }}>{b.subWeapon}</div>
-                </div>
-              </div>
-              <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginBottom: 10 }}>
-                {b.category && <Tag color={catColor[b.category]}>{b.category}</Tag>}
-                {b.weaponType && <Tag>{b.weaponType}</Tag>}
-                {b.tags?.map((t) => <Tag key={t}>{t}</Tag>)}
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 10, borderTop: '1px solid var(--border)' }}>
-                <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>♥ {b.likes}</span>
-                <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>상세보기 →</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      {/* ═══ Results ═══ */}
+      <div className="bd-results">{filtered.length}개의 빌드</div>
+
+      {/* ═══ Cards or Empty ═══ */}
+      {filtered.length > 0 ? (
+        <div className="bd-grid">
+          {filtered.map((b, i) => (
+            <BuildCard key={b.id} build={b} index={i} onClick={() => { setSel(b); setMode('detail'); }} />
+          ))}
+        </div>
+      ) : (
+        <div className="bd-empty">
+          <div className="bd-empty-icon">⚔</div>
+          <p>검색 결과가 없습니다</p>
+          <span>다른 검색어나 필터를 시도해보세요</span>
+        </div>
+      )}
     </div>
   );
 }
