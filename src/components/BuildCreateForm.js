@@ -375,9 +375,9 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
         </div>
 
         {/* 동적 배열들 */}
-        <DynList label="TUNING" items={form.tuning} onUpdate={(i, v) => updateArr('tuning', i, v)} onAdd={() => addArr('tuning')} onRemove={(i) => removeArr('tuning', i)} accent="#88ccff" placeholder="예: 안크크" />
-        <DynList label="INFECTION" items={form.infections} onUpdate={(i, v) => updateArr('infections', i, v)} onAdd={() => addArr('infections')} onRemove={(i) => removeArr('infections', i)} accent="#cc88ff" placeholder="예: 저주인형" />
-        <DynList label="DOPING" items={form.doping} onUpdate={(i, v) => updateArr('doping', i, v)} onAdd={() => addArr('doping')} onRemove={(i) => removeArr('doping', i)} accent="#44ff88" placeholder="예: 에드, 아드" />
+        <DynList label="튜닝설계도" items={form.tuning} onUpdate={(i, v) => updateArr('tuning', i, v)} onAdd={() => addArr('tuning')} onRemove={(i) => removeArr('tuning', i)} accent="#88ccff" placeholder="예: 안크크" />
+        <DynList label="감염물" items={form.infections} onUpdate={(i, v) => updateArr('infections', i, v)} onAdd={() => addArr('infections')} onRemove={(i) => removeArr('infections', i)} accent="#cc88ff" placeholder="예: 저주인형" />
+        <DynList label="도핑" items={form.doping} onUpdate={(i, v) => updateArr('doping', i, v)} onAdd={() => addArr('doping')} onRemove={(i) => removeArr('doping', i)} accent="#44ff88" placeholder="예: 에드, 아드" />
       </SectionCard>
 
       {/* ═══ 섹션 2: 방어구 & 가죽 장비 ═══ */}

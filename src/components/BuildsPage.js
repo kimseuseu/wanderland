@@ -218,7 +218,7 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
               {build.tuning?.length > 0 && (
                 <div>
-                  <div style={{ fontSize: 10, color: '#88ccff', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', marginBottom: 10 }}>TUNING</div>
+                  <div style={{ fontSize: 10, color: '#88ccff', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', marginBottom: 10 }}>튜닝설계도</div>
                   {build.tuning.map((t, i) => (
                     <div key={i} style={{ padding: '10px 14px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, fontSize: 14, fontWeight: 600, marginBottom: 6 }}>{t}</div>
                   ))}
@@ -226,7 +226,7 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
               )}
               {build.infections?.length > 0 && (
                 <div>
-                  <div style={{ fontSize: 10, color: '#cc88ff', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', marginBottom: 10 }}>INFECTION</div>
+                  <div style={{ fontSize: 10, color: '#cc88ff', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', marginBottom: 10 }}>감염물</div>
                   {build.infections.map((x, i) => (
                     <div key={i} style={{ padding: '10px 14px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, fontSize: 14, fontWeight: 600, marginBottom: 6 }}>{x}</div>
                   ))}
@@ -238,7 +238,7 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
           {/* 도핑 */}
           {build.doping?.length > 0 && (
             <div className="build-reveal" style={{ opacity: 0, transform: 'translateY(40px)', transition: 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.2s', marginTop: 36 }}>
-              <div style={{ fontSize: 10, color: '#44ff88', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', marginBottom: 10 }}>DOPING</div>
+              <div style={{ fontSize: 10, color: '#44ff88', fontFamily: 'var(--font-mono)', letterSpacing: '0.15em', marginBottom: 10 }}>도핑</div>
               {build.doping.map((d, i) => (
                 <div key={i} style={{ padding: '10px 14px', background: 'var(--bg-card)', border: '1px solid var(--border)', borderRadius: 8, fontSize: 14, fontWeight: 600, marginBottom: 6 }}>{d}</div>
               ))}
