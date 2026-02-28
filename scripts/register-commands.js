@@ -43,7 +43,6 @@ const DISCORD_API = 'https://discord.com/api/v10';
 const BLACKLIST_CHANNEL_COMMAND = {
   name: 'blacklist-channel',
   description: '이 채널을 블랙리스트 검색 채널로 지정합니다 (관리자 전용)',
-  default_member_permissions: '8', // ADMINISTRATOR
 };
 
 // /blacklist <검색어> → 블랙리스트 DB 검색
