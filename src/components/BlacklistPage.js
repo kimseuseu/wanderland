@@ -147,10 +147,8 @@ function MarkdownEditor({ value, onChange }) {
   const [imgUrl, setImgUrl] = useState('');
   const [uploading, setUploading] = useState(false);
   const [dragOver, setDragOver] = useState(false);
-  const [popoverPos, setPopoverPos] = useState({ top: 0, right: 0 });
   const textareaRef = useRef(null);
   const fileInputRef = useRef(null);
-  const imgBtnRef = useRef(null);
 
   const insertAtCursor = useCallback((text) => {
     const ta = textareaRef.current;
@@ -182,13 +180,6 @@ function MarkdownEditor({ value, onChange }) {
   }, [value, onChange]);
 
   const toggleImgPopover = useCallback(() => {
-    if (!showImgPopover && imgBtnRef.current) {
-      const rect = imgBtnRef.current.getBoundingClientRect();
-      setPopoverPos({
-        top: rect.bottom + 4,
-        right: Math.max(8, window.innerWidth - rect.right),
-      });
-    }
     setShowImgPopover(!showImgPopover);
   }, [showImgPopover]);
 
@@ -270,7 +261,6 @@ function MarkdownEditor({ value, onChange }) {
               ) : (
                 <button
                   key={i}
-                  ref={a.id === 'img' ? imgBtnRef : undefined}
                   className={`bl-editor-toolbar-btn${a.id === 'img' && showImgPopover ? ' active' : ''}`}
                   onClick={a.action}
                   title={a.title}
@@ -324,7 +314,7 @@ function MarkdownEditor({ value, onChange }) {
       {showImgPopover && (
         <>
           <div className="bl-img-popover-overlay" onClick={() => setShowImgPopover(false)} />
-          <div className="bl-img-popover" style={{ top: popoverPos.top, right: popoverPos.right }}>
+          <div className="bl-img-popover">
             <div className="bl-img-popover-title">이미지 추가</div>
 
             {/* URL Option */}
