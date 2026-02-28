@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import nacl from 'tweetnacl';
+import crypto from 'crypto';
 
 // Discord interaction types
 const INTERACTION_TYPE = {
@@ -21,29 +21,20 @@ const SEVERITY_LABELS = {
 };
 
 /**
- * Verify Discord interaction signature
+ * Verify Discord interaction signature using Node.js crypto (Ed25519)
  */
 function verifyDiscordRequest(body, signature, timestamp) {
   const publicKey = process.env.DISCORD_PUBLIC_KEY;
   if (!publicKey || !signature || !timestamp) return false;
 
   try {
-    return nacl.sign.detached.verify(
-      new TextEncoder().encode(timestamp + body),
-      hexToUint8Array(signature),
-      hexToUint8Array(publicKey)
-    );
+    const message = Buffer.from(timestamp + body);
+    const sig = Buffer.from(signature, 'hex');
+    const key = Buffer.from(publicKey, 'hex');
+    return crypto.verify(null, message, { key: Buffer.concat([Buffer.from('302a300506032b6570032100', 'hex'), key]), format: 'der', type: 'spki' }, sig);
   } catch {
     return false;
   }
-}
-
-function hexToUint8Array(hex) {
-  const bytes = new Uint8Array(hex.length / 2);
-  for (let i = 0; i < hex.length; i += 2) {
-    bytes[i / 2] = parseInt(hex.substring(i, i + 2), 16);
-  }
-  return bytes;
 }
 
 /**
