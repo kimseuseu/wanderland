@@ -54,7 +54,7 @@ export default function AboutPage() {
           <div className="about-watermark">WANDER / LAND</div>
           <div className="about-bg-glow about-bg-glow--amber" />
         </div>
-        <div className="about-content" style={{ paddingTop: 80, paddingBottom: 120 }}>
+        <div className="about-content" style={{ paddingTop: 60, paddingBottom: 80 }}>
           <div className="about-reveal">
             <div className="about-label">// SECTION 01 — CALLSIGN</div>
             <h2 className="about-heading">
@@ -101,7 +101,7 @@ export default function AboutPage() {
         <div className="about-bg">
           <div className="about-bg-glow about-bg-glow--amber" />
         </div>
-        <div className="about-content" style={{ paddingTop: 80, paddingBottom: 120 }}>
+        <div className="about-content" style={{ paddingTop: 60, paddingBottom: 80 }}>
           <div className="about-reveal">
             <div className="about-label">// SECTION 02 — SITUATION REPORT</div>
             <h2 className="about-heading about-heading--amber">
@@ -153,7 +153,7 @@ export default function AboutPage() {
         <div className="about-bg">
           <div className="about-bg-glow about-bg-glow--green" />
         </div>
-        <div className="about-content" style={{ paddingTop: 80, paddingBottom: 120 }}>
+        <div className="about-content" style={{ paddingTop: 60, paddingBottom: 80 }}>
           <div className="about-reveal">
             <div className="about-label">// SECTION 03 — OPERATING PROTOCOL</div>
             <h2 className="about-heading about-heading--green">

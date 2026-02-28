@@ -2515,7 +2515,6 @@ option {
 /* ─── Block (Parallax Container) ─── */
 .about-block {
   position: relative;
-  min-height: 200vh;
 }
 .about-block--hero {
   min-height: 100vh;
@@ -2530,6 +2529,7 @@ option {
   position: sticky;
   top: 48px;
   height: calc(100vh - 48px);
+  margin-bottom: calc(-100vh + 48px);
   overflow: hidden;
   z-index: 1;
   background: var(--bg-primary);
@@ -2538,6 +2538,7 @@ option {
   position: relative;
   top: auto;
   height: 100vh;
+  margin-bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2837,6 +2838,7 @@ option {
     position: relative;
     top: auto;
     height: 40vh;
+    margin-bottom: 0;
   }
   .about-bg--hero {
     height: 80vh;
