@@ -106,8 +106,14 @@ export const authOptions = {
             if (token.isMember) {
               token.isAdmin = matchedGuildIds.some((botGuildId) => {
                 const guild = userGuilds.find((g) => g.id === botGuildId);
-                return guild && (parseInt(guild.permissions) & 0x8) !== 0;
+                if (!guild) return false;
+                if (guild.owner) return true;
+                const perms = BigInt(guild.permissions || '0');
+                const isAdm = (perms & BigInt(0x8)) !== BigInt(0);
+                console.log(`[auth] guild=${guild.name} owner=${guild.owner} perms=${guild.permissions} isAdmin=${isAdm}`);
+                return isAdm;
               });
+              console.log(`[auth] user=${token.username} isAdmin=${token.isAdmin}`);
             } else {
               token.isAdmin = false;
             }

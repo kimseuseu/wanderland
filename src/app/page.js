@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { Icons } from '@/components/Icons';
@@ -20,14 +20,15 @@ const nav = [
   { key: 'blacklist', icon: <Icons.Ban />, label: '블랙리스트', locked: true },
 ];
 
-function getInitialPage() {
-  if (typeof window === 'undefined') return 'home';
-  const p = new URLSearchParams(window.location.search).get('page');
-  return ['home', 'about', 'builds', 'members', 'blacklist'].includes(p) ? p : 'home';
-}
-
 export default function Page() {
-  const [page, setPage] = useState(getInitialPage);
+  const [page, setPage] = useState('home');
+
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search).get('page');
+    if (['home', 'about', 'builds', 'members', 'blacklist'].includes(p)) {
+      setPage(p);
+    }
+  }, []);
   const { data: session, status } = useSession();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const router = useRouter();
