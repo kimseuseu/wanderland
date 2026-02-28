@@ -4,15 +4,16 @@ import { NextResponse } from 'next/server';
 const INTERACTION_TYPE = {
   PING: 1,
   APPLICATION_COMMAND: 2,
+  MODAL_SUBMIT: 5,
 };
 
-// Discord interaction response types
+// Discord response types
 const RESPONSE_TYPE = {
   PONG: 1,
   CHANNEL_MESSAGE: 4,
+  MODAL: 9,
 };
 
-// Severity labels for display
 const SEVERITY_LABELS = {
   low: '🟢 낮음',
   medium: '🟡 중간',
@@ -27,15 +28,9 @@ function hexToUint8Array(hex) {
   return bytes;
 }
 
-/**
- * Verify Discord interaction signature using Web Crypto API (SubtleCrypto)
- */
 async function verifyDiscordRequest(body, signature, timestamp) {
   const publicKey = process.env.DISCORD_PUBLIC_KEY;
-  if (!publicKey || !signature || !timestamp) {
-    console.log('[Discord] Missing params:', { publicKey: !!publicKey, signature: !!signature, timestamp: !!timestamp });
-    return false;
-  }
+  if (!publicKey || !signature || !timestamp) return false;
 
   try {
     const key = await crypto.subtle.importKey(
@@ -45,167 +40,287 @@ async function verifyDiscordRequest(body, signature, timestamp) {
       false,
       ['verify']
     );
-
-    const isValid = await crypto.subtle.verify(
+    return await crypto.subtle.verify(
       'Ed25519',
       key,
       hexToUint8Array(signature),
       new TextEncoder().encode(timestamp + body)
     );
-
-    console.log('[Discord] Signature valid:', isValid);
-    return isValid;
-  } catch (e) {
-    console.error('[Discord] Verification error:', e.message);
+  } catch {
     return false;
   }
 }
 
-/**
- * Check if the interaction is from an allowed channel
- */
 function isAllowedChannel(channelId) {
-  const allowedChannels = process.env.DISCORD_BOT_CHANNEL_IDS;
-  if (!allowedChannels) return true; // If not configured, allow all
-  return allowedChannels.split(',').map(id => id.trim()).includes(channelId);
+  const allowed = process.env.DISCORD_BOT_CHANNEL_IDS;
+  if (!allowed) return true;
+  return allowed.split(',').map(id => id.trim()).includes(channelId);
 }
 
-/**
- * Check if the interaction is from an allowed guild
- */
 function isAllowedGuild(guildId) {
-  const allowedGuilds = [
+  const guilds = [
     process.env.DISCORD_GUILD_ID,
     process.env.DISCORD_BOT_GUILD_ID_2,
   ].filter(Boolean);
-  return allowedGuilds.includes(guildId);
+  return guilds.includes(guildId);
+}
+
+function respond(content, ephemeral = false) {
+  return NextResponse.json({
+    type: RESPONSE_TYPE.CHANNEL_MESSAGE,
+    data: {
+      content,
+      flags: ephemeral ? 64 : 0,
+    },
+  });
 }
 
 /**
- * Extract slash command options as a key-value object
+ * /blacklist command → Open modal form
  */
-function getOptions(options = []) {
-  const result = {};
-  for (const opt of options) {
-    result[opt.name] = opt.value;
-  }
-  return result;
+function openBlacklistModal() {
+  return NextResponse.json({
+    type: RESPONSE_TYPE.MODAL,
+    data: {
+      custom_id: 'blacklist_form',
+      title: '🚫 블랙리스트 등록',
+      components: [
+        {
+          type: 1, // ACTION_ROW
+          components: [{
+            type: 4, // TEXT_INPUT
+            custom_id: 'name',
+            label: '이름 (필수)',
+            style: 1, // SHORT
+            required: true,
+            placeholder: '블랙리스트 대상 이름',
+            max_length: 100,
+          }],
+        },
+        {
+          type: 1,
+          components: [{
+            type: 4,
+            custom_id: 'uuid',
+            label: 'UUID',
+            style: 1,
+            required: false,
+            placeholder: '예: OH-XXXXX-KR',
+            max_length: 100,
+          }],
+        },
+        {
+          type: 1,
+          components: [{
+            type: 4,
+            custom_id: 'clan_alts',
+            label: '소속 클랜 / 부캐',
+            style: 1,
+            required: false,
+            placeholder: '예: 클랜명 / 부캐1, 부캐2',
+            max_length: 200,
+          }],
+        },
+        {
+          type: 1,
+          components: [{
+            type: 4,
+            custom_id: 'incident',
+            label: '사건 내용 (필수)',
+            style: 2, // PARAGRAPH
+            required: true,
+            placeholder: '어떤 사건이 있었는지 자세히 적어주세요',
+            max_length: 1000,
+          }],
+        },
+        {
+          type: 1,
+          components: [{
+            type: 4,
+            custom_id: 'severity',
+            label: '심각도',
+            style: 1,
+            required: false,
+            placeholder: 'low / medium / high (기본: medium)',
+            max_length: 10,
+          }],
+        },
+      ],
+    },
+  });
 }
 
 /**
- * Handle blacklist add subcommand
+ * Handle modal form submission → Save to DB
  */
-async function handleBlacklistAdd(interaction) {
-  const subcommand = interaction.data.options?.[0];
-  if (!subcommand || subcommand.name !== 'add') {
-    return respond('알 수 없는 명령어입니다.');
+async function handleModalSubmit(interaction) {
+  const fields = {};
+  for (const row of interaction.data.components) {
+    for (const comp of row.components) {
+      fields[comp.custom_id] = comp.value || '';
+    }
   }
 
-  const opts = getOptions(subcommand.options);
   const reporter = interaction.member?.user?.username
     || interaction.member?.nick
     || '디스코드 봇';
 
-  if (!opts.name) {
-    return respond('❌ 이름은 필수 항목입니다.');
+  // Parse clan and alts from combined field
+  let clan = '';
+  let alts = '';
+  if (fields.clan_alts) {
+    const parts = fields.clan_alts.split('/').map(s => s.trim());
+    if (parts.length >= 2) {
+      clan = parts[0];
+      alts = parts.slice(1).join(', ');
+    } else {
+      clan = fields.clan_alts;
+    }
+  }
+
+  // Validate severity
+  const validSeverities = ['low', 'medium', 'high'];
+  let severity = (fields.severity || 'medium').toLowerCase().trim();
+  if (!validSeverities.includes(severity)) {
+    severity = 'medium';
   }
 
   try {
     const { db } = await import('@/db');
     const { blacklist } = await import('@/db/schema');
 
-    const entry = {
-      name: opts.name,
-      uuid: opts.uuid || '',
-      alts: opts.alts || '',
-      clan: opts.clan || '',
-      incident: opts.incident || '',
-      severity: opts.severity || 'medium',
-      date: opts.date || new Date().toISOString().split('T')[0],
-      reporter: reporter,
-    };
+    const result = await db.insert(blacklist).values({
+      name: fields.name,
+      uuid: fields.uuid || '',
+      alts,
+      clan,
+      incident: fields.incident || '',
+      severity,
+      date: new Date().toISOString().split('T')[0],
+      reporter,
+    }).returning();
 
-    const result = await db.insert(blacklist).values(entry).returning();
     const saved = result[0];
     const severityLabel = SEVERITY_LABELS[saved.severity] || saved.severity;
 
     return respond(
-      `✅ **블랙리스트에 등록되었습니다**\n` +
-      `\n` +
+      `✅ **블랙리스트 #${saved.id} 등록 완료**\n\n` +
       `> **이름:** ${saved.name}\n` +
       (saved.uuid ? `> **UUID:** ${saved.uuid}\n` : '') +
-      (saved.alts ? `> **부캐:** ${saved.alts}\n` : '') +
       (saved.clan ? `> **클랜:** ${saved.clan}\n` : '') +
-      (saved.incident ? `> **사건:** ${saved.incident}\n` : '') +
+      (saved.alts ? `> **부캐:** ${saved.alts}\n` : '') +
+      `> **사건:** ${saved.incident}\n` +
       `> **심각도:** ${severityLabel}\n` +
       `> **등록일:** ${saved.date}\n` +
-      `> **등록자:** ${reporter}`
+      `> **등록자:** ${reporter}\n\n` +
+      `📸 스크린샷을 추가하려면 \`/blacklist-image\` 명령어에 이미지를 첨부해주세요.`
     );
   } catch (error) {
-    console.error('Discord blacklist add error:', error);
-    return respond('❌ 블랙리스트 등록에 실패했습니다. 서버 오류가 발생했습니다.');
+    console.error('[Discord] blacklist save error:', error);
+    return respond('❌ 블랙리스트 등록에 실패했습니다. 서버 오류가 발생했습니다.', true);
   }
 }
 
 /**
- * Create a Discord interaction response
+ * /blacklist-image command → Upload screenshot for a blacklist entry
  */
-function respond(content, ephemeral = false) {
-  return NextResponse.json({
-    type: RESPONSE_TYPE.CHANNEL_MESSAGE,
-    data: {
-      content,
-      flags: ephemeral ? 64 : 0, // 64 = EPHEMERAL
-    },
-  });
+async function handleBlacklistImage(interaction) {
+  const options = {};
+  for (const opt of interaction.data.options || []) {
+    options[opt.name] = opt.value;
+  }
+
+  const entryId = options.id;
+  if (!entryId) {
+    return respond('❌ 블랙리스트 번호(id)를 입력해주세요.', true);
+  }
+
+  // Get attachment URL from resolved data
+  const attachmentId = options.image;
+  const attachment = interaction.data.resolved?.attachments?.[attachmentId];
+  if (!attachment?.url) {
+    return respond('❌ 이미지를 첨부해주세요.', true);
+  }
+
+  // Check if it's an image
+  if (!attachment.content_type?.startsWith('image/')) {
+    return respond('❌ 이미지 파일만 첨부할 수 있습니다.', true);
+  }
+
+  try {
+    const { db } = await import('@/db');
+    const { blacklist } = await import('@/db/schema');
+    const { eq } = await import('drizzle-orm');
+
+    // Check if entry exists
+    const existing = await db.select().from(blacklist).where(eq(blacklist.id, entryId));
+    if (existing.length === 0) {
+      return respond(`❌ 블랙리스트 #${entryId}을(를) 찾을 수 없습니다.`, true);
+    }
+
+    // Update with Discord CDN image URL
+    await db.update(blacklist)
+      .set({ image: attachment.url })
+      .where(eq(blacklist.id, entryId));
+
+    return respond(
+      `📸 **블랙리스트 #${entryId}에 스크린샷이 추가되었습니다**\n\n` +
+      `> **대상:** ${existing[0].name}\n` +
+      `> **이미지:** [첨부됨](${attachment.url})`
+    );
+  } catch (error) {
+    console.error('[Discord] blacklist image error:', error);
+    return respond('❌ 이미지 추가에 실패했습니다.', true);
+  }
 }
 
 export async function POST(req) {
   try {
-    // Read the raw body for signature verification
     const body = await req.text();
     const signature = req.headers.get('x-signature-ed25519');
     const timestamp = req.headers.get('x-signature-timestamp');
 
-    console.log('[Discord] POST received, body length:', body.length);
-
-    // Verify the request is from Discord
-    const isValid = await verifyDiscordRequest(body, signature, timestamp);
-    if (!isValid) {
+    if (!await verifyDiscordRequest(body, signature, timestamp)) {
       return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
     }
 
     const interaction = JSON.parse(body);
 
-    // Handle Discord PING (required for setting up the endpoint)
+    // PING
     if (interaction.type === INTERACTION_TYPE.PING) {
-      console.log('[Discord] PING received, responding with PONG');
       return NextResponse.json({ type: RESPONSE_TYPE.PONG });
     }
 
-  // Only handle application commands
-  if (interaction.type !== INTERACTION_TYPE.APPLICATION_COMMAND) {
+    // Modal submit
+    if (interaction.type === INTERACTION_TYPE.MODAL_SUBMIT) {
+      if (interaction.data.custom_id === 'blacklist_form') {
+        return handleModalSubmit(interaction);
+      }
+      return respond('알 수 없는 폼입니다.', true);
+    }
+
+    // Slash commands
+    if (interaction.type === INTERACTION_TYPE.APPLICATION_COMMAND) {
+      if (!isAllowedGuild(interaction.guild_id)) {
+        return respond('❌ 이 서버에서는 사용할 수 없는 명령어입니다.', true);
+      }
+      if (!isAllowedChannel(interaction.channel_id)) {
+        return respond('❌ 이 채널에서는 사용할 수 없습니다. 지정된 채널에서 사용해주세요.', true);
+      }
+
+      const { name } = interaction.data;
+
+      if (name === 'blacklist') {
+        return openBlacklistModal();
+      }
+      if (name === 'blacklist-image') {
+        return handleBlacklistImage(interaction);
+      }
+
+      return respond('알 수 없는 명령어입니다.', true);
+    }
+
     return respond('지원하지 않는 상호작용입니다.', true);
-  }
-
-  // Check guild restriction
-  if (!isAllowedGuild(interaction.guild_id)) {
-    return respond('❌ 이 서버에서는 사용할 수 없는 명령어입니다.', true);
-  }
-
-  // Check channel restriction
-  if (!isAllowedChannel(interaction.channel_id)) {
-    return respond('❌ 이 채널에서는 사용할 수 없는 명령어입니다. 지정된 채널에서 사용해주세요.', true);
-  }
-
-  // Route commands
-  const { name } = interaction.data;
-
-  if (name === 'blacklist') {
-    return handleBlacklistAdd(interaction);
-  }
-
-  return respond('알 수 없는 명령어입니다.', true);
   } catch (e) {
     console.error('[Discord] Unhandled error:', e);
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 });

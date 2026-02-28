@@ -36,63 +36,28 @@ loadEnvFile();
 
 const DISCORD_API = 'https://discord.com/api/v10';
 
+// /blacklist → 모달 폼을 열어 블랙리스트 등록
 const BLACKLIST_COMMAND = {
   name: 'blacklist',
-  description: '블랙리스트 관리',
+  description: '블랙리스트에 등록합니다 (입력 폼이 열립니다)',
+};
+
+// /blacklist-image → 기존 블랙리스트 항목에 스크린샷 추가
+const BLACKLIST_IMAGE_COMMAND = {
+  name: 'blacklist-image',
+  description: '블랙리스트 항목에 스크린샷을 추가합니다',
   options: [
     {
-      name: 'add',
-      description: '블랙리스트에 새 항목을 등록합니다',
-      type: 1, // SUB_COMMAND
-      options: [
-        {
-          name: 'name',
-          description: '블랙리스트 대상 이름 (필수)',
-          type: 3, // STRING
-          required: true,
-        },
-        {
-          name: 'incident',
-          description: '사건 내용 (필수)',
-          type: 3,
-          required: true,
-        },
-        {
-          name: 'uuid',
-          description: '대상 UUID (예: OH-XXXXX-KR)',
-          type: 3,
-          required: false,
-        },
-        {
-          name: 'severity',
-          description: '심각도',
-          type: 3,
-          required: false,
-          choices: [
-            { name: '🟢 낮음 (low)', value: 'low' },
-            { name: '🟡 중간 (medium)', value: 'medium' },
-            { name: '🔴 높음 (high)', value: 'high' },
-          ],
-        },
-        {
-          name: 'alts',
-          description: '부캐 이름 (쉼표로 구분)',
-          type: 3,
-          required: false,
-        },
-        {
-          name: 'clan',
-          description: '소속 클랜',
-          type: 3,
-          required: false,
-        },
-        {
-          name: 'date',
-          description: '사건 날짜 (YYYY-MM-DD, 미입력 시 오늘)',
-          type: 3,
-          required: false,
-        },
-      ],
+      name: 'id',
+      description: '블랙리스트 번호 (등록 시 표시된 #번호)',
+      type: 4, // INTEGER
+      required: true,
+    },
+    {
+      name: 'image',
+      description: '스크린샷 이미지 파일',
+      type: 11, // ATTACHMENT
+      required: true,
     },
   ],
 };
@@ -111,7 +76,7 @@ async function registerCommandsForGuild(guildId, guildLabel) {
       'Content-Type': 'application/json',
       Authorization: `Bot ${token}`,
     },
-    body: JSON.stringify([BLACKLIST_COMMAND]),
+    body: JSON.stringify([BLACKLIST_COMMAND, BLACKLIST_IMAGE_COMMAND]),
   });
 
   if (!res.ok) {

@@ -29,6 +29,13 @@ async function migrate() {
     console.log('[migrate] clear pins:', err.message);
   }
 
+  try {
+    await sql`ALTER TABLE blacklist ADD COLUMN IF NOT EXISTS image text`;
+    console.log('[migrate] Added blacklist image column');
+  } catch (err) {
+    console.log('[migrate] blacklist image:', err.message);
+  }
+
   console.log('[migrate] Done');
 }
 

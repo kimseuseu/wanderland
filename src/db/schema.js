@@ -44,6 +44,7 @@ export const blacklist = pgTable('blacklist', {
   severity: text('severity').default('medium'),
   date: text('date'),
   reporter: text('reporter'),
+  image: text('image'),
 });
 
 export const mapPins = pgTable('map_pins', {
