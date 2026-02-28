@@ -38,6 +38,7 @@ export async function POST(req) {
       y: body.y,
       label: body.label,
       author: body.author || session.user?.name || '익명',
+      discordId: session.discordId || null,
       note: body.note || '',
       color: body.color || '#44ff88',
       scenario: body.scenario || null,

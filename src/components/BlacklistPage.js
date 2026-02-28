@@ -149,6 +149,7 @@ export default function BlacklistPage() {
 
   const checkOwner = (item) => {
     if (!session || !item) return false;
+    if (session.isAdmin) return true;
     if (item.discordId && session.discordId) return item.discordId === session.discordId;
     if (!item.discordId && session.user?.name) return item.reporter === session.user.name;
     return false;

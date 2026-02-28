@@ -30,18 +30,25 @@ export const authOptions = {
           });
           if (res.ok) {
             const guilds = await res.json();
-            token.isMember = guilds.some((g) => g.id === GUILD_ID);
+            const guild = guilds.find((g) => g.id === GUILD_ID);
+            token.isMember = !!guild;
+            token.isAdmin = guild
+              ? (parseInt(guild.permissions) & 0x8) !== 0
+              : false;
           } else {
             token.isMember = false;
+            token.isAdmin = false;
           }
         } catch {
           token.isMember = false;
+          token.isAdmin = false;
         }
       }
       return token;
     },
     async session({ session, token }) {
       session.isMember = token.isMember ?? false;
+      session.isAdmin = token.isAdmin ?? false;
       session.discordId = token.discordId;
       session.user.image = token.avatar
         ? `https://cdn.discordapp.com/avatars/${token.discordId}/${token.avatar}.png`

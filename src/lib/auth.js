@@ -32,3 +32,16 @@ export function isOwner(session, entry, nameField = 'reporter') {
   }
   return false;
 }
+
+/**
+ * 수정/삭제 권한 확인: 관리자이거나 소유자인 경우 true
+ * @param {object} session - NextAuth 세션
+ * @param {object} entry - DB 행
+ * @param {string} nameField - 'reporter' (블랙리스트) 또는 'author' (빌드/핀)
+ * @returns {boolean}
+ */
+export function canModify(session, entry, nameField = 'reporter') {
+  if (!session) return false;
+  if (session.isAdmin) return true;
+  return isOwner(session, entry, nameField);
+}

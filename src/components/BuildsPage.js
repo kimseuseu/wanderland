@@ -345,6 +345,7 @@ export default function BuildsPage() {
 
   const checkOwner = (build) => {
     if (!session || !build) return false;
+    if (session.isAdmin) return true;
     if (build.discordId && session.discordId) return build.discordId === session.discordId;
     if (!build.discordId && session.user?.name) return build.author === session.user.name;
     return false;

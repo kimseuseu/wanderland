@@ -45,23 +45,47 @@ function MapContent() {
   const [np, setNp] = useState(null);
   const [form, setForm] = useState({ ...DEFAULT_FORM });
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [editPin, setEditPin] = useState(null);
+
+  const checkOwner = (pin) => {
+    if (!session || !pin) return false;
+    if (session.isAdmin) return true;
+    if (pin.discordId && session.discordId) return pin.discordId === session.discordId;
+    if (!pin.discordId && session.user?.name) return pin.author === session.user.name;
+    return false;
+  };
 
   const handleMapClick = (pct) => {
     setNp(pct);
     setShowAdd(true);
   };
 
-  const addPin = async () => {
-    if (!form.label || !np) return;
+  const startEdit = (pin) => {
+    setEditPin(pin);
+    setForm({ label: pin.label, note: pin.note || '', color: pin.color || '#44ff88', scenario: pin.scenario || '무한의꿈', server: pin.server ? String(pin.server) : '' });
+    setSel(null);
+  };
+
+  const addOrUpdatePin = async () => {
+    if (!form.label) return;
     try {
-      await fetch('/api/map-pins', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...np, ...form, server: form.server ? parseInt(form.server) : null, author: session?.user?.name || '익명' }),
-      });
+      if (editPin) {
+        await fetch(`/api/map-pins/${editPin.id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...form, server: form.server ? parseInt(form.server) : null }),
+        });
+      } else {
+        if (!np) return;
+        await fetch('/api/map-pins', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...np, ...form, server: form.server ? parseInt(form.server) : null, author: session?.user?.name || '익명' }),
+        });
+      }
       mutate();
     } catch (e) { console.error(e); }
-    setShowAdd(false); setNp(null); setForm({ ...DEFAULT_FORM });
+    setShowAdd(false); setEditPin(null); setNp(null); setForm({ ...DEFAULT_FORM });
   };
 
   const deletePin = async (id) => {
@@ -167,14 +191,19 @@ function MapContent() {
             )}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>by {sel.author}</span>
-              <Button variant="danger" onClick={() => deletePin(sel.id)} style={{ padding: '5px 12px', fontSize: 12 }}><Icons.Trash /> 삭제</Button>
+              {checkOwner(sel) && (
+                <div style={{ display: 'flex', gap: 6 }}>
+                  <Button variant="secondary" onClick={() => startEdit(sel)} style={{ padding: '5px 12px', fontSize: 12 }}><Icons.Edit /> 수정</Button>
+                  <Button variant="danger" onClick={() => deletePin(sel.id)} style={{ padding: '5px 12px', fontSize: 12 }}><Icons.Trash /> 삭제</Button>
+                </div>
+              )}
             </div>
           </div>
         )}
       </Modal>
 
-      {/* Add Pin Modal */}
-      <Modal open={showAdd} onClose={() => { setShowAdd(false); setNp(null); }} title="새 핀 추가">
+      {/* Add / Edit Pin Modal */}
+      <Modal open={showAdd || !!editPin} onClose={() => { setShowAdd(false); setEditPin(null); setNp(null); setForm({ ...DEFAULT_FORM }); }} title={editPin ? '핀 수정' : '새 핀 추가'}>
         <Input label="장소 이름" value={form.label} onChange={(e) => setForm({ ...form, label: e.target.value })} placeholder="예: 보스 스폰 지점" />
         <TextArea label="메모" value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })} placeholder="정보..." />
         <div style={{ marginBottom: 13 }}>
@@ -205,8 +234,8 @@ function MapContent() {
         </div>
         <Input label="서버" type="number" value={form.server} onChange={(e) => setForm({ ...form, server: e.target.value })} placeholder="서버 번호 입력" />
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
-          <Button variant="secondary" onClick={() => { setShowAdd(false); setNp(null); }}>취소</Button>
-          <Button onClick={addPin}>추가</Button>
+          <Button variant="secondary" onClick={() => { setShowAdd(false); setEditPin(null); setNp(null); setForm({ ...DEFAULT_FORM }); }}>취소</Button>
+          <Button onClick={addOrUpdatePin}>{editPin ? '수정' : '추가'}</Button>
         </div>
       </Modal>
     </div>

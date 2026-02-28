@@ -1,6 +1,6 @@
 import { db } from '@/db';
 import { builds } from '@/db/schema';
-import { requireMember, isOwner } from '@/lib/auth';
+import { requireMember, canModify } from '@/lib/auth';
 import { NextResponse } from 'next/server';
 import { eq } from 'drizzle-orm';
 
@@ -46,7 +46,7 @@ export async function PUT(req, { params }) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
 
-    if (!isOwner(session, existing[0], 'author')) {
+    if (!canModify(session, existing[0], 'author')) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
@@ -96,7 +96,7 @@ export async function DELETE(req, { params }) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
 
-    if (!isOwner(session, existing[0], 'author')) {
+    if (!canModify(session, existing[0], 'author')) {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 

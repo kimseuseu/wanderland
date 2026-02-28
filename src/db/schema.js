@@ -54,6 +54,7 @@ export const mapPins = pgTable('map_pins', {
   y: real('y').notNull(),
   label: text('label').notNull(),
   author: text('author'),
+  discordId: text('discord_id'),
   note: text('note'),
   color: text('color').default('#44ff88'),
   scenario: text('scenario'),
