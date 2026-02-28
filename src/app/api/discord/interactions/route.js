@@ -4,14 +4,12 @@ import { NextResponse } from 'next/server';
 const INTERACTION_TYPE = {
   PING: 1,
   APPLICATION_COMMAND: 2,
-  MODAL_SUBMIT: 5,
 };
 
 // Discord response types
 const RESPONSE_TYPE = {
   PONG: 1,
   CHANNEL_MESSAGE: 4,
-  MODAL: 9,
 };
 
 function hexToUint8Array(hex) {
@@ -46,18 +44,12 @@ async function verifyDiscordRequest(body, signature, timestamp) {
   }
 }
 
-function isAllowedChannel(channelId) {
-  const allowed = process.env.DISCORD_BOT_CHANNEL_IDS;
-  if (!allowed) return true;
-  return allowed.split(',').map(id => id.trim()).includes(channelId);
-}
-
 function isAllowedGuild(guildId) {
   const guilds = [
     process.env.DISCORD_GUILD_ID,
     process.env.DISCORD_BOT_GUILD_ID_2,
   ].filter(Boolean);
-  if (guilds.length === 0) return true; // 환경변수 미설정시 모든 서버 허용
+  if (guilds.length === 0) return true;
   return guilds.includes(guildId);
 }
 
@@ -72,194 +64,139 @@ function respond(content, ephemeral = false) {
 }
 
 /**
- * Build modal response object
+ * DB에서 지정된 블랙리스트 채널 조회
  */
-function buildModalData() {
-  return {
-    type: RESPONSE_TYPE.MODAL,
-    data: {
-      custom_id: 'blacklist_form',
-      title: '블랙리스트 등록',
-      components: [
-        {
-          type: 1,
-          components: [{
-            type: 4,
-            custom_id: 'name',
-            label: '이름 (필수)',
-            style: 1,
-            required: true,
-            placeholder: '블랙리스트 대상 이름',
-            max_length: 100,
-          }],
-        },
-        {
-          type: 1,
-          components: [{
-            type: 4,
-            custom_id: 'uuid',
-            label: 'UUID',
-            style: 1,
-            required: false,
-            placeholder: 'OH-XXXXX-KR',
-            max_length: 100,
-          }],
-        },
-        {
-          type: 1,
-          components: [{
-            type: 4,
-            custom_id: 'clan_alts',
-            label: '소속 클랜 / 부캐',
-            style: 1,
-            required: false,
-            placeholder: '클랜명 / 부캐1, 부캐2',
-            max_length: 200,
-          }],
-        },
-        {
-          type: 1,
-          components: [{
-            type: 4,
-            custom_id: 'incident',
-            label: '사건 내용 (필수)',
-            style: 2,
-            required: true,
-            placeholder: '어떤 사건이 있었는지 자세히 적어주세요',
-            max_length: 1000,
-          }],
-        },
-      ],
-    },
-  };
-}
-
-/**
- * /blacklist command → Open modal form
- */
-function openBlacklistModal() {
-  return NextResponse.json(buildModalData());
-}
-
-/**
- * Handle modal form submission → Save to DB
- */
-async function handleModalSubmit(interaction) {
-  const fields = {};
-  for (const row of interaction.data.components) {
-    for (const comp of row.components) {
-      fields[comp.custom_id] = comp.value || '';
-    }
+async function getDesignatedChannel(guildId, feature = 'blacklist') {
+  try {
+    const { db } = await import('@/db');
+    const { botChannels } = await import('@/db/schema');
+    const { eq, and } = await import('drizzle-orm');
+    const rows = await db.select().from(botChannels).where(
+      and(eq(botChannels.guildId, guildId), eq(botChannels.feature, feature))
+    );
+    return rows[0]?.channelId || null;
+  } catch (e) {
+    console.error('[Discord] getDesignatedChannel error:', e);
+    return null;
   }
+}
 
-  const reporter = interaction.member?.user?.username
-    || interaction.member?.nick
-    || '디스코드 봇';
+/**
+ * /blacklist-channel → 현재 채널을 블랙리스트 검색 채널로 지정
+ */
+async function handleBlacklistChannel(interaction) {
+  const guildId = interaction.guild_id;
+  const channelId = interaction.channel_id;
 
-  // Parse clan and alts from combined field
-  let clan = '';
-  let alts = '';
-  if (fields.clan_alts) {
-    const parts = fields.clan_alts.split('/').map(s => s.trim());
-    if (parts.length >= 2) {
-      clan = parts[0];
-      alts = parts.slice(1).join(', ');
+  try {
+    const { db } = await import('@/db');
+    const { botChannels } = await import('@/db/schema');
+    const { eq, and } = await import('drizzle-orm');
+
+    // 기존 설정 확인
+    const existing = await db.select().from(botChannels).where(
+      and(eq(botChannels.guildId, guildId), eq(botChannels.feature, 'blacklist'))
+    );
+
+    if (existing.length > 0) {
+      // 업데이트
+      await db.update(botChannels)
+        .set({ channelId })
+        .where(eq(botChannels.id, existing[0].id));
     } else {
-      clan = fields.clan_alts;
+      // 새로 등록
+      await db.insert(botChannels).values({
+        guildId,
+        channelId,
+        feature: 'blacklist',
+      });
     }
-  }
 
-  try {
-    const { db } = await import('@/db');
-    const { blacklist } = await import('@/db/schema');
-
-    const discordId = interaction.member?.user?.id || null;
-
-    const result = await db.insert(blacklist).values({
-      name: fields.name,
-      uuid: fields.uuid || '',
-      alts,
-      clan,
-      incident: fields.incident || '',
-      date: new Date().toISOString().split('T')[0],
-      reporter,
-      discordId,
-    }).returning();
-
-    const saved = result[0];
-
-    return respond(
-      `✅ **블랙리스트 #${saved.id} 등록 완료**\n\n` +
-      `> **이름:** ${saved.name}\n` +
-      (saved.uuid ? `> **UUID:** ${saved.uuid}\n` : '') +
-      (saved.clan ? `> **클랜:** ${saved.clan}\n` : '') +
-      (saved.alts ? `> **부캐:** ${saved.alts}\n` : '') +
-      `> **사건:** ${saved.incident}\n` +
-      `> **등록일:** ${saved.date}\n` +
-      `> **등록자:** ${reporter}\n\n` +
-      `📸 스크린샷을 추가하려면 \`/blacklist-image\` 명령어에 이미지를 첨부해주세요.`
-    );
+    return respond(`✅ <#${channelId}> 채널이 블랙리스트 검색 채널로 지정되었습니다.`);
   } catch (error) {
-    console.error('[Discord] blacklist save error:', error);
-    return respond('❌ 블랙리스트 등록에 실패했습니다. 서버 오류가 발생했습니다.', true);
+    console.error('[Discord] blacklist-channel error:', error);
+    return respond('❌ 채널 지정에 실패했습니다.', true);
   }
 }
 
 /**
- * /blacklist-image command → Upload screenshot for a blacklist entry
+ * /blacklist <검색어> → 블랙리스트 DB 검색
  */
-async function handleBlacklistImage(interaction) {
-  const options = {};
-  for (const opt of interaction.data.options || []) {
-    options[opt.name] = opt.value;
+async function handleBlacklistSearch(interaction) {
+  const guildId = interaction.guild_id;
+  const channelId = interaction.channel_id;
+
+  // 지정된 채널인지 확인
+  const designatedChannel = await getDesignatedChannel(guildId);
+  if (!designatedChannel) {
+    return respond(
+      '❌ 블랙리스트 검색 채널이 지정되지 않았습니다.\n' +
+      '관리자가 `/blacklist-channel` 명령어로 채널을 지정해주세요.',
+      true
+    );
+  }
+  if (designatedChannel !== channelId) {
+    return respond(
+      `❌ 이 채널에서는 사용할 수 없습니다.\n<#${designatedChannel}> 채널에서 사용해주세요.`,
+      true
+    );
   }
 
-  const entryId = options.id;
-  if (!entryId) {
-    return respond('❌ 블랙리스트 번호(id)를 입력해주세요.', true);
+  // 검색어 추출
+  const query = interaction.data.options?.find(o => o.name === '검색어')?.value;
+  if (!query || query.trim().length === 0) {
+    return respond('❌ 검색어를 입력해주세요.', true);
   }
 
-  // Get attachment URL from resolved data
-  const attachmentId = options.image;
-  const attachment = interaction.data.resolved?.attachments?.[attachmentId];
-  if (!attachment?.url) {
-    return respond('❌ 이미지를 첨부해주세요.', true);
-  }
-
-  // Check if it's an image
-  if (!attachment.content_type?.startsWith('image/')) {
-    return respond('❌ 이미지 파일만 첨부할 수 있습니다.', true);
-  }
+  const searchTerm = query.trim();
 
   try {
     const { db } = await import('@/db');
     const { blacklist } = await import('@/db/schema');
-    const { eq } = await import('drizzle-orm');
+    const { ilike, or } = await import('drizzle-orm');
 
-    // Check if entry exists
-    const existing = await db.select().from(blacklist).where(eq(blacklist.id, entryId));
-    if (existing.length === 0) {
-      return respond(`❌ 블랙리스트 #${entryId}을(를) 찾을 수 없습니다.`, true);
+    const results = await db.select().from(blacklist).where(
+      or(
+        ilike(blacklist.name, `%${searchTerm}%`),
+        ilike(blacklist.uuid, `%${searchTerm}%`),
+        ilike(blacklist.clan, `%${searchTerm}%`),
+        ilike(blacklist.alts, `%${searchTerm}%`),
+      )
+    ).limit(10);
+
+    if (results.length === 0) {
+      return respond(`🔍 **"${searchTerm}"** 검색 결과가 없습니다.`);
     }
 
-    // Update with Discord CDN image URL
-    await db.update(blacklist)
-      .set({ image: attachment.url })
-      .where(eq(blacklist.id, entryId));
+    const displayCount = Math.min(results.length, 5);
+    const lines = [`🔍 **"${searchTerm}"** 검색 결과 (${results.length}건)\n`];
 
-    return respond(
-      `📸 **블랙리스트 #${entryId}에 스크린샷이 추가되었습니다**\n\n` +
-      `> **대상:** ${existing[0].name}\n` +
-      `> **이미지:** [첨부됨](${attachment.url})`
-    );
+    for (let i = 0; i < displayCount; i++) {
+      const entry = results[i];
+      lines.push(`━━━ #${entry.id} ━━━`);
+      lines.push(`> **이름:** ${entry.name}`);
+      if (entry.uuid) lines.push(`> **UUID:** ${entry.uuid}`);
+      if (entry.clan) lines.push(`> **클랜:** ${entry.clan}`);
+      if (entry.alts) lines.push(`> **부캐:** ${entry.alts}`);
+      if (entry.incident) lines.push(`> **사건:** ${entry.incident}`);
+      if (entry.date) lines.push(`> **등록일:** ${entry.date}`);
+      if (entry.reporter) lines.push(`> **등록자:** ${entry.reporter}`);
+      lines.push('');
+    }
+
+    if (results.length > 5) {
+      lines.push(`외 ${results.length - 5}건 — 웹사이트에서 전체 목록을 확인하세요.`);
+    }
+
+    return respond(lines.join('\n'));
   } catch (error) {
-    console.error('[Discord] blacklist image error:', error);
-    return respond('❌ 이미지 추가에 실패했습니다.', true);
+    console.error('[Discord] blacklist search error:', error);
+    return respond('❌ 검색 중 오류가 발생했습니다.', true);
   }
 }
 
 /**
- * GET: 진단용 엔드포인트 - 환경변수 설정 상태 & 모달 JSON 확인
+ * GET: 진단용 엔드포인트
  */
 export async function GET() {
   const envCheck = {
@@ -267,14 +204,13 @@ export async function GET() {
     DISCORD_APP_ID: !!process.env.DISCORD_APP_ID,
     DISCORD_GUILD_ID: process.env.DISCORD_GUILD_ID || '(not set)',
     DISCORD_BOT_GUILD_ID_2: process.env.DISCORD_BOT_GUILD_ID_2 || '(not set)',
-    DISCORD_BOT_CHANNEL_IDS: process.env.DISCORD_BOT_CHANNEL_IDS || '(not set)',
     DATABASE_URL: !!process.env.DATABASE_URL,
   };
 
   return NextResponse.json({
     status: 'ok',
     env: envCheck,
-    modalResponse: buildModalData(),
+    commands: ['blacklist-channel', 'blacklist'],
   });
 }
 
@@ -290,14 +226,13 @@ export async function POST(req) {
     console.log('[Discord] Signature verified:', verified);
 
     if (!verified) {
-      // 디버깅용: 서명 실패 시에도 진행하되, 에러 메시지 반환
-      // TODO: 디버깅 완료 후 401 반환으로 복원
       const parsed = JSON.parse(body);
       if (parsed.type === INTERACTION_TYPE.PING) {
         return NextResponse.json({ type: RESPONSE_TYPE.PONG });
       }
-      return respond('⚠️ [디버그] 서명 검증 실패 - 관리자에게 문의하세요', true);
+      return respond('⚠️ 서명 검증 실패 — 관리자에게 문의하세요', true);
     }
+
     const interaction = JSON.parse(body);
     console.log('[Discord] type:', interaction.type);
 
@@ -306,37 +241,23 @@ export async function POST(req) {
       return NextResponse.json({ type: RESPONSE_TYPE.PONG });
     }
 
-    // Modal submit
-    if (interaction.type === INTERACTION_TYPE.MODAL_SUBMIT) {
-      console.log('[Discord] Modal submit:', interaction.data.custom_id);
-      if (interaction.data.custom_id === 'blacklist_form') {
-        return handleModalSubmit(interaction);
-      }
-      return respond('알 수 없는 폼입니다.', true);
-    }
-
     // Slash commands
     if (interaction.type === INTERACTION_TYPE.APPLICATION_COMMAND) {
       const guildOk = isAllowedGuild(interaction.guild_id);
-      const channelOk = isAllowedChannel(interaction.channel_id);
-      console.log('[Discord] Guild:', interaction.guild_id, '→', guildOk, '| Channel:', interaction.channel_id, '→', channelOk);
+      console.log('[Discord] Guild:', interaction.guild_id, '→', guildOk);
 
       if (!guildOk) {
         return respond('❌ 이 서버에서는 사용할 수 없는 명령어입니다.', true);
-      }
-      if (!channelOk) {
-        return respond('❌ 이 채널에서는 사용할 수 없습니다. 지정된 채널에서 사용해주세요.', true);
       }
 
       const { name } = interaction.data;
       console.log('[Discord] Command:', name);
 
-      if (name === 'blacklist') {
-        console.log('[Discord] Opening blacklist modal');
-        return openBlacklistModal();
+      if (name === 'blacklist-channel') {
+        return handleBlacklistChannel(interaction);
       }
-      if (name === 'blacklist-image') {
-        return handleBlacklistImage(interaction);
+      if (name === 'blacklist') {
+        return handleBlacklistSearch(interaction);
       }
 
       return respond('알 수 없는 명령어입니다.', true);

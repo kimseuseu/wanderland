@@ -61,3 +61,11 @@ export const mapPins = pgTable('map_pins', {
   scenario: text('scenario'),
   server: integer('server'),
 });
+
+export const botChannels = pgTable('bot_channels', {
+  id: serial('id').primaryKey(),
+  guildId: text('guild_id').notNull(),
+  channelId: text('channel_id').notNull(),
+  feature: text('feature').notNull().default('blacklist'),
+  createdAt: timestamp('created_at').defaultNow(),
+});

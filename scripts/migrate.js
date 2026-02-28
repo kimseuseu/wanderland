@@ -64,6 +64,19 @@ async function migrate() {
     console.log('[migrate] blacklist content:', err.message);
   }
 
+  try {
+    await sql`CREATE TABLE IF NOT EXISTS bot_channels (
+      id SERIAL PRIMARY KEY,
+      guild_id TEXT NOT NULL,
+      channel_id TEXT NOT NULL,
+      feature TEXT NOT NULL DEFAULT 'blacklist',
+      created_at TIMESTAMP DEFAULT NOW()
+    )`;
+    console.log('[migrate] Created bot_channels table');
+  } catch (err) {
+    console.log('[migrate] bot_channels:', err.message);
+  }
+
   console.log('[migrate] Done');
 }
 

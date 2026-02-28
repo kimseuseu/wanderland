@@ -36,27 +36,22 @@ loadEnvFile();
 
 const DISCORD_API = 'https://discord.com/api/v10';
 
-// /blacklist → 모달 폼을 열어 블랙리스트 등록
-const BLACKLIST_COMMAND = {
-  name: 'blacklist',
-  description: '블랙리스트에 등록합니다 (입력 폼이 열립니다)',
+// /blacklist-channel → 관리자가 블랙리스트 검색 채널을 지정
+const BLACKLIST_CHANNEL_COMMAND = {
+  name: 'blacklist-channel',
+  description: '이 채널을 블랙리스트 검색 채널로 지정합니다 (관리자 전용)',
+  default_member_permissions: '8', // ADMINISTRATOR
 };
 
-// /blacklist-image → 기존 블랙리스트 항목에 스크린샷 추가
-const BLACKLIST_IMAGE_COMMAND = {
-  name: 'blacklist-image',
-  description: '블랙리스트 항목에 스크린샷을 추가합니다',
+// /blacklist <검색어> → 블랙리스트 DB 검색
+const BLACKLIST_COMMAND = {
+  name: 'blacklist',
+  description: '블랙리스트를 검색합니다',
   options: [
     {
-      name: 'id',
-      description: '블랙리스트 번호 (등록 시 표시된 #번호)',
-      type: 4, // INTEGER
-      required: true,
-    },
-    {
-      name: 'image',
-      description: '스크린샷 이미지 파일',
-      type: 11, // ATTACHMENT
+      name: '검색어',
+      description: '이름, UUID, 클랜명 등',
+      type: 3, // STRING
       required: true,
     },
   ],
@@ -76,7 +71,7 @@ async function registerCommandsForGuild(guildId, guildLabel) {
       'Content-Type': 'application/json',
       Authorization: `Bot ${token}`,
     },
-    body: JSON.stringify([BLACKLIST_COMMAND, BLACKLIST_IMAGE_COMMAND]),
+    body: JSON.stringify([BLACKLIST_CHANNEL_COMMAND, BLACKLIST_COMMAND]),
   });
 
   if (!res.ok) {
