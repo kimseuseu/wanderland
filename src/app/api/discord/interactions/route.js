@@ -30,7 +30,7 @@ async function verifyDiscordRequest(body, signature, timestamp) {
     const key = await crypto.subtle.importKey(
       'raw',
       hexToUint8Array(publicKey),
-      { name: 'Ed25519', namedCurve: 'Ed25519' },
+      { name: 'Ed25519' },
       false,
       ['verify']
     );
@@ -252,11 +252,15 @@ export async function POST(req) {
     const signature = req.headers.get('x-signature-ed25519');
     const timestamp = req.headers.get('x-signature-timestamp');
 
+    console.log('[Discord] Received interaction request');
+
     if (!await verifyDiscordRequest(body, signature, timestamp)) {
+      console.log('[Discord] Signature verification failed');
       return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
     }
 
     const interaction = JSON.parse(body);
+    console.log('[Discord] Interaction type:', interaction.type, 'data:', JSON.stringify(interaction.data?.name || interaction.data?.custom_id || 'N/A'));
 
     // PING
     if (interaction.type === INTERACTION_TYPE.PING) {
@@ -273,17 +277,25 @@ export async function POST(req) {
 
     // Slash commands
     if (interaction.type === INTERACTION_TYPE.APPLICATION_COMMAND) {
-      if (!isAllowedGuild(interaction.guild_id)) {
+      const guildOk = isAllowedGuild(interaction.guild_id);
+      const channelOk = isAllowedChannel(interaction.channel_id);
+      console.log('[Discord] Guild:', interaction.guild_id, 'allowed:', guildOk, '| Channel:', interaction.channel_id, 'allowed:', channelOk);
+      console.log('[Discord] ENV DISCORD_GUILD_ID:', process.env.DISCORD_GUILD_ID || '(not set)');
+
+      if (!guildOk) {
         return respond('❌ 이 서버에서는 사용할 수 없는 명령어입니다.', true);
       }
-      if (!isAllowedChannel(interaction.channel_id)) {
+      if (!channelOk) {
         return respond('❌ 이 채널에서는 사용할 수 없습니다. 지정된 채널에서 사용해주세요.', true);
       }
 
       const { name } = interaction.data;
+      console.log('[Discord] Command name:', name);
 
       if (name === 'blacklist') {
-        return openBlacklistModal();
+        const modalResponse = openBlacklistModal();
+        console.log('[Discord] Returning modal response');
+        return modalResponse;
       }
       if (name === 'blacklist-image') {
         return handleBlacklistImage(interaction);
