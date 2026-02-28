@@ -40,7 +40,8 @@ async function verifyDiscordRequest(body, signature, timestamp) {
       hexToUint8Array(signature),
       new TextEncoder().encode(timestamp + body)
     );
-  } catch {
+  } catch (e) {
+    console.error('[Discord] Verify error:', e);
     return false;
   }
 }
@@ -56,6 +57,7 @@ function isAllowedGuild(guildId) {
     process.env.DISCORD_GUILD_ID,
     process.env.DISCORD_BOT_GUILD_ID_2,
   ].filter(Boolean);
+  if (guilds.length === 0) return true; // 환경변수 미설정시 모든 서버 허용
   return guilds.includes(guildId);
 }
 
@@ -70,22 +72,22 @@ function respond(content, ephemeral = false) {
 }
 
 /**
- * /blacklist command → Open modal form
+ * Build modal response object
  */
-function openBlacklistModal() {
-  return NextResponse.json({
+function buildModalData() {
+  return {
     type: RESPONSE_TYPE.MODAL,
     data: {
       custom_id: 'blacklist_form',
-      title: '🚫 블랙리스트 등록',
+      title: '블랙리스트 등록',
       components: [
         {
-          type: 1, // ACTION_ROW
+          type: 1,
           components: [{
-            type: 4, // TEXT_INPUT
+            type: 4,
             custom_id: 'name',
             label: '이름 (필수)',
-            style: 1, // SHORT
+            style: 1,
             required: true,
             placeholder: '블랙리스트 대상 이름',
             max_length: 100,
@@ -99,7 +101,7 @@ function openBlacklistModal() {
             label: 'UUID',
             style: 1,
             required: false,
-            placeholder: '예: OH-XXXXX-KR',
+            placeholder: 'OH-XXXXX-KR',
             max_length: 100,
           }],
         },
@@ -111,7 +113,7 @@ function openBlacklistModal() {
             label: '소속 클랜 / 부캐',
             style: 1,
             required: false,
-            placeholder: '예: 클랜명 / 부캐1, 부캐2',
+            placeholder: '클랜명 / 부캐1, 부캐2',
             max_length: 200,
           }],
         },
@@ -121,7 +123,7 @@ function openBlacklistModal() {
             type: 4,
             custom_id: 'incident',
             label: '사건 내용 (필수)',
-            style: 2, // PARAGRAPH
+            style: 2,
             required: true,
             placeholder: '어떤 사건이 있었는지 자세히 적어주세요',
             max_length: 1000,
@@ -129,7 +131,14 @@ function openBlacklistModal() {
         },
       ],
     },
-  });
+  };
+}
+
+/**
+ * /blacklist command → Open modal form
+ */
+function openBlacklistModal() {
+  return NextResponse.json(buildModalData());
 }
 
 /**
@@ -246,21 +255,42 @@ async function handleBlacklistImage(interaction) {
   }
 }
 
+/**
+ * GET: 진단용 엔드포인트 - 환경변수 설정 상태 & 모달 JSON 확인
+ */
+export async function GET() {
+  const envCheck = {
+    DISCORD_PUBLIC_KEY: !!process.env.DISCORD_PUBLIC_KEY,
+    DISCORD_APP_ID: !!process.env.DISCORD_APP_ID,
+    DISCORD_GUILD_ID: process.env.DISCORD_GUILD_ID || '(not set)',
+    DISCORD_BOT_GUILD_ID_2: process.env.DISCORD_BOT_GUILD_ID_2 || '(not set)',
+    DISCORD_BOT_CHANNEL_IDS: process.env.DISCORD_BOT_CHANNEL_IDS || '(not set)',
+    DATABASE_URL: !!process.env.DATABASE_URL,
+  };
+
+  return NextResponse.json({
+    status: 'ok',
+    env: envCheck,
+    modalResponse: buildModalData(),
+  });
+}
+
 export async function POST(req) {
   try {
     const body = await req.text();
     const signature = req.headers.get('x-signature-ed25519');
     const timestamp = req.headers.get('x-signature-timestamp');
 
-    console.log('[Discord] Received interaction request');
+    console.log('[Discord] POST received, body length:', body.length);
 
     if (!await verifyDiscordRequest(body, signature, timestamp)) {
-      console.log('[Discord] Signature verification failed');
+      console.log('[Discord] Signature verification FAILED');
       return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
     }
 
+    console.log('[Discord] Signature OK');
     const interaction = JSON.parse(body);
-    console.log('[Discord] Interaction type:', interaction.type, 'data:', JSON.stringify(interaction.data?.name || interaction.data?.custom_id || 'N/A'));
+    console.log('[Discord] type:', interaction.type);
 
     // PING
     if (interaction.type === INTERACTION_TYPE.PING) {
@@ -269,6 +299,7 @@ export async function POST(req) {
 
     // Modal submit
     if (interaction.type === INTERACTION_TYPE.MODAL_SUBMIT) {
+      console.log('[Discord] Modal submit:', interaction.data.custom_id);
       if (interaction.data.custom_id === 'blacklist_form') {
         return handleModalSubmit(interaction);
       }
@@ -279,8 +310,7 @@ export async function POST(req) {
     if (interaction.type === INTERACTION_TYPE.APPLICATION_COMMAND) {
       const guildOk = isAllowedGuild(interaction.guild_id);
       const channelOk = isAllowedChannel(interaction.channel_id);
-      console.log('[Discord] Guild:', interaction.guild_id, 'allowed:', guildOk, '| Channel:', interaction.channel_id, 'allowed:', channelOk);
-      console.log('[Discord] ENV DISCORD_GUILD_ID:', process.env.DISCORD_GUILD_ID || '(not set)');
+      console.log('[Discord] Guild:', interaction.guild_id, '→', guildOk, '| Channel:', interaction.channel_id, '→', channelOk);
 
       if (!guildOk) {
         return respond('❌ 이 서버에서는 사용할 수 없는 명령어입니다.', true);
@@ -290,12 +320,11 @@ export async function POST(req) {
       }
 
       const { name } = interaction.data;
-      console.log('[Discord] Command name:', name);
+      console.log('[Discord] Command:', name);
 
       if (name === 'blacklist') {
-        const modalResponse = openBlacklistModal();
-        console.log('[Discord] Returning modal response');
-        return modalResponse;
+        console.log('[Discord] Opening blacklist modal');
+        return openBlacklistModal();
       }
       if (name === 'blacklist-image') {
         return handleBlacklistImage(interaction);
@@ -306,7 +335,7 @@ export async function POST(req) {
 
     return respond('지원하지 않는 상호작용입니다.', true);
   } catch (e) {
-    console.error('[Discord] Unhandled error:', e);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error('[Discord] Unhandled error:', e?.message, e?.stack);
+    return respond('❌ 서버 오류가 발생했습니다: ' + (e?.message || 'Unknown'), true);
   }
 }
