@@ -20,8 +20,14 @@ const nav = [
   { key: 'blacklist', icon: <Icons.Ban />, label: '블랙리스트', locked: true },
 ];
 
+function getInitialPage() {
+  if (typeof window === 'undefined') return 'home';
+  const p = new URLSearchParams(window.location.search).get('page');
+  return ['home', 'about', 'builds', 'members', 'blacklist'].includes(p) ? p : 'home';
+}
+
 export default function Page() {
-  const [page, setPage] = useState('home');
+  const [page, setPage] = useState(getInitialPage);
   const { data: session, status } = useSession();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const router = useRouter();

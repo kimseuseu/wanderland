@@ -11,12 +11,12 @@ import { useApi } from '@/hooks/useApi';
 import AuthGate from '@/components/AuthGate';
 
 const nav = [
-  { key: 'home', icon: <Icons.Home />, label: '홈', href: '/' },
-  { key: 'about', icon: <Icons.Info />, label: '소개', href: '/' },
-  { key: 'builds', icon: <Icons.Build />, label: '빌드', href: '/' },
+  { key: 'home', icon: <Icons.Home />, label: '홈', href: '/?page=home' },
+  { key: 'about', icon: <Icons.Info />, label: '소개', href: '/?page=about' },
+  { key: 'builds', icon: <Icons.Build />, label: '빌드', href: '/?page=builds' },
   { key: 'map', icon: <Icons.Map />, label: '지도', href: '/map' },
-  { key: 'members', icon: <Icons.Users />, label: '멤버', href: '/' },
-  { key: 'blacklist', icon: <Icons.Ban />, label: '블랙리스트', href: '/' },
+  { key: 'members', icon: <Icons.Users />, label: '멤버', href: '/?page=members' },
+  { key: 'blacklist', icon: <Icons.Ban />, label: '블랙리스트', href: '/?page=blacklist' },
 ];
 
 const LeafletMap = dynamic(() => import('@/components/LeafletMap'), {
