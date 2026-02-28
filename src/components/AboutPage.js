@@ -58,7 +58,7 @@ export default function AboutPage() {
           <div className="about-reveal">
             <div className="about-label">// SECTION 01 — CALLSIGN</div>
             <h2 className="about-heading">
-              원더랜드가 아니다.
+              원더랜드가 아닙니다.
             </h2>
           </div>
 
@@ -72,8 +72,8 @@ export default function AboutPage() {
 
           <div className="about-reveal" style={{ transitionDelay: '0.2s', marginTop: 40 }}>
             <p className="about-body">
-              떠돌던 사람들이 모여서 자리 잡은 곳.<br />
-              그냥 그렇게 시작됐다.
+              떠돌던 사람들이 모여서 자리 잡은 곳입니다.<br />
+              그렇게 시작됐습니다.
             </p>
           </div>
 
@@ -165,7 +165,7 @@ export default function AboutPage() {
           <div className="about-reveal" style={{ transitionDelay: '0.1s', marginTop: 24 }}>
             <p className="about-body">
               프로젝트 낙원과 함께 운영 중인 파트너 클랜.<br />
-              블랙리스트·빌드 데이터를 공유하고 있다.
+              블랙리스트·빌드 데이터를 공유하고 있습니다.
             </p>
           </div>
 
@@ -208,7 +208,7 @@ export default function AboutPage() {
                 <span className="about-protocol-title">자유 행동</span>
               </div>
               <p className="about-protocol-desc">
-                플레이 방식은 자유. 솔로든 파티든 상관없다.
+                플레이 방식은 자유입니다. 솔로든 파티든 상관없습니다.
               </p>
             </div>
           </div>
@@ -220,7 +220,7 @@ export default function AboutPage() {
                 <span className="about-protocol-title">정보 공유</span>
               </div>
               <p className="about-protocol-desc">
-                아는 정보는 공유한다. 빌드, 공략, 좌표 등.
+                아는 정보는 공유합니다. 빌드, 공략, 좌표 등.
               </p>
             </div>
           </div>
@@ -232,7 +232,7 @@ export default function AboutPage() {
                 <span className="about-protocol-title">기본 매너</span>
               </div>
               <p className="about-protocol-desc">
-                서로 불쾌하지 않게. 그게 전부다.
+                서로 불쾌하지 않게 해주세요. 그것이 전부입니다.
               </p>
             </div>
           </div>
