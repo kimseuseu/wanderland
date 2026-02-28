@@ -64,7 +64,11 @@ async function getMembers(guildId) {
   let after = '0';
   while (true) {
     const res = await discordFetch(`/guilds/${guildId}/members?limit=1000&after=${after}`);
-    if (!res.ok) break;
+    if (!res.ok) {
+      const errText = await res.text().catch(() => '');
+      console.error(`[discord-members] Failed to fetch members for ${guildId}: ${res.status} ${errText}`);
+      break;
+    }
     const batch = await res.json();
     if (!batch.length) break;
     allMembers = allMembers.concat(batch);
