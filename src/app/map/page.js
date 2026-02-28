@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
@@ -34,6 +34,7 @@ const LeafletMap = dynamic(() => import('@/components/LeafletMap'), {
 });
 
 const SCENARIOS = ['무한의꿈', '혹독한겨울', '터치오브스카이', '비정상수용'];
+const SCENARIO_SHORT = { '무한의꿈': '무한', '혹독한겨울': '혹겨', '터치오브스카이': '터스', '비정상수용': '비수' };
 const PIN_COLORS = ['#44ff88', '#ff4444', '#ffaa44', '#4488ff', '#ffffff', '#ff44ff', '#a855f7', '#06b6d4'];
 const DEFAULT_FORM = { label: '', note: '', color: '#44ff88', scenario: '무한의꿈', server: '' };
 
@@ -46,6 +47,26 @@ function MapContent() {
   const [form, setForm] = useState({ ...DEFAULT_FORM });
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [editPin, setEditPin] = useState(null);
+  const [filter, setFilter] = useState('전체');
+  const [search, setSearch] = useState('');
+
+  const pinList = pins || [];
+
+  const filteredPins = useMemo(() => {
+    let result = pinList;
+    if (filter !== '전체') {
+      result = result.filter((p) => p.scenario === filter);
+    }
+    if (search.trim()) {
+      const q = search.trim().toLowerCase();
+      result = result.filter((p) =>
+        p.label?.toLowerCase().includes(q) ||
+        p.author?.toLowerCase().includes(q) ||
+        p.note?.toLowerCase().includes(q)
+      );
+    }
+    return result;
+  }, [pinList, filter, search]);
 
   const checkOwner = (pin) => {
     if (!session || !pin) return false;
@@ -96,12 +117,11 @@ function MapContent() {
     setSel(null);
   };
 
-  const pinList = pins || [];
-
   if (loading) {
     return (
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--text-muted)' }}>
-        <div style={{ fontSize: 13, fontFamily: 'var(--font-mono)', animation: 'pulse 1.5s ease-in-out infinite' }}>지도 불러오는 중...</div>
+      <div className="map-loading">
+        <div className="map-loading-spinner" />
+        <div className="map-loading-text">지도 불러오는 중...</div>
       </div>
     );
   }
@@ -111,90 +131,176 @@ function MapContent() {
       {/* Full-size Map */}
       <LeafletMap pins={pinList} selectedPin={sel} onMapClick={handleMapClick} onPinClick={setSel} />
 
-      {/* Floating Pin Sidebar */}
-      <div style={{
-        position: 'absolute', top: 12, left: 12, zIndex: 1000,
-        background: 'rgba(20, 20, 20, 0.92)', backdropFilter: 'blur(12px)',
-        border: '1px solid var(--border)', borderRadius: 14,
-        width: sidebarOpen ? 240 : 44, overflow: 'hidden',
-        transition: 'width 0.25s ease',
-        maxHeight: 'calc(100% - 24px)',
-        display: 'flex', flexDirection: 'column',
-      }}>
-        {/* Sidebar Header */}
-        <div
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          style={{
-            padding: sidebarOpen ? '10px 12px' : '10px',
-            borderBottom: sidebarOpen ? '1px solid var(--border)' : 'none',
-            cursor: 'pointer', display: 'flex', alignItems: 'center',
-            gap: 8, flexShrink: 0,
-            justifyContent: sidebarOpen ? 'space-between' : 'center',
-          }}
-        >
+      {/* ── Floating Sidebar ── */}
+      <div className={`map-sidebar${sidebarOpen ? '' : ' collapsed'}`}>
+        {/* Header */}
+        <div className="map-sidebar-header" onClick={() => setSidebarOpen(!sidebarOpen)}>
           {sidebarOpen ? (
             <>
-              <span style={{ fontSize: 12, fontWeight: 700, fontFamily: 'var(--font-display)' }}>
-                핀 목록 · {pinList.length}
-              </span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" strokeWidth="2">
-                <polyline points="15 18 9 12 15 6" />
-              </svg>
+              <div className="map-sidebar-title">
+                <div className="map-sidebar-icon">
+                  <Icons.Map />
+                </div>
+                <span className="map-sidebar-label">핀 목록</span>
+                <span className="map-sidebar-count">{filteredPins.length}</span>
+              </div>
+              <button className="map-sidebar-toggle" onClick={(e) => { e.stopPropagation(); setSidebarOpen(false); }}>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
             </>
           ) : (
-            <Icons.Map />
+            <div className="map-sidebar-icon" style={{ width: 24, height: 24, borderRadius: 6, border: 'none', background: 'transparent' }}>
+              <Icons.Map />
+            </div>
           )}
         </div>
 
-        {/* Pin List */}
+        {/* Search + Filter + List (only when open) */}
         {sidebarOpen && (
-          <div style={{ overflow: 'auto', padding: '6px 8px' }}>
-            {pinList.map((p) => (
-              <div key={p.id} onClick={() => setSel(p)}
-                style={{
-                  padding: '7px 9px', borderRadius: 8, marginBottom: 2, cursor: 'pointer',
-                  transition: 'all 0.15s',
-                  background: sel?.id === p.id ? 'var(--bg-tertiary)' : 'transparent',
-                }}
-                onMouseEnter={(e) => { if (sel?.id !== p.id) e.currentTarget.style.background = 'var(--accent-dim)'; }}
-                onMouseLeave={(e) => { if (sel?.id !== p.id) e.currentTarget.style.background = 'transparent'; }}
-              >
-                <div style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
-                  <div style={{ width: 6, height: 6, borderRadius: '50%', background: p.color, flexShrink: 0 }} />
-                  <span style={{ fontSize: 12, fontWeight: 700 }}>{p.label}</span>
-                </div>
-                <div style={{ fontSize: 10, color: 'var(--text-muted)', paddingLeft: 13, marginTop: 1, display: 'flex', gap: 6, alignItems: 'center' }}>
-                  <span>{p.author}</span>
-                  {p.scenario && <span style={{ opacity: 0.7 }}>{p.scenario}{p.server ? ` ${p.server}` : ''}</span>}
-                </div>
+          <>
+            {/* Search */}
+            <div className="map-search-wrap">
+              <div className="map-search-icon">
+                <Icons.Search />
               </div>
-            ))}
-          </div>
+              <input
+                className="map-search"
+                placeholder="핀 검색..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              {search && (
+                <button className="map-search-clear" onClick={() => setSearch('')}>
+                  <Icons.X />
+                </button>
+              )}
+            </div>
+
+            {/* Scenario Filter Chips */}
+            <div className="map-filter-row">
+              {['전체', ...SCENARIOS].map((s) => (
+                <button
+                  key={s}
+                  className={`map-chip${filter === s ? ' active' : ''}`}
+                  onClick={() => setFilter(s)}
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+
+            {/* Pin List */}
+            <div className="map-pin-list">
+              {filteredPins.length === 0 ? (
+                <div className="map-empty">
+                  <div className="map-empty-icon">
+                    <Icons.Map />
+                  </div>
+                  <div className="map-empty-text">핀이 없습니다</div>
+                  <div className="map-empty-sub">지도를 클릭하여 핀을 추가하세요</div>
+                </div>
+              ) : (
+                filteredPins.map((p) => (
+                  <div
+                    key={p.id}
+                    className={`map-pin-item${sel?.id === p.id ? ' selected' : ''}`}
+                    style={{ '--pin-color': p.color || '#44ff88' }}
+                    onClick={() => setSel(p)}
+                  >
+                    <div
+                      className="map-pin-dot"
+                      style={{ background: p.color || '#44ff88', '--pin-color': p.color || '#44ff88' }}
+                    />
+                    <div className="map-pin-info">
+                      <div className="map-pin-name">{p.label}</div>
+                      <div className="map-pin-meta">
+                        <span className="map-pin-author">{p.author}</span>
+                        {p.scenario && (
+                          <span className="map-pin-scenario-tag">
+                            {SCENARIO_SHORT[p.scenario] || p.scenario}
+                            {p.server ? ` ${p.server}` : ''}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </>
         )}
       </div>
 
-      {/* Pin Detail Modal */}
-      <Modal open={!!sel} onClose={() => setSel(null)} title={sel?.label || ''}>
+      {/* ── Pin Detail Modal ── */}
+      <Modal open={!!sel} onClose={() => setSel(null)} title="">
         {sel && (
           <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14, flexWrap: 'wrap' }}>
-              <div style={{ width: 10, height: 10, borderRadius: '50%', background: sel.color }} />
-              <span style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)' }}>({sel.x.toFixed(1)}, {sel.y.toFixed(1)})</span>
-              {sel.scenario && (
-                <span style={{ fontSize: 11, padding: '2px 8px', borderRadius: 4, background: 'var(--accent-dim)', color: 'var(--text-secondary)', fontWeight: 600 }}>
-                  {sel.scenario}{sel.server ? ` · ${sel.server}서버` : ''}
-                </span>
-              )}
+            {/* Color Gradient Banner */}
+            <div className="map-detail-banner" style={{ '--pin-color': sel.color || '#44ff88' }}>
+              <div className="map-detail-title">{sel.label}</div>
+              <div className="map-detail-coords">
+                ({sel.x?.toFixed(1)}, {sel.y?.toFixed(1)})
+              </div>
             </div>
+
+            {/* Info Grid */}
+            <div className="map-detail-grid">
+              <div className="map-detail-cell">
+                <div className="map-detail-cell-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
+                  </svg>
+                </div>
+                <div className="map-detail-cell-label">시나리오</div>
+                <div className="map-detail-cell-value">{sel.scenario || '—'}</div>
+              </div>
+              <div className="map-detail-cell">
+                <div className="map-detail-cell-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" />
+                  </svg>
+                </div>
+                <div className="map-detail-cell-label">서버</div>
+                <div className="map-detail-cell-value">{sel.server ? `${sel.server}서버` : '—'}</div>
+              </div>
+              <div className="map-detail-cell">
+                <div className="map-detail-cell-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
+                  </svg>
+                </div>
+                <div className="map-detail-cell-label">작성자</div>
+                <div className="map-detail-cell-value">{sel.author || '익명'}</div>
+              </div>
+            </div>
+
+            {/* Note */}
             {sel.note && (
-              <div style={{ padding: 12, background: 'var(--bg-tertiary)', borderRadius: 8, fontSize: 14, lineHeight: 1.7, color: 'var(--text-secondary)', marginBottom: 14 }}>{sel.note}</div>
+              <div className="map-detail-note" style={{ '--pin-color': sel.color || '#44ff88' }}>
+                {sel.note}
+              </div>
             )}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>by {sel.author}</span>
+
+            {/* Footer */}
+            <div className="map-detail-footer">
+              <div className="map-detail-author">
+                <div style={{
+                  width: 8, height: 8, borderRadius: '50%',
+                  background: sel.color || '#44ff88',
+                  boxShadow: `0 0 6px ${sel.color || '#44ff88'}`,
+                }} />
+                {sel.author || '익명'}
+              </div>
               {checkOwner(sel) && (
-                <div style={{ display: 'flex', gap: 6 }}>
-                  <Button variant="secondary" onClick={() => startEdit(sel)} style={{ padding: '5px 12px', fontSize: 12 }}><Icons.Edit /> 수정</Button>
-                  <Button variant="danger" onClick={() => deletePin(sel.id)} style={{ padding: '5px 12px', fontSize: 12 }}><Icons.Trash /> 삭제</Button>
+                <div className="map-detail-actions">
+                  <Button variant="secondary" onClick={() => startEdit(sel)} style={{ padding: '5px 14px', fontSize: 12 }}>
+                    <Icons.Edit /> 수정
+                  </Button>
+                  <Button variant="danger" onClick={() => deletePin(sel.id)} style={{ padding: '5px 14px', fontSize: 12 }}>
+                    <Icons.Trash /> 삭제
+                  </Button>
                 </div>
               )}
             </div>
@@ -202,38 +308,53 @@ function MapContent() {
         )}
       </Modal>
 
-      {/* Add / Edit Pin Modal */}
-      <Modal open={showAdd || !!editPin} onClose={() => { setShowAdd(false); setEditPin(null); setNp(null); setForm({ ...DEFAULT_FORM }); }} title={editPin ? '핀 수정' : '새 핀 추가'}>
+      {/* ── Add / Edit Pin Modal ── */}
+      <Modal
+        open={showAdd || !!editPin}
+        onClose={() => { setShowAdd(false); setEditPin(null); setNp(null); setForm({ ...DEFAULT_FORM }); }}
+        title={editPin ? '핀 수정' : '새 핀 추가'}
+      >
         <Input label="장소 이름" value={form.label} onChange={(e) => setForm({ ...form, label: e.target.value })} placeholder="예: 보스 스폰 지점" />
-        <TextArea label="메모" value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })} placeholder="정보..." />
-        <div style={{ marginBottom: 13 }}>
-          <label style={{ display: 'block', fontSize: 11, color: 'var(--text-secondary)', marginBottom: 5, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>핀 색상</label>
-          <div style={{ display: 'flex', gap: 7 }}>
+        <TextArea label="메모" value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })} placeholder="위치에 대한 메모를 남겨주세요..." />
+
+        {/* Color Picker */}
+        <div style={{ marginBottom: 16 }}>
+          <label style={{ display: 'block', fontSize: 11, color: 'var(--text-secondary)', marginBottom: 8, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+            핀 색상
+          </label>
+          <div className="map-color-grid">
             {PIN_COLORS.map((c) => (
-              <button key={c} onClick={() => setForm({ ...form, color: c })} style={{
-                width: 26, height: 26, borderRadius: '50%', background: c,
-                border: form.color === c ? '3px solid #fff' : '3px solid transparent',
-                cursor: 'pointer', transition: 'transform 0.15s',
-              }} />
+              <button
+                key={c}
+                className={`map-color-btn${form.color === c ? ' selected' : ''}`}
+                style={{ background: c, '--btn-color': c }}
+                onClick={() => setForm({ ...form, color: c })}
+              />
             ))}
           </div>
         </div>
-        <div style={{ marginBottom: 13 }}>
-          <label style={{ display: 'block', fontSize: 11, color: 'var(--text-secondary)', marginBottom: 5, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>시나리오</label>
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+
+        {/* Scenario Selector */}
+        <div style={{ marginBottom: 16 }}>
+          <label style={{ display: 'block', fontSize: 11, color: 'var(--text-secondary)', marginBottom: 8, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+            시나리오
+          </label>
+          <div className="map-scenario-grid">
             {SCENARIOS.map((s) => (
-              <button key={s} onClick={() => setForm({ ...form, scenario: s })} style={{
-                padding: '6px 12px', borderRadius: 6, fontSize: 12, fontWeight: 600,
-                fontFamily: 'var(--font-body)', cursor: 'pointer', transition: 'all 0.15s',
-                background: form.scenario === s ? '#fff' : 'var(--bg-tertiary)',
-                color: form.scenario === s ? '#000' : 'var(--text-secondary)',
-                border: form.scenario === s ? '1px solid #fff' : '1px solid var(--border)',
-              }}>{s}</button>
+              <button
+                key={s}
+                className={`map-scenario-btn${form.scenario === s ? ' active' : ''}`}
+                onClick={() => setForm({ ...form, scenario: s })}
+              >
+                {s}
+              </button>
             ))}
           </div>
         </div>
+
         <Input label="서버" type="number" value={form.server} onChange={(e) => setForm({ ...form, server: e.target.value })} placeholder="서버 번호 입력" />
-        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 8 }}>
           <Button variant="secondary" onClick={() => { setShowAdd(false); setEditPin(null); setNp(null); setForm({ ...DEFAULT_FORM }); }}>취소</Button>
           <Button onClick={addOrUpdatePin}>{editPin ? '수정' : '추가'}</Button>
         </div>
