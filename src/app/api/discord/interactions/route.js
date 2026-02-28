@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import crypto from 'crypto';
 
 // Discord interaction types
 const INTERACTION_TYPE = {
@@ -20,19 +19,44 @@ const SEVERITY_LABELS = {
   high: '🔴 높음',
 };
 
+function hexToUint8Array(hex) {
+  const bytes = new Uint8Array(hex.length / 2);
+  for (let i = 0; i < hex.length; i += 2) {
+    bytes[i / 2] = parseInt(hex.substring(i, i + 2), 16);
+  }
+  return bytes;
+}
+
 /**
- * Verify Discord interaction signature using Node.js crypto (Ed25519)
+ * Verify Discord interaction signature using Web Crypto API (SubtleCrypto)
  */
-function verifyDiscordRequest(body, signature, timestamp) {
+async function verifyDiscordRequest(body, signature, timestamp) {
   const publicKey = process.env.DISCORD_PUBLIC_KEY;
-  if (!publicKey || !signature || !timestamp) return false;
+  if (!publicKey || !signature || !timestamp) {
+    console.log('[Discord] Missing params:', { publicKey: !!publicKey, signature: !!signature, timestamp: !!timestamp });
+    return false;
+  }
 
   try {
-    const message = Buffer.from(timestamp + body);
-    const sig = Buffer.from(signature, 'hex');
-    const key = Buffer.from(publicKey, 'hex');
-    return crypto.verify(null, message, { key: Buffer.concat([Buffer.from('302a300506032b6570032100', 'hex'), key]), format: 'der', type: 'spki' }, sig);
-  } catch {
+    const key = await crypto.subtle.importKey(
+      'raw',
+      hexToUint8Array(publicKey),
+      { name: 'Ed25519', namedCurve: 'Ed25519' },
+      false,
+      ['verify']
+    );
+
+    const isValid = await crypto.subtle.verify(
+      'Ed25519',
+      key,
+      hexToUint8Array(signature),
+      new TextEncoder().encode(timestamp + body)
+    );
+
+    console.log('[Discord] Signature valid:', isValid);
+    return isValid;
+  } catch (e) {
+    console.error('[Discord] Verification error:', e.message);
     return false;
   }
 }
@@ -137,22 +161,27 @@ function respond(content, ephemeral = false) {
 }
 
 export async function POST(req) {
-  // Read the raw body for signature verification
-  const body = await req.text();
-  const signature = req.headers.get('x-signature-ed25519');
-  const timestamp = req.headers.get('x-signature-timestamp');
+  try {
+    // Read the raw body for signature verification
+    const body = await req.text();
+    const signature = req.headers.get('x-signature-ed25519');
+    const timestamp = req.headers.get('x-signature-timestamp');
 
-  // Verify the request is from Discord
-  if (!verifyDiscordRequest(body, signature, timestamp)) {
-    return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
-  }
+    console.log('[Discord] POST received, body length:', body.length);
 
-  const interaction = JSON.parse(body);
+    // Verify the request is from Discord
+    const isValid = await verifyDiscordRequest(body, signature, timestamp);
+    if (!isValid) {
+      return NextResponse.json({ error: 'Invalid signature' }, { status: 401 });
+    }
 
-  // Handle Discord PING (required for setting up the endpoint)
-  if (interaction.type === INTERACTION_TYPE.PING) {
-    return NextResponse.json({ type: RESPONSE_TYPE.PONG });
-  }
+    const interaction = JSON.parse(body);
+
+    // Handle Discord PING (required for setting up the endpoint)
+    if (interaction.type === INTERACTION_TYPE.PING) {
+      console.log('[Discord] PING received, responding with PONG');
+      return NextResponse.json({ type: RESPONSE_TYPE.PONG });
+    }
 
   // Only handle application commands
   if (interaction.type !== INTERACTION_TYPE.APPLICATION_COMMAND) {
@@ -177,4 +206,8 @@ export async function POST(req) {
   }
 
   return respond('알 수 없는 명령어입니다.', true);
+  } catch (e) {
+    console.error('[Discord] Unhandled error:', e);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
 }
