@@ -1,7 +1,48 @@
 import NextAuth from 'next-auth';
 import DiscordProvider from 'next-auth/providers/discord';
 
-const GUILD_ID = process.env.DISCORD_GUILD_ID;
+const BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
+const PRIMARY = process.env.DISCORD_GUILD_ID;
+const SECONDARY = process.env.DISCORD_BOT_GUILD_ID_2;
+
+/** 봇이 들어가 있는 서버 ID 목록 */
+function getBotGuildIds() {
+  return [PRIMARY, SECONDARY].filter(Boolean);
+}
+
+/** 봇 토큰으로 특정 서버의 멤버 닉네임 조회 */
+async function fetchNickname(guildId, userId) {
+  if (!BOT_TOKEN || !guildId || !userId) return null;
+  try {
+    const res = await fetch(
+      `https://discord.com/api/v10/guilds/${guildId}/members/${userId}`,
+      { headers: { Authorization: `Bot ${BOT_TOKEN}` } }
+    );
+    if (!res.ok) return null;
+    const member = await res.json();
+    return member.nick || member.user?.global_name || null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * 다중 서버에서 닉네임 우선순위 결정
+ * 주 서버 → 보조 서버 → 기타 순으로 닉네임 조회
+ */
+async function resolveNickname(matchedGuildIds, userId, fallbackUsername) {
+  const sorted = [...matchedGuildIds].sort((a, b) => {
+    const p = (id) => (id === PRIMARY ? 0 : id === SECONDARY ? 1 : 2);
+    return p(a) - p(b);
+  });
+
+  for (const guildId of sorted) {
+    const nick = await fetchNickname(guildId, userId);
+    if (nick) return { nickname: nick, guildId };
+  }
+
+  return { nickname: fallbackUsername, guildId: sorted[0] || null };
+}
 
 export const authOptions = {
   providers: [
@@ -21,20 +62,43 @@ export const authOptions = {
         token.accessToken = account.access_token;
         token.discordId = profile?.id;
         token.avatar = profile?.avatar;
-        token.username = profile?.username;
+        token.username = profile?.global_name || profile?.username;
 
-        // Check guild membership
         try {
+          // 1. 유저가 속한 서버 목록 (OAuth)
           const res = await fetch('https://discord.com/api/users/@me/guilds', {
             headers: { Authorization: `Bearer ${account.access_token}` },
           });
+
           if (res.ok) {
-            const guilds = await res.json();
-            const guild = guilds.find((g) => g.id === GUILD_ID);
-            token.isMember = !!guild;
-            token.isAdmin = guild
-              ? (parseInt(guild.permissions) & 0x8) !== 0
-              : false;
+            const userGuilds = await res.json();
+            const userGuildIds = new Set(userGuilds.map((g) => g.id));
+            const botGuildIds = getBotGuildIds();
+
+            // 2. 봇 서버 ∩ 유저 서버 = 매칭된 서버
+            const matchedGuildIds = botGuildIds.filter((id) => userGuildIds.has(id));
+            token.isMember = matchedGuildIds.length > 0;
+
+            // 3. 매칭된 서버 중 하나라도 관리자면 isAdmin
+            if (token.isMember) {
+              token.isAdmin = matchedGuildIds.some((botGuildId) => {
+                const guild = userGuilds.find((g) => g.id === botGuildId);
+                return guild && (parseInt(guild.permissions) & 0x8) !== 0;
+              });
+            } else {
+              token.isAdmin = false;
+            }
+
+            // 4. 서버 닉네임 가져오기 (멤버인 경우만)
+            if (token.isMember && token.discordId) {
+              const { nickname, guildId } = await resolveNickname(
+                matchedGuildIds,
+                token.discordId,
+                token.username
+              );
+              token.username = nickname;
+              token.guildId = guildId;
+            }
           } else {
             token.isMember = false;
             token.isAdmin = false;
@@ -50,6 +114,7 @@ export const authOptions = {
       session.isMember = token.isMember ?? false;
       session.isAdmin = token.isAdmin ?? false;
       session.discordId = token.discordId;
+      session.guildId = token.guildId || null;
       session.user.image = token.avatar
         ? `https://cdn.discordapp.com/avatars/${token.discordId}/${token.avatar}.png`
         : null;
