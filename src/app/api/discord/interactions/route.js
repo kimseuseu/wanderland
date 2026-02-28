@@ -180,7 +180,7 @@ async function handleBlacklistSearch(interaction) {
       lines.push(`외 ${results.length - 5}건`);
     }
 
-    lines.push(`🔗 [wanderland.gg에서 보기](https://wanderland.gg?page=blacklist&q=${encodeURIComponent(searchTerm)})`);
+    lines.push(`🔗 https://wanderland.co.kr?page=blacklist&q=${encodeURIComponent(searchTerm)}`);
 
     return respond(lines.join('\n'));
   } catch (error) {

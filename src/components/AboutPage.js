@@ -252,7 +252,7 @@ export default function AboutPage() {
               lineHeight: 2,
               marginTop: 16,
             }}>
-              wanderland.gg
+              wanderland.co.kr
             </p>
             <span className="about-blink" />
           </div>
