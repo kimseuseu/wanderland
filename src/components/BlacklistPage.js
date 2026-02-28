@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react';
 import { useApi } from '@/hooks/useApi';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { upload } from '@vercel/blob/client';
 
 /* ────────── Inline SVG Icons ────────── */
 const SkullIcon = ({ size = 20 }) => (
@@ -199,17 +200,11 @@ function MarkdownEditor({ value, onChange }) {
     if (file.size > 10 * 1024 * 1024) { alert('파일 크기는 10MB 이하여야 합니다.'); return; }
     setUploading(true);
     try {
-      const fd = new FormData();
-      fd.append('file', file);
-      fd.append('prefix', 'blacklist');
-      const res = await fetch('/api/upload', { method: 'POST', body: fd });
-      if (!res.ok) {
-        const errData = await res.json().catch(() => ({}));
-        console.error('Upload failed:', res.status, errData);
-        throw new Error(errData.error || `업로드 실패 (${res.status})`);
-      }
-      const { url } = await res.json();
-      insertAtCursor(`\n![이미지](${url})\n`);
+      const blob = await upload(`blacklist/${Date.now()}-${file.name}`, file, {
+        access: 'public',
+        handleUploadUrl: '/api/upload',
+      });
+      insertAtCursor(`\n![이미지](${blob.url})\n`);
       setShowImgPopover(false);
       setImgUrl('');
     } catch (e) { console.error(e); alert(e.message || '업로드에 실패했습니다.'); }

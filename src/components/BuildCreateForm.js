@@ -4,6 +4,7 @@ import { useState, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 import { Icons } from './Icons';
 import { TextArea, Button } from './UI';
+import { upload } from '@vercel/blob/client';
 
 const catColor = { '총기': '#ff6b6b', '원소': '#88ccff', '하이브리드': '#cc88ff' };
 const categories = ['총기', '원소', '하이브리드'];
@@ -165,12 +166,11 @@ export default function BuildCreateForm({ onBack, onCreated, initialData, editId
     setUploading(true);
     setError(null);
     try {
-      const fd = new FormData();
-      fd.append('file', file);
-      const res = await fetch('/api/upload', { method: 'POST', body: fd });
-      if (!res.ok) { const d = await res.json().catch(() => ({})); throw new Error(d.error || '업로드 실패'); }
-      const { url } = await res.json();
-      set('image', url);
+      const blob = await upload(`builds/${Date.now()}-${file.name}`, file, {
+        access: 'public',
+        handleUploadUrl: '/api/upload',
+      });
+      set('image', blob.url);
     } catch (e) { setError(e.message); }
     finally { setUploading(false); }
   };
