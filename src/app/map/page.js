@@ -76,8 +76,8 @@ function MapContent() {
     return false;
   };
 
-  const handleMapClick = (pct) => {
-    setNp(pct);
+  const handleMapClick = (coords) => {
+    setNp(coords);
     setShowAdd(true);
   };
 
@@ -241,7 +241,7 @@ function MapContent() {
             <div className="map-detail-banner" style={{ '--pin-color': sel.color || '#44ff88' }}>
               <div className="map-detail-title">{sel.label}</div>
               <div className="map-detail-coords">
-                ({sel.x?.toFixed(1)}, {sel.y?.toFixed(1)})
+                ({Math.round(sel.x)}, {Math.round(sel.y)})
               </div>
             </div>
 

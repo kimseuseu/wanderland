@@ -9,17 +9,38 @@ const TILE_SIZE = 512;
 const MIN_ZOOM = 0;
 const MAX_NATIVE_ZOOM = 4;
 const MAX_ZOOM = 6;
-// At zoom 0, 1 tile of 512px → bounds [0,0] to [-512, 512] in CRS.Simple
-const MAP_SIZE = 512;
 
-// Convert percentage coords (0-100) to Leaflet CRS.Simple coords
-export function pctToLatLng(x, y) {
-  return L.latLng(-(y / 100) * MAP_SIZE, (x / 100) * MAP_SIZE);
+// ── Game coordinate constants (Once Human: 16km x 16km, 1 unit ≈ 1m) ──
+// Adjust these if coordinates don't match in-game values
+const GAME_MIN_X = -8192;
+const GAME_MAX_X = 8192;
+const GAME_MIN_Y = -8192;
+const GAME_MAX_Y = 8192;
+const GAME_WIDTH = GAME_MAX_X - GAME_MIN_X;   // 16384
+const GAME_HEIGHT = GAME_MAX_Y - GAME_MIN_Y;  // 16384
+
+// Custom CRS: maps game coordinates directly to tile pixel space
+// At zoom 0, tile covers 512px. Transformation maps game coords → pixels.
+// pixel_x = game_x * (TILE_SIZE/GAME_WIDTH) + (-GAME_MIN_X * TILE_SIZE/GAME_WIDTH)
+// pixel_y = game_y * (-TILE_SIZE/GAME_HEIGHT) + (GAME_MAX_Y * TILE_SIZE/GAME_HEIGHT)
+const GameCRS = L.Util.extend({}, L.CRS.Simple, {
+  transformation: new L.Transformation(
+    TILE_SIZE / GAME_WIDTH,                    // a = 0.03125
+    -GAME_MIN_X * TILE_SIZE / GAME_WIDTH,      // b = 256
+    -TILE_SIZE / GAME_HEIGHT,                   // c = -0.03125 (invert Y)
+    GAME_MAX_Y * TILE_SIZE / GAME_HEIGHT        // d = 256
+  ),
+});
+
+// Convert game coords (x, y) to Leaflet LatLng
+// Leaflet uses (lat, lng) = (y, x)
+export function gameToLatLng(x, y) {
+  return L.latLng(y, x);
 }
 
-// Convert Leaflet CRS.Simple coords back to percentage
-export function latLngToPct(latlng) {
-  return { x: (latlng.lng / MAP_SIZE) * 100, y: (-latlng.lat / MAP_SIZE) * 100 };
+// Convert Leaflet LatLng to game coords
+export function latLngToGame(latlng) {
+  return { x: Math.round(latlng.lng), y: Math.round(latlng.lat) };
 }
 
 function createPinIcon(color) {
@@ -40,6 +61,7 @@ export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markersRef = useRef({});
+  const coordsRef = useRef(null);
   const onMapClickRef = useRef(onMapClick);
   const onPinClickRef = useRef(onPinClick);
 
@@ -51,7 +73,7 @@ export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }
     if (!containerRef.current || mapRef.current) return;
 
     const map = L.map(containerRef.current, {
-      crs: L.CRS.Simple,
+      crs: GameCRS,
       minZoom: MIN_ZOOM,
       maxZoom: MAX_ZOOM,
       zoomSnap: 1,
@@ -70,17 +92,30 @@ export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }
       noWrap: true,
     }).addTo(map);
 
+    // Set bounds in game coordinates
     const bounds = L.latLngBounds(
-      L.latLng(0, 0),
-      L.latLng(-MAP_SIZE, MAP_SIZE),
+      L.latLng(GAME_MIN_Y, GAME_MIN_X),  // southwest
+      L.latLng(GAME_MAX_Y, GAME_MAX_X),  // northeast
     );
     map.fitBounds(bounds);
     map.setMaxBounds(bounds.pad(0.1));
 
+    // Coordinate overlay
+    const coordsDiv = L.DomUtil.create('div', 'map-coords-overlay');
+    coordsDiv.textContent = '(0, 0)';
+    containerRef.current.appendChild(coordsDiv);
+    coordsRef.current = coordsDiv;
+
+    map.on('mousemove', (e) => {
+      const coords = latLngToGame(e.latlng);
+      coordsDiv.textContent = `(${coords.x}, ${coords.y})`;
+    });
+
     map.on('click', (e) => {
-      const pct = latLngToPct(e.latlng);
-      if (pct.x >= 0 && pct.x <= 100 && pct.y >= 0 && pct.y <= 100) {
-        onMapClickRef.current?.(pct);
+      const coords = latLngToGame(e.latlng);
+      if (coords.x >= GAME_MIN_X && coords.x <= GAME_MAX_X &&
+          coords.y >= GAME_MIN_Y && coords.y <= GAME_MAX_Y) {
+        onMapClickRef.current?.(coords);
       }
     });
 
@@ -109,13 +144,12 @@ export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }
 
     // Add/update markers
     for (const pin of pins) {
-      const latlng = pctToLatLng(pin.x, pin.y);
+      const latlng = gameToLatLng(pin.x, pin.y);
       if (markersRef.current[pin.id]) {
         markersRef.current[pin.id].setLatLng(latlng);
         markersRef.current[pin.id].setIcon(createPinIcon(pin.color));
       } else {
         const marker = L.marker(latlng, { icon: createPinIcon(pin.color) });
-        // Label tooltip
         marker.bindTooltip(pin.label, {
           permanent: true,
           direction: 'top',
@@ -135,7 +169,7 @@ export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }
   // Fly to selected pin
   useEffect(() => {
     if (!selectedPin || !mapRef.current) return;
-    const latlng = pctToLatLng(selectedPin.x, selectedPin.y);
+    const latlng = gameToLatLng(selectedPin.x, selectedPin.y);
     mapRef.current.setView(latlng, 3, { animate: true });
   }, [selectedPin]);
 
@@ -149,6 +183,7 @@ export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }
         borderRadius: 14,
         overflow: 'hidden',
         border: '1px solid var(--border)',
+        position: 'relative',
       }}
     />
   );
