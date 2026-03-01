@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { Icons } from '@/components/Icons';
 import { Modal, Input, TextArea, Button } from '@/components/UI';
 import { useApi } from '@/hooks/useApi';
+import { useNicknames } from '@/hooks/useNicknames';
 import AuthGate from '@/components/AuthGate';
 
 const nav = [
@@ -41,6 +42,7 @@ const DEFAULT_FORM = { label: '', note: '', color: '#44ff88', scenario: '무한�
 function MapContent() {
   const { data: session } = useSession();
   const { data: pins, loading, mutate } = useApi('/api/map-pins');
+  const resolveNick = useNicknames();
   const [showAdd, setShowAdd] = useState(false);
   const [sel, setSel] = useState(null);
   const [np, setNp] = useState(null);
@@ -216,7 +218,7 @@ function MapContent() {
                     <div className="map-pin-info">
                       <div className="map-pin-name">{p.label}</div>
                       <div className="map-pin-meta">
-                        <span className="map-pin-author">{p.author}</span>
+                        <span className="map-pin-author">{resolveNick(p.discordId, p.author)}</span>
                         {p.scenario && (
                           <span className="map-pin-scenario-tag">
                             {SCENARIO_SHORT[p.scenario] || p.scenario}
@@ -272,7 +274,7 @@ function MapContent() {
                   </svg>
                 </div>
                 <div className="map-detail-cell-label">작성자</div>
-                <div className="map-detail-cell-value">{sel.author || '익명'}</div>
+                <div className="map-detail-cell-value">{resolveNick(sel.discordId, sel.author)}</div>
               </div>
             </div>
 
@@ -291,7 +293,7 @@ function MapContent() {
                   background: sel.color || '#44ff88',
                   boxShadow: `0 0 6px ${sel.color || '#44ff88'}`,
                 }} />
-                {sel.author || '익명'}
+                {resolveNick(sel.discordId, sel.author)}
               </div>
               {checkOwner(sel) && (
                 <div className="map-detail-actions">

@@ -5,6 +5,7 @@ import { Icons } from './Icons';
 import { Input, TextArea, Button } from './UI';
 import { useSession } from 'next-auth/react';
 import { useApi } from '@/hooks/useApi';
+import { useNicknames } from '@/hooks/useNicknames';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { upload } from '@vercel/blob/client';
@@ -407,6 +408,7 @@ function MarkdownEditor({ value, onChange }) {
 export default function BlacklistPage() {
   const { data: session } = useSession();
   const { data: list, loading, mutate } = useApi('/api/blacklist');
+  const resolveNick = useNicknames();
   const [view, setView] = useState('list'); // 'list' | 'form' | 'detail'
   const [sel, setSel] = useState(null);
   const [copied, setCopied] = useState(false);
@@ -586,7 +588,7 @@ export default function BlacklistPage() {
                 <div className="bl-detail-cell-icon"><UserIcon /></div>
                 <div>
                   <div className="bl-detail-cell-label">신고자</div>
-                  <div className="bl-detail-cell-value">{sel.reporter || '익명'}</div>
+                  <div className="bl-detail-cell-value">{resolveNick(sel.discordId, sel.reporter)}</div>
                 </div>
               </div>
             </div>
