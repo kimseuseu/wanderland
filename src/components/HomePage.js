@@ -99,7 +99,7 @@ export default function HomePage({ onNavigate }) {
       )}
 
       <footer className="hp-footer">
-        <span>운영: 간편 · 제작: 춘영</span>
+        <span>제작: 춘영</span>
       </footer>
     </div>
   );

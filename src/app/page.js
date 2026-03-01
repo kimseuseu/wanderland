@@ -43,7 +43,7 @@ export default function Page() {
       {/* Footer */}
       <footer style={{ borderTop: '1px solid var(--border)', padding: '16px 24px', textAlign: 'center' }}>
         <p style={{ fontSize: 11, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', letterSpacing: '0.04em' }}>
-          WANDERLAND · 프로젝트 낙원 · Once Human · 제작: 간편 · {new Date().getFullYear()}
+          WANDERLAND · 프로젝트 낙원 · Once Human · 제작: 춘영 · {new Date().getFullYear()}
         </p>
       </footer>
     </div>
