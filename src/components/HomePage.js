@@ -20,10 +20,10 @@ export default function HomePage({ onNavigate }) {
 
   useEffect(() => {
     Promise.all([
-      fetch('/api/members').then((r) => r.ok ? r.json() : []),
+      fetch('/api/member-count').then((r) => r.ok ? r.json() : { count: 0 }),
       fetch('/api/builds').then((r) => r.ok ? r.json() : []),
-    ]).then(([m, b]) => {
-      setCounts({ members: m.length || 0, builds: b.length || 0 });
+    ]).then(([mc, b]) => {
+      setCounts({ members: mc.count || 0, builds: b.length || 0 });
     }).catch(() => {});
 
     fetch('/api/news')
