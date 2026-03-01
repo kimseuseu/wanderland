@@ -282,7 +282,7 @@ export default function TradePage() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             <Input label="수량" type="number" value={form.quantity} onChange={(e) => setForm({ ...form, quantity: parseInt(e.target.value) || 1 })} min={1} />
             {form.type !== 'share' && (
-              <Input label="가격" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} placeholder="가격 (예: 1000골드)" />
+              <Input label="가격" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} placeholder="가격 (예: 1000에링)" />
             )}
           </div>
 

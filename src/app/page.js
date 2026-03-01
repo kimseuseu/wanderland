@@ -10,11 +10,13 @@ import MembersPage from '@/components/MembersPage';
 import BlacklistPage from '@/components/BlacklistPage';
 import TradePage from '@/components/TradePage';
 import GuidePage from '@/components/GuidePage';
+import NewsPage from '@/components/NewsPage';
 import AboutPage from '@/components/AboutPage';
 import AuthGate from '@/components/AuthGate';
 
 const nav = [
   { key: 'home', icon: <Icons.Home />, label: '홈' },
+  { key: 'news', icon: <Icons.News />, label: '뉴스' },
   { key: 'about', icon: <Icons.Info />, label: '소개' },
   { key: 'builds', icon: <Icons.Build />, label: '빌드' },
   { key: 'map', icon: <Icons.Map />, label: '지도', href: '/map' },
@@ -29,7 +31,7 @@ export default function Page() {
 
   useEffect(() => {
     const p = new URLSearchParams(window.location.search).get('page');
-    if (['home', 'about', 'builds', 'members', 'blacklist', 'trades', 'guides'].includes(p)) {
+    if (['home', 'news', 'about', 'builds', 'members', 'blacklist', 'trades', 'guides'].includes(p)) {
       setPage(p);
     }
   }, []);
@@ -178,6 +180,7 @@ export default function Page() {
       {/* Content */}
       <main style={{ maxWidth: 1200, margin: '0 auto', padding: '26px 24px 56px' }}>
         {page === 'home' && <HomePage onNavigate={setPage} />}
+        {page === 'news' && <NewsPage />}
         {page === 'builds' && <BuildsPage />}
         {page === 'members' && <MembersPage />}
         {page === 'trades' && <AuthGate><TradePage /></AuthGate>}
