@@ -3,11 +3,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 
-// 모든 봇 서버의 멤버 닉네임을 통합 조회하여 discordId → 서버 닉네임 매핑 제공
-// 주 서버(DISCORD_GUILD_ID) 닉네임이 우선 적용됨
+// 모든 봇 서버의 멤버 닉네임을 통합 조회
+// byId: discordId → 서버 닉네임
+// byName: 저장된 이름(username/global_name) → 서버 닉네임 (기존 데이터 역조회)
 export function useNicknames() {
   const { data: session } = useSession();
-  const [nicknameMap, setNicknameMap] = useState(new Map());
+  const [byId, setById] = useState(new Map());
+  const [byName, setByName] = useState(new Map());
 
   useEffect(() => {
     if (!session?.isMember) return;
@@ -15,16 +17,28 @@ export function useNicknames() {
       .then((r) => r.ok ? r.json() : null)
       .then((data) => {
         if (data) {
-          setNicknameMap(new Map(Object.entries(data)));
+          if (data.byId) setById(new Map(Object.entries(data.byId)));
+          if (data.byName) setByName(new Map(Object.entries(data.byName)));
         }
       })
       .catch(() => {});
   }, [session?.isMember]);
 
   const resolve = useCallback((discordId, fallback) => {
-    if (!discordId) return fallback || '익명';
-    return nicknameMap.get(discordId) || fallback || '익명';
-  }, [nicknameMap]);
+    // 1순위: discordId로 직접 조회
+    if (discordId) {
+      const found = byId.get(discordId);
+      if (found) return found;
+    }
+
+    // 2순위: 저장된 이름으로 역조회 (discordId 없는 기존 데이터)
+    if (fallback) {
+      const found = byName.get(fallback.toLowerCase());
+      if (found) return found;
+    }
+
+    return fallback || '익명';
+  }, [byId, byName]);
 
   return resolve;
 }

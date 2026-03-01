@@ -4,7 +4,6 @@ const BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
 const PRIMARY = process.env.DISCORD_GUILD_ID;
 const DISCORD_API = 'https://discord.com/api/v10';
 
-// 5분 캐시
 let cached = null;
 let cacheTime = 0;
 const CACHE_TTL = 5 * 60 * 1000;
@@ -15,28 +14,22 @@ function discordFetch(path) {
   });
 }
 
-/**
- * 닉네임 우선순위:
- *  3 = 주 서버 서버 닉네임 (최우선)
- *  2 = 다른 서버 서버 닉네임
- *  1 = 글로벌 이름 / 유저네임 (최하위)
- */
 async function getAllNicknames() {
   if (cached && Date.now() - cacheTime < CACHE_TTL) return cached;
 
   const guildsRes = await discordFetch('/users/@me/guilds');
-  if (!guildsRes.ok) return {};
+  if (!guildsRes.ok) return { byId: {}, byName: {} };
   const guilds = await guildsRes.json();
 
-  // 주 서버 먼저 처리
   const sorted = guilds.sort((a, b) => {
     if (a.id === PRIMARY) return -1;
     if (b.id === PRIMARY) return 1;
     return 0;
   });
 
-  const nicknameMap = {};  // { discordId: displayName }
-  const priorityMap = {};  // { discordId: priority }
+  const byId = {};         // { discordId: displayName }
+  const priorityMap = {};   // { discordId: priority }
+  const userNames = {};     // { discordId: [username, globalName, ...] } — 역조회용 raw 이름들
 
   for (const guild of sorted) {
     const isPrimary = guild.id === PRIMARY;
@@ -55,10 +48,16 @@ async function getAllNicknames() {
         const displayName = m.nick || m.user.global_name || m.user.username;
         const priority = hasNick ? (isPrimary ? 3 : 2) : 1;
 
-        if (!nicknameMap[uid] || priority > (priorityMap[uid] || 0)) {
-          nicknameMap[uid] = displayName;
+        if (!byId[uid] || priority > (priorityMap[uid] || 0)) {
+          byId[uid] = displayName;
           priorityMap[uid] = priority;
         }
+
+        // 역조회용: 이 유저의 모든 이름 변형 수집
+        if (!userNames[uid]) userNames[uid] = new Set();
+        if (m.user.username) userNames[uid].add(m.user.username.toLowerCase());
+        if (m.user.global_name) userNames[uid].add(m.user.global_name.toLowerCase());
+        if (m.nick) userNames[uid].add(m.nick.toLowerCase());
       }
 
       if (batch.length < 1000) break;
@@ -66,21 +65,34 @@ async function getAllNicknames() {
     }
   }
 
-  cached = nicknameMap;
+  // byName 역조회 맵: 저장된 이름(username/global_name/nick) → 최종 displayName
+  const byName = {};
+  for (const [uid, names] of Object.entries(userNames)) {
+    const displayName = byId[uid];
+    for (const name of names) {
+      // 이미 있으면 덮어쓰지 않음 (먼저 발견된 것 우선)
+      if (!byName[name]) {
+        byName[name] = displayName;
+      }
+    }
+  }
+
+  cached = { byId, byName };
   cacheTime = Date.now();
-  return nicknameMap;
+  return cached;
 }
 
 export async function GET() {
   if (!BOT_TOKEN) {
-    return NextResponse.json({});
+    return NextResponse.json({ byId: {}, byName: {} });
   }
 
   try {
-    const map = await getAllNicknames();
-    return NextResponse.json(map);
+    const data = await getAllNicknames();
+    // Set을 JSON으로 직렬화할 수 없으므로 이미 plain object
+    return NextResponse.json(data);
   } catch (error) {
     console.error('[nicknames] Error:', error);
-    return NextResponse.json({});
+    return NextResponse.json({ byId: {}, byName: {} });
   }
 }
