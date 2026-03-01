@@ -1,30 +1,25 @@
 'use client';
 
-import { useState, useEffect, useMemo, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 
-// Fetches Discord server members once and provides discordId → server nickname resolution.
+// 모든 봇 서버의 멤버 닉네임을 통합 조회하여 discordId → 서버 닉네임 매핑 제공
+// 주 서버(DISCORD_GUILD_ID) 닉네임이 우선 적용됨
 export function useNicknames() {
   const { data: session } = useSession();
-  const guildId = session?.guildId;
-  const [members, setMembers] = useState(null);
+  const [nicknameMap, setNicknameMap] = useState(new Map());
 
   useEffect(() => {
-    if (!guildId) return;
-    fetch(`/api/discord-members?action=members&guildId=${guildId}`)
+    if (!session?.isMember) return;
+    fetch('/api/nicknames')
       .then((r) => r.ok ? r.json() : null)
-      .then((data) => { if (data?.members) setMembers(data.members); })
+      .then((data) => {
+        if (data) {
+          setNicknameMap(new Map(Object.entries(data)));
+        }
+      })
       .catch(() => {});
-  }, [guildId]);
-
-  const nicknameMap = useMemo(() => {
-    if (!members) return new Map();
-    const map = new Map();
-    for (const m of members) {
-      map.set(m.id, m.displayName);
-    }
-    return map;
-  }, [members]);
+  }, [session?.isMember]);
 
   const resolve = useCallback((discordId, fallback) => {
     if (!discordId) return fallback || '익명';
