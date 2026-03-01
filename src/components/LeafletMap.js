@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useImperativeHandle, forwardRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
@@ -11,7 +11,6 @@ const MAX_NATIVE_ZOOM = 4;
 const MAX_ZOOM = 6;
 
 // ── Game coordinate constants (Once Human: 16km x 16km, 1 unit ≈ 1m) ──
-// Adjust these if coordinates don't match in-game values
 const GAME_MIN_X = -8192;
 const GAME_MAX_X = 8192;
 const GAME_MIN_Y = -8192;
@@ -19,54 +18,84 @@ const GAME_MAX_Y = 8192;
 const GAME_WIDTH = GAME_MAX_X - GAME_MIN_X;   // 16384
 const GAME_HEIGHT = GAME_MAX_Y - GAME_MIN_Y;  // 16384
 
-// Custom CRS: maps game coordinates directly to tile pixel space
-// At zoom 0, tile covers 512px. Transformation maps game coords → pixels.
-// pixel_x = game_x * (TILE_SIZE/GAME_WIDTH) + (-GAME_MIN_X * TILE_SIZE/GAME_WIDTH)
-// pixel_y = game_y * (-TILE_SIZE/GAME_HEIGHT) + (GAME_MAX_Y * TILE_SIZE/GAME_HEIGHT)
 const GameCRS = L.Util.extend({}, L.CRS.Simple, {
   transformation: new L.Transformation(
-    TILE_SIZE / GAME_WIDTH,                    // a = 0.03125
-    -GAME_MIN_X * TILE_SIZE / GAME_WIDTH,      // b = 256
-    -TILE_SIZE / GAME_HEIGHT,                   // c = -0.03125 (invert Y)
-    GAME_MAX_Y * TILE_SIZE / GAME_HEIGHT        // d = 256
+    TILE_SIZE / GAME_WIDTH,
+    -GAME_MIN_X * TILE_SIZE / GAME_WIDTH,
+    -TILE_SIZE / GAME_HEIGHT,
+    GAME_MAX_Y * TILE_SIZE / GAME_HEIGHT
   ),
 });
 
-// Convert game coords (x, y) to Leaflet LatLng
-// Leaflet uses (lat, lng) = (y, x)
 export function gameToLatLng(x, y) {
   return L.latLng(y, x);
 }
 
-// Convert Leaflet LatLng to game coords
 export function latLngToGame(latlng) {
   return { x: Math.round(latlng.lng), y: Math.round(latlng.lat) };
 }
 
-function createPinIcon(color) {
+const CATEGORY_ICONS = {
+  boss: '💀',
+  resource: '⛏️',
+  dungeon: '🏛️',
+  teleport: '🔷',
+  npc: '👤',
+  chest: '📦',
+  landmark: '🏔️',
+  etc: '📍',
+};
+
+function createPinIcon(color, category) {
+  const emoji = CATEGORY_ICONS[category] || CATEGORY_ICONS.etc;
   return L.divIcon({
     className: 'custom-pin',
     html: `<div style="
-      width:12px;height:12px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      width:24px;height:24px;border-radius:50%;
       background:${color};
       border:2px solid rgba(10,10,10,0.8);
       box-shadow:0 0 12px ${color}80, 0 0 4px ${color}40;
-    "></div>`,
-    iconSize: [16, 16],
-    iconAnchor: [8, 8],
+      font-size:12px;line-height:1;
+    ">${emoji}</div>`,
+    iconSize: [28, 28],
+    iconAnchor: [14, 14],
   });
 }
 
-export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }) {
+const LeafletMap = forwardRef(function LeafletMap(
+  { pins, selectedPin, onMapClick, onPinClick, routes = [], drawingMode, drawingColor = '#ffaa44', onRoutePoint },
+  ref
+) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markersRef = useRef({});
   const coordsRef = useRef(null);
+  const routeLayersRef = useRef([]);
+  const drawingLayerRef = useRef(null);
+  const drawingPointsRef = useRef([]);
   const onMapClickRef = useRef(onMapClick);
   const onPinClickRef = useRef(onPinClick);
+  const onRoutePointRef = useRef(onRoutePoint);
+  const drawingModeRef = useRef(drawingMode);
 
   onMapClickRef.current = onMapClick;
   onPinClickRef.current = onPinClick;
+  onRoutePointRef.current = onRoutePoint;
+  drawingModeRef.current = drawingMode;
+
+  // Expose map methods to parent
+  useImperativeHandle(ref, () => ({
+    getMap: () => mapRef.current,
+    clearDrawing: () => {
+      if (drawingLayerRef.current) {
+        drawingLayerRef.current.remove();
+        drawingLayerRef.current = null;
+      }
+      drawingPointsRef.current = [];
+    },
+    getDrawingPoints: () => drawingPointsRef.current.map(latLngToGame),
+  }), []);
 
   // Initialize map once
   useEffect(() => {
@@ -92,10 +121,9 @@ export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }
       noWrap: true,
     }).addTo(map);
 
-    // Set bounds in game coordinates
     const bounds = L.latLngBounds(
-      L.latLng(GAME_MIN_Y, GAME_MIN_X),  // southwest
-      L.latLng(GAME_MAX_Y, GAME_MAX_X),  // northeast
+      L.latLng(GAME_MIN_Y, GAME_MIN_X),
+      L.latLng(GAME_MAX_Y, GAME_MAX_X),
     );
     map.fitBounds(bounds);
     map.setMaxBounds(bounds.pad(0.1));
@@ -113,8 +141,24 @@ export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }
 
     map.on('click', (e) => {
       const coords = latLngToGame(e.latlng);
-      if (coords.x >= GAME_MIN_X && coords.x <= GAME_MAX_X &&
-          coords.y >= GAME_MIN_Y && coords.y <= GAME_MAX_Y) {
+      if (coords.x < GAME_MIN_X || coords.x > GAME_MAX_X ||
+          coords.y < GAME_MIN_Y || coords.y > GAME_MAX_Y) return;
+
+      if (drawingModeRef.current) {
+        // Drawing mode: add point to polyline
+        drawingPointsRef.current.push(e.latlng);
+        if (drawingLayerRef.current) {
+          drawingLayerRef.current.addLatLng(e.latlng);
+        } else {
+          drawingLayerRef.current = L.polyline([e.latlng], {
+            color: drawingColor,
+            weight: 3,
+            opacity: 0.8,
+            dashArray: '8, 6',
+          }).addTo(map);
+        }
+        onRoutePointRef.current?.(coords);
+      } else {
         onMapClickRef.current?.(coords);
       }
     });
@@ -128,13 +172,19 @@ export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }
     };
   }, []);
 
+  // Update drawing polyline color
+  useEffect(() => {
+    if (drawingLayerRef.current) {
+      drawingLayerRef.current.setStyle({ color: drawingColor });
+    }
+  }, [drawingColor]);
+
   // Sync markers with pins
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
 
     const currentIds = new Set(pins.map(p => p.id));
-    // Remove markers for deleted pins
     for (const id of Object.keys(markersRef.current)) {
       if (!currentIds.has(Number(id))) {
         markersRef.current[id].remove();
@@ -142,14 +192,13 @@ export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }
       }
     }
 
-    // Add/update markers
     for (const pin of pins) {
       const latlng = gameToLatLng(pin.x, pin.y);
       if (markersRef.current[pin.id]) {
         markersRef.current[pin.id].setLatLng(latlng);
-        markersRef.current[pin.id].setIcon(createPinIcon(pin.color));
+        markersRef.current[pin.id].setIcon(createPinIcon(pin.color, pin.category));
       } else {
-        const marker = L.marker(latlng, { icon: createPinIcon(pin.color) });
+        const marker = L.marker(latlng, { icon: createPinIcon(pin.color, pin.category) });
         marker.bindTooltip(pin.label, {
           permanent: true,
           direction: 'top',
@@ -166,12 +215,46 @@ export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }
     }
   }, [pins]);
 
+  // Sync routes (saved polylines)
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    // Remove old route layers
+    for (const layer of routeLayersRef.current) {
+      layer.remove();
+    }
+    routeLayersRef.current = [];
+
+    // Draw saved routes
+    for (const route of routes) {
+      if (!route.points || route.points.length < 2) continue;
+      const latlngs = route.points.map((p) => gameToLatLng(p.x, p.y));
+      const polyline = L.polyline(latlngs, {
+        color: route.color || '#ffaa44',
+        weight: 3,
+        opacity: 0.7,
+        dashArray: '8, 6',
+      }).addTo(map);
+      if (route.label) {
+        polyline.bindTooltip(route.label, { permanent: true, direction: 'center', className: 'route-tooltip' });
+      }
+      routeLayersRef.current.push(polyline);
+    }
+  }, [routes]);
+
   // Fly to selected pin
   useEffect(() => {
     if (!selectedPin || !mapRef.current) return;
     const latlng = gameToLatLng(selectedPin.x, selectedPin.y);
     mapRef.current.setView(latlng, 3, { animate: true });
   }, [selectedPin]);
+
+  // Toggle cursor style for drawing mode
+  useEffect(() => {
+    if (!containerRef.current) return;
+    containerRef.current.style.cursor = drawingMode ? 'crosshair' : '';
+  }, [drawingMode]);
 
   return (
     <div
@@ -187,4 +270,6 @@ export default function LeafletMap({ pins, selectedPin, onMapClick, onPinClick }
       }}
     />
   );
-}
+});
+
+export default LeafletMap;

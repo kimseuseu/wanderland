@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import { MAP_PINS } from '@/data';
 
 async function getFromDB() {
   if (!process.env.DATABASE_URL) return null;
   try {
     const { db } = await import('@/db');
-    const { mapPins } = await import('@/db/schema');
-    return await db.select().from(mapPins);
+    const { trades } = await import('@/db/schema');
+    const { desc } = await import('drizzle-orm');
+    return await db.select().from(trades).orderBy(desc(trades.createdAt));
   } catch { return null; }
 }
 
@@ -19,7 +19,7 @@ export async function GET() {
 
   const dbData = await getFromDB();
   if (dbData) return NextResponse.json(dbData);
-  return NextResponse.json(MAP_PINS);
+  return NextResponse.json([]);
 }
 
 export async function POST(req) {
@@ -31,23 +31,25 @@ export async function POST(req) {
 
   try {
     const { db } = await import('@/db');
-    const { mapPins } = await import('@/db/schema');
+    const { trades } = await import('@/db/schema');
     const body = await req.json();
-    const result = await db.insert(mapPins).values({
-      x: body.x,
-      y: body.y,
-      label: body.label,
-      author: body.author || session.user?.name || '익명',
+    const result = await db.insert(trades).values({
+      type: body.type || 'sell',
+      title: body.title,
+      item: body.item,
+      quantity: body.quantity || 1,
+      price: body.price || null,
+      description: body.description || '',
+      image: body.image || null,
+      status: 'open',
+      author: session.user?.name || '익명',
       discordId: session.discordId || null,
-      note: body.note || '',
-      color: body.color || '#44ff88',
-      category: body.category || 'etc',
       scenario: body.scenario || null,
-      server: body.server ? parseInt(body.server) : null,
+      server: body.server || null,
     }).returning();
     return NextResponse.json(result[0], { status: 201 });
   } catch (error) {
-    console.error('POST /api/map-pins error:', error);
-    return NextResponse.json({ error: 'Failed to create pin' }, { status: 500 });
+    console.error('POST /api/trades error:', error);
+    return NextResponse.json({ error: 'Failed to create trade' }, { status: 500 });
   }
 }

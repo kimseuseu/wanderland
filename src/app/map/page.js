@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useRef } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import dynamic from 'next/dynamic';
@@ -16,6 +16,8 @@ const nav = [
   { key: 'about', icon: <Icons.Info />, label: '소개', href: '/?page=about' },
   { key: 'builds', icon: <Icons.Build />, label: '빌드', href: '/?page=builds' },
   { key: 'map', icon: <Icons.Map />, label: '지도', href: '/map' },
+  { key: 'trades', icon: <Icons.Trade />, label: '거래소', href: '/?page=trades' },
+  { key: 'guides', icon: <Icons.Guide />, label: '가이드', href: '/?page=guides' },
   { key: 'members', icon: <Icons.Users />, label: '멤버', href: '/?page=members' },
   { key: 'blacklist', icon: <Icons.Ban />, label: '블랙리스트', href: '/?page=blacklist' },
 ];
@@ -37,12 +39,26 @@ const LeafletMap = dynamic(() => import('@/components/LeafletMap'), {
 const SCENARIOS = ['무한의꿈', '혹독한겨울', '터치오브스카이', '비정상수용'];
 const SCENARIO_SHORT = { '무한의꿈': '무한', '혹독한겨울': '혹겨', '터치오브스카이': '터스', '비정상수용': '비수' };
 const PIN_COLORS = ['#44ff88', '#ff4444', '#ffaa44', '#4488ff', '#ffffff', '#ff44ff', '#a855f7', '#06b6d4'];
-const DEFAULT_FORM = { label: '', note: '', color: '#44ff88', scenario: '무한의꿈', server: '' };
+const PIN_CATEGORIES = [
+  { key: 'boss', label: '보스', emoji: '💀' },
+  { key: 'resource', label: '자원', emoji: '⛏️' },
+  { key: 'dungeon', label: '던전', emoji: '🏛️' },
+  { key: 'teleport', label: '텔레포트', emoji: '🔷' },
+  { key: 'npc', label: 'NPC', emoji: '👤' },
+  { key: 'chest', label: '상자', emoji: '📦' },
+  { key: 'landmark', label: '랜드마크', emoji: '🏔️' },
+  { key: 'etc', label: '기타', emoji: '📍' },
+];
+const DEFAULT_FORM = { label: '', note: '', color: '#44ff88', category: 'etc', scenario: '무한의꿈', server: '' };
+
+const ROUTE_COLORS = ['#ffaa44', '#ff4444', '#44ff88', '#4488ff', '#ff44ff', '#06b6d4'];
 
 function MapContent() {
   const { data: session } = useSession();
   const { data: pins, loading, mutate } = useApi('/api/map-pins');
+  const { data: routes, mutate: mutateRoutes } = useApi('/api/map-routes');
   const resolveNick = useNicknames();
+  const mapRef = useRef(null);
   const [showAdd, setShowAdd] = useState(false);
   const [sel, setSel] = useState(null);
   const [np, setNp] = useState(null);
@@ -51,6 +67,13 @@ function MapContent() {
   const [editPin, setEditPin] = useState(null);
   const [filter, setFilter] = useState('전체');
   const [search, setSearch] = useState('');
+
+  // Route drawing state
+  const [drawingMode, setDrawingMode] = useState(false);
+  const [drawingColor, setDrawingColor] = useState('#ffaa44');
+  const [routePoints, setRoutePoints] = useState([]);
+  const [routeForm, setRouteForm] = useState({ label: '', note: '', scenario: '' });
+  const [showRouteModal, setShowRouteModal] = useState(false);
 
   const pinList = pins || [];
 
@@ -79,13 +102,71 @@ function MapContent() {
   };
 
   const handleMapClick = (coords) => {
+    if (drawingMode) return; // handled by LeafletMap
     setNp(coords);
     setShowAdd(true);
   };
 
+  const handleRoutePoint = (coords) => {
+    setRoutePoints((prev) => [...prev, coords]);
+  };
+
+  const startDrawing = () => {
+    setDrawingMode(true);
+    setRoutePoints([]);
+    if (mapRef.current) mapRef.current.clearDrawing();
+  };
+
+  const finishDrawing = () => {
+    if (routePoints.length < 2) {
+      setDrawingMode(false);
+      setRoutePoints([]);
+      if (mapRef.current) mapRef.current.clearDrawing();
+      return;
+    }
+    setShowRouteModal(true);
+  };
+
+  const cancelDrawing = () => {
+    setDrawingMode(false);
+    setRoutePoints([]);
+    if (mapRef.current) mapRef.current.clearDrawing();
+  };
+
+  const saveRoute = async () => {
+    const points = mapRef.current?.getDrawingPoints() || routePoints;
+    if (points.length < 2) return;
+    try {
+      await fetch('/api/map-routes', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          label: routeForm.label || '경로',
+          points,
+          color: drawingColor,
+          note: routeForm.note,
+          scenario: routeForm.scenario,
+        }),
+      });
+      mutateRoutes();
+    } catch (e) { console.error(e); }
+    setDrawingMode(false);
+    setRoutePoints([]);
+    setRouteForm({ label: '', note: '', scenario: '' });
+    setShowRouteModal(false);
+    if (mapRef.current) mapRef.current.clearDrawing();
+  };
+
+  const deleteRoute = async (id) => {
+    try {
+      await fetch(`/api/map-routes/${id}`, { method: 'DELETE' });
+      mutateRoutes();
+    } catch (e) { console.error(e); }
+  };
+
   const startEdit = (pin) => {
     setEditPin(pin);
-    setForm({ label: pin.label, note: pin.note || '', color: pin.color || '#44ff88', scenario: pin.scenario || '무한의꿈', server: pin.server ? String(pin.server) : '' });
+    setForm({ label: pin.label, note: pin.note || '', color: pin.color || '#44ff88', category: pin.category || 'etc', scenario: pin.scenario || '무한의꿈', server: pin.server ? String(pin.server) : '' });
     setSel(null);
   };
 
@@ -131,7 +212,38 @@ function MapContent() {
   return (
     <div style={{ height: '100%', position: 'relative' }}>
       {/* Full-size Map */}
-      <LeafletMap pins={pinList} selectedPin={sel} onMapClick={handleMapClick} onPinClick={setSel} />
+      <LeafletMap
+        ref={mapRef}
+        pins={pinList}
+        selectedPin={sel}
+        onMapClick={handleMapClick}
+        onPinClick={setSel}
+        routes={routes || []}
+        drawingMode={drawingMode}
+        drawingColor={drawingColor}
+        onRoutePoint={handleRoutePoint}
+      />
+
+      {/* Drawing Mode Toolbar */}
+      {drawingMode && (
+        <div className="map-draw-toolbar">
+          <div className="map-draw-info">
+            <Icons.Route /> 경로 그리기 모드 · 지도를 클릭하여 포인트 추가 ({routePoints.length}점)
+          </div>
+          <div className="map-draw-colors">
+            {ROUTE_COLORS.map((c) => (
+              <button key={c}
+                style={{ width: 20, height: 20, borderRadius: '50%', background: c, border: drawingColor === c ? '2px solid #fff' : '2px solid transparent', cursor: 'pointer' }}
+                onClick={() => setDrawingColor(c)}
+              />
+            ))}
+          </div>
+          <div className="map-draw-actions">
+            <Button onClick={finishDrawing} disabled={routePoints.length < 2}>완료</Button>
+            <Button onClick={cancelDrawing} style={{ background: 'var(--bg-tertiary)' }}>취소</Button>
+          </div>
+        </div>
+      )}
 
       {/* ── Floating Sidebar ── */}
       <div className={`map-sidebar${sidebarOpen ? '' : ' collapsed'}`}>
@@ -231,9 +343,64 @@ function MapContent() {
                 ))
               )}
             </div>
+
+            {/* Route Section */}
+            <div className="map-route-section">
+              <div className="map-route-header">
+                <span><Icons.Route /> 경로</span>
+                {!drawingMode && (
+                  <button className="map-route-draw-btn" onClick={startDrawing}>
+                    <Icons.Plus /> 그리기
+                  </button>
+                )}
+              </div>
+              {(routes || []).map((r) => (
+                <div key={r.id} className="map-route-item">
+                  <div className="map-route-dot" style={{ background: r.color || '#ffaa44' }} />
+                  <div className="map-route-info">
+                    <div className="map-route-name">{r.label}</div>
+                    <div className="map-route-meta">{resolveNick(r.discordId, r.author)} · {r.points?.length || 0}점</div>
+                  </div>
+                  {checkOwner(r) && (
+                    <button className="map-route-delete" onClick={() => deleteRoute(r.id)}>
+                      <Icons.Trash />
+                    </button>
+                  )}
+                </div>
+              ))}
+              {(!routes || routes.length === 0) && (
+                <div style={{ fontSize: 11, color: 'var(--text-muted)', padding: '8px 0', textAlign: 'center' }}>
+                  경로가 없습니다
+                </div>
+              )}
+            </div>
           </>
         )}
       </div>
+
+      {/* ── Route Save Modal ── */}
+      <Modal open={showRouteModal} onClose={() => { setShowRouteModal(false); cancelDrawing(); }} title="경로 저장">
+        <Input label="경로 이름" value={routeForm.label} onChange={(e) => setRouteForm({ ...routeForm, label: e.target.value })} placeholder="예: 자원 파밍 루트" />
+        <TextArea label="메모" value={routeForm.note} onChange={(e) => setRouteForm({ ...routeForm, note: e.target.value })} placeholder="경로에 대한 메모" rows={3} />
+        <div style={{ marginBottom: 12 }}>
+          <label style={{ display: 'block', fontSize: 11, color: 'var(--text-secondary)', marginBottom: 6, fontWeight: 600 }}>시나리오</label>
+          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+            {SCENARIOS.map((s) => (
+              <button key={s}
+                className={`map-scenario-btn${routeForm.scenario === s ? ' active' : ''}`}
+                onClick={() => setRouteForm({ ...routeForm, scenario: s })}
+              >{s}</button>
+            ))}
+          </div>
+        </div>
+        <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 12 }}>
+          {routePoints.length}개 포인트 · 색상: <span style={{ color: drawingColor }}>{drawingColor}</span>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8 }}>
+          <Button variant="secondary" onClick={() => { setShowRouteModal(false); cancelDrawing(); }}>취소</Button>
+          <Button onClick={saveRoute}>저장</Button>
+        </div>
+      </Modal>
 
       {/* ── Pin Detail Modal ── */}
       <Modal open={!!sel} onClose={() => setSel(null)} title="">
@@ -318,6 +485,32 @@ function MapContent() {
       >
         <Input label="장소 이름" value={form.label} onChange={(e) => setForm({ ...form, label: e.target.value })} placeholder="예: 보스 스폰 지점" />
         <TextArea label="메모" value={form.note} onChange={(e) => setForm({ ...form, note: e.target.value })} placeholder="위치에 대한 메모를 남겨주세요..." />
+
+        {/* Category Selector */}
+        <div style={{ marginBottom: 16 }}>
+          <label style={{ display: 'block', fontSize: 11, color: 'var(--text-secondary)', marginBottom: 8, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+            카테고리
+          </label>
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+            {PIN_CATEGORIES.map((cat) => (
+              <button
+                key={cat.key}
+                onClick={() => setForm({ ...form, category: cat.key })}
+                style={{
+                  padding: '5px 10px', borderRadius: 6, fontSize: 12,
+                  border: form.category === cat.key ? '1px solid var(--text-secondary)' : '1px solid var(--border)',
+                  background: form.category === cat.key ? 'var(--accent-dim)' : 'transparent',
+                  color: form.category === cat.key ? '#fff' : 'var(--text-muted)',
+                  cursor: 'pointer', fontFamily: 'var(--font-body)',
+                  display: 'flex', alignItems: 'center', gap: 4,
+                  transition: 'all 0.15s',
+                }}
+              >
+                <span style={{ fontSize: 14 }}>{cat.emoji}</span> {cat.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
         {/* Color Picker */}
         <div style={{ marginBottom: 16 }}>

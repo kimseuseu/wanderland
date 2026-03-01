@@ -1,12 +1,11 @@
 import { NextResponse } from 'next/server';
-import { MAP_PINS } from '@/data';
 
 async function getFromDB() {
   if (!process.env.DATABASE_URL) return null;
   try {
     const { db } = await import('@/db');
-    const { mapPins } = await import('@/db/schema');
-    return await db.select().from(mapPins);
+    const { mapRoutes } = await import('@/db/schema');
+    return await db.select().from(mapRoutes);
   } catch { return null; }
 }
 
@@ -16,10 +15,8 @@ export async function GET() {
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
-
   const dbData = await getFromDB();
-  if (dbData) return NextResponse.json(dbData);
-  return NextResponse.json(MAP_PINS);
+  return NextResponse.json(dbData || []);
 }
 
 export async function POST(req) {
@@ -31,23 +28,23 @@ export async function POST(req) {
 
   try {
     const { db } = await import('@/db');
-    const { mapPins } = await import('@/db/schema');
+    const { mapRoutes } = await import('@/db/schema');
     const body = await req.json();
-    const result = await db.insert(mapPins).values({
-      x: body.x,
-      y: body.y,
-      label: body.label,
-      author: body.author || session.user?.name || '익명',
+    if (!body.points || body.points.length < 2) {
+      return NextResponse.json({ error: 'At least 2 points required' }, { status: 400 });
+    }
+    const result = await db.insert(mapRoutes).values({
+      label: body.label || '경로',
+      points: body.points,
+      color: body.color || '#ffaa44',
+      author: session.user?.name || '익명',
       discordId: session.discordId || null,
       note: body.note || '',
-      color: body.color || '#44ff88',
-      category: body.category || 'etc',
       scenario: body.scenario || null,
-      server: body.server ? parseInt(body.server) : null,
     }).returning();
     return NextResponse.json(result[0], { status: 201 });
   } catch (error) {
-    console.error('POST /api/map-pins error:', error);
-    return NextResponse.json({ error: 'Failed to create pin' }, { status: 500 });
+    console.error('POST /api/map-routes error:', error);
+    return NextResponse.json({ error: 'Failed to create route' }, { status: 500 });
   }
 }
