@@ -124,6 +124,14 @@ export const buildLikes = pgTable('build_likes', {
   createdAt: timestamp('created_at').defaultNow(),
 });
 
+export const onlineSessions = pgTable('online_sessions', {
+  id: serial('id').primaryKey(),
+  discordId: text('discord_id').notNull(),
+  username: text('username').notNull(),
+  avatar: text('avatar'),
+  lastSeen: timestamp('last_seen').defaultNow().notNull(),
+});
+
 export const botChannels = pgTable('bot_channels', {
   id: serial('id').primaryKey(),
   guildId: text('guild_id').notNull(),

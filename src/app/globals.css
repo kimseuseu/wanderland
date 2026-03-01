@@ -437,6 +437,9 @@ body {
   .nav-label {
     display: none;
   }
+  .online-avatars-wrap {
+    display: none !important;
+  }
   .nav-btn { padding: 6px 8px !important; }
   .nav-btn--active::after {
     content: '';

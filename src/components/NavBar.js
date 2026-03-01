@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { Icons } from '@/components/Icons';
+import OnlineAvatars from '@/components/OnlineAvatars';
+import { useOnlinePresence } from '@/hooks/useOnlinePresence';
 
 const NAV_ITEMS = [
   { key: 'home', icon: <Icons.Home />, label: '홈' },
@@ -21,6 +23,7 @@ export default function NavBar({ activePage, onNavigate }) {
   const { data: session, status } = useSession();
   const [showUserMenu, setShowUserMenu] = useState(false);
   const router = useRouter();
+  const onlineUsers = useOnlinePresence();
 
   const handleNav = (item) => {
     if (item.href) {
@@ -73,6 +76,10 @@ export default function NavBar({ activePage, onNavigate }) {
               <span className="nav-label">{n.label}</span>
             </button>
           ))}
+
+          {session && onlineUsers.length > 0 && (
+            <OnlineAvatars users={onlineUsers} />
+          )}
 
           <div style={{ width: 1, height: 20, background: 'var(--border)', margin: '0 8px', flexShrink: 0 }} />
 
