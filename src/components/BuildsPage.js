@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { Icons } from './Icons';
 import { Tag, Button } from './UI';
 import { useApi } from '@/hooks/useApi';
+import { useNicknames } from '@/hooks/useNicknames';
 import BuildCreateForm from './BuildCreateForm';
 
 const typeColor = (t) => t === '섬광' ? '#88ccff' : t === '클래식' ? '#ffcc44' : t === '신판' ? '#88ff88' : 'var(--text-secondary)';
@@ -39,7 +40,7 @@ function StatCard({ icon, value, label, accent }) {
   );
 }
 
-function BuildCard({ build, index, onClick, liked, onLike }) {
+function BuildCard({ build, index, onClick, liked, onLike, resolveNick }) {
   const gc = gradeColor(build.grade);
   return (
     <div className="bd-card fade-in" style={{ animationDelay: `${index * 0.04}s` }} onClick={onClick}>
@@ -57,7 +58,7 @@ function BuildCard({ build, index, onClick, liked, onLike }) {
       )}
       <div className="bd-card-body">
         <div className="bd-card-name">{build.name}</div>
-        <div className="bd-card-meta">{build.author} · {build.date}</div>
+        <div className="bd-card-meta">{resolveNick(build.discordId, build.author)} · {build.date}</div>
         <div className="bd-card-weapons">
           <div className="bd-card-weapon">
             <span className="bd-card-weapon-label">메인</span>
@@ -93,7 +94,7 @@ function BuildCard({ build, index, onClick, liked, onLike }) {
 /* ═══════════════════════════════════════════
    빌드 상세 페이지 (Sticky Parallax)
    ═══════════════════════════════════════════ */
-function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
+function BuildDetail({ build, onBack, canEdit, onEdit, onDelete, resolveNick }) {
   const containerRef = useRef(null);
 
   useEffect(() => {
@@ -168,7 +169,7 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
             </div>
           </div>
           <div style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', textAlign: 'right' }}>
-            <div style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>{build.author}</div>
+            <div style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>{resolveNick(build.discordId, build.author)}</div>
             <div style={{ marginTop: 2 }}>{build.date}</div>
           </div>
         </div>
@@ -413,6 +414,7 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete }) {
 export default function BuildsPage() {
   const { data: session } = useSession();
   const { data: builds, loading, mutate } = useApi('/api/builds');
+  const resolveNick = useNicknames();
   const [sel, setSel] = useState(null);
   const [mode, setMode] = useState('list');
   const [search, setSearch] = useState('');
@@ -474,6 +476,7 @@ export default function BuildsPage() {
         onBack={() => { setSel(null); setMode('list'); }}
         canEdit={checkOwner(sel)}
         onEdit={() => { setEditBuild(sel); setMode('edit'); }}
+        resolveNick={resolveNick}
         onDelete={async () => {
           try {
             await fetch(`/api/builds/${sel.id}`, { method: 'DELETE' });
@@ -597,7 +600,7 @@ export default function BuildsPage() {
       {filtered.length > 0 ? (
         <div className="bd-grid">
           {filtered.map((b, i) => (
-            <BuildCard key={b.id} build={b} index={i} liked={likedIds.has(b.id)} onLike={handleLike} onClick={() => { setSel(b); setMode('detail'); }} />
+            <BuildCard key={b.id} build={b} index={i} liked={likedIds.has(b.id)} onLike={handleLike} resolveNick={resolveNick} onClick={() => { setSel(b); setMode('detail'); }} />
           ))}
         </div>
       ) : (
