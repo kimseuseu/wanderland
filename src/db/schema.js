@@ -61,6 +61,7 @@ export const mapPins = pgTable('map_pins', {
   category: text('category').default('etc'), // 'boss' | 'resource' | 'dungeon' | 'teleport' | 'npc' | 'chest' | 'landmark' | 'etc'
   scenario: text('scenario'),
   server: integer('server'),
+  visibility: text('visibility').default('public'), // 'public' | 'private'
 });
 
 export const trades = pgTable('trades', {
@@ -105,6 +106,14 @@ export const mapRoutes = pgTable('map_routes', {
   discordId: text('discord_id'),
   note: text('note'),
   scenario: text('scenario'),
+  visibility: text('visibility').default('public'), // 'public' | 'private'
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
+export const pinFavorites = pgTable('pin_favorites', {
+  id: serial('id').primaryKey(),
+  discordId: text('discord_id').notNull(),
+  pinId: integer('pin_id').notNull(),
   createdAt: timestamp('created_at').defaultNow(),
 });
 

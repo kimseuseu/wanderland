@@ -32,6 +32,7 @@ export async function PUT(req, { params }) {
         category: body.category || existing[0].category || 'etc',
         scenario: body.scenario || null,
         server: body.server ? parseInt(body.server) : null,
+        visibility: body.visibility || existing[0].visibility || 'public',
       })
       .where(eq(mapPins.id, parsedId))
       .returning();

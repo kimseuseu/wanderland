@@ -1,11 +1,18 @@
 import { NextResponse } from 'next/server';
+import { or, eq } from 'drizzle-orm';
 
-async function getFromDB() {
+async function getFromDB(discordId) {
   if (!process.env.DATABASE_URL) return null;
   try {
     const { db } = await import('@/db');
     const { mapRoutes } = await import('@/db/schema');
-    return await db.select().from(mapRoutes);
+    // Return public routes + current user's private routes
+    return await db.select().from(mapRoutes).where(
+      or(
+        eq(mapRoutes.visibility, 'public'),
+        eq(mapRoutes.discordId, discordId || '')
+      )
+    );
   } catch { return null; }
 }
 
@@ -15,7 +22,7 @@ export async function GET() {
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
-  const dbData = await getFromDB();
+  const dbData = await getFromDB(session.discordId);
   return NextResponse.json(dbData || []);
 }
 
@@ -41,6 +48,7 @@ export async function POST(req) {
       discordId: session.discordId || null,
       note: body.note || '',
       scenario: body.scenario || null,
+      visibility: body.visibility || 'public',
     }).returning();
     return NextResponse.json(result[0], { status: 201 });
   } catch (error) {

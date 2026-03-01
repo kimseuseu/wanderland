@@ -1909,6 +1909,8 @@ option {
   overflow: hidden;
 }
 .map-pin-name {
+  display: flex;
+  align-items: center;
   font-size: 13px;
   font-weight: 700;
   font-family: var(--font-display);
@@ -3985,6 +3987,7 @@ option {
 }
 .map-route-info { flex: 1; min-width: 0; }
 .map-route-name {
+  display: flex; align-items: center;
   font-weight: 600; font-size: 12px;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
@@ -4003,6 +4006,174 @@ option {
   font-size: 11px !important;
   padding: 2px 6px !important;
   border-radius: 4px !important;
+}
+
+/* ─── Visibility Toggle ─── */
+.map-visibility-toggle {
+  display: flex;
+  gap: 6px;
+}
+.map-vis-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+  flex: 1;
+  justify-content: center;
+}
+.map-vis-btn:hover {
+  border-color: rgba(255,255,255,0.15);
+  color: var(--text-secondary);
+}
+.map-vis-btn.active.public {
+  border-color: rgba(68,255,136,0.4);
+  background: rgba(68,255,136,0.08);
+  color: #44ff88;
+}
+.map-vis-btn.active.private {
+  border-color: rgba(255,170,68,0.4);
+  background: rgba(255,170,68,0.08);
+  color: #ffaa44;
+}
+
+/* ─── View Mode Toggle ─── */
+.map-view-toggle {
+  display: flex;
+  gap: 0;
+  padding: 0 12px;
+  margin-bottom: 6px;
+}
+.map-view-btn {
+  flex: 1;
+  padding: 5px 0;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.map-view-btn:first-child {
+  border-radius: 6px 0 0 6px;
+  border-right: none;
+}
+.map-view-btn:last-child {
+  border-radius: 0 6px 6px 0;
+}
+.map-view-btn.active {
+  background: var(--accent-dim);
+  border-color: rgba(255,255,255,0.12);
+  color: #fff;
+}
+
+/* ─── Private Pin Indicator ─── */
+.map-pin-private {
+  opacity: 0.85;
+}
+.map-pin-private .map-pin-dot {
+  box-shadow: none;
+}
+
+/* ─── Category Filter ─── */
+.map-category-filter {
+  padding: 0 12px;
+  margin-bottom: 6px;
+}
+.map-category-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.map-category-toggle-btn:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--text-muted);
+}
+.map-category-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 6px 0 0;
+}
+.map-category-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.map-category-item:hover {
+  background: rgba(255,255,255,0.06);
+}
+.map-cat-check {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* ─── Tools Row ─── */
+.map-tools-row {
+  display: flex;
+  gap: 4px;
+  padding: 0 12px;
+  margin-bottom: 8px;
+}
+.map-tool-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.map-tool-btn:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--text-muted);
+}
+.map-tool-btn.active {
+  background: rgba(68,255,136,0.1);
+  border-color: #44ff88;
+  color: #44ff88;
+}
+
+/* ─── Cluster Icons ─── */
+.custom-cluster {
+  background: transparent !important;
+}
+.leaflet-marker-icon.marker-cluster {
+  background: transparent !important;
 }
 
 @media (max-width: 640px) {

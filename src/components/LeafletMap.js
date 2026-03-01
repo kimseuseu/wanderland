@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect, useRef, useCallback, useImperativeHandle, forwardRef } from 'react';
+import { useEffect, useRef, useImperativeHandle, forwardRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import 'leaflet.markercluster';
 
 const TILE_URL = 'https://cdn.th.gl/once-human/map-tiles/default/{z}/{y}/{x}.webp';
 const TILE_SIZE = 512;
@@ -64,7 +66,7 @@ function createPinIcon(color, category) {
 }
 
 const LeafletMap = forwardRef(function LeafletMap(
-  { pins, selectedPin, onMapClick, onPinClick, routes = [], drawingMode, drawingColor = '#ffaa44', onRoutePoint },
+  { pins, selectedPin, onMapClick, onPinClick, routes = [], drawingMode, drawingColor = '#ffaa44', onRoutePoint, measureMode, measurePoints = [], cluster },
   ref
 ) {
   const containerRef = useRef(null);
@@ -74,15 +76,19 @@ const LeafletMap = forwardRef(function LeafletMap(
   const routeLayersRef = useRef([]);
   const drawingLayerRef = useRef(null);
   const drawingPointsRef = useRef([]);
+  const clusterGroupRef = useRef(null);
+  const measureLayerRef = useRef(null);
   const onMapClickRef = useRef(onMapClick);
   const onPinClickRef = useRef(onPinClick);
   const onRoutePointRef = useRef(onRoutePoint);
   const drawingModeRef = useRef(drawingMode);
+  const measureModeRef = useRef(measureMode);
 
   onMapClickRef.current = onMapClick;
   onPinClickRef.current = onPinClick;
   onRoutePointRef.current = onRoutePoint;
   drawingModeRef.current = drawingMode;
+  measureModeRef.current = measureMode;
 
   // Expose map methods to parent
   useImperativeHandle(ref, () => ({
@@ -179,41 +185,76 @@ const LeafletMap = forwardRef(function LeafletMap(
     }
   }, [drawingColor]);
 
-  // Sync markers with pins
+  // Sync markers with pins (with optional clustering)
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
 
-    const currentIds = new Set(pins.map(p => p.id));
+    // Remove all old markers from map/cluster
     for (const id of Object.keys(markersRef.current)) {
-      if (!currentIds.has(Number(id))) {
-        markersRef.current[id].remove();
-        delete markersRef.current[id];
-      }
+      markersRef.current[id].remove();
+    }
+    markersRef.current = {};
+
+    // Remove old cluster group
+    if (clusterGroupRef.current) {
+      map.removeLayer(clusterGroupRef.current);
+      clusterGroupRef.current = null;
+    }
+
+    // Create cluster group if clustering is enabled
+    let clusterGroup = null;
+    if (cluster) {
+      clusterGroup = L.markerClusterGroup({
+        maxClusterRadius: 50,
+        spiderfyOnMaxZoom: true,
+        showCoverageOnHover: false,
+        iconCreateFunction: (c) => {
+          const count = c.getChildCount();
+          return L.divIcon({
+            html: `<div style="
+              display:flex;align-items:center;justify-content:center;
+              width:32px;height:32px;border-radius:50%;
+              background:rgba(68,136,255,0.85);
+              border:2px solid rgba(10,10,10,0.8);
+              box-shadow:0 0 12px rgba(68,136,255,0.5);
+              font-size:12px;font-weight:700;color:#fff;
+            ">${count}</div>`,
+            className: 'custom-cluster',
+            iconSize: [36, 36],
+            iconAnchor: [18, 18],
+          });
+        },
+      });
+      clusterGroupRef.current = clusterGroup;
     }
 
     for (const pin of pins) {
       const latlng = gameToLatLng(pin.x, pin.y);
-      if (markersRef.current[pin.id]) {
-        markersRef.current[pin.id].setLatLng(latlng);
-        markersRef.current[pin.id].setIcon(createPinIcon(pin.color, pin.category));
+      const marker = L.marker(latlng, { icon: createPinIcon(pin.color, pin.category) });
+      marker.bindTooltip(pin.label, {
+        permanent: !cluster,
+        direction: 'top',
+        offset: [0, -10],
+        className: 'pin-tooltip',
+      });
+      marker.on('click', (e) => {
+        L.DomEvent.stopPropagation(e);
+        onPinClickRef.current?.(pin);
+      });
+
+      if (clusterGroup) {
+        clusterGroup.addLayer(marker);
       } else {
-        const marker = L.marker(latlng, { icon: createPinIcon(pin.color, pin.category) });
-        marker.bindTooltip(pin.label, {
-          permanent: true,
-          direction: 'top',
-          offset: [0, -10],
-          className: 'pin-tooltip',
-        });
-        marker.on('click', (e) => {
-          L.DomEvent.stopPropagation(e);
-          onPinClickRef.current?.(pin);
-        });
         marker.addTo(map);
-        markersRef.current[pin.id] = marker;
       }
+      markersRef.current[pin.id] = marker;
     }
-  }, [pins]);
+
+    if (clusterGroup) {
+      map.addLayer(clusterGroup);
+    }
+  }, [pins, cluster]);
 
   // Sync routes (saved polylines)
   useEffect(() => {
@@ -250,11 +291,46 @@ const LeafletMap = forwardRef(function LeafletMap(
     mapRef.current.setView(latlng, 3, { animate: true });
   }, [selectedPin]);
 
-  // Toggle cursor style for drawing mode
+  // Render measurement line between two points
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    // Remove old measurement line
+    if (measureLayerRef.current) {
+      measureLayerRef.current.remove();
+      measureLayerRef.current = null;
+    }
+
+    if (measurePoints.length === 2) {
+      const latlngs = measurePoints.map((p) => gameToLatLng(p.x, p.y));
+      const line = L.polyline(latlngs, {
+        color: '#44ff88',
+        weight: 2,
+        opacity: 0.9,
+        dashArray: '6, 8',
+      });
+      const startCircle = L.circleMarker(latlngs[0], {
+        radius: 5, color: '#44ff88', fillColor: '#44ff88', fillOpacity: 0.9, weight: 2,
+      });
+      const endCircle = L.circleMarker(latlngs[1], {
+        radius: 5, color: '#44ff88', fillColor: '#44ff88', fillOpacity: 0.9, weight: 2,
+      });
+      measureLayerRef.current = L.layerGroup([line, startCircle, endCircle]).addTo(map);
+    } else if (measurePoints.length === 1) {
+      // Show single point marker
+      const circle = L.circleMarker(gameToLatLng(measurePoints[0].x, measurePoints[0].y), {
+        radius: 5, color: '#44ff88', fillColor: '#44ff88', fillOpacity: 0.9, weight: 2,
+      }).addTo(map);
+      measureLayerRef.current = circle;
+    }
+  }, [measurePoints]);
+
+  // Toggle cursor style for drawing/measure mode
   useEffect(() => {
     if (!containerRef.current) return;
-    containerRef.current.style.cursor = drawingMode ? 'crosshair' : '';
-  }, [drawingMode]);
+    containerRef.current.style.cursor = (drawingMode || measureMode) ? 'crosshair' : '';
+  }, [drawingMode, measureMode]);
 
   return (
     <div
