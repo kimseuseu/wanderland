@@ -34,7 +34,7 @@ async function getBotGuildIds() {
 }
 
 /** 봇 토큰으로 특정 서버의 멤버 닉네임 조회 */
-async function fetchNickname(guildId, userId) {
+async function fetchMemberInfo(guildId, userId) {
   if (!BOT_TOKEN || !guildId || !userId) return null;
   try {
     const res = await fetch(
@@ -43,7 +43,11 @@ async function fetchNickname(guildId, userId) {
     );
     if (!res.ok) return null;
     const member = await res.json();
-    return member.nick || member.user?.global_name || null;
+    return {
+      nick: member.nick || null,
+      globalName: member.user?.global_name || null,
+      username: member.user?.username || null,
+    };
   } catch {
     return null;
   }
@@ -51,7 +55,9 @@ async function fetchNickname(guildId, userId) {
 
 /**
  * 다중 서버에서 닉네임 우선순위 결정
- * 주 서버(DISCORD_GUILD_ID) 우선 → 나머지 서버 순
+ * 1. 주 서버 서버 닉네임 (최우선)
+ * 2. 다른 서버 서버 닉네임
+ * 3. 글로벌 이름 / 유저네임 (최하위)
  */
 async function resolveNickname(matchedGuildIds, userId, fallbackUsername) {
   const sorted = [...matchedGuildIds].sort((a, b) => {
@@ -59,12 +65,26 @@ async function resolveNickname(matchedGuildIds, userId, fallbackUsername) {
     return p(a) - p(b);
   });
 
+  let bestNick = null;
+  let bestGuildId = sorted[0] || null;
+  let globalName = null;
+
   for (const guildId of sorted) {
-    const nick = await fetchNickname(guildId, userId);
-    if (nick) return { nickname: nick, guildId };
+    const info = await fetchMemberInfo(guildId, userId);
+    if (!info) continue;
+
+    // 서버 닉네임이 있으면 즉시 사용 (주 서버 먼저 처리되므로 주 서버 우선)
+    if (info.nick) {
+      return { nickname: info.nick, guildId };
+    }
+
+    // 글로벌 이름 백업 (첫 번째로 발견된 것 사용)
+    if (!globalName) {
+      globalName = info.globalName || info.username;
+    }
   }
 
-  return { nickname: fallbackUsername, guildId: sorted[0] || null };
+  return { nickname: globalName || fallbackUsername, guildId: bestGuildId };
 }
 
 export const authOptions = {
