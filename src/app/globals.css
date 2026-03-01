@@ -722,6 +722,20 @@ option {
   color: var(--text-muted);
   margin-top: 1px;
 }
+.bl-card-uuid--copyable {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  position: relative;
+}
+.bl-card-uuid--copyable:hover {
+  background: rgba(255,68,68,0.12);
+  color: #ff6b6b;
+}
 .bl-card-header > svg {
   color: var(--text-muted);
   opacity: 0;
@@ -876,6 +890,36 @@ option {
   padding: 4px 12px;
   background: rgba(255,255,255,0.04);
   border-radius: 8px;
+}
+.bl-detail-uuid--copyable {
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+.bl-detail-uuid--copyable:hover {
+  background: rgba(255,68,68,0.15);
+  color: #ff6b6b;
+}
+.bl-copied-toast {
+  position: absolute;
+  top: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #ff4444;
+  color: #fff;
+  font-size: 11px;
+  font-family: var(--font-sans);
+  padding: 3px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: bl-toast-fade 1.5s ease forwards;
+}
+@keyframes bl-toast-fade {
+  0% { opacity: 0; transform: translateX(-50%) translateY(4px); }
+  15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  70% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 /* Detail Info Grid */

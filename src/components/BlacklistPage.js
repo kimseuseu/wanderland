@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 import { Icons } from './Icons';
-import { Modal, Input, TextArea, Button } from './UI';
+import { Input, TextArea, Button } from './UI';
 import { useSession } from 'next-auth/react';
 import { useApi } from '@/hooks/useApi';
 import ReactMarkdown from 'react-markdown';
@@ -95,6 +95,16 @@ function StatCard({ icon, value, label, accent }) {
 /* ────────── Blacklist Entry Card ────────── */
 function EntryCard({ item, index, onClick }) {
   const initial = (item.name || '?')[0].toUpperCase();
+  const [uuidCopied, setUuidCopied] = useState(false);
+
+  const handleUuidCopy = (e) => {
+    e.stopPropagation();
+    navigator.clipboard.writeText(item.uuid).then(() => {
+      setUuidCopied(true);
+      setTimeout(() => setUuidCopied(false), 1500);
+    });
+  };
+
   return (
     <div className="bl-card fade-in" style={{ animationDelay: `${index * 0.06}s` }} onClick={onClick}>
       <div className="bl-card-glow" />
@@ -105,7 +115,12 @@ function EntryCard({ item, index, onClick }) {
         </div>
         <div className="bl-card-identity">
           <div className="bl-card-name">{item.name}</div>
-          {item.uuid && <div className="bl-card-uuid">{item.uuid}</div>}
+          {item.uuid && (
+            <div className="bl-card-uuid bl-card-uuid--copyable" onClick={handleUuidCopy} title="클릭하여 UUID 복사">
+              <ClipboardIcon /> {item.uuid}
+              {uuidCopied && <span className="bl-copied-toast">복사됨!</span>}
+            </div>
+          )}
         </div>
         <ChevronIcon />
       </div>
@@ -392,8 +407,9 @@ function MarkdownEditor({ value, onChange }) {
 export default function BlacklistPage() {
   const { data: session } = useSession();
   const { data: list, loading, mutate } = useApi('/api/blacklist');
-  const [view, setView] = useState('list'); // 'list' | 'form'
+  const [view, setView] = useState('list'); // 'list' | 'form' | 'detail'
   const [sel, setSel] = useState(null);
+  const [copied, setCopied] = useState(false);
   const [search, setSearch] = useState(() => {
     if (typeof window !== 'undefined') {
       return new URLSearchParams(window.location.search).get('q') || '';
@@ -450,6 +466,23 @@ export default function BlacklistPage() {
     setSel(null);
   };
 
+  const copyUuid = (uuid) => {
+    navigator.clipboard.writeText(uuid).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  };
+
+  const openDetail = (item) => {
+    setSel(item);
+    setView('detail');
+  };
+
+  const closeDetail = () => {
+    setSel(null);
+    setView('list');
+  };
+
   const openNewForm = () => {
     setForm({ ...EMPTY_FORM });
     setEditItem(null);
@@ -500,6 +533,125 @@ export default function BlacklistPage() {
     );
   }
 
+  /* ── 풀페이지 상세 ── */
+  if (view === 'detail' && sel) {
+    return (
+      <div className="bl-page fade-in">
+        <div className="bl-form-page">
+          <button className="bl-form-back" onClick={closeDetail}>
+            ← 목록으로
+          </button>
+
+          <div className="bl-detail">
+            <div className="bl-detail-banner">
+              <div className="bl-detail-avatar">
+                <span>{(sel.name || '?')[0].toUpperCase()}</span>
+              </div>
+              <h3 className="bl-detail-name">{sel.name}</h3>
+              {sel.uuid && (
+                <div
+                  className="bl-detail-uuid bl-detail-uuid--copyable"
+                  onClick={() => copyUuid(sel.uuid)}
+                  title="클릭하여 UUID 복사"
+                >
+                  <ClipboardIcon /> {sel.uuid}
+                  {copied && <span className="bl-copied-toast">복사됨!</span>}
+                </div>
+              )}
+            </div>
+
+            <div className="bl-detail-grid">
+              <div className="bl-detail-cell">
+                <div className="bl-detail-cell-icon"><Icons.Users /></div>
+                <div>
+                  <div className="bl-detail-cell-label">부캐</div>
+                  <div className="bl-detail-cell-value">{sel.alts || '정보 없음'}</div>
+                </div>
+              </div>
+              <div className="bl-detail-cell">
+                <div className="bl-detail-cell-icon"><Icons.Shield /></div>
+                <div>
+                  <div className="bl-detail-cell-label">소속 클랜</div>
+                  <div className="bl-detail-cell-value">{sel.clan || '무소속'}</div>
+                </div>
+              </div>
+              <div className="bl-detail-cell">
+                <div className="bl-detail-cell-icon"><CalendarIcon /></div>
+                <div>
+                  <div className="bl-detail-cell-label">등록일</div>
+                  <div className="bl-detail-cell-value">{sel.date || '-'}</div>
+                </div>
+              </div>
+              <div className="bl-detail-cell">
+                <div className="bl-detail-cell-icon"><UserIcon /></div>
+                <div>
+                  <div className="bl-detail-cell-label">신고자</div>
+                  <div className="bl-detail-cell-value">{sel.reporter || '익명'}</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="bl-detail-section">
+              <div className="bl-detail-section-title">
+                <AlertIcon /> 사건 개요
+              </div>
+              <div className="bl-detail-incident">
+                {sel.incident || '기록된 내용이 없습니다.'}
+              </div>
+            </div>
+
+            {sel.content && (
+              <div className="bl-detail-section">
+                <div className="bl-detail-section-title">
+                  <DocIcon /> 상세 내용
+                </div>
+                <div className="bl-markdown-body">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      img: ({ src, alt }) => (
+                        <div className="bl-markdown-img-wrap">
+                          <img src={src} alt={alt || ''} className="bl-markdown-img" loading="lazy" />
+                        </div>
+                      ),
+                    }}
+                  >
+                    {sel.content}
+                  </ReactMarkdown>
+                </div>
+              </div>
+            )}
+
+            {sel.image && (
+              <div className="bl-detail-section">
+                <div className="bl-detail-section-title">
+                  <ImageIcon /> 증거 스크린샷
+                </div>
+                <div className="bl-detail-image-wrap">
+                  <img src={sel.image} alt="증거 이미지" className="bl-detail-image" />
+                </div>
+              </div>
+            )}
+
+            <div className="bl-detail-actions">
+              <Button variant="secondary" onClick={closeDetail}>목록으로</Button>
+              {checkOwner(sel) && (
+                <>
+                  <Button variant="secondary" onClick={() => startEdit(sel)}>
+                    <Icons.Edit /> 수정
+                  </Button>
+                  <Button variant="danger" onClick={() => { remove(sel.id); closeDetail(); }}>
+                    <Icons.Trash /> 삭제
+                  </Button>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   /* ── 풀페이지 폼 (등록/수정) ── */
   if (view === 'form') {
     return (
@@ -517,7 +669,7 @@ export default function BlacklistPage() {
             <div className="bl-form-section-title"><SkullIcon size={14} /> 기본 정보</div>
             <Input label="닉네임 *" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="게임 내 닉네임" />
             <div className="bl-form-grid">
-              <Input label="UUID" value={form.uuid} onChange={(e) => setForm({ ...form, uuid: e.target.value })} placeholder="OH-XXXXX-KR" />
+              <Input label="UUID" value={form.uuid} onChange={(e) => setForm({ ...form, uuid: e.target.value })} placeholder="151431247" />
               <Input label="소속 클랜" value={form.clan} onChange={(e) => setForm({ ...form, clan: e.target.value })} placeholder="클랜 / 하이브명" />
             </div>
             <Input label="부캐" value={form.alts} onChange={(e) => setForm({ ...form, alts: e.target.value })} placeholder="쉼표로 구분 (선택)" />
@@ -601,7 +753,7 @@ export default function BlacklistPage() {
       {/* Card Grid */}
       <div className="bl-grid">
         {filtered.map((item, i) => (
-          <EntryCard key={item.id} item={item} index={i} onClick={() => setSel(item)} />
+          <EntryCard key={item.id} item={item} index={i} onClick={() => openDetail(item)} />
         ))}
       </div>
 
@@ -613,112 +765,6 @@ export default function BlacklistPage() {
         </div>
       )}
 
-      {/* Detail Modal */}
-      <Modal open={!!sel} onClose={() => setSel(null)} title="블랙리스트 상세">
-        {sel && (
-          <div className="bl-detail">
-            <div className="bl-detail-banner">
-              <div className="bl-detail-avatar">
-                <span>{(sel.name || '?')[0].toUpperCase()}</span>
-              </div>
-              <h3 className="bl-detail-name">{sel.name}</h3>
-              {sel.uuid && (
-                <div className="bl-detail-uuid">
-                  <ClipboardIcon /> {sel.uuid}
-                </div>
-              )}
-            </div>
-
-            <div className="bl-detail-grid">
-              <div className="bl-detail-cell">
-                <div className="bl-detail-cell-icon"><Icons.Users /></div>
-                <div>
-                  <div className="bl-detail-cell-label">부캐</div>
-                  <div className="bl-detail-cell-value">{sel.alts || '정보 없음'}</div>
-                </div>
-              </div>
-              <div className="bl-detail-cell">
-                <div className="bl-detail-cell-icon"><Icons.Shield /></div>
-                <div>
-                  <div className="bl-detail-cell-label">소속 클랜</div>
-                  <div className="bl-detail-cell-value">{sel.clan || '무소속'}</div>
-                </div>
-              </div>
-              <div className="bl-detail-cell">
-                <div className="bl-detail-cell-icon"><CalendarIcon /></div>
-                <div>
-                  <div className="bl-detail-cell-label">등록일</div>
-                  <div className="bl-detail-cell-value">{sel.date || '-'}</div>
-                </div>
-              </div>
-              <div className="bl-detail-cell">
-                <div className="bl-detail-cell-icon"><UserIcon /></div>
-                <div>
-                  <div className="bl-detail-cell-label">신고자</div>
-                  <div className="bl-detail-cell-value">{sel.reporter || '익명'}</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bl-detail-section">
-              <div className="bl-detail-section-title">
-                <AlertIcon /> 사건 개요
-              </div>
-              <div className="bl-detail-incident">
-                {sel.incident || '기록된 내용이 없습니다.'}
-              </div>
-            </div>
-
-            {/* Markdown Content */}
-            {sel.content && (
-              <div className="bl-detail-section">
-                <div className="bl-detail-section-title">
-                  <DocIcon /> 상세 내용
-                </div>
-                <div className="bl-markdown-body">
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    components={{
-                      img: ({ src, alt }) => (
-                        <div className="bl-markdown-img-wrap">
-                          <img src={src} alt={alt || ''} className="bl-markdown-img" loading="lazy" />
-                        </div>
-                      ),
-                    }}
-                  >
-                    {sel.content}
-                  </ReactMarkdown>
-                </div>
-              </div>
-            )}
-
-            {sel.image && (
-              <div className="bl-detail-section">
-                <div className="bl-detail-section-title">
-                  <ImageIcon /> 증거 스크린샷
-                </div>
-                <div className="bl-detail-image-wrap">
-                  <img src={sel.image} alt="증거 이미지" className="bl-detail-image" />
-                </div>
-              </div>
-            )}
-
-            <div className="bl-detail-actions">
-              <Button variant="secondary" onClick={() => setSel(null)}>닫기</Button>
-              {checkOwner(sel) && (
-                <>
-                  <Button variant="secondary" onClick={() => startEdit(sel)}>
-                    <Icons.Edit /> 수정
-                  </Button>
-                  <Button variant="danger" onClick={() => remove(sel.id)}>
-                    <Icons.Trash /> 삭제
-                  </Button>
-                </>
-              )}
-            </div>
-          </div>
-        )}
-      </Modal>
 
     </div>
   );
