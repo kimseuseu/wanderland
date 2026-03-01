@@ -1,22 +1,27 @@
 import { NextResponse } from 'next/server';
-import { getSession } from '@/lib/auth';
+import { getToken } from 'next-auth/jwt';
 import { db } from '@/db';
 import { sql } from 'drizzle-orm';
 
-export async function POST() {
-  const session = await getSession();
-  if (!session?.discordId) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
-
+export async function POST(request) {
   try {
+    const token = await getToken({ req: request });
+    if (!token?.discordId) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const username = token.username || token.name || '???';
+    const avatar = token.avatar
+      ? `https://cdn.discordapp.com/avatars/${token.discordId}/${token.avatar}.png`
+      : null;
+
     await db.execute(sql`
       INSERT INTO online_sessions (discord_id, username, avatar, last_seen)
-      VALUES (${session.discordId}, ${session.user?.name || '???'}, ${session.user?.image || null}, NOW())
+      VALUES (${token.discordId}, ${username}, ${avatar}, NOW())
       ON CONFLICT (discord_id)
       DO UPDATE SET
-        username = ${session.user?.name || '???'},
-        avatar = ${session.user?.image || null},
+        username = ${username},
+        avatar = ${avatar},
         last_seen = NOW()
     `);
 

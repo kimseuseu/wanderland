@@ -29,9 +29,8 @@ export function useOnlinePresence() {
   useEffect(() => {
     if (status !== 'authenticated' || !session) return;
 
-    // 즉시 하트비트 + 온라인 목록 조회
-    sendHeartbeat();
-    fetchOnline();
+    // 하트비트 먼저 전송 → 완료 후 온라인 목록 조회
+    sendHeartbeat().then(() => fetchOnline());
 
     const heartbeatTimer = setInterval(sendHeartbeat, HEARTBEAT_INTERVAL);
     const fetchTimer = setInterval(fetchOnline, FETCH_INTERVAL);
@@ -39,8 +38,7 @@ export function useOnlinePresence() {
     // 탭 복귀 시 즉시 갱신
     const handleVisibility = () => {
       if (document.visibilityState === 'visible') {
-        sendHeartbeat();
-        fetchOnline();
+        sendHeartbeat().then(() => fetchOnline());
       }
     };
     document.addEventListener('visibilitychange', handleVisibility);
