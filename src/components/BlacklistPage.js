@@ -669,7 +669,7 @@ export default function BlacklistPage() {
             <div className="bl-form-section-title"><SkullIcon size={14} /> 기본 정보</div>
             <Input label="닉네임 *" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="게임 내 닉네임" />
             <div className="bl-form-grid">
-              <Input label="UUID" value={form.uuid} onChange={(e) => setForm({ ...form, uuid: e.target.value })} placeholder="151431247" />
+              <Input label="UUID" value={form.uuid} onChange={(e) => setForm({ ...form, uuid: e.target.value })} placeholder="숫자 9자리 (예: 123456789)" />
               <Input label="소속 클랜" value={form.clan} onChange={(e) => setForm({ ...form, clan: e.target.value })} placeholder="클랜 / 하이브명" />
             </div>
             <Input label="부캐" value={form.alts} onChange={(e) => setForm({ ...form, alts: e.target.value })} placeholder="쉼표로 구분 (선택)" />
