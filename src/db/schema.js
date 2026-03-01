@@ -117,6 +117,13 @@ export const pinFavorites = pgTable('pin_favorites', {
   createdAt: timestamp('created_at').defaultNow(),
 });
 
+export const buildLikes = pgTable('build_likes', {
+  id: serial('id').primaryKey(),
+  discordId: text('discord_id').notNull(),
+  buildId: integer('build_id').notNull(),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
 export const botChannels = pgTable('bot_channels', {
   id: serial('id').primaryKey(),
   guildId: text('guild_id').notNull(),

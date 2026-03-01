@@ -55,6 +55,7 @@ export default function NavBar({ activePage, onNavigate }) {
           {NAV_ITEMS.map((n) => (
             <button
               key={n.key}
+              className={`nav-btn${activePage === n.key ? ' nav-btn--active' : ''}`}
               onClick={() => handleNav(n)}
               style={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4,
@@ -63,7 +64,7 @@ export default function NavBar({ activePage, onNavigate }) {
                 transition: 'all 0.2s', fontFamily: 'var(--font-body)',
                 background: activePage === n.key ? 'var(--accent-dim)' : 'transparent',
                 color: activePage === n.key ? '#fff' : 'var(--text-muted)',
-                whiteSpace: 'nowrap',
+                whiteSpace: 'nowrap', position: 'relative',
               }}
               onMouseEnter={(e) => { if (activePage !== n.key) e.currentTarget.style.color = 'var(--text-secondary)'; }}
               onMouseLeave={(e) => { if (activePage !== n.key) e.currentTarget.style.color = 'var(--text-muted)'; }}

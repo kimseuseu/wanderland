@@ -419,10 +419,54 @@ body {
   }
 }
 
+/* ─── Tablet Responsive ─── */
+@media (max-width: 1024px) and (min-width: 641px) {
+  .builds-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  .trade-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .news-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 /* ─── Mobile Responsive ─── */
 @media (max-width: 640px) {
   .nav-label {
     display: none;
+  }
+  .nav-btn { padding: 6px 8px !important; }
+  .nav-btn--active::after {
+    content: '';
+    position: absolute; bottom: 1px; left: 50%;
+    transform: translateX(-50%);
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--accent);
+  }
+  /* News mobile layout fix */
+  .news-title-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .news-title {
+    font-size: 18px;
+  }
+  .news-header-right {
+    gap: 8px;
+  }
+  .news-source {
+    font-size: 10px;
+  }
+  /* Trade form mobile stack */
+  .trade-toolbar {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .trade-toolbar-right {
+    flex-wrap: wrap;
+    gap: 6px;
   }
   .builds-grid {
     grid-template-columns: 1fr 1fr !important;
@@ -2455,6 +2499,18 @@ option {
 .bd-card-likes {
   font-size: 12px; color: var(--text-muted);
   display: flex; align-items: center; gap: 4px;
+}
+.bd-like-btn {
+  background: none; border: 1px solid transparent; cursor: pointer;
+  font-size: 12px; color: var(--text-muted); padding: 3px 8px;
+  border-radius: 6px; display: flex; align-items: center; gap: 4px;
+  transition: all 0.2s; font-family: var(--font-body);
+}
+.bd-like-btn:hover {
+  color: #ff6b6b; border-color: rgba(255,107,107,0.2); background: rgba(255,107,107,0.06);
+}
+.bd-like-btn--active {
+  color: #ff6b6b;
 }
 .bd-card-arrow {
   font-size: 11px; color: var(--text-muted);

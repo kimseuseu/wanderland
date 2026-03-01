@@ -30,7 +30,7 @@ export default function AboutPage() {
         <div className="about-bg about-bg--hero">
           <div style={{ textAlign: 'center', position: 'relative', zIndex: 4, padding: '0 20px' }}>
             <div className="about-label about-flicker">
-              FIELD REPORT // WANDERLAND.GG
+              FIELD REPORT // WANDERLAND.CO.KR
             </div>
             <h1 className="about-hero-title">
               WANDER<span>LAND</span>
@@ -85,7 +85,7 @@ export default function AboutPage() {
               </div>
               <div className="about-data-item">
                 <div className="about-data-key">FREQ</div>
-                <div className="about-data-val">WANDERLAND.GG</div>
+                <div className="about-data-val">WANDERLAND.CO.KR</div>
               </div>
               <div className="about-data-item">
                 <div className="about-data-key">TYPE</div>

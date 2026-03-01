@@ -39,7 +39,7 @@ function StatCard({ icon, value, label, accent }) {
   );
 }
 
-function BuildCard({ build, index, onClick }) {
+function BuildCard({ build, index, onClick, liked, onLike }) {
   const gc = gradeColor(build.grade);
   return (
     <div className="bd-card fade-in" style={{ animationDelay: `${index * 0.04}s` }} onClick={onClick}>
@@ -76,7 +76,13 @@ function BuildCard({ build, index, onClick }) {
           {build.tags?.map((t) => <Tag key={t}>{t}</Tag>)}
         </div>
         <div className="bd-card-footer">
-          <span className="bd-card-likes">♥ {build.likes || 0}</span>
+          <button
+            className={`bd-like-btn${liked ? ' bd-like-btn--active' : ''}`}
+            onClick={(e) => { e.stopPropagation(); onLike?.(build.id); }}
+            title={liked ? '좋아요 취소' : '좋아요'}
+          >
+            {liked ? '♥' : '♡'} {build.likes || 0}
+          </button>
           <span className="bd-card-arrow">상세보기 →</span>
         </div>
       </div>
@@ -413,6 +419,32 @@ export default function BuildsPage() {
   const [catFilter, setCatFilter] = useState('전체');
   const [weaponFilter, setWeaponFilter] = useState('전체');
   const [editBuild, setEditBuild] = useState(null);
+  const [likedIds, setLikedIds] = useState(new Set());
+
+  // 좋아요 목록 로드
+  useEffect(() => {
+    if (session?.discordId) {
+      fetch('/api/build-likes').then((r) => r.json()).then((d) => {
+        setLikedIds(new Set(d.ids || []));
+      }).catch(() => {});
+    }
+  }, [session?.discordId]);
+
+  const handleLike = async (buildId) => {
+    if (!session?.isMember) return;
+    try {
+      const res = await fetch(`/api/builds/${buildId}/like`, { method: 'POST' });
+      if (!res.ok) return;
+      const data = await res.json();
+      setLikedIds((prev) => {
+        const next = new Set(prev);
+        if (data.liked) next.add(buildId);
+        else next.delete(buildId);
+        return next;
+      });
+      mutate();
+    } catch (e) { console.error(e); }
+  };
 
   const checkOwner = (build) => {
     if (!session || !build) return false;
@@ -565,7 +597,7 @@ export default function BuildsPage() {
       {filtered.length > 0 ? (
         <div className="bd-grid">
           {filtered.map((b, i) => (
-            <BuildCard key={b.id} build={b} index={i} onClick={() => { setSel(b); setMode('detail'); }} />
+            <BuildCard key={b.id} build={b} index={i} liked={likedIds.has(b.id)} onLike={handleLike} onClick={() => { setSel(b); setMode('detail'); }} />
           ))}
         </div>
       ) : (

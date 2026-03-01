@@ -66,10 +66,11 @@ export default function TradePage() {
   const [showClosed, setShowClosed] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [sortBy, setSortBy] = useState('latest');
 
   const filtered = useMemo(() => {
     if (!list) return [];
-    return list.filter((t) => {
+    let result = list.filter((t) => {
       if (filterType !== 'all' && t.type !== filterType) return false;
       if (!showClosed && t.status === 'closed') return false;
       if (search) {
@@ -79,7 +80,12 @@ export default function TradePage() {
       }
       return true;
     });
-  }, [list, filterType, showClosed, search]);
+    if (sortBy === 'latest') result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    else if (sortBy === 'oldest') result.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+    else if (sortBy === 'price-asc') result.sort((a, b) => (parseInt(a.price) || 0) - (parseInt(b.price) || 0));
+    else if (sortBy === 'price-desc') result.sort((a, b) => (parseInt(b.price) || 0) - (parseInt(a.price) || 0));
+    return result;
+  }, [list, filterType, showClosed, search, sortBy]);
 
   const checkOwner = (entry) => {
     if (!session || !entry) return false;
@@ -197,7 +203,7 @@ export default function TradePage() {
               <span className="trade-detail-value">{sel.quantity || 1}개</span>
             </div>
             <div className="trade-detail-cell">
-              <TagIcon /> <span className="trade-detail-label">{sel.type === 'share' ? '가격' : '가격'}</span>
+              <TagIcon /> <span className="trade-detail-label">{sel.type === 'share' ? '나눔' : '가격'}</span>
               <span className="trade-detail-value">{sel.type === 'share' ? '무료 나눔' : (sel.price || '협의')}</span>
             </div>
             <div className="trade-detail-cell">
@@ -362,6 +368,20 @@ export default function TradePage() {
           </label>
         </div>
         <div className="trade-toolbar-right">
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            style={{
+              padding: '6px 10px', borderRadius: 8, fontSize: 12,
+              background: 'var(--bg-tertiary)', border: '1px solid var(--border)',
+              color: 'var(--text-secondary)', fontFamily: 'var(--font-body)', cursor: 'pointer',
+            }}
+          >
+            <option value="latest">최신순</option>
+            <option value="oldest">오래된순</option>
+            <option value="price-asc">가격 낮은순</option>
+            <option value="price-desc">가격 높은순</option>
+          </select>
           <div className="trade-search">
             <Icons.Search />
             <input value={search} onChange={(e) => setSearch(e.target.value)} placeholder="검색..." />
