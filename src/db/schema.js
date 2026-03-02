@@ -127,7 +127,7 @@ export const buildLikes = pgTable('build_likes', {
 
 export const onlineSessions = pgTable('online_sessions', {
   id: serial('id').primaryKey(),
-  discordId: text('discord_id').notNull(),
+  discordId: text('discord_id').notNull().unique(),
   username: text('username').notNull(),
   avatar: text('avatar'),
   lastSeen: timestamp('last_seen').defaultNow().notNull(),
