@@ -34,6 +34,7 @@ export async function POST(req) {
     const { blacklist } = await import('@/db/schema');
     const body = await req.json();
     const result = await db.insert(blacklist).values({
+      type: body.type || 'individual',
       name: body.name,
       uuid: body.uuid || '',
       alts: body.alts || '',

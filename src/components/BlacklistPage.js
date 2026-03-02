@@ -66,6 +66,11 @@ const DocIcon = ({ size = 14 }) => (
     <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="16" y1="13" x2="8" y2="13" /><line x1="16" y1="17" x2="8" y2="17" /><polyline points="10 9 9 9 8 9" />
   </svg>
 );
+const GroupIcon = ({ size = 20 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx="9" cy="7" r="4" /><path d="M23 21v-2a4 4 0 00-3-3.87" /><path d="M16 3.13a4 4 0 010 7.75" />
+  </svg>
+);
 
 /* ────────── Floating Particles Background ────────── */
 function FloatingParticles() {
@@ -95,7 +100,8 @@ function StatCard({ icon, value, label, accent }) {
 
 /* ────────── Blacklist Entry Card ────────── */
 function EntryCard({ item, index, onClick }) {
-  const initial = (item.name || '?')[0].toUpperCase();
+  const isGroup = item.type === 'group';
+  const initial = isGroup ? null : (item.name || '?')[0].toUpperCase();
   const [uuidCopied, setUuidCopied] = useState(false);
 
   const handleUuidCopy = (e) => {
@@ -107,16 +113,19 @@ function EntryCard({ item, index, onClick }) {
   };
 
   return (
-    <div className="bl-card fade-in" style={{ animationDelay: `${index * 0.06}s` }} onClick={onClick}>
+    <div className={`bl-card fade-in${isGroup ? ' bl-card--group' : ''}`} style={{ animationDelay: `${index * 0.06}s` }} onClick={onClick}>
       <div className="bl-card-glow" />
       <div className="bl-card-header">
-        <div className="bl-card-avatar">
-          <span>{initial}</span>
+        <div className={`bl-card-avatar${isGroup ? ' bl-card-avatar--group' : ''}`}>
+          <span>{isGroup ? <GroupIcon size={18} /> : initial}</span>
           <div className="bl-card-avatar-ring" />
         </div>
         <div className="bl-card-identity">
-          <div className="bl-card-name">{item.name}</div>
-          {item.uuid && (
+          <div className="bl-card-name">
+            {isGroup && <span className="bl-card-type-badge">집단</span>}
+            {item.name}
+          </div>
+          {!isGroup && item.uuid && (
             <div className="bl-card-uuid bl-card-uuid--copyable" onClick={handleUuidCopy} title="클릭하여 UUID 복사">
               <ClipboardIcon /> {item.uuid}
               {uuidCopied && <span className="bl-copied-toast">복사됨!</span>}
@@ -127,14 +136,14 @@ function EntryCard({ item, index, onClick }) {
       </div>
 
       <div className="bl-card-body">
-        {item.clan && (
+        {!isGroup && item.clan && (
           <div className="bl-card-tag">
             <Icons.Shield /> {item.clan}
           </div>
         )}
         {item.alts && (
           <div className="bl-card-tag bl-card-tag--alt">
-            <Icons.Users /> {item.alts}
+            <Icons.Users /> {isGroup ? item.alts : item.alts}
           </div>
         )}
       </div>
@@ -418,10 +427,10 @@ export default function BlacklistPage() {
     }
     return '';
   });
-  const [form, setForm] = useState({ name: '', uuid: '', alts: '', clan: '', incident: '', content: '' });
+  const [form, setForm] = useState({ type: 'individual', name: '', uuid: '', alts: '', clan: '', incident: '', content: '' });
   const [editItem, setEditItem] = useState(null);
 
-  const EMPTY_FORM = { name: '', uuid: '', alts: '', clan: '', incident: '', content: '' };
+  const EMPTY_FORM = { type: 'individual', name: '', uuid: '', alts: '', clan: '', incident: '', content: '' };
 
   const items = list || [];
   const filtered = useMemo(() => {
@@ -436,14 +445,15 @@ export default function BlacklistPage() {
   }, [items, search]);
 
   const stats = useMemo(() => {
-    const clans = new Set(items.filter(i => i.clan).map(i => i.clan));
+    const individuals = items.filter(i => i.type !== 'group');
+    const groups = items.filter(i => i.type === 'group');
     const thisMonth = items.filter(i => {
       if (!i.date) return false;
       const d = new Date(i.date);
       const now = new Date();
       return d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
     });
-    return { total: items.length, clans: clans.size, recent: thisMonth.length };
+    return { total: individuals.length, groups: groups.length, recent: thisMonth.length };
   }, [items]);
 
   const checkOwner = (item) => {
@@ -456,6 +466,7 @@ export default function BlacklistPage() {
 
   const startEdit = (item) => {
     setForm({
+      type: item.type || 'individual',
       name: item.name || '',
       uuid: item.uuid || '',
       alts: item.alts || '',
@@ -510,7 +521,7 @@ export default function BlacklistPage() {
         await fetch('/api/blacklist', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...form, reporter: session?.user?.name || '익명' }),
+          body: JSON.stringify({ ...form, type: form.type || 'individual', reporter: session?.user?.name || '익명' }),
         });
       }
       mutate();
@@ -537,6 +548,7 @@ export default function BlacklistPage() {
 
   /* ── 풀페이지 상세 ── */
   if (view === 'detail' && sel) {
+    const isGroupDetail = sel.type === 'group';
     return (
       <div className="bl-page fade-in">
         <div className="bl-form-page">
@@ -546,11 +558,12 @@ export default function BlacklistPage() {
 
           <div className="bl-detail">
             <div className="bl-detail-banner">
-              <div className="bl-detail-avatar">
-                <span>{(sel.name || '?')[0].toUpperCase()}</span>
+              <div className={`bl-detail-avatar${isGroupDetail ? ' bl-detail-avatar--group' : ''}`}>
+                <span>{isGroupDetail ? <GroupIcon size={24} /> : (sel.name || '?')[0].toUpperCase()}</span>
               </div>
+              {isGroupDetail && <div className="bl-detail-type-badge">집단 신고</div>}
               <h3 className="bl-detail-name">{sel.name}</h3>
-              {sel.uuid && (
+              {!isGroupDetail && sel.uuid && (
                 <div
                   className="bl-detail-uuid bl-detail-uuid--copyable"
                   onClick={() => copyUuid(sel.uuid)}
@@ -563,34 +576,62 @@ export default function BlacklistPage() {
             </div>
 
             <div className="bl-detail-grid">
-              <div className="bl-detail-cell">
-                <div className="bl-detail-cell-icon"><Icons.Users /></div>
-                <div>
-                  <div className="bl-detail-cell-label">부캐</div>
-                  <div className="bl-detail-cell-value">{sel.alts || '정보 없음'}</div>
-                </div>
-              </div>
-              <div className="bl-detail-cell">
-                <div className="bl-detail-cell-icon"><Icons.Shield /></div>
-                <div>
-                  <div className="bl-detail-cell-label">소속 클랜</div>
-                  <div className="bl-detail-cell-value">{sel.clan || '무소속'}</div>
-                </div>
-              </div>
-              <div className="bl-detail-cell">
-                <div className="bl-detail-cell-icon"><CalendarIcon /></div>
-                <div>
-                  <div className="bl-detail-cell-label">등록일</div>
-                  <div className="bl-detail-cell-value">{sel.date || '-'}</div>
-                </div>
-              </div>
-              <div className="bl-detail-cell">
-                <div className="bl-detail-cell-icon"><UserIcon /></div>
-                <div>
-                  <div className="bl-detail-cell-label">신고자</div>
-                  <div className="bl-detail-cell-value">{resolveNick(sel.discordId, sel.reporter)}</div>
-                </div>
-              </div>
+              {isGroupDetail ? (
+                <>
+                  <div className="bl-detail-cell">
+                    <div className="bl-detail-cell-icon"><Icons.Users /></div>
+                    <div>
+                      <div className="bl-detail-cell-label">관련 인물</div>
+                      <div className="bl-detail-cell-value">{sel.alts || '정보 없음'}</div>
+                    </div>
+                  </div>
+                  <div className="bl-detail-cell">
+                    <div className="bl-detail-cell-icon"><CalendarIcon /></div>
+                    <div>
+                      <div className="bl-detail-cell-label">등록일</div>
+                      <div className="bl-detail-cell-value">{sel.date || '-'}</div>
+                    </div>
+                  </div>
+                  <div className="bl-detail-cell">
+                    <div className="bl-detail-cell-icon"><UserIcon /></div>
+                    <div>
+                      <div className="bl-detail-cell-label">신고자</div>
+                      <div className="bl-detail-cell-value">{resolveNick(sel.discordId, sel.reporter)}</div>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="bl-detail-cell">
+                    <div className="bl-detail-cell-icon"><Icons.Users /></div>
+                    <div>
+                      <div className="bl-detail-cell-label">부캐</div>
+                      <div className="bl-detail-cell-value">{sel.alts || '정보 없음'}</div>
+                    </div>
+                  </div>
+                  <div className="bl-detail-cell">
+                    <div className="bl-detail-cell-icon"><Icons.Shield /></div>
+                    <div>
+                      <div className="bl-detail-cell-label">소속 클랜</div>
+                      <div className="bl-detail-cell-value">{sel.clan || '무소속'}</div>
+                    </div>
+                  </div>
+                  <div className="bl-detail-cell">
+                    <div className="bl-detail-cell-icon"><CalendarIcon /></div>
+                    <div>
+                      <div className="bl-detail-cell-label">등록일</div>
+                      <div className="bl-detail-cell-value">{sel.date || '-'}</div>
+                    </div>
+                  </div>
+                  <div className="bl-detail-cell">
+                    <div className="bl-detail-cell-icon"><UserIcon /></div>
+                    <div>
+                      <div className="bl-detail-cell-label">신고자</div>
+                      <div className="bl-detail-cell-value">{resolveNick(sel.discordId, sel.reporter)}</div>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="bl-detail-section">
@@ -656,6 +697,7 @@ export default function BlacklistPage() {
 
   /* ── 풀페이지 폼 (등록/수정) ── */
   if (view === 'form') {
+    const isGroupForm = form.type === 'group';
     return (
       <div className="bl-page fade-in">
         <div className="bl-form-page">
@@ -664,17 +706,49 @@ export default function BlacklistPage() {
           </button>
 
           <h2 className="bl-form-title">{editItem ? '블랙리스트 수정' : '블랙리스트 등록'}</h2>
-          <p className="bl-form-subtitle">{editItem ? '블랙리스트 정보를 수정합니다' : '새로운 블랙리스트 유저를 등록합니다'}</p>
+          <p className="bl-form-subtitle">{editItem ? '블랙리스트 정보를 수정합니다' : '새로운 블랙리스트 항목을 등록합니다'}</p>
+
+          {/* 신고 유형 선택 */}
+          <div className="bl-form-section">
+            <div className="bl-form-section-title"><AlertIcon size={14} /> 신고 유형</div>
+            <div className="bl-type-toggle">
+              <button
+                className={`bl-type-btn${!isGroupForm ? ' active' : ''}`}
+                onClick={() => setForm({ ...form, type: 'individual' })}
+              >
+                <SkullIcon size={16} />
+                <span>개인</span>
+              </button>
+              <button
+                className={`bl-type-btn${isGroupForm ? ' active' : ''}`}
+                onClick={() => setForm({ ...form, type: 'group' })}
+              >
+                <GroupIcon size={16} />
+                <span>집단</span>
+              </button>
+            </div>
+          </div>
 
           {/* 기본 정보 섹션 */}
           <div className="bl-form-section">
-            <div className="bl-form-section-title"><SkullIcon size={14} /> 기본 정보</div>
-            <Input label="닉네임 *" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="게임 내 닉네임" />
-            <div className="bl-form-grid">
-              <Input label="UUID" value={form.uuid} onChange={(e) => setForm({ ...form, uuid: e.target.value })} placeholder="숫자 9자리 (예: 123456789)" />
-              <Input label="소속 클랜" value={form.clan} onChange={(e) => setForm({ ...form, clan: e.target.value })} placeholder="클랜 / 하이브명" />
+            <div className="bl-form-section-title">
+              {isGroupForm ? <><GroupIcon size={14} /> 집단 정보</> : <><SkullIcon size={14} /> 기본 정보</>}
             </div>
-            <Input label="부캐" value={form.alts} onChange={(e) => setForm({ ...form, alts: e.target.value })} placeholder="쉼표로 구분 (선택)" />
+            {isGroupForm ? (
+              <>
+                <Input label="집단 이름 *" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="하이브 / 클랜 이름" />
+                <Input label="관련 인물" value={form.alts} onChange={(e) => setForm({ ...form, alts: e.target.value })} placeholder="주요 멤버, 리더 등 (쉼표로 구분)" />
+              </>
+            ) : (
+              <>
+                <Input label="닉네임 *" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="게임 내 닉네임" />
+                <div className="bl-form-grid">
+                  <Input label="UUID" value={form.uuid} onChange={(e) => setForm({ ...form, uuid: e.target.value })} placeholder="숫자 9자리 (예: 123456789)" />
+                  <Input label="소속 클랜" value={form.clan} onChange={(e) => setForm({ ...form, clan: e.target.value })} placeholder="클랜 / 하이브명" />
+                </div>
+                <Input label="부캐" value={form.alts} onChange={(e) => setForm({ ...form, alts: e.target.value })} placeholder="쉼표로 구분 (선택)" />
+              </>
+            )}
           </div>
 
           {/* 사건 내용 섹션 */}
@@ -713,18 +787,18 @@ export default function BlacklistPage() {
           </div>
           <div>
             <h2 className="bl-hero-title">BLACKLIST</h2>
-            <p className="bl-hero-sub">주의 유저 공유 목록</p>
+            <p className="bl-hero-sub">주의 유저 / 집단 공유 목록</p>
           </div>
         </div>
         <Button variant="danger" onClick={openNewForm} style={{ position: 'relative', zIndex: 2 }}>
-          <Icons.Plus /> 유저 등록
+          <Icons.Plus /> 신고 등록
         </Button>
       </div>
 
       {/* Stats Row */}
       <div className="bl-stats">
         <StatCard icon={<SkullIcon size={18} />} value={stats.total} label="등록된 유저" accent="#ff4444" />
-        <StatCard icon={<Icons.Shield />} value={stats.clans} label="관련 클랜" accent="#ff6b35" />
+        <StatCard icon={<GroupIcon size={18} />} value={stats.groups} label="등록된 집단" accent="#ff6b35" />
         <StatCard icon={<AlertIcon />} value={stats.recent} label="이번 달" accent="#ffaa44" />
       </div>
 

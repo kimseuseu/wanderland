@@ -37,6 +37,7 @@ export const members = pgTable('members', {
 
 export const blacklist = pgTable('blacklist', {
   id: serial('id').primaryKey(),
+  type: text('type').default('individual'), // 'individual' | 'group'
   name: text('name').notNull(),
   uuid: text('uuid'),
   alts: text('alts'),

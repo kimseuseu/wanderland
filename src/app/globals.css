@@ -1692,6 +1692,79 @@ option {
   object-fit: contain;
 }
 
+/* ─── Group Report Styles ─── */
+.bl-type-toggle {
+  display: flex;
+  gap: 8px;
+}
+.bl-type-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-display);
+  transition: all 0.2s;
+}
+.bl-type-btn:hover {
+  border-color: rgba(255,255,255,0.15);
+  color: var(--text-primary);
+}
+.bl-type-btn.active {
+  border-color: var(--danger);
+  background: rgba(255,68,68,0.08);
+  color: var(--danger);
+}
+.bl-card--group {
+  border-color: rgba(255,107,53,0.15);
+}
+.bl-card--group .bl-card-glow {
+  background: radial-gradient(ellipse at top, rgba(255,107,53,0.06), transparent 70%);
+}
+.bl-card-avatar--group {
+  background: linear-gradient(135deg, rgba(255,107,53,0.15), rgba(255,107,53,0.05));
+  border-color: rgba(255,107,53,0.15);
+}
+.bl-card-avatar--group span {
+  color: #ff6b35;
+}
+.bl-card-type-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(255,107,53,0.15);
+  color: #ff6b35;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.bl-detail-avatar--group {
+  background: linear-gradient(135deg, rgba(255,107,53,0.2), rgba(255,107,53,0.05));
+  border-color: rgba(255,107,53,0.25);
+}
+.bl-detail-avatar--group span {
+  color: #ff6b35;
+}
+.bl-detail-type-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 6px;
+  background: rgba(255,107,53,0.12);
+  color: #ff6b35;
+  margin-bottom: 8px;
+}
+
 /* ─── Mobile: Form ─── */
 @media (max-width: 640px) {
   .bl-form-page { padding: 0 4px; }

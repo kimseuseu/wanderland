@@ -26,6 +26,7 @@ export async function PUT(req, { params }) {
     const body = await req.json();
     const result = await db.update(blacklist)
       .set({
+        type: body.type || existing[0].type || 'individual',
         name: body.name,
         uuid: body.uuid || '',
         alts: body.alts || '',
