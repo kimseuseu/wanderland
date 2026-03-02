@@ -526,24 +526,32 @@ option {
 }
 
 .pin-tooltip {
-  background: rgba(10, 10, 10, 0.9) !important;
-  border: 1px solid var(--border) !important;
-  color: var(--text-primary) !important;
-  font-size: 10px !important;
-  font-weight: 700 !important;
+  background: rgba(8, 8, 12, 0.95) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  color: #fff !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
   font-family: var(--font-body) !important;
-  padding: 2px 6px !important;
-  border-radius: 4px !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5) !important;
+  padding: 5px 10px !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.6) !important;
+  letter-spacing: 0.02em !important;
+  white-space: nowrap !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
 }
 
 .pin-tooltip::before {
-  border-top-color: rgba(10, 10, 10, 0.9) !important;
+  border-top-color: rgba(8, 8, 12, 0.95) !important;
 }
 
 .custom-pin {
   background: none !important;
   border: none !important;
+}
+.custom-pin .pin-marker:hover {
+  transform: scale(1.2);
+  z-index: 9999 !important;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -4624,17 +4632,32 @@ option {
 
 /* POI Tooltip */
 .poi-tooltip {
-  background: rgba(12,12,12,0.9) !important;
-  border: 1px solid rgba(255,255,255,0.1) !important;
-  border-radius: 6px !important;
-  padding: 3px 8px !important;
-  font-size: 10px !important;
+  background: rgba(8, 8, 12, 0.95) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
   font-family: var(--font-body) !important;
-  color: var(--text-secondary) !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.4) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.6) !important;
+  letter-spacing: 0.02em !important;
+  white-space: nowrap !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
 }
 .poi-tooltip::before {
-  border-top-color: rgba(12,12,12,0.9) !important;
+  border-top-color: rgba(8, 8, 12, 0.95) !important;
+}
+
+/* POI marker hover */
+.custom-poi {
+  background: none !important;
+  border: none !important;
+}
+.custom-poi .poi-marker:hover {
+  transform: scale(1.25);
+  z-index: 9999 !important;
 }
 
 /* ─── Cluster Icons ─── */

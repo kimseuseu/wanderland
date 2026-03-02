@@ -70,34 +70,48 @@ function createPinIcon(color, category) {
   const emoji = CATEGORY_ICONS[category] || CATEGORY_ICONS.etc;
   return L.divIcon({
     className: 'custom-pin',
-    html: `<div style="
+    html: `<div class="pin-marker" style="
+      --pin-color:${color};
       display:flex;align-items:center;justify-content:center;
-      width:24px;height:24px;border-radius:50%;
-      background:${color};
-      border:2px solid rgba(10,10,10,0.8);
-      box-shadow:0 0 12px ${color}80, 0 0 4px ${color}40;
-      font-size:12px;line-height:1;
+      width:30px;height:30px;border-radius:50%;
+      background:radial-gradient(circle at 35% 35%, ${color}, ${color}bb);
+      border:2.5px solid rgba(0,0,0,0.7);
+      outline:1.5px solid ${color}60;
+      box-shadow:0 2px 8px rgba(0,0,0,0.5), 0 0 16px ${color}50;
+      font-size:14px;line-height:1;
+      transition:transform 0.15s;
     ">${emoji}</div>`,
-    iconSize: [28, 28],
-    iconAnchor: [14, 14],
+    iconSize: [34, 34],
+    iconAnchor: [17, 17],
   });
 }
+
+// POI 카테고리별 중요도 (큰 마커 vs 작은 마커)
+const POI_MAJOR = new Set(['monolith', 'silo', 'worldstone', 'boss']);
 
 function createPoiIcon(category, group) {
   const emoji = POI_ICONS[category] || '📍';
   const color = POI_GROUP_COLORS[group] || '#4488ff';
+  const isMajor = POI_MAJOR.has(category);
+  const size = isMajor ? 32 : 26;
+  const fontSize = isMajor ? 15 : 12;
+  const borderW = isMajor ? 2.5 : 2;
+  const borderRadius = category === 'worldstone' ? '6px' : '50%';
+
   return L.divIcon({
-    className: 'custom-poi',
-    html: `<div style="
+    className: `custom-poi poi-${category}`,
+    html: `<div class="poi-marker" style="
       display:flex;align-items:center;justify-content:center;
-      width:20px;height:20px;border-radius:50%;
-      background:${color}cc;
-      border:1.5px solid rgba(255,255,255,0.3);
-      box-shadow:0 0 6px ${color}60;
-      font-size:10px;line-height:1;
+      width:${size}px;height:${size}px;border-radius:${borderRadius};
+      background:radial-gradient(circle at 35% 35%, ${color}ee, ${color}99);
+      border:${borderW}px solid rgba(0,0,0,0.6);
+      outline:1px solid ${color}40;
+      box-shadow:0 2px 6px rgba(0,0,0,0.45), 0 0 10px ${color}35;
+      font-size:${fontSize}px;line-height:1;
+      transition:transform 0.15s;
     ">${emoji}</div>`,
-    iconSize: [24, 24],
-    iconAnchor: [12, 12],
+    iconSize: [size + 4, size + 4],
+    iconAnchor: [(size + 4) / 2, (size + 4) / 2],
   });
 }
 
@@ -273,10 +287,11 @@ const LeafletMap = forwardRef(function LeafletMap(
     for (const pin of pins) {
       const latlng = gameToLatLng(pin.x, pin.y);
       const marker = L.marker(latlng, { icon: createPinIcon(pin.color, pin.category) });
-      marker.bindTooltip(pin.label, {
+      const pinEmoji = CATEGORY_ICONS[pin.category] || CATEGORY_ICONS.etc;
+      marker.bindTooltip(`${pinEmoji} ${pin.label}`, {
         permanent: !cluster,
         direction: 'top',
-        offset: [0, -10],
+        offset: [0, -14],
         className: 'pin-tooltip',
       });
       marker.on('click', (e) => {
@@ -316,10 +331,12 @@ const LeafletMap = forwardRef(function LeafletMap(
     for (const poi of pois) {
       const latlng = gameToLatLng(poi.x, poi.y);
       const marker = L.marker(latlng, { icon: createPoiIcon(poi.category, poi.group) });
-      marker.bindTooltip(poi.label, {
+      const poiEmoji = POI_ICONS[poi.category] || '📍';
+      const isMajor = POI_MAJOR.has(poi.category);
+      marker.bindTooltip(`${poiEmoji} ${poi.label}`, {
         permanent: false,
         direction: 'top',
-        offset: [0, -8],
+        offset: [0, isMajor ? -14 : -10],
         className: 'poi-tooltip',
       });
       marker.on('click', (e) => {
