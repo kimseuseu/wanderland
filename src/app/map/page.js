@@ -144,10 +144,10 @@ function MapContent() {
   // 시나리오 → DB scenario 매핑
   const POI_SCENARIO_MAP = {
     '전체': null,            // 모든 POI 표시
-    '마니부스': ['manibus'],
+    '터치오브스카이': ['touch_of_sky'],
     '혹독한겨울': ['way_of_winter'],
-    '무한의꿈': ['manibus', 'way_of_winter'],   // 양쪽 맵 통합
-    '비정상수용': ['manibus'],                    // 마니부스 맵 사용
+    '무한의꿈': ['touch_of_sky', 'way_of_winter'],   // 양쪽 맵 통합
+    '비정상수용': ['touch_of_sky'],                    // 터치오브스카이 맵 사용
   };
 
   const filteredPois = useMemo(() => {
@@ -612,7 +612,7 @@ function MapContent() {
                 <div className="map-poi-filter-body">
                   {/* 시나리오 필터 */}
                   <div className="map-poi-scenario-row">
-                    {['전체', '마니부스', '혹독한겨울', '무한의꿈', '비정상수용'].map((s) => (
+                    {['전체', '터치오브스카이', '혹독한겨울', '무한의꿈', '비정상수용'].map((s) => (
                       <button
                         key={s}
                         className={`map-poi-scenario-btn${poiScenarioFilter === s ? ' active' : ''}`}
