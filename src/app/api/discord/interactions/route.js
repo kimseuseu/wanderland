@@ -170,7 +170,21 @@ async function handleBlacklistSearch(interaction) {
       lines.push(`> **${isGroup ? '집단명' : '이름'}:** ${entry.name}`);
       if (!isGroup && entry.uuid) lines.push(`> **UUID:** ${entry.uuid}`);
       if (!isGroup && entry.clan) lines.push(`> **클랜:** ${entry.clan}`);
-      if (entry.alts) lines.push(`> **${isGroup ? '관련 인물' : '부캐'}:** ${entry.alts}`);
+      if (entry.alts) {
+        if (isGroup) {
+          try {
+            const members = JSON.parse(entry.alts);
+            if (Array.isArray(members)) {
+              const memberStr = members.map(m => m.uid ? `${m.name} (${m.uid})` : m.name).join(', ');
+              lines.push(`> **관련 인물:** ${memberStr}`);
+            } else {
+              lines.push(`> **관련 인물:** ${entry.alts}`);
+            }
+          } catch { lines.push(`> **관련 인물:** ${entry.alts}`); }
+        } else {
+          lines.push(`> **부캐:** ${entry.alts}`);
+        }
+      }
       if (entry.incident) lines.push(`> **사건:** ${entry.incident}`);
       if (entry.date) lines.push(`> **등록일:** ${entry.date}`);
       if (entry.reporter) lines.push(`> **등록자:** ${entry.reporter}`);

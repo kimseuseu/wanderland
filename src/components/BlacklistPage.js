@@ -72,6 +72,82 @@ const GroupIcon = ({ size = 20 }) => (
   </svg>
 );
 
+/* ────────── Group Members Helpers ────────── */
+function parseGroupMembers(alts) {
+  if (!alts) return [];
+  try {
+    const parsed = JSON.parse(alts);
+    if (Array.isArray(parsed)) return parsed;
+  } catch {}
+  // fallback: plain text → single entry
+  return alts ? [{ name: alts, uid: '' }] : [];
+}
+
+function serializeGroupMembers(members) {
+  const filtered = members.filter(m => m.name.trim());
+  if (filtered.length === 0) return '';
+  return JSON.stringify(filtered);
+}
+
+function formatGroupMembersSummary(alts) {
+  const members = parseGroupMembers(alts);
+  if (members.length === 0) return '';
+  const names = members.map(m => m.name).filter(Boolean);
+  if (names.length <= 3) return names.join(', ');
+  return `${names.slice(0, 3).join(', ')} 외 ${names.length - 3}명`;
+}
+
+/* ────────── Group Member List Editor ────────── */
+function MemberListEditor({ members, onChange }) {
+  const addMember = () => onChange([...members, { name: '', uid: '' }]);
+
+  const removeMember = (idx) => {
+    if (members.length <= 1) return;
+    onChange(members.filter((_, i) => i !== idx));
+  };
+
+  const updateMember = (idx, field, value) => {
+    const updated = members.map((m, i) => i === idx ? { ...m, [field]: value } : m);
+    onChange(updated);
+  };
+
+  return (
+    <div className="bl-members-editor">
+      <label className="bl-editor-label" style={{ marginBottom: 8, display: 'block' }}>관련 인물</label>
+      <div className="bl-members-list">
+        {members.map((m, i) => (
+          <div key={i} className="bl-member-row">
+            <span className="bl-member-index">{i + 1}</span>
+            <input
+              className="bl-member-input"
+              placeholder="닉네임"
+              value={m.name}
+              onChange={(e) => updateMember(i, 'name', e.target.value)}
+            />
+            <input
+              className="bl-member-input bl-member-input--uid"
+              placeholder="UID (선택)"
+              value={m.uid}
+              onChange={(e) => updateMember(i, 'uid', e.target.value)}
+            />
+            <button
+              className="bl-member-remove"
+              onClick={() => removeMember(i)}
+              disabled={members.length <= 1}
+              title="삭제"
+            >
+              <Icons.X />
+            </button>
+          </div>
+        ))}
+      </div>
+      <button className="bl-member-add" onClick={addMember}>
+        <Icons.Plus /> 인물 추가
+      </button>
+    </div>
+  );
+}
+
 /* ────────── Floating Particles Background ────────── */
 function FloatingParticles() {
   return (
@@ -143,7 +219,7 @@ function EntryCard({ item, index, onClick }) {
         )}
         {item.alts && (
           <div className="bl-card-tag bl-card-tag--alt">
-            <Icons.Users /> {isGroup ? item.alts : item.alts}
+            <Icons.Users /> {isGroup ? formatGroupMembersSummary(item.alts) : item.alts}
           </div>
         )}
       </div>
@@ -428,6 +504,7 @@ export default function BlacklistPage() {
     return '';
   });
   const [form, setForm] = useState({ type: 'individual', name: '', uuid: '', alts: '', clan: '', incident: '', content: '' });
+  const [members, setMembers] = useState([{ name: '', uid: '' }]);
   const [editItem, setEditItem] = useState(null);
 
   const EMPTY_FORM = { type: 'individual', name: '', uuid: '', alts: '', clan: '', incident: '', content: '' };
@@ -465,6 +542,7 @@ export default function BlacklistPage() {
   };
 
   const startEdit = (item) => {
+    const isGroup = item.type === 'group';
     setForm({
       type: item.type || 'individual',
       name: item.name || '',
@@ -474,6 +552,12 @@ export default function BlacklistPage() {
       incident: item.incident || '',
       content: item.content || '',
     });
+    if (isGroup) {
+      const parsed = parseGroupMembers(item.alts);
+      setMembers(parsed.length > 0 ? parsed : [{ name: '', uid: '' }]);
+    } else {
+      setMembers([{ name: '', uid: '' }]);
+    }
     setEditItem(item);
     setView('form');
     setSel(null);
@@ -498,6 +582,7 @@ export default function BlacklistPage() {
 
   const openNewForm = () => {
     setForm({ ...EMPTY_FORM });
+    setMembers([{ name: '', uid: '' }]);
     setEditItem(null);
     setView('form');
   };
@@ -506,22 +591,28 @@ export default function BlacklistPage() {
     setView('list');
     setEditItem(null);
     setForm({ ...EMPTY_FORM });
+    setMembers([{ name: '', uid: '' }]);
   };
 
   const addOrUpdate = async () => {
     if (!form.name) return;
+    const isGroup = form.type === 'group';
+    const payload = { ...form };
+    if (isGroup) {
+      payload.alts = serializeGroupMembers(members);
+    }
     try {
       if (editItem) {
         await fetch(`/api/blacklist/${editItem.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(form),
+          body: JSON.stringify(payload),
         });
       } else {
         await fetch('/api/blacklist', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ ...form, type: form.type || 'individual', reporter: session?.user?.name || '익명' }),
+          body: JSON.stringify({ ...payload, type: payload.type || 'individual', reporter: session?.user?.name || '익명' }),
         });
       }
       mutate();
@@ -579,13 +670,6 @@ export default function BlacklistPage() {
               {isGroupDetail ? (
                 <>
                   <div className="bl-detail-cell">
-                    <div className="bl-detail-cell-icon"><Icons.Users /></div>
-                    <div>
-                      <div className="bl-detail-cell-label">관련 인물</div>
-                      <div className="bl-detail-cell-value">{sel.alts || '정보 없음'}</div>
-                    </div>
-                  </div>
-                  <div className="bl-detail-cell">
                     <div className="bl-detail-cell-icon"><CalendarIcon /></div>
                     <div>
                       <div className="bl-detail-cell-label">등록일</div>
@@ -633,6 +717,30 @@ export default function BlacklistPage() {
                 </>
               )}
             </div>
+
+            {isGroupDetail && sel.alts && (() => {
+              const groupMembers = parseGroupMembers(sel.alts);
+              if (groupMembers.length === 0) return null;
+              return (
+                <div className="bl-detail-section">
+                  <div className="bl-detail-section-title">
+                    <Icons.Users /> 관련 인물 ({groupMembers.length}명)
+                  </div>
+                  <div className="bl-members-table">
+                    <div className="bl-members-table-header">
+                      <span>닉네임</span>
+                      <span>UID</span>
+                    </div>
+                    {groupMembers.map((m, i) => (
+                      <div key={i} className="bl-members-table-row">
+                        <span className="bl-members-table-name">{m.name || '-'}</span>
+                        <span className="bl-members-table-uid">{m.uid || '-'}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
 
             <div className="bl-detail-section">
               <div className="bl-detail-section-title">
@@ -737,7 +845,7 @@ export default function BlacklistPage() {
             {isGroupForm ? (
               <>
                 <Input label="집단 이름 *" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} placeholder="하이브 / 클랜 이름" />
-                <Input label="관련 인물" value={form.alts} onChange={(e) => setForm({ ...form, alts: e.target.value })} placeholder="주요 멤버, 리더 등 (쉼표로 구분)" />
+                <MemberListEditor members={members} onChange={setMembers} />
               </>
             ) : (
               <>
