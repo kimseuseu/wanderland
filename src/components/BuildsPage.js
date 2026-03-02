@@ -96,6 +96,15 @@ function BuildCard({ build, index, onClick, liked, onLike, resolveNick }) {
    ═══════════════════════════════════════════ */
 function BuildDetail({ build, onBack, canEdit, onEdit, onDelete, resolveNick }) {
   const containerRef = useRef(null);
+  const [shareCopied, setShareCopied] = useState(false);
+
+  const copyShareLink = () => {
+    const url = `${window.location.origin}?page=builds&id=${build.id}`;
+    navigator.clipboard.writeText(url).then(() => {
+      setShareCopied(true);
+      setTimeout(() => setShareCopied(false), 2000);
+    });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -168,9 +177,19 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete, resolveNick }) 
               {build.tags?.map((t) => <Tag key={t}>{t}</Tag>)}
             </div>
           </div>
-          <div style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', textAlign: 'right' }}>
-            <div style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>{resolveNick(build.discordId, build.author)}</div>
-            <div style={{ marginTop: 2 }}>{build.date}</div>
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 12 }}>
+            <div style={{ fontSize: 12, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', textAlign: 'right' }}>
+              <div style={{ fontWeight: 600, color: 'var(--text-secondary)' }}>{resolveNick(build.discordId, build.author)}</div>
+              <div style={{ marginTop: 2 }}>{build.date}</div>
+            </div>
+            <button
+              onClick={copyShareLink}
+              className="bd-share-btn"
+              title="공유 링크 복사"
+            >
+              {shareCopied ? '✓' : <Icons.Share />}
+              {shareCopied ? '복사됨!' : '공유'}
+            </button>
           </div>
         </div>
       </div>
@@ -411,7 +430,7 @@ function BuildDetail({ build, onBack, canEdit, onEdit, onDelete, resolveNick }) 
 /* ═══════════════════════════════════════════
    빌드 목록 페이지
    ═══════════════════════════════════════════ */
-export default function BuildsPage() {
+export default function BuildsPage({ initialBuildId }) {
   const { data: session } = useSession();
   const { data: builds, loading, mutate } = useApi('/api/builds');
   const resolveNick = useNicknames();
@@ -422,6 +441,17 @@ export default function BuildsPage() {
   const [weaponFilter, setWeaponFilter] = useState('전체');
   const [editBuild, setEditBuild] = useState(null);
   const [likedIds, setLikedIds] = useState(new Set());
+
+  // URL의 빌드 ID로 상세 페이지 자동 이동
+  useEffect(() => {
+    if (initialBuildId && builds?.length) {
+      const target = builds.find((b) => b.id === initialBuildId);
+      if (target) {
+        setSel(target);
+        setMode('detail');
+      }
+    }
+  }, [initialBuildId, builds]);
 
   // 좋아요 목록 로드
   useEffect(() => {

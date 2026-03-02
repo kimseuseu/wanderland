@@ -14,11 +14,17 @@ import AuthGate from '@/components/AuthGate';
 
 export default function Page() {
   const [page, setPage] = useState('home');
+  const [buildId, setBuildId] = useState(null);
 
   useEffect(() => {
-    const p = new URLSearchParams(window.location.search).get('page');
+    const params = new URLSearchParams(window.location.search);
+    const p = params.get('page');
     if (['home', 'news', 'about', 'builds', 'members', 'blacklist', 'trades', 'guides'].includes(p)) {
       setPage(p);
+    }
+    const bid = params.get('id');
+    if (p === 'builds' && bid) {
+      setBuildId(Number(bid));
     }
   }, []);
 
@@ -32,7 +38,7 @@ export default function Page() {
       <main style={{ maxWidth: 1200, margin: '0 auto', padding: '26px 24px 56px' }}>
         {page === 'home' && <HomePage onNavigate={setPage} />}
         {page === 'news' && <NewsPage />}
-        {page === 'builds' && <BuildsPage />}
+        {page === 'builds' && <BuildsPage initialBuildId={buildId} />}
         {page === 'members' && <MembersPage />}
         {page === 'trades' && <AuthGate><TradePage /></AuthGate>}
         {page === 'guides' && <AuthGate><GuidePage /></AuthGate>}
