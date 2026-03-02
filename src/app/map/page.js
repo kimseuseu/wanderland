@@ -10,6 +10,7 @@ import { useApi } from '@/hooks/useApi';
 import { useNicknames } from '@/hooks/useNicknames';
 import NavBar from '@/components/NavBar';
 import AuthGate from '@/components/AuthGate';
+import { POI_GROUPS, ALL_POI_CATEGORIES, POI_CATEGORY_MAP, ALL_POI_KEYS } from '@/data/poiCategories';
 
 const LeafletMap = dynamic(() => import('@/components/LeafletMap'), {
   ssr: false,
@@ -47,6 +48,7 @@ function MapContent() {
   const { data: pins, loading, mutate } = useApi('/api/map-pins');
   const { data: routes, mutate: mutateRoutes } = useApi('/api/map-routes');
   const { data: favIds, mutate: mutateFavs } = useApi('/api/pin-favorites');
+  const { data: poisData, mutate: mutatePois } = useApi('/api/pois');
   const resolveNick = useNicknames();
   const mapRef = useRef(null);
   const [showAdd, setShowAdd] = useState(false);
@@ -71,6 +73,16 @@ function MapContent() {
     new Set(PIN_CATEGORIES.map((c) => c.key))
   );
   const [showCategoryFilter, setShowCategoryFilter] = useState(false);
+
+  // POI layer state
+  const [enabledPoiCategories, setEnabledPoiCategories] = useState(() => new Set(ALL_POI_KEYS));
+  const [expandedPoiGroups, setExpandedPoiGroups] = useState(() => new Set());
+  const [showPoiFilter, setShowPoiFilter] = useState(false);
+  const [poiAddMode, setPoiAddMode] = useState(false);
+  const [showPoiModal, setShowPoiModal] = useState(false);
+  const [poiNp, setPoiNp] = useState(null);
+  const [poiForm, setPoiForm] = useState({ category: 'monolith', group: 'locations', label: '', note: '', scenario: '' });
+  const [selPoi, setSelPoi] = useState(null);
 
   // Feature 4: Distance measurement
   const [measureMode, setMeasureMode] = useState(false);
@@ -128,6 +140,20 @@ function MapContent() {
     return result;
   }, [pinList, filter, search, viewMode, session, enabledCategories, favorites]);
 
+  const filteredPois = useMemo(() => {
+    const list = poisData || [];
+    return list.filter((p) => enabledPoiCategories.has(p.category));
+  }, [poisData, enabledPoiCategories]);
+
+  // POI 카테고리별 개수
+  const poiCounts = useMemo(() => {
+    const counts = {};
+    for (const p of (poisData || [])) {
+      counts[p.category] = (counts[p.category] || 0) + 1;
+    }
+    return counts;
+  }, [poisData]);
+
   const checkOwner = (pin) => {
     if (!session || !pin) return false;
     if (session.isAdmin) return true;
@@ -151,6 +177,67 @@ function MapContent() {
     } else {
       setEnabledCategories(new Set(PIN_CATEGORIES.map((c) => c.key)));
     }
+  };
+
+  // POI toggles
+  const togglePoiCategory = (key) => {
+    setEnabledPoiCategories((prev) => {
+      const next = new Set(prev);
+      if (next.has(key)) next.delete(key); else next.add(key);
+      return next;
+    });
+  };
+
+  const togglePoiGroup = (groupKey) => {
+    const cats = POI_GROUPS.find((g) => g.key === groupKey)?.categories || [];
+    const allEnabled = cats.every((c) => enabledPoiCategories.has(c.key));
+    setEnabledPoiCategories((prev) => {
+      const next = new Set(prev);
+      for (const c of cats) {
+        if (allEnabled) next.delete(c.key); else next.add(c.key);
+      }
+      return next;
+    });
+  };
+
+  const toggleAllPoi = () => {
+    if (enabledPoiCategories.size === ALL_POI_KEYS.size) {
+      setEnabledPoiCategories(new Set());
+    } else {
+      setEnabledPoiCategories(new Set(ALL_POI_KEYS));
+    }
+  };
+
+  const toggleExpandGroup = (groupKey) => {
+    setExpandedPoiGroups((prev) => {
+      const next = new Set(prev);
+      if (next.has(groupKey)) next.delete(groupKey); else next.add(groupKey);
+      return next;
+    });
+  };
+
+  // POI CRUD (admin only)
+  const addPoi = async () => {
+    if (!poiForm.label || !poiNp) return;
+    try {
+      await fetch('/api/pois', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...poiForm, x: poiNp.x, y: poiNp.y }),
+      });
+      mutatePois();
+    } catch (e) { console.error(e); }
+    setShowPoiModal(false);
+    setPoiNp(null);
+    setPoiForm({ category: 'monolith', group: 'locations', label: '', note: '', scenario: '' });
+  };
+
+  const deletePoi = async (id) => {
+    try {
+      await fetch(`/api/pois/${id}`, { method: 'DELETE' });
+      mutatePois();
+    } catch (e) { console.error(e); }
+    setSelPoi(null);
   };
 
   // Feature 3: Toggle favorite
@@ -179,6 +266,11 @@ function MapContent() {
         if (prev.length >= 2) return [coords]; // reset after 2
         return [...prev, coords];
       });
+      return;
+    }
+    if (poiAddMode) {
+      setPoiNp(coords);
+      setShowPoiModal(true);
       return;
     }
     setNp(coords);
@@ -313,6 +405,8 @@ function MapContent() {
         measureMode={measureMode}
         measurePoints={measurePoints}
         cluster
+        pois={filteredPois}
+        onPoiClick={setSelPoi}
       />
 
       {/* Drawing Mode Toolbar */}
@@ -352,6 +446,18 @@ function MapContent() {
               <Button onClick={() => setMeasurePoints([])} style={{ background: 'var(--bg-tertiary)' }}>초기화</Button>
             )}
             <Button onClick={() => { setMeasureMode(false); setMeasurePoints([]); }} style={{ background: 'var(--bg-tertiary)' }}>닫기</Button>
+          </div>
+        </div>
+      )}
+
+      {/* POI Add Mode Toolbar (Admin) */}
+      {poiAddMode && (
+        <div className="map-draw-toolbar">
+          <div className="map-draw-info">
+            <span style={{ fontSize: 14 }}>📌</span> POI 배치 모드 · 지도를 클릭하여 위치 지정
+          </div>
+          <div className="map-draw-actions">
+            <Button onClick={() => { setPoiAddMode(false); }} style={{ background: 'var(--bg-tertiary)' }}>종료</Button>
           </div>
         </div>
       )}
@@ -470,6 +576,76 @@ function MapContent() {
                 </svg>
                 거리 측정
               </button>
+            </div>
+
+            {/* ── POI Layer Filter ── */}
+            <div className="map-poi-filter">
+              <button className="map-poi-filter-header" onClick={() => setShowPoiFilter(!showPoiFilter)}>
+                <span style={{ fontSize: 13 }}>🌍</span>
+                게임 POI
+                <span style={{ opacity: 0.5, fontSize: 10 }}>
+                  {enabledPoiCategories.size}/{ALL_POI_KEYS.size}
+                </span>
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginLeft: 'auto', transform: showPoiFilter ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              {showPoiFilter && (
+                <div className="map-poi-filter-body">
+                  {/* 전체 토글 + 관리자 POI 추가 */}
+                  <div className="map-poi-toggle-all-row">
+                    <button className="map-poi-toggle-all" onClick={toggleAllPoi}>
+                      {enabledPoiCategories.size === ALL_POI_KEYS.size ? '전체 끄기' : '전체 켜기'}
+                    </button>
+                    {session?.isAdmin && (
+                      <button
+                        className={`map-poi-admin-btn${poiAddMode ? ' active' : ''}`}
+                        onClick={() => { setPoiAddMode(!poiAddMode); setDrawingMode(false); setMeasureMode(false); }}
+                      >
+                        + POI 추가
+                      </button>
+                    )}
+                  </div>
+                  {/* 그룹별 아코디언 */}
+                  {POI_GROUPS.map((group) => {
+                    const isExpanded = expandedPoiGroups.has(group.key);
+                    const allOn = group.categories.every((c) => enabledPoiCategories.has(c.key));
+                    const someOn = group.categories.some((c) => enabledPoiCategories.has(c.key));
+                    return (
+                      <div key={group.key} className="map-poi-group">
+                        <button className="map-poi-group-header" onClick={() => toggleExpandGroup(group.key)}>
+                          <span
+                            className="map-poi-group-check"
+                            onClick={(e) => { e.stopPropagation(); togglePoiGroup(group.key); }}
+                          >
+                            {allOn ? '☑' : someOn ? '◧' : '☐'}
+                          </span>
+                          <span className="map-poi-group-label">{group.label}</span>
+                          <span className="map-poi-group-count">{group.categories.reduce((s, c) => s + (poiCounts[c.key] || 0), 0)}</span>
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginLeft: 'auto', transform: isExpanded ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>
+                            <polyline points="6 9 12 15 18 9" />
+                          </svg>
+                        </button>
+                        {isExpanded && (
+                          <div className="map-poi-group-items">
+                            {group.categories.map((cat) => (
+                              <button
+                                key={cat.key}
+                                className={`map-poi-item${enabledPoiCategories.has(cat.key) ? ' on' : ''}`}
+                                onClick={() => togglePoiCategory(cat.key)}
+                              >
+                                <span className="map-poi-item-emoji">{cat.emoji}</span>
+                                <span className="map-poi-item-label">{cat.label}</span>
+                                <span className="map-poi-item-count">{poiCounts[cat.key] || 0}</span>
+                              </button>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
 
             {/* Pin List */}
@@ -773,6 +949,112 @@ function MapContent() {
         <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 8 }}>
           <Button variant="secondary" onClick={() => { setShowAdd(false); setEditPin(null); setNp(null); setForm({ ...DEFAULT_FORM }); }}>취소</Button>
           <Button onClick={addOrUpdatePin}>{editPin ? '수정' : '추가'}</Button>
+        </div>
+      </Modal>
+      {/* ── POI Detail Modal ── */}
+      <Modal open={!!selPoi} onClose={() => setSelPoi(null)} title="">
+        {selPoi && (() => {
+          const catInfo = POI_CATEGORY_MAP[selPoi.category];
+          const groupColor = { locations: '#4488ff', loot: '#ffaa44', creatures: '#ff4444', resources: '#44ff88', knowledge: '#a855f7' }[selPoi.group] || '#4488ff';
+          return (
+            <div>
+              <div className="map-detail-banner" style={{ '--pin-color': groupColor }}>
+                <div className="map-detail-title">
+                  <span style={{ marginRight: 6 }}>{catInfo?.emoji || '📍'}</span>
+                  {selPoi.label}
+                </div>
+                <div className="map-detail-coords">
+                  ({Math.round(selPoi.x)}, {Math.round(selPoi.y)})
+                </div>
+              </div>
+              <div className="map-detail-grid">
+                <div className="map-detail-cell">
+                  <div className="map-detail-cell-label">카테고리</div>
+                  <div className="map-detail-cell-value">{catInfo?.label || selPoi.category}</div>
+                </div>
+                <div className="map-detail-cell">
+                  <div className="map-detail-cell-label">그룹</div>
+                  <div className="map-detail-cell-value">{catInfo?.groupLabel || selPoi.group}</div>
+                </div>
+                <div className="map-detail-cell">
+                  <div className="map-detail-cell-label">시나리오</div>
+                  <div className="map-detail-cell-value">{selPoi.scenario || '전체'}</div>
+                </div>
+              </div>
+              {selPoi.note && (
+                <div className="map-detail-note" style={{ '--pin-color': groupColor }}>
+                  {selPoi.note}
+                </div>
+              )}
+              {session?.isAdmin && (
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 12 }}>
+                  <Button variant="danger" onClick={() => deletePoi(selPoi.id)} style={{ padding: '5px 14px', fontSize: 12 }}>
+                    <Icons.Trash /> 삭제
+                  </Button>
+                </div>
+              )}
+            </div>
+          );
+        })()}
+      </Modal>
+
+      {/* ── POI Add Modal (Admin) ── */}
+      <Modal
+        open={showPoiModal}
+        onClose={() => { setShowPoiModal(false); setPoiNp(null); }}
+        title="POI 추가"
+      >
+        {poiNp && (
+          <div style={{ fontSize: 11, color: 'var(--text-muted)', marginBottom: 12, fontFamily: 'var(--font-mono)' }}>
+            좌표: ({poiNp.x}, {poiNp.y})
+          </div>
+        )}
+        <Input label="이름" value={poiForm.label} onChange={(e) => setPoiForm({ ...poiForm, label: e.target.value })} placeholder="예: 무한의꿈 모노리스 #1" />
+        <TextArea label="메모 (선택)" value={poiForm.note} onChange={(e) => setPoiForm({ ...poiForm, note: e.target.value })} placeholder="이 POI에 대한 설명" rows={2} />
+
+        {/* POI 카테고리 선택 */}
+        <div style={{ marginBottom: 16 }}>
+          <label style={{ display: 'block', fontSize: 11, color: 'var(--text-secondary)', marginBottom: 8, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>카테고리</label>
+          {POI_GROUPS.map((group) => (
+            <div key={group.key} style={{ marginBottom: 8 }}>
+              <div style={{ fontSize: 10, color: 'var(--text-muted)', marginBottom: 4, fontWeight: 600 }}>{group.label}</div>
+              <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+                {group.categories.map((cat) => (
+                  <button key={cat.key} onClick={() => setPoiForm({ ...poiForm, category: cat.key, group: group.key })} style={{
+                    padding: '4px 8px', borderRadius: 6, fontSize: 11,
+                    border: poiForm.category === cat.key ? '1px solid var(--text-secondary)' : '1px solid var(--border)',
+                    background: poiForm.category === cat.key ? 'var(--accent-dim)' : 'transparent',
+                    color: poiForm.category === cat.key ? '#fff' : 'var(--text-muted)',
+                    cursor: 'pointer', fontFamily: 'var(--font-body)', display: 'flex', alignItems: 'center', gap: 3, transition: 'all 0.15s',
+                  }}>
+                    <span style={{ fontSize: 12 }}>{cat.emoji}</span> {cat.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* 시나리오 선택 */}
+        <div style={{ marginBottom: 16 }}>
+          <label style={{ display: 'block', fontSize: 11, color: 'var(--text-secondary)', marginBottom: 8, fontWeight: 600, letterSpacing: '0.06em', textTransform: 'uppercase' }}>시나리오 (선택)</label>
+          <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
+            <button
+              className={`map-scenario-btn${!poiForm.scenario ? ' active' : ''}`}
+              onClick={() => setPoiForm({ ...poiForm, scenario: '' })}
+            >전체</button>
+            {SCENARIOS.map((s) => (
+              <button key={s}
+                className={`map-scenario-btn${poiForm.scenario === s ? ' active' : ''}`}
+                onClick={() => setPoiForm({ ...poiForm, scenario: s })}
+              >{s}</button>
+            ))}
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'flex-end', gap: 8, marginTop: 8 }}>
+          <Button variant="secondary" onClick={() => { setShowPoiModal(false); setPoiNp(null); }}>취소</Button>
+          <Button onClick={addPoi}>추가</Button>
         </div>
       </Modal>
     </div>

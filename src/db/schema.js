@@ -133,6 +133,18 @@ export const onlineSessions = pgTable('online_sessions', {
   lastSeen: timestamp('last_seen').defaultNow().notNull(),
 });
 
+export const pois = pgTable('pois', {
+  id: serial('id').primaryKey(),
+  category: text('category').notNull(),
+  group: text('group').notNull(),
+  label: text('label').notNull(),
+  x: real('x').notNull(),
+  y: real('y').notNull(),
+  note: text('note'),
+  scenario: text('scenario'),
+  createdAt: timestamp('created_at').defaultNow(),
+});
+
 export const botChannels = pgTable('bot_channels', {
   id: serial('id').primaryKey(),
   guildId: text('guild_id').notNull(),

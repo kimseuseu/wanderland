@@ -48,6 +48,24 @@ const CATEGORY_ICONS = {
   etc: '📍',
 };
 
+// POI 카테고리 이모지 매핑
+const POI_ICONS = {
+  monolith: '🏛️', silo: '🔒', worldstone: '💠', village: '🏘️', camp: '⛺', transport: '🚁',
+  crate_mystical: '✨', crate_weapon: '🗡️', crate_gear: '⚙️', crate_morphic: '🧬', hoard: '📦',
+  boss: '💀', elite: '⚔️', deviant: '🧪',
+  ore: '⛏️', plant: '🌿', fish_spot: '🎣',
+  viewpoint: '🔭', riddle: '🧩', echo: '🌟', record: '📜', note: '📝',
+};
+
+// POI 그룹별 색상
+const POI_GROUP_COLORS = {
+  locations: '#4488ff',
+  loot: '#ffaa44',
+  creatures: '#ff4444',
+  resources: '#44ff88',
+  knowledge: '#a855f7',
+};
+
 function createPinIcon(color, category) {
   const emoji = CATEGORY_ICONS[category] || CATEGORY_ICONS.etc;
   return L.divIcon({
@@ -65,27 +83,49 @@ function createPinIcon(color, category) {
   });
 }
 
+function createPoiIcon(category, group) {
+  const emoji = POI_ICONS[category] || '📍';
+  const color = POI_GROUP_COLORS[group] || '#4488ff';
+  return L.divIcon({
+    className: 'custom-poi',
+    html: `<div style="
+      display:flex;align-items:center;justify-content:center;
+      width:20px;height:20px;border-radius:50%;
+      background:${color}cc;
+      border:1.5px solid rgba(255,255,255,0.3);
+      box-shadow:0 0 6px ${color}60;
+      font-size:10px;line-height:1;
+    ">${emoji}</div>`,
+    iconSize: [24, 24],
+    iconAnchor: [12, 12],
+  });
+}
+
 const LeafletMap = forwardRef(function LeafletMap(
-  { pins, selectedPin, onMapClick, onPinClick, routes = [], drawingMode, drawingColor = '#ffaa44', onRoutePoint, measureMode, measurePoints = [], cluster },
+  { pins, selectedPin, onMapClick, onPinClick, routes = [], drawingMode, drawingColor = '#ffaa44', onRoutePoint, measureMode, measurePoints = [], cluster, pois = [], onPoiClick },
   ref
 ) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const markersRef = useRef({});
+  const poiMarkersRef = useRef({});
   const coordsRef = useRef(null);
   const routeLayersRef = useRef([]);
   const drawingLayerRef = useRef(null);
   const drawingPointsRef = useRef([]);
   const clusterGroupRef = useRef(null);
+  const poiLayerGroupRef = useRef(null);
   const measureLayerRef = useRef(null);
   const onMapClickRef = useRef(onMapClick);
   const onPinClickRef = useRef(onPinClick);
+  const onPoiClickRef = useRef(onPoiClick);
   const onRoutePointRef = useRef(onRoutePoint);
   const drawingModeRef = useRef(drawingMode);
   const measureModeRef = useRef(measureMode);
 
   onMapClickRef.current = onMapClick;
   onPinClickRef.current = onPinClick;
+  onPoiClickRef.current = onPoiClick;
   onRoutePointRef.current = onRoutePoint;
   drawingModeRef.current = drawingMode;
   measureModeRef.current = measureMode;
@@ -175,6 +215,7 @@ const LeafletMap = forwardRef(function LeafletMap(
       map.remove();
       mapRef.current = null;
       markersRef.current = {};
+      poiMarkersRef.current = {};
     };
   }, []);
 
@@ -255,6 +296,43 @@ const LeafletMap = forwardRef(function LeafletMap(
       map.addLayer(clusterGroup);
     }
   }, [pins, cluster]);
+
+  // Sync POI markers (separate layer, no clustering)
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map) return;
+
+    // Remove old POI layer group
+    if (poiLayerGroupRef.current) {
+      map.removeLayer(poiLayerGroupRef.current);
+      poiLayerGroupRef.current = null;
+    }
+    poiMarkersRef.current = {};
+
+    if (!pois.length) return;
+
+    const poiGroup = L.layerGroup();
+
+    for (const poi of pois) {
+      const latlng = gameToLatLng(poi.x, poi.y);
+      const marker = L.marker(latlng, { icon: createPoiIcon(poi.category, poi.group) });
+      marker.bindTooltip(poi.label, {
+        permanent: false,
+        direction: 'top',
+        offset: [0, -8],
+        className: 'poi-tooltip',
+      });
+      marker.on('click', (e) => {
+        L.DomEvent.stopPropagation(e);
+        onPoiClickRef.current?.(poi);
+      });
+      poiGroup.addLayer(marker);
+      poiMarkersRef.current[poi.id] = marker;
+    }
+
+    poiGroup.addTo(map);
+    poiLayerGroupRef.current = poiGroup;
+  }, [pois]);
 
   // Sync routes (saved polylines)
   useEffect(() => {

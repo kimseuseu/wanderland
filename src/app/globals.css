@@ -4462,6 +4462,181 @@ option {
   color: #44ff88;
 }
 
+/* ─── POI Filter Panel ─── */
+.map-poi-filter {
+  padding: 0 12px;
+  margin-bottom: 6px;
+}
+.map-poi-filter-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.map-poi-filter-header:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: var(--text-muted);
+}
+.map-poi-filter-body {
+  padding: 8px 0 0;
+}
+.map-poi-toggle-all-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+.map-poi-toggle-all {
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.map-poi-toggle-all:hover {
+  background: rgba(255,255,255,0.06);
+  color: var(--text-secondary);
+}
+.map-poi-admin-btn {
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(68,255,136,0.3);
+  background: rgba(68,255,136,0.08);
+  color: #44ff88;
+  font-size: 10px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+  margin-left: auto;
+}
+.map-poi-admin-btn:hover {
+  background: rgba(68,255,136,0.15);
+}
+.map-poi-admin-btn.active {
+  background: rgba(68,255,136,0.2);
+  border-color: #44ff88;
+  box-shadow: 0 0 8px rgba(68,255,136,0.2);
+}
+
+/* POI Group Accordion */
+.map-poi-group {
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 2px;
+}
+.map-poi-group-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 5px 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 0.12s;
+  border-radius: 6px;
+}
+.map-poi-group-header:hover {
+  background: rgba(255,255,255,0.04);
+}
+.map-poi-group-check {
+  font-size: 12px;
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 0 2px;
+}
+.map-poi-group-check:hover {
+  opacity: 1;
+}
+.map-poi-group-label {
+  flex: 1;
+  text-align: left;
+}
+.map-poi-group-count {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+/* POI Category Items */
+.map-poi-group-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 2px 0 4px 16px;
+}
+.map-poi-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: 5px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.12s;
+  opacity: 0.5;
+}
+.map-poi-item.on {
+  opacity: 1;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.04);
+}
+.map-poi-item:hover {
+  opacity: 1;
+  background: rgba(255,255,255,0.06);
+}
+.map-poi-item-emoji {
+  font-size: 12px;
+}
+.map-poi-item-label {
+  white-space: nowrap;
+}
+.map-poi-item-count {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  margin-left: 2px;
+}
+
+/* POI Tooltip */
+.poi-tooltip {
+  background: rgba(12,12,12,0.9) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 6px !important;
+  padding: 3px 8px !important;
+  font-size: 10px !important;
+  font-family: var(--font-body) !important;
+  color: var(--text-secondary) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4) !important;
+}
+.poi-tooltip::before {
+  border-top-color: rgba(12,12,12,0.9) !important;
+}
+
 /* ─── Cluster Icons ─── */
 .custom-cluster {
   background: transparent !important;
