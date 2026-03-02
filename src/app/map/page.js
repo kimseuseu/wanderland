@@ -83,6 +83,7 @@ function MapContent() {
   const [poiNp, setPoiNp] = useState(null);
   const [poiForm, setPoiForm] = useState({ category: 'monolith', group: 'locations', label: '', note: '', scenario: '' });
   const [selPoi, setSelPoi] = useState(null);
+  const [poiScenarioFilter, setPoiScenarioFilter] = useState('전체'); // '전체' | 'manibus' | 'way_of_winter'
 
   // Feature 4: Distance measurement
   const [measureMode, setMeasureMode] = useState(false);
@@ -140,19 +141,36 @@ function MapContent() {
     return result;
   }, [pinList, filter, search, viewMode, session, enabledCategories, favorites]);
 
+  // 시나리오 → DB scenario 매핑
+  const POI_SCENARIO_MAP = {
+    '전체': null,            // 모든 POI 표시
+    '마니부스': ['manibus'],
+    '혹독한겨울': ['way_of_winter'],
+    '무한의꿈': ['manibus', 'way_of_winter'],   // 양쪽 맵 통합
+    '비정상수용': ['manibus'],                    // 마니부스 맵 사용
+  };
+
   const filteredPois = useMemo(() => {
     const list = poisData || [];
-    return list.filter((p) => enabledPoiCategories.has(p.category));
-  }, [poisData, enabledPoiCategories]);
+    let result = list.filter((p) => enabledPoiCategories.has(p.category));
+    // 시나리오 필터
+    const allowed = POI_SCENARIO_MAP[poiScenarioFilter];
+    if (allowed) {
+      result = result.filter((p) => allowed.includes(p.scenario));
+    }
+    return result;
+  }, [poisData, enabledPoiCategories, poiScenarioFilter]);
 
-  // POI 카테고리별 개수
+  // POI 카테고리별 개수 (시나리오 필터 반영)
   const poiCounts = useMemo(() => {
     const counts = {};
+    const allowed = POI_SCENARIO_MAP[poiScenarioFilter];
     for (const p of (poisData || [])) {
+      if (allowed && !allowed.includes(p.scenario)) continue;
       counts[p.category] = (counts[p.category] || 0) + 1;
     }
     return counts;
-  }, [poisData]);
+  }, [poisData, poiScenarioFilter]);
 
   const checkOwner = (pin) => {
     if (!session || !pin) return false;
@@ -592,6 +610,18 @@ function MapContent() {
               </button>
               {showPoiFilter && (
                 <div className="map-poi-filter-body">
+                  {/* 시나리오 필터 */}
+                  <div className="map-poi-scenario-row">
+                    {['전체', '마니부스', '혹독한겨울', '무한의꿈', '비정상수용'].map((s) => (
+                      <button
+                        key={s}
+                        className={`map-poi-scenario-btn${poiScenarioFilter === s ? ' active' : ''}`}
+                        onClick={() => setPoiScenarioFilter(s)}
+                      >
+                        {s}
+                      </button>
+                    ))}
+                  </div>
                   {/* 전체 토글 + 관리자 POI 추가 */}
                   <div className="map-poi-toggle-all-row">
                     <button className="map-poi-toggle-all" onClick={toggleAllPoi}>

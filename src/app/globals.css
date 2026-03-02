@@ -4497,6 +4497,35 @@ option {
 .map-poi-filter-body {
   padding: 8px 0 0;
 }
+/* POI 시나리오 필터 탭 */
+.map-poi-scenario-row {
+  display: flex;
+  gap: 3px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.map-poi-scenario-btn {
+  padding: 3px 8px;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.map-poi-scenario-btn:hover {
+  background: rgba(255,255,255,0.06);
+  color: var(--text-secondary);
+}
+.map-poi-scenario-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
 .map-poi-toggle-all-row {
   display: flex;
   align-items: center;
