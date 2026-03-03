@@ -51,8 +51,10 @@ const CATEGORY_ICONS = {
 // POI 카테고리 이모지 매핑
 const POI_ICONS = {
   monolith: '🏛️', silo: '🔒', worldstone: '💠', village: '🏘️', camp: '⛺', transport: '🚁',
+  entropy_hub: '🌡️',
   crate_mystical: '✨', crate_weapon: '🗡️', crate_gear: '⚙️', crate_morphic: '🧬', hoard: '📦',
   boss: '💀', elite: '⚔️', deviant: '🧪',
+  eternal_kin: '👁️', deep_dreamer: '🌀', light_dreamer: '💤',
   ore: '⛏️', plant: '🌿', fish_spot: '🎣',
   viewpoint: '🔭', riddle: '🧩', echo: '🌟', record: '📜', note: '📝',
 };
@@ -64,6 +66,15 @@ const POI_GROUP_COLORS = {
   creatures: '#ff4444',
   resources: '#44ff88',
   knowledge: '#a855f7',
+};
+
+// 인게임 이미지를 사용하는 주요 카테고리 (큼직한 이미지 마커)
+const POI_IMAGE_ICONS = {
+  monolith: '/icons/poi/monolith.png',
+  silo: '/icons/poi/silo.png',
+  worldstone: '/icons/poi/worldstone.png',
+  village: '/icons/poi/village.png',
+  boss: '/icons/poi/boss.png',
 };
 
 function createPinIcon(color, category) {
@@ -86,25 +97,118 @@ function createPinIcon(color, category) {
   });
 }
 
-// POI 카테고리별 중요도 (큰 마커 vs 작은 마커)
+// POI 카테고리별 중요도 — 이미지 마커 사용 카테고리는 크고 차별화됨
 const POI_MAJOR = new Set(['monolith', 'silo', 'worldstone', 'boss', 'village']);
 
 function createPoiIcon(category, group) {
+  const imageSrc = POI_IMAGE_ICONS[category];
+
+  // 인게임 이미지 마커 (모노리스, 사일로, 워프타워, 마을, 보스)
+  if (imageSrc) {
+    const size = (category === 'boss') ? 44 : 40;
+    const glowColor = (category === 'boss') ? '#ff2222' :
+                       (category === 'monolith') ? '#ff8844' :
+                       (category === 'worldstone') ? '#44aaff' :
+                       (category === 'silo') ? '#ffcc44' :
+                       '#44ff88';
+    return L.divIcon({
+      className: `custom-poi poi-${category} poi-image`,
+      html: `<div class="poi-marker poi-image-marker" style="
+        display:flex;align-items:center;justify-content:center;
+        width:${size}px;height:${size}px;border-radius:8px;
+        background:rgba(0,0,0,0.7);
+        border:2px solid ${glowColor};
+        box-shadow:0 0 12px ${glowColor}80, 0 2px 8px rgba(0,0,0,0.6);
+        padding:4px;
+        transition:transform 0.15s;
+      "><img src="${imageSrc}" style="width:${size - 10}px;height:${size - 10}px;object-fit:contain;filter:drop-shadow(0 0 2px ${glowColor});" /></div>`,
+      iconSize: [size + 4, size + 4],
+      iconAnchor: [(size + 4) / 2, (size + 4) / 2],
+    });
+  }
+
+  // 무한의꿈 보스 카테고리 (커스텀 스타일)
+  if (category === 'eternal_kin') {
+    return L.divIcon({
+      className: `custom-poi poi-${category}`,
+      html: `<div class="poi-marker" style="
+        display:flex;align-items:center;justify-content:center;
+        width:38px;height:38px;border-radius:50%;
+        background:radial-gradient(circle at 35% 35%, #9b59b6ee, #6c3483cc);
+        border:3px solid #e74c3c;
+        box-shadow:0 0 16px #9b59b680, 0 0 30px #e74c3c40;
+        font-size:18px;line-height:1;
+        transition:transform 0.15s;
+      ">👁️</div>`,
+      iconSize: [44, 44],
+      iconAnchor: [22, 22],
+    });
+  }
+
+  if (category === 'deep_dreamer') {
+    return L.divIcon({
+      className: `custom-poi poi-${category}`,
+      html: `<div class="poi-marker" style="
+        display:flex;align-items:center;justify-content:center;
+        width:32px;height:32px;border-radius:50%;
+        background:radial-gradient(circle at 35% 35%, #3498dbee, #2471a3cc);
+        border:2.5px solid #1abc9c;
+        box-shadow:0 0 12px #3498db80, 0 0 20px #1abc9c40;
+        font-size:15px;line-height:1;
+        transition:transform 0.15s;
+      ">🌀</div>`,
+      iconSize: [36, 36],
+      iconAnchor: [18, 18],
+    });
+  }
+
+  if (category === 'light_dreamer') {
+    return L.divIcon({
+      className: `custom-poi poi-${category}`,
+      html: `<div class="poi-marker" style="
+        display:flex;align-items:center;justify-content:center;
+        width:26px;height:26px;border-radius:50%;
+        background:radial-gradient(circle at 35% 35%, #f39c12ee, #e67e22cc);
+        border:2px solid #f1c40f;
+        box-shadow:0 0 8px #f39c1260;
+        font-size:12px;line-height:1;
+        transition:transform 0.15s;
+      ">💤</div>`,
+      iconSize: [30, 30],
+      iconAnchor: [15, 15],
+    });
+  }
+
+  if (category === 'entropy_hub') {
+    return L.divIcon({
+      className: `custom-poi poi-${category}`,
+      html: `<div class="poi-marker" style="
+        display:flex;align-items:center;justify-content:center;
+        width:36px;height:36px;border-radius:8px;
+        background:radial-gradient(circle at 35% 35%, #e74c3cee, #c0392bcc);
+        border:2.5px solid #f39c12;
+        box-shadow:0 0 14px #e74c3c60, 0 0 24px #f39c1230;
+        font-size:16px;line-height:1;
+        transition:transform 0.15s;
+      ">🌡️</div>`,
+      iconSize: [40, 40],
+      iconAnchor: [20, 20],
+    });
+  }
+
+  // 일반 POI 마커 (작은 원형)
   const emoji = POI_ICONS[category] || '📍';
   const color = POI_GROUP_COLORS[group] || '#4488ff';
-  const isMajor = POI_MAJOR.has(category);
-  const size = isMajor ? 32 : 26;
-  const fontSize = isMajor ? 15 : 12;
-  const borderW = isMajor ? 2.5 : 2;
-  const borderRadius = category === 'worldstone' ? '6px' : '50%';
+  const size = 26;
+  const fontSize = 12;
 
   return L.divIcon({
     className: `custom-poi poi-${category}`,
     html: `<div class="poi-marker" style="
       display:flex;align-items:center;justify-content:center;
-      width:${size}px;height:${size}px;border-radius:${borderRadius};
+      width:${size}px;height:${size}px;border-radius:50%;
       background:radial-gradient(circle at 35% 35%, ${color}ee, ${color}99);
-      border:${borderW}px solid rgba(0,0,0,0.6);
+      border:2px solid rgba(0,0,0,0.6);
       outline:1px solid ${color}40;
       box-shadow:0 2px 6px rgba(0,0,0,0.45), 0 0 10px ${color}35;
       font-size:${fontSize}px;line-height:1;
@@ -336,8 +440,8 @@ const LeafletMap = forwardRef(function LeafletMap(
       marker.bindTooltip(`${poiEmoji} ${poi.label}`, {
         permanent: false,
         direction: 'top',
-        offset: [0, isMajor ? -14 : -10],
-        className: 'poi-tooltip',
+        offset: [0, isMajor ? -18 : -10],
+        className: isMajor ? 'poi-tooltip poi-tooltip-major' : 'poi-tooltip',
       });
       marker.on('click', (e) => {
         L.DomEvent.stopPropagation(e);

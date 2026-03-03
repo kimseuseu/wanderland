@@ -5,18 +5,19 @@ export const POI_GROUPS = [
     label: '위치',
     categories: [
       { key: 'monolith', label: '모노리스', emoji: '🏛️' },
-      { key: 'silo', label: '보안 사일로', emoji: '🔒' },
+      { key: 'silo', label: '사일로', emoji: '🔒' },
       { key: 'worldstone', label: '워프 타워', emoji: '💠' },
       { key: 'village', label: '마을', emoji: '🏘️' },
       { key: 'camp', label: '캠프', emoji: '⛺' },
       { key: 'transport', label: '이동장치', emoji: '🚁' },
+      { key: 'entropy_hub', label: '엔트로피 허브', emoji: '🌡️' },
     ],
   },
   {
     key: 'loot',
     label: '전리품',
     categories: [
-      { key: 'crate_mystical', label: '신비로운 상자', emoji: '✨' },
+      { key: 'crate_mystical', label: '비밀 보물상자', emoji: '✨' },
       { key: 'crate_weapon', label: '무기 상자', emoji: '🗡️' },
       { key: 'crate_gear', label: '장비 상자', emoji: '⚙️' },
       { key: 'crate_morphic', label: '모르픽 상자', emoji: '🧬' },
@@ -30,6 +31,9 @@ export const POI_GROUPS = [
       { key: 'boss', label: '보스', emoji: '💀' },
       { key: 'elite', label: '엘리트', emoji: '⚔️' },
       { key: 'deviant', label: '변이체', emoji: '🧪' },
+      { key: 'eternal_kin', label: '영면의 킨', emoji: '👁️' },
+      { key: 'deep_dreamer', label: '깊이 잠든 자', emoji: '🌀' },
+      { key: 'light_dreamer', label: '얕게 잠든 자', emoji: '💤' },
     ],
   },
   {

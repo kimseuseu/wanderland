@@ -146,7 +146,7 @@ function MapContent() {
     '전체': null,            // 모든 POI 표시
     '터치오브스카이': ['touch_of_sky'],
     '혹독한겨울': ['way_of_winter'],
-    '무한의꿈': ['touch_of_sky', 'way_of_winter'],   // 양쪽 맵 통합
+    '무한의꿈': ['touch_of_sky', 'way_of_winter', 'endless_dream'],   // 양쪽 맵 통합 + 드림존 보스
     '비정상수용': ['touch_of_sky'],                    // 터치오브스카이 맵 사용
   };
 

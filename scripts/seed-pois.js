@@ -40,14 +40,15 @@ const POI_DATA = [
   { category: 'monolith', group: 'locations', label: '잊혀진 모노리스', x: 1905, y: -1508, note: 'Lv.50 · 레드 샌드 · 보스: 망각의 주인', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // 보안 사일로 (group: locations, category: silo)
+  // 사일로 (group: locations, category: silo)
+  // 명칭: 사일로 [이름]
   // ═══════════════════════════════════════════════
-  { category: 'silo', group: 'locations', label: '보안 사일로 시그마', x: 4900, y: -5422, note: 'Lv.15 · 무너진 삼각주', scenario: S },
-  { category: 'silo', group: 'locations', label: '보안 사일로 파이', x: 5142, y: -2943, note: 'Lv.25 · 아이언 리버', scenario: S },
-  { category: 'silo', group: 'locations', label: '보안 사일로 EX1', x: 2144, y: -6503, note: 'Lv.35 · 초크 피크', scenario: S },
-  { category: 'silo', group: 'locations', label: '보안 사일로 알파', x: 145, y: -3615, note: 'Lv.35 · 초크 피크', scenario: S },
-  { category: 'silo', group: 'locations', label: '보안 사일로 세타', x: 5485, y: -520, note: 'Lv.45 · 레드 샌드', scenario: S },
-  { category: 'silo', group: 'locations', label: '보안 사일로 프사이', x: 2490, y: -2570, note: 'Lv.45 · 레드 샌드', scenario: S },
+  { category: 'silo', group: 'locations', label: '사일로 시그마', x: 4900, y: -5422, note: 'Lv.15 · 무너진 삼각주', scenario: S },
+  { category: 'silo', group: 'locations', label: '사일로 파이', x: 5142, y: -2943, note: 'Lv.25 · 아이언 리버', scenario: S },
+  { category: 'silo', group: 'locations', label: '사일로 EX1', x: 2144, y: -6503, note: 'Lv.35 · 초크 피크', scenario: S },
+  { category: 'silo', group: 'locations', label: '사일로 알파', x: 145, y: -3615, note: 'Lv.35 · 초크 피크', scenario: S },
+  { category: 'silo', group: 'locations', label: '사일로 세타', x: 5485, y: -520, note: 'Lv.45 · 레드 샌드', scenario: S },
+  { category: 'silo', group: 'locations', label: '사일로 프사이', x: 2490, y: -2570, note: 'Lv.45 · 레드 샌드', scenario: S },
 
   // ═══════════════════════════════════════════════
   // 워프 타워 (group: locations, category: worldstone)
@@ -166,13 +167,13 @@ const POI_DATA = [
 
   // ═══════════════════════════════════════════════
   // 보스 (group: creatures, category: boss)
-  // 모노리스 보스 — 주요 던전 보스
+  // 명칭: [모노리스이름] 모노리스 [보스이름]
   // ═══════════════════════════════════════════════
-  { category: 'boss', group: 'creatures', label: '트렌트', x: 4584, y: -6024, note: '가이아 절벽 모노리스 보스 · Lv.20', scenario: S },
-  { category: 'boss', group: 'creatures', label: '라베노스 헌터', x: 5990, y: -4728, note: '탐욕의 모노리스 보스 · Lv.10', scenario: S },
-  { category: 'boss', group: 'creatures', label: '아라크시암', x: 6554, y: -2942, note: '신기루 모노리스 보스 · Lv.30', scenario: S },
-  { category: 'boss', group: 'creatures', label: '섀도우 하운드', x: 1831, y: -4733, note: '송곳니 모노리스 보스 · Lv.40', scenario: S },
-  { category: 'boss', group: 'creatures', label: '망각의 주인', x: 1905, y: -1508, note: '잊혀진 모노리스 보스 · Lv.50', scenario: S },
+  { category: 'boss', group: 'creatures', label: '가이아 절벽 모노리스 트렌트', x: 4584, y: -6024, note: '가이아 절벽 모노리스 보스 · Lv.20', scenario: S },
+  { category: 'boss', group: 'creatures', label: '탐욕의 모노리스 라베노스 헌터', x: 5990, y: -4728, note: '탐욕의 모노리스 보스 · Lv.10', scenario: S },
+  { category: 'boss', group: 'creatures', label: '신기루 모노리스 아라크시암', x: 6554, y: -2942, note: '신기루 모노리스 보스 · Lv.30', scenario: S },
+  { category: 'boss', group: 'creatures', label: '송곳니 모노리스 섀도우 하운드', x: 1831, y: -4733, note: '송곳니 모노리스 보스 · Lv.40', scenario: S },
+  { category: 'boss', group: 'creatures', label: '잊혀진 모노리스 망각의 주인', x: 1905, y: -1508, note: '잊혀진 모노리스 보스 · Lv.50', scenario: S },
 
   // ═══════════════════════════════════════════════
   // 엘리트 (group: creatures, category: elite)
@@ -216,65 +217,65 @@ const POI_DATA = [
   { category: 'elite', group: 'creatures', label: '로제타 헤비 (73소스)', x: 2877, y: -1610, note: 'Lv.43 · 레드 샌드 · 73 소스 추출지점', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // 신비로운 상자 (group: loot, category: crate_mystical)
+  // 비밀 보물상자 (group: loot, category: crate_mystical)
   // ═══════════════════════════════════════════════
   // — 무너진 삼각주 —
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (가이아 절벽)', x: 4581, y: -5979, note: '가이아 절벽 모노리스 내부', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (허스트 공업)', x: 6076, y: -6002, note: '허스트 공업', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (항구 마을)', x: 5975, y: -7192, note: '항구 마을', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (하이뱅크)', x: 5386, y: -5886, note: '하이뱅크', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (동부 철도)', x: 4489, y: -5412, note: '동부 철도 교차점', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (서덜랜드 화학)', x: 4982, y: -6223, note: '서덜랜드 화학공장', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (선버리)', x: 4783, y: -6905, note: '선버리', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (선버리 중학교)', x: 5283, y: -7000, note: '선버리 중학교', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (사냥개 섬)', x: 6975, y: -7323, note: '사냥개 섬 초소', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (가이아 연구소)', x: 3966, y: -6360, note: '가이아 연구소 유적', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (폐품장)', x: 3617, y: -6995, note: '폐품장', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (가이아 절벽)', x: 4581, y: -5979, note: '가이아 절벽 모노리스 내부', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (허스트 공업)', x: 6076, y: -6002, note: '허스트 공업', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (항구 마을)', x: 5975, y: -7192, note: '항구 마을', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (하이뱅크)', x: 5386, y: -5886, note: '하이뱅크', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (동부 철도)', x: 4489, y: -5412, note: '동부 철도 교차점', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (서덜랜드 화학)', x: 4982, y: -6223, note: '서덜랜드 화학공장', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (선버리)', x: 4783, y: -6905, note: '선버리', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (선버리 중학교)', x: 5283, y: -7000, note: '선버리 중학교', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (사냥개 섬)', x: 6975, y: -7323, note: '사냥개 섬 초소', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (가이아 연구소)', x: 3966, y: -6360, note: '가이아 연구소 유적', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (폐품장)', x: 3617, y: -6995, note: '폐품장', scenario: S },
 
   // — 데이턴 습지 —
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (서덜랜드 과수원)', x: 7241, y: -5352, note: '서덜랜드 과수원', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (브룩햄)', x: 6344, y: -4704, note: '브룩햄', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (코스트사이드)', x: 7292, y: -4816, note: '코스트사이드 플라자', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (데이턴 병원)', x: 5811, y: -4471, note: '데이턴 병원', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (전망 마을)', x: 6706, y: -5703, note: '전망 마을', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (감귤 마을)', x: 5672, y: -5256, note: '감귤 마을', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (부패한 저택)', x: 5956, y: -4935, note: '부패한 저택', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (스루빌)', x: 6446, y: -5128, note: '스루빌', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (탐욕의 모노리스)', x: 5905, y: -4768, note: '탐욕의 모노리스', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (서덜랜드 과수원)', x: 7241, y: -5352, note: '서덜랜드 과수원', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (브룩햄)', x: 6344, y: -4704, note: '브룩햄', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (코스트사이드)', x: 7292, y: -4816, note: '코스트사이드 플라자', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (데이턴 병원)', x: 5811, y: -4471, note: '데이턴 병원', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (전망 마을)', x: 6706, y: -5703, note: '전망 마을', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (감귤 마을)', x: 5672, y: -5256, note: '감귤 마을', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (부패한 저택)', x: 5956, y: -4935, note: '부패한 저택', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (스루빌)', x: 6446, y: -5128, note: '스루빌', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (탐욕의 모노리스)', x: 5905, y: -4768, note: '탐욕의 모노리스', scenario: S },
 
   // — 아이언 리버 —
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (하이랜드)', x: 4894, y: -4455, note: '하이랜드', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (정유공장)', x: 5194, y: -3788, note: '정유공장', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (그레이워터)', x: 4734, y: -3053, note: '그레이워터 공업지대', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (동부 블랙펠)', x: 6163, y: -3066, note: '동부 블랙펠 교차점', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (알칼크)', x: 6309, y: -2488, note: '알칼크', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (리치)', x: 6585, y: -3488, note: '리치 보안지점', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (신기루)', x: 6507, y: -2853, note: '신기루 모노리스', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (리플비)', x: 7630, y: -3951, note: '리플비', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (하이랜드)', x: 4894, y: -4455, note: '하이랜드', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (정유공장)', x: 5194, y: -3788, note: '정유공장', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (그레이워터)', x: 4734, y: -3053, note: '그레이워터 공업지대', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (동부 블랙펠)', x: 6163, y: -3066, note: '동부 블랙펠 교차점', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (알칼크)', x: 6309, y: -2488, note: '알칼크', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (리치)', x: 6585, y: -3488, note: '리치 보안지점', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (신기루)', x: 6507, y: -2853, note: '신기루 모노리스', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (리플비)', x: 7630, y: -3951, note: '리플비', scenario: S },
 
   // — 초크 피크 —
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (홀트 마을)', x: 3776, y: -4406, note: '홀트 마을', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (가이아 군사기지)', x: 3119, y: -5966, note: '가이아 군사기지', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (용광로 소굴)', x: 2448, y: -4093, note: '용광로 소굴', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (상록수 포도원)', x: 1451, y: -3298, note: '상록수 포도원', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (낡은 안장)', x: 1716, y: -5881, note: '낡은 안장', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (언덕 마을)', x: 740, y: -4492, note: '언덕 마을', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (송곳니)', x: 1632, y: -4756, note: '송곳니 모노리스', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (실버 해안)', x: 292, y: -7154, note: '실버 해안 리조트', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (알파)', x: -63, y: -3805, note: '알파 연구소', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (홀트 마을)', x: 3776, y: -4406, note: '홀트 마을', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (가이아 군사기지)', x: 3119, y: -5966, note: '가이아 군사기지', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (용광로 소굴)', x: 2448, y: -4093, note: '용광로 소굴', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (상록수 포도원)', x: 1451, y: -3298, note: '상록수 포도원', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (낡은 안장)', x: 1716, y: -5881, note: '낡은 안장', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (언덕 마을)', x: 740, y: -4492, note: '언덕 마을', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (송곳니)', x: 1632, y: -4756, note: '송곳니 모노리스', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (실버 해안)', x: 292, y: -7154, note: '실버 해안 리조트', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (알파)', x: -63, y: -3805, note: '알파 연구소', scenario: S },
 
   // — 레드 샌드 —
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (블랙펠 몰락)', x: 4308, y: -1321, note: '블랙펠 몰락지대', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (에버그린)', x: 4357, y: -2428, note: '에버그린', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (블랙펠 유전)', x: 5491, y: -1565, note: '블랙펠 유전', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (포트 아이리)', x: 3295, y: -2817, note: '포트 아이리', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (73소스)', x: 2907, y: -1588, note: '73 소스 추출지점', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (잊혀진)', x: 2005, y: -1527, note: '잊혀진 모노리스', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (대체현실)', x: 6932, y: -1765, note: '대체현실 연구소', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (블랙펠 몰락)', x: 4308, y: -1321, note: '블랙펠 몰락지대', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (에버그린)', x: 4357, y: -2428, note: '에버그린', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (블랙펠 유전)', x: 5491, y: -1565, note: '블랙펠 유전', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (포트 아이리)', x: 3295, y: -2817, note: '포트 아이리', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (73소스)', x: 2907, y: -1588, note: '73 소스 추출지점', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (잊혀진)', x: 2005, y: -1527, note: '잊혀진 모노리스', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (대체현실)', x: 6932, y: -1765, note: '대체현실 연구소', scenario: S },
 
   // — 블랙하트 —
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (선샤인 농장)', x: 2867, y: -281, note: '선샤인 농장', scenario: S },
-  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (화이트 클리프)', x: 3499, y: 1245, note: '화이트 클리프', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (선샤인 농장)', x: 2867, y: -281, note: '선샤인 농장', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '비밀 보물상자 (화이트 클리프)', x: 3499, y: 1245, note: '화이트 클리프', scenario: S },
 
   // ═══════════════════════════════════════════════
   // 무기 상자 (group: loot, category: crate_weapon)
