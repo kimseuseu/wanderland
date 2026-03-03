@@ -6,7 +6,7 @@ export const POI_GROUPS = [
     categories: [
       { key: 'monolith', label: '모노리스', emoji: '🏛️' },
       { key: 'silo', label: '사일로', emoji: '🔒' },
-      { key: 'worldstone', label: '워프 타워', emoji: '💠' },
+      { key: 'worldstone', label: '세계석', emoji: '💠' },
       { key: 'village', label: '마을', emoji: '🏘️' },
       { key: 'camp', label: '캠프', emoji: '⛺' },
       { key: 'transport', label: '이동장치', emoji: '🚁' },

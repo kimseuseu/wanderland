@@ -51,51 +51,51 @@ const POI_DATA = [
   { category: 'silo', group: 'locations', label: '사일로 프사이', x: 2490, y: -2570, note: 'Lv.45 · 레드 샌드', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // 워프 타워 (group: locations, category: worldstone)
+  // 세계석 (group: locations, category: worldstone)
   // ═══════════════════════════════════════════════
   // — 무너진 삼각주 —
-  { category: 'worldstone', group: 'locations', label: '사냥개 섬 워프 타워', x: 6804, y: -7150, note: '무너진 삼각주', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '시그마 워프 타워', x: 5222, y: -5543, note: '무너진 삼각주', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '선버리 중앙 워프 타워', x: 5150, y: -6850, note: '무너진 삼각주', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '가이아 절벽 모노리스 워프 타워', x: 4501, y: -6010, note: '무너진 삼각주', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '남부 삼각주 워프 타워', x: 3865, y: -7361, note: '무너진 삼각주', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '가이아 절벽 워프 타워', x: 3369, y: -6375, note: '무너진 삼각주', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '사냥개 섬 세계석', x: 6804, y: -7150, note: '무너진 삼각주', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '시그마 세계석', x: 5222, y: -5543, note: '무너진 삼각주', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '선버리 중앙 세계석', x: 5150, y: -6850, note: '무너진 삼각주', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '가이아 절벽 모노리스 세계석', x: 4501, y: -6010, note: '무너진 삼각주', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '남부 삼각주 세계석', x: 3865, y: -7361, note: '무너진 삼각주', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '가이아 절벽 세계석', x: 3369, y: -6375, note: '무너진 삼각주', scenario: S },
 
   // — 데이턴 습지 —
-  { category: 'worldstone', group: 'locations', label: '전망 마을 워프 타워', x: 6906, y: -5849, note: '데이턴 습지', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '코스트사이드 플라자 워프 타워', x: 7633, y: -4791, note: '데이턴 습지', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '탐욕의 모노리스 워프 타워', x: 6014, y: -4640, note: '데이턴 습지', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '전망 마을 세계석', x: 6906, y: -5849, note: '데이턴 습지', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '코스트사이드 플라자 세계석', x: 7633, y: -4791, note: '데이턴 습지', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '탐욕의 모노리스 세계석', x: 6014, y: -4640, note: '데이턴 습지', scenario: S },
 
   // — 아이언 리버 —
-  { category: 'worldstone', group: 'locations', label: '북부 데이턴 워프 타워', x: 5540, y: -4115, note: '아이언 리버', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '서부 하이뱅크 워프 타워', x: 4584, y: -4314, note: '아이언 리버', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '와인딩 리지 워프 타워', x: 6239, y: -3481, note: '아이언 리버', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '북부 리플비 워프 타워', x: 7089, y: -3601, note: '아이언 리버', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '신기루 모노리스 워프 타워', x: 6625, y: -2762, note: '아이언 리버', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '윈드워드 워프 타워', x: 7424, y: -2457, note: '아이언 리버', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '북부 데이턴 세계석', x: 5540, y: -4115, note: '아이언 리버', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '서부 하이뱅크 세계석', x: 4584, y: -4314, note: '아이언 리버', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '와인딩 리지 세계석', x: 6239, y: -3481, note: '아이언 리버', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '북부 리플비 세계석', x: 7089, y: -3601, note: '아이언 리버', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '신기루 모노리스 세계석', x: 6625, y: -2762, note: '아이언 리버', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '윈드워드 세계석', x: 7424, y: -2457, note: '아이언 리버', scenario: S },
 
   // — 초크 피크 —
-  { category: 'worldstone', group: 'locations', label: '내해 워프 타워', x: 1981, y: -6899, note: '초크 피크', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '북부 실버 해안 워프 타워', x: 431, y: -6968, note: '초크 피크', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '낡은 안장 워프 타워', x: 1366, y: -6200, note: '초크 피크', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '서부 가이아 워프 타워', x: 2750, y: -5680, note: '초크 피크', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '남부 그린레이크 워프 타워', x: 110, y: -4860, note: '초크 피크', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '송곳니 모노리스 워프 타워', x: 1690, y: -4800, note: '초크 피크', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '알파 워프 타워', x: 300, y: -3700, note: '초크 피크', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '동부 매너 워프 타워', x: 2000, y: -3480, note: '초크 피크', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '문레이크 워프 타워', x: 300, y: -2530, note: '초크 피크', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '북부 그린레이크 워프 타워', x: 1400, y: -4240, note: '초크 피크', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '내해 세계석', x: 1981, y: -6899, note: '초크 피크', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '북부 실버 해안 세계석', x: 431, y: -6968, note: '초크 피크', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '낡은 안장 세계석', x: 1366, y: -6200, note: '초크 피크', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '서부 가이아 세계석', x: 2750, y: -5680, note: '초크 피크', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '남부 그린레이크 세계석', x: 110, y: -4860, note: '초크 피크', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '송곳니 모노리스 세계석', x: 1690, y: -4800, note: '초크 피크', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '알파 세계석', x: 300, y: -3700, note: '초크 피크', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '동부 매너 세계석', x: 2000, y: -3480, note: '초크 피크', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '문레이크 세계석', x: 300, y: -2530, note: '초크 피크', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '북부 그린레이크 세계석', x: 1400, y: -4240, note: '초크 피크', scenario: S },
 
   // — 레드 샌드 —
-  { category: 'worldstone', group: 'locations', label: '중앙 블랙펠 워프 타워', x: 4847, y: -1915, note: '레드 샌드', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '남부 밸리 워프 타워', x: 6548, y: -1521, note: '레드 샌드', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '세타 워프 타워', x: 5640, y: -950, note: '레드 샌드', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '잊혀진 모노리스 워프 타워', x: 1970, y: -1400, note: '레드 샌드', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '북부 포트 아이리 워프 타워', x: 2700, y: -2327, note: '레드 샌드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '중앙 블랙펠 세계석', x: 4847, y: -1915, note: '레드 샌드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '남부 밸리 세계석', x: 6548, y: -1521, note: '레드 샌드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '세타 세계석', x: 5640, y: -950, note: '레드 샌드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '잊혀진 모노리스 세계석', x: 1970, y: -1400, note: '레드 샌드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '북부 포트 아이리 세계석', x: 2700, y: -2327, note: '레드 샌드', scenario: S },
 
   // — 블랙하트 지대 —
-  { category: 'worldstone', group: 'locations', label: '거인의 계단 워프 타워', x: 3337, y: 181, note: '블랙하트 지대', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '블랙하트 만 워프 타워', x: 5900, y: 480, note: '블랙하트 지대', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '거인의 계단 세계석', x: 3337, y: 181, note: '블랙하트 지대', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '블랙하트 만 세계석', x: 5900, y: 480, note: '블랙하트 지대', scenario: S },
 
   // ═══════════════════════════════════════════════
   // 마을 / 주요 정착지 (group: locations, category: village)

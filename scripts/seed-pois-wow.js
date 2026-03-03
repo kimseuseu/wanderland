@@ -41,41 +41,41 @@ const WOW_DATA = [
   // 명칭: 사일로 [이름]
   // ═══════════════════════════════════════════════
   { category: 'silo', group: 'locations', label: '사일로 델타', x: 3525, y: 3898, note: '마노 툰드라 · 그레이트 리버 부근', scenario: S },
-  { category: 'silo', group: 'locations', label: '사일로 스티그마', x: 4197, y: 4600, note: '마노 툰드라 · 무스 시 남쪽', scenario: S },
-  { category: 'silo', group: 'locations', label: '사일로 타우', x: -500, y: 5800, note: '비너 피오르드', scenario: S },
-  { category: 'silo', group: 'locations', label: '사일로 페이', x: -218, y: 6004, note: '비너 피오르드', scenario: S },
+  { category: 'silo', group: 'locations', label: '사일로 EX1', x: 4197, y: 4600, note: '마노 툰드라 · 다크헬 · 무스 식품 공장 남서쪽', scenario: S },
+  { category: 'silo', group: 'locations', label: '사일로 PSI', x: -500, y: 5800, note: '비너 피오르드 · 설국 · 웨일본 동쪽', scenario: S },
+  { category: 'silo', group: 'locations', label: '사일로 08', x: -6500, y: 4200, note: '잿더미 해변 · 애쉬튼시 서쪽', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // 워프 타워 (group: locations, category: worldstone)
+  // 세계석 (group: locations, category: worldstone)
   // ═══════════════════════════════════════════════
   // — 마노 툰드라 —
-  { category: 'worldstone', group: 'locations', label: '동부 흑석 워프 타워', x: 6186, y: 4160, note: '마노 툰드라', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '툰드라 모노리스 워프 타워', x: 2883, y: 4657, note: '마노 툰드라', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '원더랜드 동쪽 워프 타워', x: 2545, y: 5766, note: '마노 툰드라', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '무스 시 워프 타워', x: 5301, y: 4600, note: '마노 툰드라', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '흑석요새 워프 타워', x: 5569, y: 3272, note: '마노 툰드라', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '동부 흑석 세계석', x: 6186, y: 4160, note: '마노 툰드라', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '툰드라 모노리스 세계석', x: 2883, y: 4657, note: '마노 툰드라', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '원더랜드 동쪽 세계석', x: 2545, y: 5766, note: '마노 툰드라', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '무스 시 세계석', x: 5301, y: 4600, note: '마노 툰드라', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '흑석요새 세계석', x: 5569, y: 3272, note: '마노 툰드라', scenario: S },
 
   // — 비너 피오르드 —
-  { category: 'worldstone', group: 'locations', label: '눈사태 모노리스 워프 타워', x: 181, y: 4679, note: '비너 피오르드', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '피스쿨 항구 워프 타워', x: 733, y: 6840, note: '비너 피오르드', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '웨일본 워프 타워', x: -733, y: 5949, note: '비너 피오르드', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '하이브 수용장 워프 타워', x: 1303, y: 4642, note: '비너 피오르드', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '프로스트 포지 워프 타워', x: -2369, y: 5008, note: '비너 피오르드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '눈사태 모노리스 세계석', x: 181, y: 4679, note: '비너 피오르드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '피스쿨 항구 세계석', x: 733, y: 6840, note: '비너 피오르드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '웨일본 세계석', x: -733, y: 5949, note: '비너 피오르드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '하이브 수용장 세계석', x: 1303, y: 4642, note: '비너 피오르드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '프로스트 포지 세계석', x: -2369, y: 5008, note: '비너 피오르드', scenario: S },
 
   // — 잿더미 해변 —
-  { category: 'worldstone', group: 'locations', label: '서부 프로스트 워프 타워', x: -3830, y: 5427, note: '잿더미 해변', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '동부 화목 워프 타워', x: -3867, y: 2417, note: '잿더미 해변', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '플레임 더스트 워프 타워', x: -4279, y: 3365, note: '잿더미 해변', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '유황 연못 워프 타워', x: -4845, y: 4634, note: '잿더미 해변', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '화목 고지 워프 타워', x: -5271, y: 5400, note: '잿더미 해변', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '북부 화목 워프 타워', x: -5176, y: 6335, note: '잿더미 해변', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '풍요의 땅 워프 타워', x: -5960, y: 5089, note: '잿더미 해변', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '애쉬튼시 워프 타워', x: -5702, y: 4256, note: '잿더미 해변', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '화목 기지 워프 타워', x: -5983, y: 3085, note: '잿더미 해변', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '열풍 워프 타워', x: -7435, y: 3745, note: '잿더미 해변', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '침묵의 불 워프 타워', x: -6441, y: 6850, note: '잿더미 해변', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '뱀눈 고개 워프 타워', x: -5552, y: 7097, note: '잿더미 해변', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '뱀배 워프 타워', x: -4637, y: 6709, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '서부 프로스트 세계석', x: -3830, y: 5427, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '동부 화목 세계석', x: -3867, y: 2417, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '플레임 더스트 세계석', x: -4279, y: 3365, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '유황 연못 세계석', x: -4845, y: 4634, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '화목 고지 세계석', x: -5271, y: 5400, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '북부 화목 세계석', x: -5176, y: 6335, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '풍요의 땅 세계석', x: -5960, y: 5089, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '애쉬튼시 세계석', x: -5702, y: 4256, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '화목 기지 세계석', x: -5983, y: 3085, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '열풍 세계석', x: -7435, y: 3745, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '침묵의 불 세계석', x: -6441, y: 6850, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '뱀눈 고개 세계석', x: -5552, y: 7097, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '뱀배 세계석', x: -4637, y: 6709, note: '잿더미 해변', scenario: S },
 
   // ═══════════════════════════════════════════════
   // 엔트로피 허브 (group: locations, category: entropy_hub)
@@ -202,6 +202,33 @@ const WOW_DATA = [
   { category: 'crate_weapon', group: 'loot', label: '무기 상자 (이클립스 1)', x: -5894, y: 7253, note: '이클립스 · 컨테이너', scenario: S },
   { category: 'crate_weapon', group: 'loot', label: '무기 상자 (이클립스 2)', x: -5771, y: 7339, note: '이클립스 · 경비 플랫폼', scenario: S },
 
+  // — 마노 툰드라 추가 —
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (무스 시 쿠키)', x: 5198, y: 4591, note: '무스 시 · 분홍 지붕 쿠키 건물', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (흑석요새 벌처)', x: 5556, y: 3282, note: '흑석요새 · 벌처 빌딩 옥상', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (원더랜드 동쪽 성)', x: 2515, y: 5750, note: '원더랜드 동쪽구역 · 롤러코스터 오렌지 성', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (그레이트 리버 2)', x: 3516, y: 3942, note: '그레이트 리버 · 입구 왼쪽 방', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (툰드라 위험구역)', x: 2601, y: 4768, note: '툰드라 위험구역 · 두 번째 터널', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (툰드라 모노리스 창고)', x: 2335, y: 4366, note: '툰드라 모노리스 · 다리 서쪽 창고', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (툰드라 배제구역 1)', x: 2478, y: 4281, note: '툰드라 배제구역 · 로제타 시설 남쪽', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (툰드라 배제구역 2)', x: 2689, y: 4578, note: '툰드라 배제구역 · 소형 로제타 시설', scenario: S },
+
+  // — 비너 피오르드 추가 —
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (피스쿨 화장실)', x: 774, y: 6555, note: '피스쿨 항구 · 2층 욕조 옆', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (원더랜드 서쪽 크랩버거)', x: 2212, y: 5944, note: '원더랜드 서쪽 · 크랩버거 건물 옥상', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (하이브 옥상)', x: 1193, y: 4586, note: '하이브 수용장 · 소형 건물 옥상', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (프로스트 포지 2)', x: -2317, y: 5070, note: '프로스트 포지 · 동쪽 건물 2층', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (원더랜드 서쪽 버섯)', x: 2225, y: 5716, note: '원더랜드 서쪽 · 버섯 캐빈', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (원더랜드 서쪽 목조)', x: 1618, y: 6443, note: '원더랜드 서쪽 북서쪽 · 목조 2층집', scenario: S },
+
+  // — 잿더미 해변 추가 —
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (플레임 더스트)', x: -3838, y: 2639, note: '플레임 더스트 위험구역 · 도로변 로제타 시설', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (불의 신 게이트)', x: -5235, y: 3285, note: '불의 신 연구소 · 로제타 접근카드 게이트', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (화목 벌처)', x: -4710, y: 4609, note: '화목 · 벌처 적 플랫폼', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (화목 중앙)', x: -4637, y: 4739, note: '화목 · 가장 안쪽 중앙부', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (이클립스 3)', x: -5890, y: 7236, note: '이클립스 · 나무 상자 위', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (이클립스 4)', x: -5892, y: 7241, note: '이클립스 · 계단 옆', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (이클립스 5)', x: -5889, y: 7362, note: '이클립스 · 동굴 깊은 곳 캠프파이어', scenario: S },
+
   // ═══════════════════════════════════════════════
   // 장비 상자 (group: loot, category: crate_gear)
   // ═══════════════════════════════════════════════
@@ -230,6 +257,36 @@ const WOW_DATA = [
   { category: 'crate_gear', group: 'loot', label: '장비 상자 (이클립스 1)', x: -5910, y: 7237, note: '이클립스', scenario: S },
   { category: 'crate_gear', group: 'loot', label: '장비 상자 (이클립스 2)', x: -5787, y: 7356, note: '이클립스', scenario: S },
   { category: 'crate_gear', group: 'loot', label: '장비 상자 (폐정유소)', x: -4132, y: 5257, note: '폐정유소', scenario: S },
+
+  // — 마노 툰드라 추가 —
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (식품 공장 3)', x: 4186, y: 4907, note: '무스 식품 공장 · 강철 탱크 사이 통로', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (흑석요새 2)', x: 5567, y: 3207, note: '흑석요새 · 대기실 높은 구역', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (원더랜드 동쪽 2)', x: 2436, y: 5949, note: '원더랜드 동쪽구역 · 회전목마 극장', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (원더랜드 동쪽 3)', x: 2619, y: 5888, note: '원더랜드 동쪽구역 · 북동쪽', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (툰드라 위험구역 1)', x: 2999, y: 4810, note: '툰드라 위험구역 · 터널 앞 플랫폼', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (툰드라 위험구역 2)', x: 2914, y: 4663, note: '툰드라 위험구역 · 노란 텐트', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (툰드라 모노리스)', x: 2363, y: 4380, note: '툰드라 모노리스 위험구역 · 도로변 플랫폼', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (툰드라 배제구역 1)', x: 2503, y: 4302, note: '툰드라 배제구역 · 산길 앞 망루', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (툰드라 배제구역 2)', x: 2573, y: 4527, note: '툰드라 배제구역 · 모노리스 오른쪽 방', scenario: S },
+
+  // — 비너 피오르드 추가 —
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (하이브 2)', x: 1354, y: 4312, note: '하이브 수용장 · 상승기류 바위 구조물', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (하이브 3)', x: 1314, y: 4318, note: '하이브 수용장 · 사다리 바위길', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (눈사태 위험구역 1)', x: 165, y: 4652, note: '눈사태 위험구역 · 입구 왼쪽 타워 꼭대기', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (눈사태 위험구역 2)', x: 13, y: 4634, note: '눈사태 위험구역 · 소형 로제타 캠프', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (눈사태 위험구역 3)', x: 103, y: 4426, note: '눈사태 위험구역 · 모노리스 2층', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (프로스트 포지 2)', x: -2423, y: 5018, note: '프로스트 포지 · 이그나 전위 경비 구덩이', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (프로스트 포지 3)', x: -2372, y: 5137, note: '프로스트 포지 · 서쪽 빨강/파랑 포탈', scenario: S },
+
+  // — 잿더미 해변 추가 —
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (애쉬튼시 2)', x: -6465, y: 4734, note: '애쉬튼시 · 북서쪽 백화점', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (불의 신 2)', x: -5051, y: 3341, note: '불의 신 연구소 · 북동쪽 타워 옥상', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (플레임 더스트 1)', x: -3998, y: 2475, note: '플레임 더스트 위험구역 · 다리 옆 창고', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (플레임 더스트 2)', x: -3849, y: 2434, note: '플레임 더스트 위험구역 · 모노리스 사무실', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (불의 성역 2)', x: -5188, y: 4406, note: '불의 성역 · 용암폭포 옆 창고', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (불의 성역 3)', x: -4929, y: 4586, note: '불의 성역 · 채플 위 동굴 입구', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (이클립스 3)', x: -5896, y: 7284, note: '이클립스 · 차원 앵커 부근 통로', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (이클립스 4)', x: -5888, y: 7219, note: '이클립스 · 계단 옆', scenario: S },
 
   // ═══════════════════════════════════════════════
   // 전망대 (group: knowledge, category: viewpoint)

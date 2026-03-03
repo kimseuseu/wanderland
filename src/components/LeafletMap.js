@@ -70,9 +70,9 @@ const POI_GROUP_COLORS = {
 
 // 인게임 이미지를 사용하는 주요 카테고리 (큼직한 이미지 마커)
 const POI_IMAGE_ICONS = {
-  monolith: '/icons/poi/monolith.png',
+  monolith: '/icons/poi/monolith.svg',
   silo: '/icons/poi/silo.png',
-  worldstone: '/icons/poi/worldstone.png',
+  worldstone: '/icons/poi/worldstone.svg',
   village: '/icons/poi/village.png',
   boss: '/icons/poi/boss.png',
 };
@@ -103,7 +103,7 @@ const POI_MAJOR = new Set(['monolith', 'silo', 'worldstone', 'boss', 'village'])
 function createPoiIcon(category, group) {
   const imageSrc = POI_IMAGE_ICONS[category];
 
-  // 인게임 이미지 마커 (모노리스, 사일로, 워프타워, 마을, 보스)
+  // 인게임 이미지 마커 (모노리스, 사일로, 세계석, 마을, 보스)
   if (imageSrc) {
     const size = (category === 'boss') ? 44 : 40;
     const glowColor = (category === 'boss') ? '#ff2222' :
