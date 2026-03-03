@@ -5,8 +5,8 @@ export const POI_GROUPS = [
     label: '위치',
     categories: [
       { key: 'monolith', label: '모노리스', emoji: '🏛️' },
-      { key: 'silo', label: '사일로', emoji: '🔒' },
-      { key: 'worldstone', label: '월드스톤', emoji: '💠' },
+      { key: 'silo', label: '보안 사일로', emoji: '🔒' },
+      { key: 'worldstone', label: '워프 타워', emoji: '💠' },
       { key: 'village', label: '마을', emoji: '🏘️' },
       { key: 'camp', label: '캠프', emoji: '⛺' },
       { key: 'transport', label: '이동장치', emoji: '🚁' },
@@ -16,10 +16,10 @@ export const POI_GROUPS = [
     key: 'loot',
     label: '전리품',
     categories: [
-      { key: 'crate_mystical', label: '미스틱 상자', emoji: '✨' },
+      { key: 'crate_mystical', label: '신비로운 상자', emoji: '✨' },
       { key: 'crate_weapon', label: '무기 상자', emoji: '🗡️' },
-      { key: 'crate_gear', label: '기어 상자', emoji: '⚙️' },
-      { key: 'crate_morphic', label: '모픽 상자', emoji: '🧬' },
+      { key: 'crate_gear', label: '장비 상자', emoji: '⚙️' },
+      { key: 'crate_morphic', label: '모르픽 상자', emoji: '🧬' },
       { key: 'hoard', label: '비축물', emoji: '📦' },
     ],
   },
@@ -29,7 +29,7 @@ export const POI_GROUPS = [
     categories: [
       { key: 'boss', label: '보스', emoji: '💀' },
       { key: 'elite', label: '엘리트', emoji: '⚔️' },
-      { key: 'deviant', label: '디비언트', emoji: '🧪' },
+      { key: 'deviant', label: '변이체', emoji: '🧪' },
     ],
   },
   {

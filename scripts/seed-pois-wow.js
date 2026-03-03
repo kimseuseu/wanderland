@@ -21,135 +21,240 @@ function loadEnvFile() {
 }
 loadEnvFile();
 
-// ── Way of Winter (혹독한 겨울) POI Data ──
+// ══════════════════════════════════════════════════════════
+// 혹독한 겨울 (Way of Winter) POI 데이터
+// 공식 한글명 기준
+// ══════════════════════════════════════════════════════════
+
+const S = 'way_of_winter';
+
 const WOW_DATA = [
   // ═══════════════════════════════════════════════
-  // MONOLITHS
+  // 모노리스 (group: locations, category: monolith)
   // ═══════════════════════════════════════════════
-  { category: 'monolith', group: 'locations', label: '툰드라 모노리스', x: 2559, y: 4491, note: 'Lv.19 · Onyx Tundra', scenario: 'way_of_winter' },
-  { category: 'monolith', group: 'locations', label: '눈사태 모노리스', x: 105, y: 4388, note: 'Lv.29 · Vena Fjord', scenario: 'way_of_winter' },
-  { category: 'monolith', group: 'locations', label: '화진 모노리스', x: -3831, y: 2447, note: 'Lv.39 · Ember Strand', scenario: 'way_of_winter' },
+  { category: 'monolith', group: 'locations', label: '툰드라 모노리스', x: 2559, y: 4491, note: 'Lv.19 · 마노 툰드라', scenario: S },
+  { category: 'monolith', group: 'locations', label: '눈사태 모노리스', x: 105, y: 4388, note: 'Lv.29 · 비너 피오르드', scenario: S },
+  { category: 'monolith', group: 'locations', label: '플레임 더스트 모노리스', x: -3831, y: 2447, note: 'Lv.39 · 잿더미 해변', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // SILOS
+  // 보안 사일로 (group: locations, category: silo)
   // ═══════════════════════════════════════════════
-  { category: 'silo', group: 'locations', label: '사일로 Delta', x: 3525, y: 3898, note: 'Onyx Tundra · Great River 부근', scenario: 'way_of_winter' },
-  { category: 'silo', group: 'locations', label: '사일로 EX1 (WoW)', x: 4197, y: 4600, note: 'Onyx Tundra · Moose City 남쪽', scenario: 'way_of_winter' },
-  { category: 'silo', group: 'locations', label: '사일로 PSI (WoW)', x: -500, y: 5800, note: 'Vena Fjord · Whalebone 동쪽', scenario: 'way_of_winter' },
-  { category: 'silo', group: 'locations', label: '사일로 08 (Taurus)', x: -218, y: 6004, note: 'Ember Strand', scenario: 'way_of_winter' },
+  { category: 'silo', group: 'locations', label: '보안 사일로 델타', x: 3525, y: 3898, note: '마노 툰드라 · 그레이트 리버 부근', scenario: S },
+  { category: 'silo', group: 'locations', label: '보안 사일로 스티그마', x: 4197, y: 4600, note: '마노 툰드라 · 무스 시 남쪽', scenario: S },
+  { category: 'silo', group: 'locations', label: '보안 사일로 타우', x: -500, y: 5800, note: '비너 피오르드', scenario: S },
+  { category: 'silo', group: 'locations', label: '보안 사일로 페이', x: -218, y: 6004, note: '비너 피오르드', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // WORLDSTONES — Ember Strand (좌표 확인됨)
+  // 워프 타워 (group: locations, category: worldstone)
   // ═══════════════════════════════════════════════
-  { category: 'worldstone', group: 'locations', label: 'Frost West 월드스톤', x: -3830, y: 5427, note: 'Ember Strand', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Fire Throat East 월드스톤', x: -3867, y: 2417, note: 'Ember Strand', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Firedust Monolith 월드스톤', x: -4279, y: 3365, note: 'Ember Strand', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Sulfur Pool 월드스톤', x: -4845, y: 4634, note: 'Ember Strand', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Fire Throat Rise 월드스톤', x: -5271, y: 5400, note: 'Ember Strand', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Fire Throat North 월드스톤', x: -5176, y: 6335, note: 'Ember Strand', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Ripe Land 월드스톤', x: -5960, y: 5089, note: 'Ember Strand', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Ashenton 월드스톤', x: -5702, y: 4256, note: 'Ember Strand', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Fire Throat Base 월드스톤', x: -5983, y: 3085, note: 'Ember Strand', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Blazewind 월드스톤', x: -7435, y: 3745, note: 'Ember Strand', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Silentfire 월드스톤', x: -6441, y: 6850, note: 'Ember Strand', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Snakeye Pass 월드스톤', x: -5552, y: 7097, note: 'Ember Strand', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Snakebelly 월드스톤', x: -4637, y: 6709, note: 'Ember Strand', scenario: 'way_of_winter' },
+  // — 마노 툰드라 —
+  { category: 'worldstone', group: 'locations', label: '동부 흑석 워프 타워', x: 6186, y: 4160, note: '마노 툰드라', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '툰드라 모노리스 워프 타워', x: 2883, y: 4657, note: '마노 툰드라', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '원더랜드 동쪽 워프 타워', x: 2545, y: 5766, note: '마노 툰드라', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '무스 시 워프 타워', x: 5301, y: 4600, note: '마노 툰드라', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '흑석요새 워프 타워', x: 5569, y: 3272, note: '마노 툰드라', scenario: S },
+
+  // — 비너 피오르드 —
+  { category: 'worldstone', group: 'locations', label: '눈사태 모노리스 워프 타워', x: 181, y: 4679, note: '비너 피오르드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '피스쿨 항구 워프 타워', x: 733, y: 6840, note: '비너 피오르드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '웨일본 워프 타워', x: -733, y: 5949, note: '비너 피오르드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '하이브 수용장 워프 타워', x: 1303, y: 4642, note: '비너 피오르드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '프로스트 포지 워프 타워', x: -2369, y: 5008, note: '비너 피오르드', scenario: S },
+
+  // — 잿더미 해변 —
+  { category: 'worldstone', group: 'locations', label: '서부 프로스트 워프 타워', x: -3830, y: 5427, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '동부 화목 워프 타워', x: -3867, y: 2417, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '플레임 더스트 워프 타워', x: -4279, y: 3365, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '유황 연못 워프 타워', x: -4845, y: 4634, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '화목 고지 워프 타워', x: -5271, y: 5400, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '북부 화목 워프 타워', x: -5176, y: 6335, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '풍요의 땅 워프 타워', x: -5960, y: 5089, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '애스폴 워프 타워', x: -5702, y: 4256, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '화목 기지 워프 타워', x: -5983, y: 3085, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '열풍 워프 타워', x: -7435, y: 3745, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '침묵의 불 워프 타워', x: -6441, y: 6850, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '뱀눈 고개 워프 타워', x: -5552, y: 7097, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '뱀배 워프 타워', x: -4637, y: 6709, note: '잿더미 해변', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // WORLDSTONES — Onyx Tundra (추정 좌표)
+  // 마을 / 주요 정착지 (group: locations, category: village)
   // ═══════════════════════════════════════════════
-  { category: 'worldstone', group: 'locations', label: 'East Blackstone 월드스톤', x: 6186, y: 4160, note: 'Onyx Tundra', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Tundra Monolith 월드스톤', x: 2883, y: 4657, note: 'Onyx Tundra', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Wishland 월드스톤', x: 2545, y: 5766, note: 'Onyx Tundra · Wish Land East', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Mousseville 월드스톤', x: 5301, y: 4600, note: 'Onyx Tundra · Moose City', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Obsidian Camp 월드스톤', x: 5569, y: 3272, note: 'Onyx Tundra', scenario: 'way_of_winter' },
+  // — 마노 툰드라 —
+  { category: 'village', group: 'locations', label: '무스 시', x: 5301, y: 4600, note: '마노 툰드라', scenario: S },
+  { category: 'village', group: 'locations', label: '무스 식품 공장', x: 4197, y: 4960, note: '마노 툰드라', scenario: S },
+  { category: 'village', group: 'locations', label: '흑석요새', x: 5569, y: 3272, note: '마노 툰드라', scenario: S },
+  { category: 'village', group: 'locations', label: '원더랜드 동쪽구역', x: 2545, y: 5766, note: '마노 툰드라', scenario: S },
+  { category: 'village', group: 'locations', label: '그레이트 리버 수용 구역', x: 3525, y: 3898, note: '마노 툰드라', scenario: S },
+  { category: 'village', group: 'locations', label: '이글루 캠프', x: 3480, y: 6111, note: '마노 툰드라', scenario: S },
+  { category: 'village', group: 'locations', label: '토바코 파이프 리조트', x: 6386, y: 6383, note: '마노 툰드라', scenario: S },
+
+  // — 비너 피오르드 —
+  { category: 'village', group: 'locations', label: '피스쿨 항구', x: 733, y: 6840, note: '비너 피오르드', scenario: S },
+  { category: 'village', group: 'locations', label: '웨일본 곶', x: -733, y: 5949, note: '비너 피오르드', scenario: S },
+  { category: 'village', group: 'locations', label: '프로스트 포지', x: -2369, y: 5008, note: '비너 피오르드', scenario: S },
+  { category: 'village', group: 'locations', label: '원더랜드 서쪽구역', x: 2075, y: 5845, note: '비너 피오르드', scenario: S },
+  { category: 'village', group: 'locations', label: '하이브 수용장', x: 1303, y: 4642, note: '비너 피오르드', scenario: S },
+  { category: 'village', group: 'locations', label: '은벽', x: -1465, y: 4944, note: '비너 피오르드', scenario: S },
+  { category: 'village', group: 'locations', label: '곰의 소굴', x: -1181, y: 5152, note: '비너 피오르드', scenario: S },
+
+  // — 잿더미 해변 —
+  { category: 'village', group: 'locations', label: '불의 신 연구소', x: -5134, y: 3258, note: '잿더미 해변', scenario: S },
+  { category: 'village', group: 'locations', label: '애스폴', x: -6285, y: 4591, note: '잿더미 해변', scenario: S },
+  { category: 'village', group: 'locations', label: '불의 성역', x: -5044, y: 4414, note: '잿더미 해변', scenario: S },
+  { category: 'village', group: 'locations', label: '화목', x: -4719, y: 4713, note: '잿더미 해변', scenario: S },
+  { category: 'village', group: 'locations', label: '일영 동굴', x: -5875, y: 7294, note: '잿더미 해변', scenario: S },
+  { category: 'village', group: 'locations', label: '유황 채석장', x: -3701, y: 3549, note: '잿더미 해변', scenario: S },
+  { category: 'village', group: 'locations', label: '폐정유소', x: -4132, y: 5257, note: '잿더미 해변', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // WORLDSTONES — Vena Fjord (추정 좌표)
+  // 캠프 (group: locations, category: camp)
   // ═══════════════════════════════════════════════
-  { category: 'worldstone', group: 'locations', label: 'Avalanche Monolith 월드스톤', x: 181, y: 4679, note: 'Vena Fjord', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Fiskur Harbor 월드스톤', x: 733, y: 6840, note: 'Vena Fjord', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Whalebone 월드스톤', x: -733, y: 5949, note: 'Vena Fjord', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Hiverail 월드스톤', x: 1303, y: 4642, note: 'Vena Fjord', scenario: 'way_of_winter' },
-  { category: 'worldstone', group: 'locations', label: 'Frost Forge 월드스톤', x: -2369, y: 5008, note: 'Vena Fjord', scenario: 'way_of_winter' },
+  { category: 'camp', group: 'locations', label: '웨일본 캠프', x: -649, y: 6365, note: '비너 피오르드 · 연합 거점', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // VILLAGES / TOWNS
+  // 보스 (group: creatures, category: boss)
   // ═══════════════════════════════════════════════
-  // — Onyx Tundra —
-  { category: 'village', group: 'locations', label: 'Moose City', x: 5301, y: 4600, note: 'Onyx Tundra · 무스 시티', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Moose City Food Factory', x: 4197, y: 4960, note: 'Onyx Tundra · 식품 공장', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Obsidian Camp', x: 5569, y: 3272, note: 'Onyx Tundra · 옵시디안 캠프', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Wish Land East', x: 2545, y: 5766, note: 'Onyx Tundra · 위시 랜드 동쪽', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Great River Shelter', x: 3525, y: 3898, note: 'Onyx Tundra · 대하 쉘터', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Camp Igloo', x: 3480, y: 6111, note: 'Onyx Tundra · 캠프 이글루', scenario: 'way_of_winter' },
-
-  // — Vena Fjord —
-  { category: 'village', group: 'locations', label: 'Fiskur Harbor', x: 733, y: 6840, note: 'Vena Fjord · 피스쿠르 항구', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Whalebone Cape', x: -733, y: 5949, note: 'Vena Fjord · 웨일본 곶', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Whalebone Ruins', x: -899, y: 5677, note: 'Vena Fjord · 웨일본 유적', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Frost Forge', x: -2369, y: 5008, note: 'Vena Fjord · 프로스트 포지', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: "Bear's Den", x: -1181, y: 5152, note: 'Vena Fjord · 곰의 소굴', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Western Paradise', x: 1011, y: 6033, note: 'Vena Fjord', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Wish Land West', x: 2075, y: 5845, note: 'Vena Fjord · 위시 랜드 서쪽', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Bright Sea', x: -1889, y: 7156, note: 'Vena Fjord', scenario: 'way_of_winter' },
-
-  // — Ember Strand —
-  { category: 'village', group: 'locations', label: 'Fire God Research Center', x: -5134, y: 3258, note: 'Ember Strand · 화신 연구센터', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Ashenton', x: -6285, y: 4591, note: 'Ember Strand · 애쉬턴', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Fire Throat Fortress', x: -5044, y: 4414, note: 'Ember Strand · 화목 요새', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Sunshroud Cave', x: -5875, y: 7294, note: 'Ember Strand · 일영 동굴', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Fire Throat', x: -4719, y: 4713, note: 'Ember Strand · 화목', scenario: 'way_of_winter' },
-  { category: 'village', group: 'locations', label: 'Silver Wall', x: -1465, y: 4944, note: 'Vena Fjord · 은벽', scenario: 'way_of_winter' },
+  { category: 'boss', group: 'creatures', label: '툰드라 모노리스 보스', x: 2559, y: 4491, note: '툰드라 모노리스 보스 · Lv.19', scenario: S },
+  { category: 'boss', group: 'creatures', label: '눈사태 모노리스 보스', x: 105, y: 4388, note: '눈사태 모노리스 보스 · Lv.29', scenario: S },
+  { category: 'boss', group: 'creatures', label: '플레임 더스트 보스', x: -3831, y: 2447, note: '플레임 더스트 모노리스 보스 · Lv.39', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // CAMPS
+  // 엘리트 (group: creatures, category: elite)
   // ═══════════════════════════════════════════════
-  { category: 'camp', group: 'locations', label: 'Whalebone Camp', x: -649, y: 6365, note: 'Vena Fjord · 연합 거점', scenario: 'way_of_winter' },
+  // — 마노 툰드라 —
+  { category: 'elite', group: 'creatures', label: '글라토니 (무스 시)', x: 4220, y: 4961, note: 'Lv.6 · 마노 툰드라 · 무스 식품 공장', scenario: S },
+  { category: 'elite', group: 'creatures', label: '스코처 (식품 공장)', x: 4242, y: 4919, note: 'Lv.9 · 마노 툰드라', scenario: S },
+  { category: 'elite', group: 'creatures', label: '클로머신 (원더랜드 동쪽)', x: 2520, y: 5639, note: 'Lv.15 · 마노 툰드라', scenario: S },
+  { category: 'elite', group: 'creatures', label: '벌처 정복자', x: 5544, y: 3291, note: '마노 툰드라 · 흑석요새', scenario: S },
+  { category: 'elite', group: 'creatures', label: '더치 반 펠트', x: 3507, y: 4051, note: '마노 툰드라 · 그레이트 리버', scenario: S },
+  { category: 'elite', group: 'creatures', label: '로제타 헤비 (그레이트 리버)', x: 2467, y: 4286, note: 'Lv.19 · 마노 툰드라', scenario: S },
+
+  // — 비너 피오르드 —
+  { category: 'elite', group: 'creatures', label: '클로머신 (원더랜드 서쪽)', x: 1978, y: 5800, note: 'Lv.16 · 비너 피오르드', scenario: S },
+  { category: 'elite', group: 'creatures', label: '강우 사신 (피스쿨)', x: 714, y: 6967, note: 'Lv.9 · 비너 피오르드 · 피스쿨 항구', scenario: S },
+  { category: 'elite', group: 'creatures', label: '이그나의 전위 (프로스트 포지)', x: -2423, y: 5016, note: 'Lv.29 · 비너 피오르드', scenario: S },
+  { category: 'elite', group: 'creatures', label: '풍향계', x: -376, y: 5514, note: '비너 피오르드', scenario: S },
+  { category: 'elite', group: 'creatures', label: '로제타 메카닉 (하이브)', x: 1312, y: 4648, note: 'Lv.22 · 비너 피오르드 · 하이브 수용장', scenario: S },
+
+  // — 잿더미 해변 —
+  { category: 'elite', group: 'creatures', label: '이그나의 전령 (불의 신)', x: -5134, y: 3258, note: 'Lv.35 · 잿더미 해변 · 불의 신 연구소', scenario: S },
+  { category: 'elite', group: 'creatures', label: '이그나의 전령 (애스폴)', x: -6285, y: 4591, note: 'Lv.35 · 잿더미 해변 · 애스폴', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // BOSSES
+  // 신비로운 상자 (group: loot, category: crate_mystical)
   // ═══════════════════════════════════════════════
-  { category: 'boss', group: 'creatures', label: 'Tundra Monolith Boss', x: 2559, y: 4491, note: '툰드라 모노리스 보스 · Lv.19', scenario: 'way_of_winter' },
-  { category: 'boss', group: 'creatures', label: 'Avalanche Monolith Boss', x: 105, y: 4388, note: '눈사태 모노리스 보스 · Lv.29', scenario: 'way_of_winter' },
-  { category: 'boss', group: 'creatures', label: 'Firedust Monolith Boss', x: -3831, y: 2447, note: '화진 모노리스 보스 · Lv.39', scenario: 'way_of_winter' },
+  // — 마노 툰드라 —
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (툰드라)', x: 2479, y: 4346, note: '툰드라 모노리스', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (무스 시)', x: 5301, y: 4677, note: '무스 시', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (무스 식품)', x: 4184, y: 5024, note: '무스 식품 공장', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (흑석요새)', x: 5574, y: 3287, note: '흑석요새', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (원더랜드 동쪽)', x: 2520, y: 5757, note: '원더랜드 동쪽구역', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (그레이트 리버)', x: 3524, y: 3986, note: '그레이트 리버 수용 구역', scenario: S },
+
+  // — 비너 피오르드 —
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (눈사태)', x: -94, y: 4485, note: '눈사태 모노리스', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (피스쿨)', x: 771, y: 6970, note: '피스쿨 항구', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (원더랜드 서쪽)', x: 2080, y: 5803, note: '원더랜드 서쪽구역', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (하이브)', x: 1356, y: 4268, note: '하이브 수용장', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (프로스트 포지)', x: -2427, y: 5044, note: '프로스트 포지', scenario: S },
+
+  // — 잿더미 해변 —
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (플레임 더스트)', x: -3818, y: 2539, note: '플레임 더스트 모노리스', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (불의 신)', x: -5177, y: 3276, note: '불의 신 연구소', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (불의 성역)', x: -5102, y: 4472, note: '불의 성역', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (애스폴)', x: -6359, y: 4625, note: '애스폴', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (화목)', x: -4683, y: 4711, note: '화목', scenario: S },
+  { category: 'crate_mystical', group: 'loot', label: '신비로운 상자 (일영 동굴)', x: -5877, y: 7317, note: '일영 동굴', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // ELITES
+  // 무기 상자 (group: loot, category: crate_weapon)
   // ═══════════════════════════════════════════════
-  { category: 'elite', group: 'creatures', label: 'Glutton (Moose City)', x: 4220, y: 4961, note: 'Lv.6 · Onyx Tundra', scenario: 'way_of_winter' },
-  { category: 'elite', group: 'creatures', label: 'The Scorcher (Food Factory)', x: 4242, y: 4919, note: 'Lv.9 · Onyx Tundra', scenario: 'way_of_winter' },
-  { category: 'elite', group: 'creatures', label: 'Claw Machine (Wish Land E)', x: 2520, y: 5639, note: 'Lv.15 · Onyx Tundra', scenario: 'way_of_winter' },
-  { category: 'elite', group: 'creatures', label: 'Siren (Fiskur)', x: 6426, y: 6399, note: 'Lv.11 · Onyx Tundra', scenario: 'way_of_winter' },
-  { category: 'elite', group: 'creatures', label: 'Vulture Conqueror', x: 5544, y: 3291, note: 'Onyx Tundra', scenario: 'way_of_winter' },
-  { category: 'elite', group: 'creatures', label: 'Dutch Van Pelt', x: 3507, y: 4051, note: 'Onyx Tundra', scenario: 'way_of_winter' },
-  { category: 'elite', group: 'creatures', label: 'Claw Machine (Wish Land W)', x: 1978, y: 5800, note: 'Lv.16 · Vena Fjord', scenario: 'way_of_winter' },
-  { category: 'elite', group: 'creatures', label: 'Rainfall Reaper (Fiskur)', x: 714, y: 6967, note: 'Lv.9 · Vena Fjord', scenario: 'way_of_winter' },
-  { category: 'elite', group: 'creatures', label: "Igna's Vanguard", x: -2423, y: 5016, note: 'Lv.29 · Vena Fjord · Frost Forge', scenario: 'way_of_winter' },
-  { category: 'elite', group: 'creatures', label: 'Weather Vane', x: -376, y: 5514, note: 'Vena Fjord · Dangling Vessel Cove', scenario: 'way_of_winter' },
+  // — 마노 툰드라 —
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (무스 시 스쿨버스)', x: 5228, y: 4697, note: '무스 시 · 스쿨버스', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (무스 시 컵케이크)', x: 5256, y: 4756, note: '무스 시 · 컵케이크 빌딩', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (식품 공장 도넛)', x: 4288, y: 5060, note: '무스 식품 공장 · 도넛 창고', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (흑석요새 망루)', x: 5545, y: 3193, note: '흑석요새 · 망루 하부', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (원더랜드 동쪽 동물원)', x: 2600, y: 5648, note: '원더랜드 동쪽구역 · 동물원', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (그레이트 리버)', x: 3599, y: 3948, note: '그레이트 리버 · 얼음 방', scenario: S },
+
+  // — 비너 피오르드 —
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (피스쿨 난파선)', x: 844, y: 6800, note: '피스쿨 항구 · 난파선', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (원더랜드 서쪽 폭포)', x: 2070, y: 5802, note: '원더랜드 서쪽 · 폭포 동굴', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (하이브 차원앵커)', x: 1393, y: 4377, note: '하이브 수용장 · 차원 앵커 부근', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (프로스트 포지)', x: -2291, y: 4985, note: '프로스트 포지 · 남동쪽 건물', scenario: S },
+
+  // — 잿더미 해변 —
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (불의 신 연구소)', x: -5187, y: 3231, note: '불의 신 연구소 · 로제타 트레일러', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (불의 성역)', x: -5317, y: 4318, note: '불의 성역 · 서쪽 건물', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (애스폴 1)', x: -6480, y: 4698, note: '애스폴 · 흰 컨테이너', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (애스폴 2)', x: -6402, y: 4804, note: '애스폴 · 용암 건물', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (화목 북부)', x: -4795, y: 4801, note: '화목 · 북부 기지', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (일영 동굴 1)', x: -5894, y: 7253, note: '일영 동굴 · 컨테이너', scenario: S },
+  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (일영 동굴 2)', x: -5771, y: 7339, note: '일영 동굴 · 경비 플랫폼', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // LOOT — Mystical Crates
+  // 장비 상자 (group: loot, category: crate_gear)
   // ═══════════════════════════════════════════════
-  { category: 'crate_mystical', group: 'loot', label: '미스틱 상자 (Tundra)', x: 2479, y: 4346, note: 'Tundra Monolith · 컨테이너 위', scenario: 'way_of_winter' },
-  { category: 'crate_mystical', group: 'loot', label: '미스틱 상자 (Avalanche)', x: -94, y: 4485, note: 'Avalanche · 캠프', scenario: 'way_of_winter' },
-  { category: 'crate_mystical', group: 'loot', label: '미스틱 상자 (Firedust)', x: -3818, y: 2539, note: 'Firedust Monolith · 망루 옆', scenario: 'way_of_winter' },
+  // — 마노 툰드라 —
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (토바코 리조트)', x: 6386, y: 6383, note: '토바코 파이프 리조트', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (무스 시)', x: 5186, y: 4756, note: '무스 시', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (식품 공장 1)', x: 4236, y: 4901, note: '무스 식품 공장', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (식품 공장 2)', x: 4161, y: 4956, note: '무스 식품 공장', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (흑석요새 1)', x: 5520, y: 3223, note: '흑석요새', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (원더랜드 동쪽)', x: 2535, y: 5592, note: '원더랜드 동쪽구역', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (그레이트 리버)', x: 3574, y: 4028, note: '그레이트 리버 수용 구역', scenario: S },
+
+  // — 비너 피오르드 —
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (피스쿨 1)', x: 696, y: 6761, note: '피스쿨 항구', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (피스쿨 2)', x: 682, y: 7042, note: '피스쿨 항구', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (원더랜드 서쪽)', x: 2081, y: 5869, note: '원더랜드 서쪽구역', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (하이브 1)', x: 1392, y: 4538, note: '하이브 수용장', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (프로스트 포지)', x: -2343, y: 5013, note: '프로스트 포지', scenario: S },
+
+  // — 잿더미 해변 —
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (유황 채석장)', x: -3701, y: 3549, note: '유황 채석장', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (애스폴)', x: -6218, y: 4721, note: '애스폴', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (불의 신)', x: -5240, y: 3156, note: '불의 신 연구소', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (불의 성역)', x: -5455, y: 4369, note: '불의 성역', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (화목)', x: -4604, y: 4700, note: '화목', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (일영 동굴 1)', x: -5910, y: 7237, note: '일영 동굴', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (일영 동굴 2)', x: -5787, y: 7356, note: '일영 동굴', scenario: S },
+  { category: 'crate_gear', group: 'loot', label: '장비 상자 (폐정유소)', x: -4132, y: 5257, note: '폐정유소', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // LOOT — Weapon Crates
+  // 전망대 (group: knowledge, category: viewpoint)
   // ═══════════════════════════════════════════════
-  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (Tundra 1)', x: 2601, y: 4768, note: 'Tundra Monolith · 02 건물 내부', scenario: 'way_of_winter' },
-  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (Tundra 2)', x: 2335, y: 4366, note: 'Tundra · 다리 서쪽', scenario: 'way_of_winter' },
-  { category: 'crate_weapon', group: 'loot', label: '무기 상자 (Firedust)', x: -3838, y: 2639, note: 'Firedust Monolith · Rosetta 시설', scenario: 'way_of_winter' },
+  // — 마노 툰드라 —
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (좌초 습지)', x: 6237, y: 5485, note: '마노 툰드라 · 좌초 습지', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (흑석요새 비계)', x: 5543, y: 3308, note: '마노 툰드라 · 흑석요새', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (무스 케이크)', x: 5322, y: 4669, note: '마노 툰드라 · 무스 시', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (꽃밭)', x: 5152, y: 5172, note: '마노 툰드라', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (식품 공장 아치)', x: 4318, y: 4987, note: '마노 툰드라 · 무스 식품 공장', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (그레이트 리버 입구)', x: 3634, y: 4076, note: '마노 툰드라', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (이글루 트럭)', x: 3389, y: 6225, note: '마노 툰드라 · 이글루 캠프', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (툰드라 모노리스 다리)', x: 2323, y: 4373, note: '마노 툰드라', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (원더랜드 씨월드)', x: 2480, y: 5636, note: '마노 툰드라', scenario: S },
 
-  // ═══════════════════════════════════════════════
-  // LOOT — Gear Crates
-  // ═══════════════════════════════════════════════
-  { category: 'crate_gear', group: 'loot', label: '기어 상자 (Tundra 1)', x: 2999, y: 4810, note: 'Tundra · 터널 근처', scenario: 'way_of_winter' },
-  { category: 'crate_gear', group: 'loot', label: '기어 상자 (Tundra 2)', x: 2914, y: 4663, note: 'Tundra · 노란 텐트', scenario: 'way_of_winter' },
-  { category: 'crate_gear', group: 'loot', label: '기어 상자 (Avalanche)', x: 103, y: 4426, note: 'Avalanche · 2층', scenario: 'way_of_winter' },
-  { category: 'crate_gear', group: 'loot', label: '기어 상자 (Firedust 1)', x: -3998, y: 2475, note: 'Firedust · 다리 옆 창고', scenario: 'way_of_winter' },
-  { category: 'crate_gear', group: 'loot', label: '기어 상자 (Firedust 2)', x: -3849, y: 2434, note: 'Firedust · 사무실', scenario: 'way_of_winter' },
+  // — 비너 피오르드 —
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (원더랜드 오렌지 저택)', x: 2502, y: 5793, note: '비너 피오르드', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (하이브 동굴 입구)', x: 1204, y: 4365, note: '비너 피오르드', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (피스쿨 상자)', x: 722, y: 6928, note: '비너 피오르드', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (웨일본 언덕)', x: -380, y: 6139, note: '비너 피오르드', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (마운틴셰이드 북쪽)', x: -845, y: 5719, note: '비너 피오르드', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (곰 캠프 석상)', x: -1542, y: 5218, note: '비너 피오르드', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (눈사태 남서쪽)', x: -22, y: 4260, note: '비너 피오르드', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (프로스트 포지 남쪽)', x: -2198, y: 4992, note: '비너 피오르드', scenario: S },
+
+  // — 잿더미 해변 —
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (불시착 비행기)', x: -3493, y: 3869, note: '잿더미 해변', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (불의 신 손)', x: -5162, y: 3257, note: '잿더미 해변 · 불의 신 연구소', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (머리 없는 조각상)', x: -6778, y: 4283, note: '잿더미 해변', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (일영 동굴 내부)', x: -5869, y: 7298, note: '잿더미 해변', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (애스폴 바위)', x: -6282, y: 4722, note: '잿더미 해변', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (플레임 더스트 절벽)', x: -3816, y: 2352, note: '잿더미 해변', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (사일로 차원앵커)', x: -7148, y: 4606, note: '잿더미 해변', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (불의 성역 경사로)', x: -5246, y: 4339, note: '잿더미 해변', scenario: S },
+  { category: 'viewpoint', group: 'knowledge', label: '전망대 (부서진 다리 용암)', x: -4790, y: 4648, note: '잿더미 해변', scenario: S },
 ];
 
 async function seed() {
@@ -160,7 +265,7 @@ async function seed() {
 
   const sql = neon(process.env.DATABASE_URL);
 
-  // Remove old WoW data if exists
+  // Remove old WoW data
   const existing = await sql`SELECT COUNT(*) as count FROM pois WHERE scenario = 'way_of_winter'`;
   if (parseInt(existing[0].count) > 0) {
     console.log(`[seed-wow] Clearing ${existing[0].count} existing Way of Winter POIs...`);

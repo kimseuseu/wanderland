@@ -87,7 +87,7 @@ function createPinIcon(color, category) {
 }
 
 // POI 카테고리별 중요도 (큰 마커 vs 작은 마커)
-const POI_MAJOR = new Set(['monolith', 'silo', 'worldstone', 'boss']);
+const POI_MAJOR = new Set(['monolith', 'silo', 'worldstone', 'boss', 'village']);
 
 function createPoiIcon(category, group) {
   const emoji = POI_ICONS[category] || '📍';
