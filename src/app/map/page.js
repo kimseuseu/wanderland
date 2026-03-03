@@ -84,6 +84,7 @@ function MapContent() {
   const [poiForm, setPoiForm] = useState({ category: 'monolith', group: 'locations', label: '', note: '', scenario: '' });
   const [selPoi, setSelPoi] = useState(null);
   const [poiPopupPos, setPoiPopupPos] = useState(null);
+  const [pinPopupPos, setPinPopupPos] = useState(null);
   const [poiScenarioFilter, setPoiScenarioFilter] = useState('전체'); // '전체' | 'manibus' | 'way_of_winter'
 
   // Feature 4: Distance measurement
@@ -416,7 +417,7 @@ function MapContent() {
         pins={filteredPins}
         selectedPin={sel}
         onMapClick={handleMapClick}
-        onPinClick={setSel}
+        onPinClick={(pin, screenPos) => { setSel(pin); setPinPopupPos(screenPos || null); }}
         routes={routes || []}
         drawingMode={drawingMode}
         drawingColor={drawingColor}
@@ -695,7 +696,7 @@ function MapContent() {
                     key={p.id}
                     className={`map-pin-item${sel?.id === p.id ? ' selected' : ''}${p.visibility === 'private' ? ' map-pin-private' : ''}`}
                     style={{ '--pin-color': p.color || '#44ff88' }}
-                    onClick={() => setSel(p)}
+                    onClick={() => { setSel(p); setPinPopupPos(null); }}
                   >
                     <div
                       className="map-pin-dot"
@@ -810,108 +811,117 @@ function MapContent() {
         </div>
       </Modal>
 
-      {/* ── Pin Detail Modal ── */}
-      <Modal open={!!sel} onClose={() => setSel(null)} title="">
-        {sel && (
-          <div>
-            {/* Color Gradient Banner */}
-            <div className="map-detail-banner" style={{ '--pin-color': sel.color || '#44ff88' }}>
-              <div className="map-detail-title">
-                {sel.visibility === 'private' && (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 6, opacity: 0.6 }}>
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" />
-                  </svg>
+      {/* ── Pin Detail Popup (마커 근처 작은 카드) ── */}
+      {sel && (() => {
+        const pinColor = sel.color || '#44ff88';
+        const px = pinPopupPos?.x ?? (typeof window !== 'undefined' ? window.innerWidth / 2 : 400);
+        const py = pinPopupPos?.y ?? (typeof window !== 'undefined' ? window.innerHeight / 2 : 300);
+        const popupW = 300;
+        const popupH = 240;
+        const vw = typeof window !== 'undefined' ? window.innerWidth : 1200;
+        let left = px - popupW / 2;
+        let top = py - popupH - 24;
+        if (left < 8) left = 8;
+        if (left + popupW > vw - 8) left = vw - popupW - 8;
+        if (top < 8) top = py + 30;
+        return (
+          <>
+            <div
+              onClick={() => { setSel(null); setPinPopupPos(null); }}
+              style={{ position: 'fixed', inset: 0, zIndex: 9998, background: 'transparent' }}
+            />
+            <div
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                position: 'fixed', left, top, width: popupW, zIndex: 9999,
+                background: 'var(--bg-secondary)',
+                border: `1px solid ${pinColor}40`,
+                borderRadius: 12,
+                boxShadow: `0 8px 32px rgba(0,0,0,0.6), 0 0 16px ${pinColor}20`,
+                overflow: 'hidden',
+                animation: 'fadeIn 0.15s ease-out forwards',
+              }}
+            >
+              {/* 헤더 */}
+              <div style={{
+                padding: '10px 14px 8px',
+                background: `linear-gradient(135deg, ${pinColor}18, transparent)`,
+                borderBottom: `1px solid ${pinColor}20`,
+                display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start',
+              }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{
+                    fontSize: 14, fontWeight: 700, color: 'var(--text-primary)',
+                    display: 'flex', alignItems: 'center', gap: 5, lineHeight: 1.3,
+                  }}>
+                    <div style={{ width: 10, height: 10, borderRadius: '50%', background: pinColor, boxShadow: `0 0 6px ${pinColor}`, flexShrink: 0 }} />
+                    {sel.visibility === 'private' && (
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ opacity: 0.5, flexShrink: 0 }}>
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" />
+                      </svg>
+                    )}
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{sel.label}</span>
+                  </div>
+                  <div style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginTop: 2 }}>
+                    ({Math.round(sel.x)}, {Math.round(sel.y)})
+                  </div>
+                </div>
+                <button
+                  onClick={() => { setSel(null); setPinPopupPos(null); }}
+                  style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: 2, marginLeft: 4, flexShrink: 0, lineHeight: 1 }}
+                >
+                  <Icons.X />
+                </button>
+              </div>
+              {/* 태그 줄 */}
+              <div style={{ padding: '6px 14px', display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+                {sel.scenario && (
+                  <span style={{ fontSize: 10, fontWeight: 600, padding: '2px 7px', borderRadius: 4, background: `${pinColor}15`, color: pinColor, border: `1px solid ${pinColor}25` }}>
+                    {SCENARIO_SHORT[sel.scenario] || sel.scenario}{sel.server ? ` ${sel.server}서버` : ''}
+                  </span>
                 )}
-                {sel.label}
+                <span style={{ fontSize: 10, color: 'var(--text-muted)' }}>
+                  {resolveNick(sel.discordId, sel.author)}
+                </span>
               </div>
-              <div className="map-detail-coords">
-                ({Math.round(sel.x)}, {Math.round(sel.y)})
-              </div>
-            </div>
-
-            {/* Info Grid */}
-            <div className="map-detail-grid">
-              <div className="map-detail-cell">
-                <div className="map-detail-cell-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" /><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" />
-                  </svg>
+              {/* 노트 */}
+              {sel.note && (
+                <div style={{ padding: '2px 14px 8px', fontSize: 11, color: 'var(--text-secondary)', lineHeight: 1.5 }}>
+                  {sel.note}
                 </div>
-                <div className="map-detail-cell-label">시나리오</div>
-                <div className="map-detail-cell-value">{sel.scenario || '—'}</div>
-              </div>
-              <div className="map-detail-cell">
-                <div className="map-detail-cell-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2" /><line x1="8" y1="21" x2="16" y2="21" /><line x1="12" y1="17" x2="12" y2="21" />
-                  </svg>
-                </div>
-                <div className="map-detail-cell-label">서버</div>
-                <div className="map-detail-cell-value">{sel.server ? `${sel.server}서버` : '—'}</div>
-              </div>
-              <div className="map-detail-cell">
-                <div className="map-detail-cell-icon">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
-                  </svg>
-                </div>
-                <div className="map-detail-cell-label">작성자</div>
-                <div className="map-detail-cell-value">{resolveNick(sel.discordId, sel.author)}</div>
-              </div>
-            </div>
-
-            {/* Note */}
-            {sel.note && (
-              <div className="map-detail-note" style={{ '--pin-color': sel.color || '#44ff88' }}>
-                {sel.note}
-              </div>
-            )}
-
-            {/* Footer */}
-            <div className="map-detail-footer">
-              <div className="map-detail-author">
-                <div style={{
-                  width: 8, height: 8, borderRadius: '50%',
-                  background: sel.color || '#44ff88',
-                  boxShadow: `0 0 6px ${sel.color || '#44ff88'}`,
-                }} />
-                {resolveNick(sel.discordId, sel.author)}
-              </div>
-              <div className="map-detail-actions">
-                {/* Feature 3: Favorite button */}
+              )}
+              {/* 액션 버튼 */}
+              <div style={{ padding: '4px 10px 10px', display: 'flex', gap: 4, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
                 <Button
                   variant="secondary"
                   onClick={(e) => { e.stopPropagation(); toggleFavorite(sel.id); }}
-                  style={{ padding: '5px 14px', fontSize: 12, color: favorites.has(sel.id) ? '#ffaa44' : 'var(--text-secondary)' }}
+                  style={{ padding: '3px 8px', fontSize: 10, color: favorites.has(sel.id) ? '#ffaa44' : 'var(--text-secondary)' }}
                 >
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill={favorites.has(sel.id) ? '#ffaa44' : 'none'} stroke="currentColor" strokeWidth="2">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill={favorites.has(sel.id) ? '#ffaa44' : 'none'} stroke="currentColor" strokeWidth="2">
                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                   </svg>
-                  {favorites.has(sel.id) ? '즐겨찾기 해제' : '즐겨찾기'}
                 </Button>
-                {/* Feature 2: Share link */}
-                <Button variant="secondary" onClick={() => copyShareLink(sel)} style={{ padding: '5px 14px', fontSize: 12 }}>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <Button variant="secondary" onClick={() => copyShareLink(sel)} style={{ padding: '3px 8px', fontSize: 10 }}>
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
                     <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
                   </svg>
-                  링크 복사
                 </Button>
                 {checkOwner(sel) && (
                   <>
-                    <Button variant="secondary" onClick={() => startEdit(sel)} style={{ padding: '5px 14px', fontSize: 12 }}>
-                      <Icons.Edit /> 수정
+                    <Button variant="secondary" onClick={() => { startEdit(sel); setPinPopupPos(null); }} style={{ padding: '3px 8px', fontSize: 10 }}>
+                      <Icons.Edit />
                     </Button>
-                    <Button variant="danger" onClick={() => deletePin(sel.id)} style={{ padding: '5px 14px', fontSize: 12 }}>
-                      <Icons.Trash /> 삭제
+                    <Button variant="danger" onClick={() => { deletePin(sel.id); setPinPopupPos(null); }} style={{ padding: '3px 8px', fontSize: 10 }}>
+                      <Icons.Trash />
                     </Button>
                   </>
                 )}
               </div>
             </div>
-          </div>
-        )}
-      </Modal>
+          </>
+        );
+      })()}
 
       {/* ── Add / Edit Pin Modal ── */}
       <Modal

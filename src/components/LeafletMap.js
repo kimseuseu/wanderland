@@ -400,7 +400,15 @@ const LeafletMap = forwardRef(function LeafletMap(
       });
       marker.on('click', (e) => {
         L.DomEvent.stopPropagation(e);
-        onPinClickRef.current?.(pin);
+        const map = mapRef.current;
+        if (map) {
+          const pt = map.latLngToContainerPoint(e.latlng);
+          const container = containerRef.current;
+          const rect = container?.getBoundingClientRect() || { left: 0, top: 0 };
+          onPinClickRef.current?.(pin, { x: rect.left + pt.x, y: rect.top + pt.y });
+        } else {
+          onPinClickRef.current?.(pin);
+        }
       });
 
       if (clusterGroup) {
