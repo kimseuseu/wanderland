@@ -40,7 +40,7 @@ const WOW_DATA = [
   // 사일로 (group: locations, category: silo)
   // 명칭: 사일로 [이름]
   // ═══════════════════════════════════════════════
-  { category: 'silo', group: 'locations', label: '사일로 델타', x: 3525, y: 3898, note: '마노 툰드라 · 그레이트 리버 부근', scenario: S },
+  { category: 'silo', group: 'locations', label: '사일로 델타', x: 5160, y: 4191, note: '마노 툰드라 · 무스 시 남동쪽', scenario: S },
   { category: 'silo', group: 'locations', label: '사일로 EX1', x: 4197, y: 4600, note: '마노 툰드라 · 다크헬 · 무스 식품 공장 남서쪽', scenario: S },
   { category: 'silo', group: 'locations', label: '사일로 PSI', x: -500, y: 5800, note: '비너 피오르드 · 설국 · 웨일본 동쪽', scenario: S },
   { category: 'silo', group: 'locations', label: '사일로 08', x: -6500, y: 4200, note: '잿더미 해변 · 애쉬튼시 서쪽', scenario: S },
@@ -51,21 +51,27 @@ const WOW_DATA = [
   // — 마노 툰드라 —
   { category: 'worldstone', group: 'locations', label: '동부 흑석 세계석', x: 6186, y: 4160, note: '마노 툰드라', scenario: S },
   { category: 'worldstone', group: 'locations', label: '툰드라 모노리스 세계석', x: 2883, y: 4657, note: '마노 툰드라', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '원더랜드 동쪽 세계석', x: 2545, y: 5766, note: '마노 툰드라', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '무스 시 세계석', x: 5301, y: 4600, note: '마노 툰드라', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '흑석요새 세계석', x: 5569, y: 3272, note: '마노 툰드라', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '원더랜드 동쪽 세계석', x: 2680, y: 5710, note: '마노 툰드라', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '무스 시 세계석', x: 5180, y: 4530, note: '마노 툰드라', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '흑석요새 세계석', x: 5450, y: 3340, note: '마노 툰드라', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '무스빌 세계석', x: 5050, y: 5100, note: '마노 툰드라 · 무스빌', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '파이프 아일 세계석', x: 6500, y: 6200, note: '마노 툰드라 · 토바코 파이프 리조트 부근', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '오션뷰 세계석', x: 6400, y: 5300, note: '마노 툰드라 · 좌초 습지 부근', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '북부 흑석 세계석', x: 5700, y: 3800, note: '마노 툰드라 · 흑석요새 북쪽', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '우드랜드 랜치 세계석', x: 4400, y: 4300, note: '마노 툰드라 · 사일로 EX1 부근', scenario: S },
 
   // — 비너 피오르드 —
   { category: 'worldstone', group: 'locations', label: '눈사태 모노리스 세계석', x: 181, y: 4679, note: '비너 피오르드', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '피스쿨 항구 세계석', x: 733, y: 6840, note: '비너 피오르드', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '웨일본 세계석', x: -733, y: 5949, note: '비너 피오르드', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '하이브 수용장 세계석', x: 1303, y: 4642, note: '비너 피오르드', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '프로스트 포지 세계석', x: -2369, y: 5008, note: '비너 피오르드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '피스쿨 항구 세계석', x: 610, y: 6920, note: '비너 피오르드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '웨일본 세계석', x: -620, y: 6050, note: '비너 피오르드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '하이브 수용장 세계석', x: 1180, y: 4710, note: '비너 피오르드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '프로스트 포지 세계석', x: -2250, y: 5090, note: '비너 피오르드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '브로큰 리프 세계석', x: 500, y: 5400, note: '비너 피오르드 · 원더랜드 서쪽 남부', scenario: S },
 
   // — 잿더미 해변 —
   { category: 'worldstone', group: 'locations', label: '서부 프로스트 세계석', x: -3830, y: 5427, note: '잿더미 해변', scenario: S },
   { category: 'worldstone', group: 'locations', label: '동부 화목 세계석', x: -3867, y: 2417, note: '잿더미 해변', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '플레임 더스트 세계석', x: -4279, y: 3365, note: '잿더미 해변', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '플레임 더스트 모노리스 세계석', x: -4279, y: 3365, note: '잿더미 해변', scenario: S },
   { category: 'worldstone', group: 'locations', label: '유황 연못 세계석', x: -4845, y: 4634, note: '잿더미 해변', scenario: S },
   { category: 'worldstone', group: 'locations', label: '화목 고지 세계석', x: -5271, y: 5400, note: '잿더미 해변', scenario: S },
   { category: 'worldstone', group: 'locations', label: '북부 화목 세계석', x: -5176, y: 6335, note: '잿더미 해변', scenario: S },
@@ -116,9 +122,11 @@ const WOW_DATA = [
   { category: 'village', group: 'locations', label: '폐정유소', x: -4132, y: 5257, note: '잿더미 해변', scenario: S },
 
   // ═══════════════════════════════════════════════
-  // 캠프 (group: locations, category: camp)
+  // 캠프 / 거점 (group: locations, category: camp)
   // ═══════════════════════════════════════════════
   { category: 'camp', group: 'locations', label: '웨일본 캠프', x: -649, y: 6365, note: '비너 피오르드 · 연합 거점', scenario: S },
+  { category: 'camp', group: 'locations', label: '그라운드 언폴른', x: -3500, y: 3870, note: '잿더미 해변 · 거점 · 불시착 비행기 부근', scenario: S },
+  { category: 'camp', group: 'locations', label: '오블리비온', x: -6200, y: 4400, note: '잿더미 해변 · 거점 · 애쉬튼시 부근', scenario: S },
 
   // ═══════════════════════════════════════════════
   // 보스 (group: creatures, category: boss)

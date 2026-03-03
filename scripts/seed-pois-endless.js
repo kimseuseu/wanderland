@@ -38,16 +38,16 @@ const ENDLESS_DATA = [
   // — 남부 (터치오브스카이 지역) —
   { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 시그마)', x: 4900, y: -5422, note: '1000 자각의 모래 · 사일로 시그마 부근 · 동적 스폰', scenario: S },
   { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 파이)', x: 5142, y: -2943, note: '1000 자각의 모래 · 사일로 파이 부근 · 동적 스폰', scenario: S },
-  { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 EX1)', x: 2144, y: -6503, note: '1000 자각의 모래 · 사일로 EX1 부근 · 동적 스폰', scenario: S },
+  { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 EX1 · 초크 피크)', x: 2144, y: -6503, note: '1000 자각의 모래 · 사일로 EX1 부근 · 초크 피크 · 동적 스폰', scenario: S },
   { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 알파)', x: 145, y: -3615, note: '1000 자각의 모래 · 사일로 알파 부근 · 동적 스폰', scenario: S },
   { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 세타)', x: 5485, y: -520, note: '1000 자각의 모래 · 사일로 세타 부근 · 동적 스폰', scenario: S },
   { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 프사이)', x: 2490, y: -2570, note: '1000 자각의 모래 · 사일로 프사이 부근 · 동적 스폰', scenario: S },
 
   // — 북부 (혹독한 겨울 지역) —
-  { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 델타)', x: 3525, y: 3898, note: '1000 자각의 모래 · 사일로 델타 부근 · 동적 스폰', scenario: S },
-  { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 스티그마)', x: 4197, y: 4600, note: '1000 자각의 모래 · 사일로 스티그마 부근 · 동적 스폰', scenario: S },
-  { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 타우)', x: -500, y: 5800, note: '1000 자각의 모래 · 사일로 타우 부근 · 동적 스폰', scenario: S },
-  { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 페이)', x: -218, y: 6004, note: '1000 자각의 모래 · 사일로 페이 부근 · 동적 스폰', scenario: S },
+  { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 델타)', x: 5160, y: 4191, note: '1000 자각의 모래 · 사일로 델타 부근 · 동적 스폰', scenario: S },
+  { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 EX1 · 다크헬)', x: 4197, y: 4600, note: '1000 자각의 모래 · 사일로 EX1 부근 · 마노 툰드라 · 동적 스폰', scenario: S },
+  { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 PSI)', x: -500, y: 5800, note: '1000 자각의 모래 · 사일로 PSI 부근 · 동적 스폰', scenario: S },
+  { category: 'eternal_kin', group: 'creatures', label: '영면의 킨 (사일로 08)', x: -6500, y: 4200, note: '1000 자각의 모래 · 사일로 08 부근 · 동적 스폰', scenario: S },
 
   // ═══════════════════════════════════════════════
   // 깊이 잠든 자 (group: creatures, category: deep_dreamer)

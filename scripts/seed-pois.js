@@ -91,7 +91,7 @@ const POI_DATA = [
   { category: 'worldstone', group: 'locations', label: '남부 밸리 세계석', x: 6548, y: -1521, note: '레드 샌드', scenario: S },
   { category: 'worldstone', group: 'locations', label: '세타 세계석', x: 5640, y: -950, note: '레드 샌드', scenario: S },
   { category: 'worldstone', group: 'locations', label: '잊혀진 모노리스 세계석', x: 1970, y: -1400, note: '레드 샌드', scenario: S },
-  { category: 'worldstone', group: 'locations', label: '북부 포트 아이리 세계석', x: 2700, y: -2327, note: '레드 샌드', scenario: S },
+  { category: 'worldstone', group: 'locations', label: '북부 포트 아이리 세계석', x: 2580, y: -2250, note: '레드 샌드', scenario: S },
 
   // — 블랙하트 지대 —
   { category: 'worldstone', group: 'locations', label: '거인의 계단 세계석', x: 3337, y: 181, note: '블랙하트 지대', scenario: S },
