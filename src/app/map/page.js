@@ -83,6 +83,7 @@ function MapContent() {
   const [poiNp, setPoiNp] = useState(null);
   const [poiForm, setPoiForm] = useState({ category: 'monolith', group: 'locations', label: '', note: '', scenario: '' });
   const [selPoi, setSelPoi] = useState(null);
+  const [poiPopupPos, setPoiPopupPos] = useState(null);
   const [poiScenarioFilter, setPoiScenarioFilter] = useState('전체'); // '전체' | 'manibus' | 'way_of_winter'
 
   // Feature 4: Distance measurement
@@ -424,7 +425,7 @@ function MapContent() {
         measurePoints={measurePoints}
         cluster
         pois={filteredPois}
-        onPoiClick={setSelPoi}
+        onPoiClick={(poi, screenPos) => { setSelPoi(poi); setPoiPopupPos(screenPos || null); }}
       />
 
       {/* Drawing Mode Toolbar */}
@@ -981,52 +982,109 @@ function MapContent() {
           <Button onClick={addOrUpdatePin}>{editPin ? '수정' : '추가'}</Button>
         </div>
       </Modal>
-      {/* ── POI Detail Modal ── */}
-      <Modal open={!!selPoi} onClose={() => setSelPoi(null)} title="">
-        {selPoi && (() => {
-          const catInfo = POI_CATEGORY_MAP[selPoi.category];
-          const groupColor = { locations: '#4488ff', loot: '#ffaa44', creatures: '#ff4444', resources: '#44ff88', knowledge: '#a855f7' }[selPoi.group] || '#4488ff';
-          return (
-            <div>
-              <div className="map-detail-banner" style={{ '--pin-color': groupColor }}>
-                <div className="map-detail-title">
-                  <span style={{ marginRight: 6 }}>{catInfo?.emoji || '📍'}</span>
-                  {selPoi.label}
+      {/* ── POI Detail Popup (마커 근처 작은 카드) ── */}
+      {selPoi && (() => {
+        const catInfo = POI_CATEGORY_MAP[selPoi.category];
+        const groupColor = { locations: '#4488ff', loot: '#ffaa44', creatures: '#ff4444', resources: '#44ff88', knowledge: '#a855f7' }[selPoi.group] || '#4488ff';
+        // 팝업 위치 계산: 마커 위쪽, 화면 밖이면 조정
+        const px = poiPopupPos?.x ?? (typeof window !== 'undefined' ? window.innerWidth / 2 : 400);
+        const py = poiPopupPos?.y ?? (typeof window !== 'undefined' ? window.innerHeight / 2 : 300);
+        const popupW = 280;
+        const popupH = 200;
+        const vw = typeof window !== 'undefined' ? window.innerWidth : 1200;
+        const vh = typeof window !== 'undefined' ? window.innerHeight : 800;
+        let left = px - popupW / 2;
+        let top = py - popupH - 24;
+        if (left < 8) left = 8;
+        if (left + popupW > vw - 8) left = vw - popupW - 8;
+        if (top < 8) top = py + 30; // 위에 공간 없으면 아래에 표시
+        return (
+          <>
+            {/* 반투명 배경 (클릭으로 닫기) */}
+            <div
+              onClick={() => { setSelPoi(null); setPoiPopupPos(null); }}
+              style={{ position: 'fixed', inset: 0, zIndex: 9998, background: 'transparent' }}
+            />
+            {/* 팝업 카드 */}
+            <div
+              className="fade-in"
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                position: 'fixed',
+                left, top,
+                width: popupW,
+                zIndex: 9999,
+                background: 'var(--bg-secondary)',
+                border: `1px solid ${groupColor}40`,
+                borderRadius: 12,
+                boxShadow: `0 8px 32px rgba(0,0,0,0.6), 0 0 16px ${groupColor}20`,
+                overflow: 'hidden',
+                animation: 'fadeIn 0.15s ease-out forwards',
+              }}
+            >
+              {/* 헤더 */}
+              <div style={{
+                padding: '10px 14px 8px',
+                background: `linear-gradient(135deg, ${groupColor}18, transparent)`,
+                borderBottom: `1px solid ${groupColor}20`,
+                display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start',
+              }}>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{
+                    fontSize: 14, fontWeight: 700, color: 'var(--text-primary)',
+                    display: 'flex', alignItems: 'center', gap: 5,
+                    lineHeight: 1.3,
+                  }}>
+                    <span>{catInfo?.emoji || '📍'}</span>
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{selPoi.label}</span>
+                  </div>
+                  <div style={{ fontSize: 10, color: 'var(--text-muted)', fontFamily: 'var(--font-mono)', marginTop: 2 }}>
+                    ({Math.round(selPoi.x)}, {Math.round(selPoi.y)})
+                  </div>
                 </div>
-                <div className="map-detail-coords">
-                  ({Math.round(selPoi.x)}, {Math.round(selPoi.y)})
-                </div>
+                <button
+                  onClick={() => { setSelPoi(null); setPoiPopupPos(null); }}
+                  style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: 2, marginLeft: 4, flexShrink: 0, lineHeight: 1 }}
+                >
+                  <Icons.X />
+                </button>
               </div>
-              <div className="map-detail-grid">
-                <div className="map-detail-cell">
-                  <div className="map-detail-cell-label">카테고리</div>
-                  <div className="map-detail-cell-value">{catInfo?.label || selPoi.category}</div>
-                </div>
-                <div className="map-detail-cell">
-                  <div className="map-detail-cell-label">그룹</div>
-                  <div className="map-detail-cell-value">{catInfo?.groupLabel || selPoi.group}</div>
-                </div>
-                <div className="map-detail-cell">
-                  <div className="map-detail-cell-label">시나리오</div>
-                  <div className="map-detail-cell-value">{selPoi.scenario || '전체'}</div>
-                </div>
+              {/* 태그 줄 */}
+              <div style={{ padding: '6px 14px', display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                <span style={{
+                  fontSize: 10, fontWeight: 600, padding: '2px 7px', borderRadius: 4,
+                  background: `${groupColor}15`, color: groupColor, border: `1px solid ${groupColor}25`,
+                }}>
+                  {catInfo?.label || selPoi.category}
+                </span>
+                <span style={{
+                  fontSize: 10, fontWeight: 600, padding: '2px 7px', borderRadius: 4,
+                  background: 'var(--bg-tertiary)', color: 'var(--text-secondary)', border: '1px solid var(--border)',
+                }}>
+                  {selPoi.scenario || '전체'}
+                </span>
               </div>
+              {/* 노트 */}
               {selPoi.note && (
-                <div className="map-detail-note" style={{ '--pin-color': groupColor }}>
+                <div style={{
+                  padding: '4px 14px 8px',
+                  fontSize: 11, color: 'var(--text-secondary)', lineHeight: 1.5,
+                }}>
                   {selPoi.note}
                 </div>
               )}
+              {/* 어드민 삭제 */}
               {session?.isAdmin && (
-                <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 12 }}>
-                  <Button variant="danger" onClick={() => deletePoi(selPoi.id)} style={{ padding: '5px 14px', fontSize: 12 }}>
+                <div style={{ padding: '4px 14px 10px', display: 'flex', justifyContent: 'flex-end' }}>
+                  <Button variant="danger" onClick={() => { deletePoi(selPoi.id); setSelPoi(null); setPoiPopupPos(null); }} style={{ padding: '3px 10px', fontSize: 10 }}>
                     <Icons.Trash /> 삭제
                   </Button>
                 </div>
               )}
             </div>
-          );
-        })()}
-      </Modal>
+          </>
+        );
+      })()}
 
       {/* ── POI Add Modal (Admin) ── */}
       <Modal

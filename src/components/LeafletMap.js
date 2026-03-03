@@ -445,7 +445,15 @@ const LeafletMap = forwardRef(function LeafletMap(
       });
       marker.on('click', (e) => {
         L.DomEvent.stopPropagation(e);
-        onPoiClickRef.current?.(poi);
+        const map = mapRef.current;
+        if (map) {
+          const pt = map.latLngToContainerPoint(e.latlng);
+          const container = containerRef.current;
+          const rect = container?.getBoundingClientRect() || { left: 0, top: 0 };
+          onPoiClickRef.current?.(poi, { x: rect.left + pt.x, y: rect.top + pt.y });
+        } else {
+          onPoiClickRef.current?.(poi);
+        }
       });
       poiGroup.addLayer(marker);
       poiMarkersRef.current[poi.id] = marker;
