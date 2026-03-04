@@ -20,54 +20,9 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "스네이크아이 패스 세계석",
-    "x": -6441,
-    "y": 6851,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
-    "label": "프로스트 포지 세계석",
-    "x": -2147,
-    "y": 5363,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
     "label": "위시 랜드 세계석",
     "x": 2552,
     "y": 6373,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
-    "label": "센트럴 툰드라 세계석",
-    "x": 4383,
-    "y": 4290,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
-    "label": "파이어더스트 세계석",
-    "x": -3874,
-    "y": 2413,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
-    "label": "파이어스로트 라이즈 세계석",
-    "x": -4846,
-    "y": 4635,
     "note": null,
     "scenario": "way_of_winter"
   },
@@ -92,54 +47,9 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "애벌런치 모노리스 세계석",
-    "x": 145,
-    "y": 4438,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
-    "label": "파이어스로트 기지 세계석",
-    "x": -5702,
-    "y": 4257,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
     "label": "브로큰 리프 세계석",
     "x": 67,
     "y": 7448,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
-    "label": "하이브레일 동굴 세계석",
-    "x": 1302,
-    "y": 4911,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
-    "label": "스네이크테일 세계석",
-    "x": -4637,
-    "y": 6709,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
-    "label": "라이프 랜드 세계석",
-    "x": -5177,
-    "y": 6336,
     "note": null,
     "scenario": "way_of_winter"
   },
@@ -164,36 +74,9 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "무스빌 세계석",
-    "x": 5109,
-    "y": 4903,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
     "label": "우드랜드 랜치 세계석",
     "x": 3975,
     "y": 5231,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
-    "label": "파이어스로트 동쪽 세계석",
-    "x": -3830,
-    "y": 5428,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
-    "label": "애쉬턴 세계석",
-    "x": -5961,
-    "y": 5090,
     "note": null,
     "scenario": "way_of_winter"
   },
@@ -218,36 +101,9 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "스네이크벨리 세계석",
-    "x": -5553,
-    "y": 7097,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
     "label": "스노 클리프 세계석",
     "x": -1376,
     "y": 4038,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
-    "label": "파이어스로트 북쪽 세계석",
-    "x": -5271,
-    "y": 5401,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
-    "label": "사일런트파이어 세계석",
-    "x": -7435,
-    "y": 3745,
     "note": null,
     "scenario": "way_of_winter"
   },
@@ -290,15 +146,6 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "블랙스톤 동쪽 세계석",
-    "x": 6263,
-    "y": 4147,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
     "label": "마운틴 쉐이드 세계석",
     "x": -948,
     "y": 5614,
@@ -308,27 +155,9 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "블레이즈윈드 세계석",
-    "x": -5982,
-    "y": 3085,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
     "label": "타이가 격리구역 세계석",
     "x": 3420,
     "y": 4069,
-    "note": null,
-    "scenario": "way_of_winter"
-  },
-  {
-    "category": "transport",
-    "group": "locations",
-    "label": "타이달 보어 세계석",
-    "x": 6257,
-    "y": 5336,
     "note": null,
     "scenario": "way_of_winter"
   },

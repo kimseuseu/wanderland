@@ -17,7 +17,7 @@ const DICT = JSON.parse(
 
 // ─── 카테고리별 한국어 이름 ───
 const CAT_KR = {
-  worldstone: '세계석', transport: '이동장치', village: '마을', camp: '캠프',
+  worldstone: '세계석', transport: '이동장치', village: '마을', camp: '캠프', extraction_site: '추출 거점',
   entropy_hub: '엔트로피 허브', monolith: '모노리스', silo: '사일로',
   crate_mystical: '비밀 보물상자', crate_weapon: '무기 상자', crate_gear: '장비 상자',
   crate_morphic: '모르픽 상자', hoard: '비축물', viewpoint: '전망대',

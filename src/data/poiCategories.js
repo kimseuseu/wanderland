@@ -11,6 +11,7 @@ export const POI_GROUPS = [
       { key: 'camp', label: '캠프', emoji: '⛺' },
       { key: 'transport', label: '이동장치', emoji: '🚁' },
       { key: 'entropy_hub', label: '엔트로피 허브', emoji: '🌡️' },
+      { key: 'extraction_site', label: '추출 거점', emoji: '🏭' },
     ],
   },
   {
