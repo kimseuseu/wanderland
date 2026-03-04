@@ -458,7 +458,7 @@ export default function BuildsPage({ initialBuildId }) {
     if (session?.discordId) {
       fetch('/api/build-likes').then((r) => r.json()).then((d) => {
         setLikedIds(new Set(d.ids || []));
-      }).catch(() => {});
+      }).catch((e) => console.warn('[likes] load failed:', e));
     }
   }, [session?.discordId]);
 
@@ -475,7 +475,7 @@ export default function BuildsPage({ initialBuildId }) {
         return next;
       });
       mutate();
-    } catch (e) { console.error(e); }
+    } catch (e) { console.warn('[builds] like failed:', e); }
   };
 
   const checkOwner = (build) => {
@@ -511,7 +511,7 @@ export default function BuildsPage({ initialBuildId }) {
           try {
             await fetch(`/api/builds/${sel.id}`, { method: 'DELETE' });
             mutate();
-          } catch (e) { console.error(e); }
+          } catch (e) { console.warn('[builds] delete failed:', e); }
           setSel(null);
           setMode('list');
         }}

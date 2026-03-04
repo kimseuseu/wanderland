@@ -2,16 +2,41 @@ import { NextResponse } from 'next/server';
 import { db } from '@/db';
 import { pois } from '@/db/schema';
 import { requireMember } from '@/lib/auth';
+import { eq } from 'drizzle-orm';
 
-export async function GET() {
+export async function GET(req) {
   const session = await requireMember();
   if (!session) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   try {
-    const result = await db.select().from(pois);
-    return NextResponse.json(result);
+    const { searchParams } = new URL(req.url);
+    const scenario = searchParams.get('scenario');
+    const group = searchParams.get('group');
+    const limit = parseInt(searchParams.get('limit')) || 0;
+    const offset = parseInt(searchParams.get('offset')) || 0;
+
+    let query = db.select().from(pois);
+
+    // 선택적 필터링
+    if (scenario) {
+      query = query.where(eq(pois.scenario, scenario));
+    }
+    if (group) {
+      query = query.where(eq(pois.group, group));
+    }
+
+    // 선택적 페이지네이션 (limit=0이면 전체 반환)
+    if (limit > 0) {
+      query = query.limit(limit).offset(offset);
+    }
+
+    const result = await query;
+    const res = NextResponse.json(result);
+    // POI 데이터는 자주 변경되지 않으므로 5분 캐시
+    res.headers.set('Cache-Control', 'private, max-age=300');
+    return res;
   } catch (error) {
     console.error('GET /api/pois error:', error);
     return NextResponse.json([]);

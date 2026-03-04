@@ -119,13 +119,13 @@ export default function NavBar({ activePage, onNavigate }) {
                 <>
                   <div
                     onClick={() => setShowUserMenu(false)}
-                    style={{ position: 'fixed', inset: 0, zIndex: 200 }}
+                    style={{ position: 'fixed', inset: 0, zIndex: 'var(--z-mobile-menu)' }}
                   />
                   <div style={{
                     position: 'absolute', top: '100%', right: 0, marginTop: 6,
                     background: 'var(--bg-card)', border: '1px solid var(--border)',
                     borderRadius: 10, padding: 6, minWidth: 160,
-                    boxShadow: '0 8px 32px rgba(0,0,0,0.4)', zIndex: 201,
+                    boxShadow: '0 8px 32px rgba(0,0,0,0.4)', zIndex: 'var(--z-mobile-drawer)',
                   }}>
                     <div style={{
                       padding: '8px 12px', borderBottom: '1px solid var(--border)',

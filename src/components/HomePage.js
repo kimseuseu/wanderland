@@ -24,12 +24,12 @@ export default function HomePage({ onNavigate }) {
       fetch('/api/builds').then((r) => r.ok ? r.json() : []),
     ]).then(([mc, b]) => {
       setCounts({ members: mc.count || 0, builds: b.length || 0 });
-    }).catch(() => {});
+    }).catch((e) => console.warn('[home] stats load failed:', e));
 
     fetch('/api/news')
       .then((r) => r.ok ? r.json() : [])
       .then((data) => setNews(data.slice(0, 4)))
-      .catch(() => {});
+      .catch((e) => console.warn('[home] news load failed:', e));
   }, []);
 
   const go = (page, href) => href ? router.push(href) : onNavigate(page);

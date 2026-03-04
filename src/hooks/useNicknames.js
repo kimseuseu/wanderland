@@ -21,7 +21,7 @@ export function useNicknames() {
           if (data.byName) setByName(new Map(Object.entries(data.byName)));
         }
       })
-      .catch(() => {});
+      .catch((e) => console.warn('[nicknames] load failed:', e));
   }, [session?.isMember]);
 
   const resolve = useCallback((discordId, fallback) => {

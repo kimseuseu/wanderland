@@ -97,7 +97,7 @@ export default function OnlineAvatars({ users = [] }) {
             position: 'absolute', top: '100%', right: 0, marginTop: 8,
             background: 'var(--bg-card)', border: '1px solid var(--border)',
             borderRadius: 10, padding: 8,
-            boxShadow: '0 8px 32px rgba(0,0,0,0.5)', zIndex: 300,
+            boxShadow: '0 8px 32px rgba(0,0,0,0.5)', zIndex: 'var(--z-avatar-popup)',
             minWidth: 160, maxWidth: 220,
           }}
           onMouseEnter={() => setShowTooltip(true)}

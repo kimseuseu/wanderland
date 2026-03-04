@@ -78,7 +78,8 @@ function MembersContent() {
         setRoles(data.roles || []);
         setMembersLoading(false);
       })
-      .catch(() => {
+      .catch((e) => {
+        console.warn('[members] load failed:', e);
         setMembers([]);
         setRoles([]);
         setMembersLoading(false);

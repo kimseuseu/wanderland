@@ -16,7 +16,7 @@ export async function GET() {
     db.execute(sql`
       DELETE FROM online_sessions
       WHERE last_seen < NOW() - INTERVAL '2 hours'
-    `).catch(() => {});
+    `).catch((e) => console.warn('[online] cleanup failed:', e));
 
     return NextResponse.json(result.rows || result);
   } catch (error) {

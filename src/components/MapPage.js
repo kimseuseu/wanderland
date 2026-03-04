@@ -47,7 +47,7 @@ export default function MapPage() {
         body: JSON.stringify({ ...np, ...form, server: form.server ? parseInt(form.server) : null, author: session?.user?.name || '익명' }),
       });
       mutate();
-    } catch (e) { console.error(e); }
+    } catch (e) { console.warn('[map] pin create failed:', e); }
     setShowAdd(false); setNp(null); setForm({ ...DEFAULT_FORM });
   };
 
@@ -55,7 +55,7 @@ export default function MapPage() {
     try {
       await fetch(`/api/map-pins/${id}`, { method: 'DELETE' });
       mutate();
-    } catch (e) { console.error(e); }
+    } catch (e) { console.warn('[map] pin delete failed:', e); }
     setSel(null);
   };
 

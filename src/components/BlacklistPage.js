@@ -616,7 +616,7 @@ export default function BlacklistPage() {
         });
       }
       mutate();
-    } catch (e) { console.error(e); }
+    } catch (e) { console.warn('[blacklist] save failed:', e); }
     closeForm();
   };
 
@@ -624,7 +624,7 @@ export default function BlacklistPage() {
     try {
       await fetch(`/api/blacklist/${id}`, { method: 'DELETE' });
       mutate();
-    } catch (e) { console.error(e); }
+    } catch (e) { console.warn('[blacklist] delete failed:', e); }
     setSel(null);
   };
 

@@ -127,7 +127,7 @@ export default function TradePage() {
         setImagePreview(null);
       }
     } catch (e) {
-      console.error(e);
+      console.warn('[trade] save failed:', e);
     } finally {
       setSaving(false);
     }

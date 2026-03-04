@@ -186,7 +186,7 @@ export default function GuidePage() {
         setCoverPreview(null);
       }
     } catch (e) {
-      console.error(e);
+      console.warn('[guide] save failed:', e);
     } finally {
       setSaving(false);
     }

@@ -10,7 +10,7 @@ export function Modal({ open, onClose, title, children }) {
       aria-modal="true"
       aria-label={title}
       style={{
-        position: 'fixed', inset: 0, zIndex: 9999,
+        position: 'fixed', inset: 0, zIndex: 'var(--z-modal)',
         display: 'flex', flexDirection: 'column', alignItems: 'center',
         justifyContent: 'flex-start',
         background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(16px)',

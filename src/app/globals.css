@@ -1,3 +1,19 @@
+/*
+ * ─── Wanderland Global Styles ───
+ *
+ * CSS 네이밍 규칙:
+ *   hp-*     : HomePage
+ *   bl-*     : BlacklistPage
+ *   bd-*     : BuildsPage
+ *   map-*    : Map (page & sidebar)
+ *   about-*  : AboutPage
+ *   trade-*  : TradePage
+ *   guide-*  : GuidePage/Editor
+ *   custom-pin, custom-poi : Leaflet 마커 오버라이드
+ *
+ * z-index 스케일: :root 변수 참조 (--z-base ~ --z-image-modal)
+ */
+
 /* ─── Font Faces ─── */
 @font-face {
   font-family: 'Paperlogy';
@@ -139,6 +155,20 @@
   --font-display: 'Paperlogy', 'Pretendard', sans-serif;
   --font-body: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
+
+  /* z-index 스케일 */
+  --z-base: 0;
+  --z-content: 1;
+  --z-raised: 2;
+  --z-navbar: 100;
+  --z-mobile-menu: 200;
+  --z-mobile-drawer: 201;
+  --z-avatar-popup: 300;
+  --z-sidebar: 1000;
+  --z-popup: 9998;
+  --z-modal: 9999;
+  --z-image-overlay: 10000;
+  --z-image-modal: 10001;
 }
 
 /* ─── Reset & Base ─── */
@@ -561,7 +591,7 @@ option {
 }
 .custom-pin .pin-marker:hover {
   transform: scale(1.2);
-  z-index: 9999 !important;
+  z-index: var(--z-modal) !important;
 }
 
 /* ═══════════════════════════════════════════════════════
@@ -1375,13 +1405,13 @@ option {
 .bl-img-popover-overlay {
   position: fixed;
   inset: 0;
-  z-index: 10000;
+  z-index: var(--z-image-overlay);
   background: rgba(0,0,0,0.5);
   backdrop-filter: blur(4px);
 }
 .bl-img-popover {
   position: fixed;
-  z-index: 10001;
+  z-index: var(--z-image-modal);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -1940,7 +1970,7 @@ option {
   position: absolute;
   top: 12px;
   left: 12px;
-  z-index: 1000;
+  z-index: var(--z-sidebar);
   background: rgba(12, 12, 12, 0.88);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -2479,7 +2509,7 @@ option {
   position: absolute;
   bottom: 12px;
   right: 12px;
-  z-index: 1000;
+  z-index: var(--z-sidebar);
   background: rgba(10, 10, 10, 0.85);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -4315,7 +4345,7 @@ option {
    ═══════════════════════════════════════ */
 .map-draw-toolbar {
   position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
-  z-index: 1000; display: flex; align-items: center; gap: 12px;
+  z-index: var(--z-sidebar); display: flex; align-items: center; gap: 12px;
   padding: 10px 18px; border-radius: 12px;
   background: rgba(10,10,10,0.92); border: 1px solid var(--border);
   backdrop-filter: blur(12px); box-shadow: 0 4px 20px rgba(0,0,0,0.4);
@@ -4793,7 +4823,7 @@ option {
 }
 .custom-poi .poi-marker:hover {
   transform: scale(1.25);
-  z-index: 9999 !important;
+  z-index: var(--z-modal) !important;
 }
 
 /* ─── Cluster Icons ─── */

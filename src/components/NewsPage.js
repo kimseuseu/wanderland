@@ -42,7 +42,7 @@ export default function NewsPage() {
         setLastUpdated(new Date());
         setLoading(false);
       })
-      .catch(() => setLoading(false));
+      .catch((e) => { console.warn('[news] load failed:', e); setLoading(false); });
   }, []);
 
   useEffect(() => {

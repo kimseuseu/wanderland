@@ -17,13 +17,13 @@ export function useOnlinePresence() {
         const data = await res.json();
         setOnlineUsers(Array.isArray(data) ? data : []);
       }
-    } catch { /* silent */ }
+    } catch (e) { console.warn('[online] fetch failed:', e); }
   }, []);
 
   const sendHeartbeat = useCallback(async () => {
     try {
       await fetch('/api/online/heartbeat', { method: 'POST' });
-    } catch { /* silent */ }
+    } catch (e) { console.warn('[heartbeat] send failed:', e); }
   }, []);
 
   useEffect(() => {

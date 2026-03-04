@@ -245,7 +245,7 @@ function MapContent() {
         body: JSON.stringify({ ...poiForm, x: poiNp.x, y: poiNp.y }),
       });
       mutatePois();
-    } catch (e) { console.error(e); }
+    } catch (e) { console.warn('[map] POI create failed:', e); }
     setShowPoiModal(false);
     setPoiNp(null);
     setPoiForm({ category: 'monolith', group: 'locations', label: '', note: '', scenario: '' });
@@ -255,7 +255,7 @@ function MapContent() {
     try {
       await fetch(`/api/pois/${id}`, { method: 'DELETE' });
       mutatePois();
-    } catch (e) { console.error(e); }
+    } catch (e) { console.warn('[map] POI delete failed:', e); }
     setSelPoi(null);
   };
 
@@ -268,7 +268,7 @@ function MapContent() {
         body: JSON.stringify({ pinId }),
       });
       mutateFavs();
-    } catch (e) { console.error(e); }
+    } catch (e) { console.warn('[map] favorite toggle failed:', e); }
   };
 
   // Feature 2: Copy share link
@@ -348,7 +348,7 @@ function MapContent() {
         }),
       });
       mutateRoutes();
-    } catch (e) { console.error(e); }
+    } catch (e) { console.warn('[map] route save failed:', e); }
     setDrawingMode(false);
     setRoutePoints([]);
     setRouteForm({ label: '', note: '', scenario: '', visibility: 'public' });
@@ -360,7 +360,7 @@ function MapContent() {
     try {
       await fetch(`/api/map-routes/${id}`, { method: 'DELETE' });
       mutateRoutes();
-    } catch (e) { console.error(e); }
+    } catch (e) { console.warn('[map] route delete failed:', e); }
   };
 
   const startEdit = (pin) => {
@@ -387,7 +387,7 @@ function MapContent() {
         });
       }
       mutate();
-    } catch (e) { console.error(e); }
+    } catch (e) { console.warn('[map] pin save failed:', e); }
     setShowAdd(false); setEditPin(null); setNp(null); setForm({ ...DEFAULT_FORM });
   };
 
@@ -395,7 +395,7 @@ function MapContent() {
     try {
       await fetch(`/api/map-pins/${id}`, { method: 'DELETE' });
       mutate();
-    } catch (e) { console.error(e); }
+    } catch (e) { console.warn('[map] pin delete failed:', e); }
     setSel(null);
   };
 

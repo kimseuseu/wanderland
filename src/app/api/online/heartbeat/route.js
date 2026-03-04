@@ -25,7 +25,7 @@ export async function POST(request) {
         last_seen = NOW()
     `);
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error('[heartbeat] Error:', error);
     return NextResponse.json({ error: 'Failed' }, { status: 500 });
