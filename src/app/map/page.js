@@ -75,7 +75,10 @@ function MapContent() {
   );
 
   // POI layer state
-  const [enabledPoiCategories, setEnabledPoiCategories] = useState(() => new Set(ALL_POI_KEYS));
+  const [enabledPoiCategories, setEnabledPoiCategories] = useState(() => {
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) return new Set();
+    return new Set(ALL_POI_KEYS);
+  });
   const [expandedPoiGroups, setExpandedPoiGroups] = useState(() => new Set());
   const [poiAddMode, setPoiAddMode] = useState(false);
   const [showPoiModal, setShowPoiModal] = useState(false);
