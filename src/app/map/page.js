@@ -57,7 +57,8 @@ function MapContent() {
   const [form, setForm] = useState({ ...DEFAULT_FORM });
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [editPin, setEditPin] = useState(null);
-  const [filter, setFilter] = useState('전체');
+  const [scenario, setScenario] = useState('전체');
+  const [sidebarTab, setSidebarTab] = useState('poi'); // 'poi' | 'pins' | 'routes'
   const [search, setSearch] = useState('');
 
   // Route drawing state
@@ -72,12 +73,10 @@ function MapContent() {
   const [enabledCategories, setEnabledCategories] = useState(() =>
     new Set(PIN_CATEGORIES.map((c) => c.key))
   );
-  const [showCategoryFilter, setShowCategoryFilter] = useState(false);
 
   // POI layer state
   const [enabledPoiCategories, setEnabledPoiCategories] = useState(() => new Set(ALL_POI_KEYS));
   const [expandedPoiGroups, setExpandedPoiGroups] = useState(() => new Set());
-  const [showPoiFilter, setShowPoiFilter] = useState(false);
   const [poiAddMode, setPoiAddMode] = useState(false);
   const [showPoiModal, setShowPoiModal] = useState(false);
   const [poiNp, setPoiNp] = useState(null);
@@ -85,7 +84,7 @@ function MapContent() {
   const [selPoi, setSelPoi] = useState(null);
   const [poiPopupPos, setPoiPopupPos] = useState(null);
   const [pinPopupPos, setPinPopupPos] = useState(null);
-  const [poiScenarioFilter, setPoiScenarioFilter] = useState('전체'); // '전체' | 'manibus' | 'way_of_winter'
+  // poiScenarioFilter 제거됨 → scenario 통합 사용
 
   // Feature 4: Distance measurement
   const [measureMode, setMeasureMode] = useState(false);
@@ -129,8 +128,8 @@ function MapContent() {
     } else if (viewMode === 'favs') {
       result = result.filter((p) => favorites.has(p.id));
     }
-    if (filter !== '전체') {
-      result = result.filter((p) => p.scenario === filter);
+    if (scenario !== '전체') {
+      result = result.filter((p) => p.scenario === scenario);
     }
     if (search.trim()) {
       const q = search.trim().toLowerCase();
@@ -141,7 +140,7 @@ function MapContent() {
       );
     }
     return result;
-  }, [pinList, filter, search, viewMode, session, enabledCategories, favorites]);
+  }, [pinList, scenario, search, viewMode, session, enabledCategories, favorites]);
 
   // 시나리오 → DB scenario 매핑
   const POI_SCENARIO_MAP = {
@@ -155,24 +154,24 @@ function MapContent() {
   const filteredPois = useMemo(() => {
     const list = poisData || [];
     let result = list.filter((p) => enabledPoiCategories.has(p.category));
-    // 시나리오 필터
-    const allowed = POI_SCENARIO_MAP[poiScenarioFilter];
+    // 시나리오 필터 (통합)
+    const allowed = POI_SCENARIO_MAP[scenario];
     if (allowed) {
       result = result.filter((p) => allowed.includes(p.scenario));
     }
     return result;
-  }, [poisData, enabledPoiCategories, poiScenarioFilter]);
+  }, [poisData, enabledPoiCategories, scenario]);
 
   // POI 카테고리별 개수 (시나리오 필터 반영)
   const poiCounts = useMemo(() => {
     const counts = {};
-    const allowed = POI_SCENARIO_MAP[poiScenarioFilter];
+    const allowed = POI_SCENARIO_MAP[scenario];
     for (const p of (poisData || [])) {
       if (allowed && !allowed.includes(p.scenario)) continue;
       counts[p.category] = (counts[p.category] || 0) + 1;
     }
     return counts;
-  }, [poisData, poiScenarioFilter]);
+  }, [poisData, scenario]);
 
   const checkOwner = (pin) => {
     if (!session || !pin) return false;
@@ -484,291 +483,244 @@ function MapContent() {
 
       {/* ── Floating Sidebar ── */}
       <div className={`map-sidebar${sidebarOpen ? '' : ' collapsed'}`}>
-        {/* Header */}
+        {/* Header: collapse toggle */}
         <div className="map-sidebar-header" onClick={() => setSidebarOpen(!sidebarOpen)}>
           {sidebarOpen ? (
             <>
               <div className="map-sidebar-title">
-                <div className="map-sidebar-icon">
-                  <Icons.Map />
-                </div>
-                <span className="map-sidebar-label">핀 목록</span>
-                <span className="map-sidebar-count">{filteredPins.length}</span>
+                <div className="map-sidebar-icon"><Icons.Map /></div>
+                <span className="map-sidebar-label">지도 도구</span>
               </div>
               <button className="map-sidebar-toggle" onClick={(e) => { e.stopPropagation(); setSidebarOpen(false); }}>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="15 18 9 12 15 6" />
-                </svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
               </button>
             </>
           ) : (
-            <div className="map-sidebar-icon" style={{ width: 24, height: 24, borderRadius: 6, border: 'none', background: 'transparent' }}>
-              <Icons.Map />
-            </div>
+            <div className="map-sidebar-icon" style={{ width: 24, height: 24, borderRadius: 6, border: 'none', background: 'transparent' }}><Icons.Map /></div>
           )}
         </div>
 
-        {/* Search + Filter + List (only when open) */}
         {sidebarOpen && (
           <>
-            {/* Search */}
-            <div className="map-search-wrap">
-              <div className="map-search-icon">
-                <Icons.Search />
-              </div>
-              <input
-                className="map-search"
-                placeholder="핀 검색..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              {search && (
-                <button className="map-search-clear" onClick={() => setSearch('')}>
-                  <Icons.X />
-                </button>
-              )}
-            </div>
-
-            {/* View Mode Toggle */}
-            <div className="map-view-toggle">
-              <button className={`map-view-btn${viewMode === 'all' ? ' active' : ''}`} onClick={() => setViewMode('all')}>전체</button>
-              <button className={`map-view-btn${viewMode === 'mine' ? ' active' : ''}`} onClick={() => setViewMode('mine')}>내 핀</button>
-              <button className={`map-view-btn${viewMode === 'favs' ? ' active' : ''}`} onClick={() => setViewMode('favs')}>
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none" style={{ marginRight: 3 }}>
-                  <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                </svg>
-                즐겨찾기
-              </button>
-            </div>
-
-            {/* Scenario Filter Chips */}
-            <div className="map-filter-row">
+            {/* ── 시나리오 셀렉터 (통합) ── */}
+            <div className="map-scenario-selector">
               {['전체', ...SCENARIOS].map((s) => (
                 <button
                   key={s}
-                  className={`map-chip${filter === s ? ' active' : ''}`}
-                  onClick={() => setFilter(s)}
+                  className={`map-scenario-chip${scenario === s ? ' active' : ''}`}
+                  onClick={() => setScenario(s)}
                 >
-                  {s}
+                  {SCENARIO_SHORT[s] || s}
                 </button>
               ))}
             </div>
 
-            {/* Feature 1: Category Layer Toggle */}
-            <div className="map-category-filter">
-              <button className="map-category-toggle-btn" onClick={() => setShowCategoryFilter(!showCategoryFilter)}>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-                </svg>
-                카테고리
-                <span style={{ opacity: 0.5, fontSize: 10 }}>
-                  {enabledCategories.size}/{PIN_CATEGORIES.length}
-                </span>
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginLeft: 'auto', transform: showCategoryFilter ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
+            {/* ── 탭 바 ── */}
+            <div className="map-tab-bar">
+              <button className={`map-tab${sidebarTab === 'poi' ? ' active' : ''}`} onClick={() => setSidebarTab('poi')}>
+                <span className="map-tab-icon">🌍</span>
+                <span>POI</span>
+                <span className="map-tab-badge">{filteredPois.length}</span>
               </button>
-              {showCategoryFilter && (
-                <div className="map-category-list">
-                  <button className="map-category-item" onClick={toggleAllCategories}>
-                    <span className="map-cat-check">{enabledCategories.size === PIN_CATEGORIES.length ? '☑' : '☐'}</span>
-                    전체
+              <button className={`map-tab${sidebarTab === 'pins' ? ' active' : ''}`} onClick={() => setSidebarTab('pins')}>
+                <span className="map-tab-icon">📍</span>
+                <span>내 핀</span>
+                <span className="map-tab-badge">{filteredPins.length}</span>
+              </button>
+              <button className={`map-tab${sidebarTab === 'routes' ? ' active' : ''}`} onClick={() => setSidebarTab('routes')}>
+                <span className="map-tab-icon">🛤️</span>
+                <span>경로</span>
+                <span className="map-tab-badge">{(routes || []).length}</span>
+              </button>
+            </div>
+
+            {/* ═══ POI 탭 ═══ */}
+            {sidebarTab === 'poi' && (
+              <div className="map-tab-content">
+                {/* 전체 토글 + 관리자 POI 추가 */}
+                <div className="map-poi-toolbar">
+                  <button className="map-poi-toggle-all" onClick={toggleAllPoi}>
+                    {enabledPoiCategories.size === ALL_POI_KEYS.size ? '전체 끄기' : '전체 켜기'}
                   </button>
-                  {PIN_CATEGORIES.map((cat) => (
-                    <button key={cat.key} className="map-category-item" onClick={() => toggleCategory(cat.key)}>
-                      <span className="map-cat-check">{enabledCategories.has(cat.key) ? '☑' : '☐'}</span>
-                      <span>{cat.emoji}</span>
-                      {cat.label}
+                  <span className="map-poi-stat">{enabledPoiCategories.size}/{ALL_POI_KEYS.size}</span>
+                  {session?.isAdmin && (
+                    <button
+                      className={`map-poi-admin-btn${poiAddMode ? ' active' : ''}`}
+                      onClick={() => { setPoiAddMode(!poiAddMode); setDrawingMode(false); setMeasureMode(false); }}
+                    >
+                      + POI 추가
                     </button>
-                  ))}
+                  )}
                 </div>
-              )}
-            </div>
 
-            {/* Tools: Measure */}
-            <div className="map-tools-row">
-              <button
-                className={`map-tool-btn${measureMode ? ' active' : ''}`}
-                onClick={() => { setMeasureMode(!measureMode); setMeasurePoints([]); setDrawingMode(false); }}
-              >
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M2 12h5l2-7 6 14 2-7h5" />
-                </svg>
-                거리 측정
-              </button>
-            </div>
-
-            {/* ── POI Layer Filter ── */}
-            <div className="map-poi-filter">
-              <button className="map-poi-filter-header" onClick={() => setShowPoiFilter(!showPoiFilter)}>
-                <span style={{ fontSize: 13 }}>🌍</span>
-                게임 POI
-                <span style={{ opacity: 0.5, fontSize: 10 }}>
-                  {enabledPoiCategories.size}/{ALL_POI_KEYS.size}
-                </span>
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginLeft: 'auto', transform: showPoiFilter ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
-              </button>
-              {showPoiFilter && (
-                <div className="map-poi-filter-body">
-                  {/* 시나리오 필터 */}
-                  <div className="map-poi-scenario-row">
-                    {['전체', '터치오브스카이', '혹독한겨울', '무한의꿈', '비정상수용'].map((s) => (
-                      <button
-                        key={s}
-                        className={`map-poi-scenario-btn${poiScenarioFilter === s ? ' active' : ''}`}
-                        onClick={() => setPoiScenarioFilter(s)}
-                      >
-                        {s}
-                      </button>
-                    ))}
-                  </div>
-                  {/* 전체 토글 + 관리자 POI 추가 */}
-                  <div className="map-poi-toggle-all-row">
-                    <button className="map-poi-toggle-all" onClick={toggleAllPoi}>
-                      {enabledPoiCategories.size === ALL_POI_KEYS.size ? '전체 끄기' : '전체 켜기'}
-                    </button>
-                    {session?.isAdmin && (
-                      <button
-                        className={`map-poi-admin-btn${poiAddMode ? ' active' : ''}`}
-                        onClick={() => { setPoiAddMode(!poiAddMode); setDrawingMode(false); setMeasureMode(false); }}
-                      >
-                        + POI 추가
-                      </button>
-                    )}
-                  </div>
-                  {/* 그룹별 아코디언 */}
+                {/* 그룹별 카드 */}
+                <div className="map-poi-groups">
                   {POI_GROUPS.map((group) => {
                     const isExpanded = expandedPoiGroups.has(group.key);
                     const allOn = group.categories.every((c) => enabledPoiCategories.has(c.key));
                     const someOn = group.categories.some((c) => enabledPoiCategories.has(c.key));
+                    const groupCount = group.categories.reduce((s, c) => s + (poiCounts[c.key] || 0), 0);
+                    const GROUP_COLORS = { locations: '#4488ff', loot: '#ffaa44', creatures: '#ff4444', resources: '#44ff88', knowledge: '#a855f7' };
+                    const gColor = GROUP_COLORS[group.key] || '#4488ff';
                     return (
-                      <div key={group.key} className="map-poi-group">
-                        <button className="map-poi-group-header" onClick={() => toggleExpandGroup(group.key)}>
+                      <div key={group.key} className={`map-poi-card${isExpanded ? ' expanded' : ''}`} style={{ '--group-color': gColor }}>
+                        <button className="map-poi-card-header" onClick={() => toggleExpandGroup(group.key)}>
                           <span
-                            className="map-poi-group-check"
+                            className={`map-poi-card-check${allOn ? ' on' : someOn ? ' partial' : ''}`}
                             onClick={(e) => { e.stopPropagation(); togglePoiGroup(group.key); }}
-                          >
-                            {allOn ? '☑' : someOn ? '◧' : '☐'}
-                          </span>
-                          <span className="map-poi-group-label">{group.label}</span>
-                          <span className="map-poi-group-count">{group.categories.reduce((s, c) => s + (poiCounts[c.key] || 0), 0)}</span>
-                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" style={{ marginLeft: 'auto', transform: isExpanded ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }}>
-                            <polyline points="6 9 12 15 18 9" />
-                          </svg>
+                          />
+                          <span className="map-poi-card-label">{group.label}</span>
+                          <span className="map-poi-card-count">{groupCount}</span>
+                          <svg className={`map-poi-card-chevron${isExpanded ? ' open' : ''}`} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="6 9 12 15 18 9" /></svg>
                         </button>
                         {isExpanded && (
-                          <div className="map-poi-group-items">
-                            {group.categories.map((cat) => (
-                              <button
-                                key={cat.key}
-                                className={`map-poi-item${enabledPoiCategories.has(cat.key) ? ' on' : ''}`}
-                                onClick={() => togglePoiCategory(cat.key)}
-                              >
-                                <span className="map-poi-item-emoji">{cat.emoji}</span>
-                                <span className="map-poi-item-label">{cat.label}</span>
-                                <span className="map-poi-item-count">{poiCounts[cat.key] || 0}</span>
-                              </button>
-                            ))}
+                          <div className="map-poi-card-body">
+                            {group.categories.map((cat) => {
+                              const count = poiCounts[cat.key] || 0;
+                              const isOn = enabledPoiCategories.has(cat.key);
+                              return (
+                                <button
+                                  key={cat.key}
+                                  className={`map-poi-chip${isOn ? ' on' : ''}`}
+                                  onClick={() => togglePoiCategory(cat.key)}
+                                >
+                                  <span className="map-poi-chip-emoji">{cat.emoji}</span>
+                                  <span className="map-poi-chip-label">{cat.label}</span>
+                                  <span className="map-poi-chip-count">{count}</span>
+                                </button>
+                              );
+                            })}
                           </div>
                         )}
                       </div>
                     );
                   })}
                 </div>
-              )}
-            </div>
-
-            {/* Pin List */}
-            <div className="map-pin-list">
-              {filteredPins.length === 0 ? (
-                <div className="map-empty">
-                  <div className="map-empty-icon">
-                    <Icons.Map />
-                  </div>
-                  <div className="map-empty-text">핀이 없습니다</div>
-                  <div className="map-empty-sub">지도를 클릭하여 핀을 추가하세요</div>
-                </div>
-              ) : (
-                filteredPins.map((p) => (
-                  <div
-                    key={p.id}
-                    className={`map-pin-item${sel?.id === p.id ? ' selected' : ''}${p.visibility === 'private' ? ' map-pin-private' : ''}`}
-                    style={{ '--pin-color': p.color || '#44ff88' }}
-                    onClick={() => { setSel(p); setPinPopupPos(null); }}
-                  >
-                    <div
-                      className="map-pin-dot"
-                      style={{ background: p.color || '#44ff88', '--pin-color': p.color || '#44ff88' }}
-                    />
-                    <div className="map-pin-info">
-                      <div className="map-pin-name">
-                        {p.visibility === 'private' && (
-                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 4, opacity: 0.5, flexShrink: 0 }}>
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" />
-                          </svg>
-                        )}
-                        {p.label}
-                      </div>
-                      <div className="map-pin-meta">
-                        <span className="map-pin-author">{resolveNick(p.discordId, p.author)}</span>
-                        {p.scenario && (
-                          <span className="map-pin-scenario-tag">
-                            {SCENARIO_SHORT[p.scenario] || p.scenario}
-                            {p.server ? ` ${p.server}` : ''}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    {/* Favorite star in list */}
-                    {favorites.has(p.id) && (
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="#ffaa44" stroke="none" style={{ flexShrink: 0, opacity: 0.7 }}>
-                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-                      </svg>
-                    )}
-                  </div>
-                ))
-              )}
-            </div>
-
-            {/* Route Section */}
-            <div className="map-route-section">
-              <div className="map-route-header">
-                <span><Icons.Route /> 경로</span>
-                {!drawingMode && (
-                  <button className="map-route-draw-btn" onClick={startDrawing}>
-                    <Icons.Plus /> 그리기
-                  </button>
-                )}
               </div>
-              {(routes || []).filter((r) => viewMode === 'all' || viewMode === 'favs' || (r.discordId && session?.discordId && r.discordId === session.discordId)).map((r) => (
-                <div key={r.id} className={`map-route-item${r.visibility === 'private' ? ' map-pin-private' : ''}`}>
-                  <div className="map-route-dot" style={{ background: r.color || '#ffaa44' }} />
-                  <div className="map-route-info">
-                    <div className="map-route-name">
-                      {r.visibility === 'private' && (
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 4, opacity: 0.5, flexShrink: 0 }}>
-                          <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" />
-                        </svg>
-                      )}
-                      {r.label}
-                    </div>
-                    <div className="map-route-meta">{resolveNick(r.discordId, r.author)} · {r.points?.length || 0}점</div>
+            )}
+
+            {/* ═══ 내 핀 탭 ═══ */}
+            {sidebarTab === 'pins' && (
+              <div className="map-tab-content">
+                {/* 검색 */}
+                <div className="map-search-wrap">
+                  <div className="map-search-icon"><Icons.Search /></div>
+                  <input className="map-search" placeholder="핀 검색..." value={search} onChange={(e) => setSearch(e.target.value)} />
+                  {search && (
+                    <button className="map-search-clear" onClick={() => setSearch('')}><Icons.X /></button>
+                  )}
+                </div>
+
+                {/* 뷰 모드 + 카테고리 */}
+                <div className="map-pins-controls">
+                  <div className="map-view-toggle">
+                    <button className={`map-view-btn${viewMode === 'all' ? ' active' : ''}`} onClick={() => setViewMode('all')}>전체</button>
+                    <button className={`map-view-btn${viewMode === 'mine' ? ' active' : ''}`} onClick={() => setViewMode('mine')}>내 핀</button>
+                    <button className={`map-view-btn${viewMode === 'favs' ? ' active' : ''}`} onClick={() => setViewMode('favs')}>
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="none" style={{ marginRight: 3 }}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+                      즐겨찾기
+                    </button>
                   </div>
-                  {checkOwner(r) && (
-                    <button className="map-route-delete" onClick={() => deleteRoute(r.id)}>
-                      <Icons.Trash />
+                  {/* 카테고리 칩 */}
+                  <div className="map-pin-categories">
+                    <button className={`map-pin-cat-chip${enabledCategories.size === PIN_CATEGORIES.length ? ' on' : ''}`} onClick={toggleAllCategories}>전체</button>
+                    {PIN_CATEGORIES.map((cat) => (
+                      <button key={cat.key} className={`map-pin-cat-chip${enabledCategories.has(cat.key) ? ' on' : ''}`} onClick={() => toggleCategory(cat.key)}>
+                        <span>{cat.emoji}</span> {cat.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* 도구 */}
+                <div className="map-tools-row">
+                  <button
+                    className={`map-tool-btn${measureMode ? ' active' : ''}`}
+                    onClick={() => { setMeasureMode(!measureMode); setMeasurePoints([]); setDrawingMode(false); }}
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 12h5l2-7 6 14 2-7h5" /></svg>
+                    거리 측정
+                  </button>
+                </div>
+
+                {/* 핀 목록 */}
+                <div className="map-pin-list">
+                  {filteredPins.length === 0 ? (
+                    <div className="map-empty">
+                      <div className="map-empty-icon"><Icons.Map /></div>
+                      <div className="map-empty-text">핀이 없습니다</div>
+                      <div className="map-empty-sub">지도를 클릭하여 핀을 추가하세요</div>
+                    </div>
+                  ) : (
+                    filteredPins.map((p) => (
+                      <div
+                        key={p.id}
+                        className={`map-pin-item${sel?.id === p.id ? ' selected' : ''}${p.visibility === 'private' ? ' map-pin-private' : ''}`}
+                        style={{ '--pin-color': p.color || '#44ff88' }}
+                        onClick={() => { setSel(p); setPinPopupPos(null); }}
+                      >
+                        <div className="map-pin-dot" style={{ background: p.color || '#44ff88', '--pin-color': p.color || '#44ff88' }} />
+                        <div className="map-pin-info">
+                          <div className="map-pin-name">
+                            {p.visibility === 'private' && (
+                              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 4, opacity: 0.5, flexShrink: 0 }}><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg>
+                            )}
+                            {p.label}
+                          </div>
+                          <div className="map-pin-meta">
+                            <span className="map-pin-author">{resolveNick(p.discordId, p.author)}</span>
+                            {p.scenario && (
+                              <span className="map-pin-scenario-tag">{SCENARIO_SHORT[p.scenario] || p.scenario}{p.server ? ` ${p.server}` : ''}</span>
+                            )}
+                          </div>
+                        </div>
+                        {favorites.has(p.id) && (
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="#ffaa44" stroke="none" style={{ flexShrink: 0, opacity: 0.7 }}><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+                        )}
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* ═══ 경로 탭 ═══ */}
+            {sidebarTab === 'routes' && (
+              <div className="map-tab-content">
+                <div className="map-route-toolbar">
+                  {!drawingMode && (
+                    <button className="map-route-draw-btn" onClick={startDrawing}>
+                      <Icons.Plus /> 경로 그리기
                     </button>
                   )}
                 </div>
-              ))}
-              {(!routes || routes.length === 0) && (
-                <div style={{ fontSize: 11, color: 'var(--text-muted)', padding: '8px 0', textAlign: 'center' }}>
-                  경로가 없습니다
+                <div className="map-route-list">
+                  {(routes || []).filter((r) => viewMode === 'all' || viewMode === 'favs' || (r.discordId && session?.discordId && r.discordId === session.discordId)).map((r) => (
+                    <div key={r.id} className={`map-route-item${r.visibility === 'private' ? ' map-pin-private' : ''}`}>
+                      <div className="map-route-dot" style={{ background: r.color || '#ffaa44' }} />
+                      <div className="map-route-info">
+                        <div className="map-route-name">
+                          {r.visibility === 'private' && (
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: 4, opacity: 0.5, flexShrink: 0 }}><rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0110 0v4" /></svg>
+                          )}
+                          {r.label}
+                        </div>
+                        <div className="map-route-meta">{resolveNick(r.discordId, r.author)} · {r.points?.length || 0}점</div>
+                      </div>
+                      {checkOwner(r) && (
+                        <button className="map-route-delete" onClick={() => deleteRoute(r.id)}><Icons.Trash /></button>
+                      )}
+                    </div>
+                  ))}
+                  {(!routes || routes.length === 0) && (
+                    <div className="map-empty">
+                      <div className="map-empty-text">경로가 없습니다</div>
+                      <div className="map-empty-sub">경로 그리기로 새 경로를 추가하세요</div>
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </div>
+            )}
           </>
         )}
       </div>

@@ -2,6 +2,18 @@ const { neon } = require('@neondatabase/serverless');
 const fs = require('fs');
 const path = require('path');
 
+// ── th.gl 추가 데이터 로드 ──
+function loadThglAdditions() {
+  const filepath = path.resolve(__dirname, 'seed-pois-tos-additions.json');
+  if (!fs.existsSync(filepath)) {
+    console.log('[seed] th.gl 추가 데이터 파일 없음 (seed-pois-tos-additions.json)');
+    return [];
+  }
+  const data = JSON.parse(fs.readFileSync(filepath, 'utf8'));
+  console.log(`[seed] th.gl 추가 데이터 로드: ${data.length}개`);
+  return data;
+}
+
 // Load .env.local
 function loadEnvFile() {
   const envPath = path.resolve(__dirname, '..', '.env.local');
@@ -361,12 +373,16 @@ async function seed() {
 
   const sql = neon(process.env.DATABASE_URL);
 
+  // th.gl 추가 데이터 병합
+  const thglAdditions = loadThglAdditions();
+  const allPois = [...POI_DATA, ...thglAdditions];
+
   // Delete only touch_of_sky POIs (preserve way_of_winter)
   console.log('[seed] Deleting existing touch_of_sky POIs...');
   await sql`DELETE FROM pois WHERE scenario = 'touch_of_sky'`;
 
   let inserted = 0;
-  for (const poi of POI_DATA) {
+  for (const poi of allPois) {
     try {
       await sql`
         INSERT INTO pois (category, "group", label, x, y, note, scenario)
@@ -378,7 +394,7 @@ async function seed() {
     }
   }
 
-  console.log(`[seed] Successfully inserted ${inserted}/${POI_DATA.length} touch_of_sky POIs`);
+  console.log(`[seed] Successfully inserted ${inserted}/${allPois.length} touch_of_sky POIs (수동: ${POI_DATA.length}, th.gl: ${thglAdditions.length})`);
 
   // Print summary
   const summary = await sql`

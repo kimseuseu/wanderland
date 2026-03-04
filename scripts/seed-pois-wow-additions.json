@@ -1,0 +1,4115 @@
+[
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80705-100A002C-A54D6AD6-0CE8201D_n_xgrs)",
+    "x": -2994,
+    "y": 4476,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80705-0F34000A-0DB90829-0CE8201D_n_xgrs)",
+    "x": -1165,
+    "y": 6761,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80710-140B000B-263CED3C-0CE8201D_n_xgrs)",
+    "x": -6441,
+    "y": 6851,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80705-10050026-EF3EB7C0-0CE8201D_n_xgrs)",
+    "x": -2147,
+    "y": 5363,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80617-1636003A-5F12001D-68E136D6_n_xgrs2)",
+    "x": 2552,
+    "y": 6373,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80617-17090021-68854E4A-0CE8201D_n_xgrs)",
+    "x": 4383,
+    "y": 4290,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80710-141D002D-BDFAC9D3-0CE8201D_n_xgrs)",
+    "x": -3874,
+    "y": 2413,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80710-14190020-279F2A03-0CE8201D_n_xgrs)",
+    "x": -4846,
+    "y": 4635,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80617-170E0038-297AF2A6-0CE8201D_n_xgrs2)",
+    "x": 5302,
+    "y": 3614,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E8071A-0B1D0016-61923FD7-279832D1_n_xgrs2)",
+    "x": -7028,
+    "y": 5321,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80809-170B0029-C4B0145C-0CE8201D_n_xgrs2)",
+    "x": 145,
+    "y": 4438,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80810-0C1A0017-DF21572F-0CE8201D_n_xgrs)",
+    "x": -5702,
+    "y": 4257,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80705-0F310022-B04E4022-0CE8201D_n_xgrs2)",
+    "x": 67,
+    "y": 7448,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80801-12090035-7199ED5F-0CE8201D_n_xgrs2)",
+    "x": 1302,
+    "y": 4911,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80710-14100030-EF0E1D88-0CE8201D_n_xgrs)",
+    "x": -4637,
+    "y": 6709,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80710-14120019-28FF2933-0CE8201D_n_xgrs)",
+    "x": -5177,
+    "y": 6336,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80705-0F2C001C-F9CAEDD5-0CE8201D_n_xgrs)",
+    "x": 703,
+    "y": 6109,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80809-0E380000-BDE9E5FE-0CE8201D_n_xgrs2)",
+    "x": 2627,
+    "y": 4474,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80617-17130025-D0C5EB45-0CE8201D_n_xgrs)",
+    "x": 5109,
+    "y": 4903,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80619-120D0014-600CAD2B-20976967_n_xgrs)",
+    "x": 3975,
+    "y": 5231,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80710-14150006-88BE11EE-0CE8201D_n_xgrs)",
+    "x": -3830,
+    "y": 5428,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80710-14050032-66DAF323-0CE8201D_n_xgrs)",
+    "x": -5961,
+    "y": 5090,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80617-17170002-4AD212E1-0CE8201D_n_xgrs2)",
+    "x": 5961,
+    "y": 6572,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80705-0F1E0000-F480AE4A-0CE8201D_n_xgrs2)",
+    "x": 1379,
+    "y": 5915,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80710-140E0008-8F8999E7-0CE8201D_n_xgrs)",
+    "x": -5553,
+    "y": 7097,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80705-101E001B-66A2AAB3-0CE8201D_n_xgrs)",
+    "x": -1376,
+    "y": 4038,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80710-1408002B-CE49AA0A-0CE8201D_n_xgrs)",
+    "x": -5271,
+    "y": 5401,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80710-14030033-203B392C-0CE8201D_n_xgrs)",
+    "x": -7435,
+    "y": 3745,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80912-161B0034-3D5D2D06-0CE8201D_n_xgrs2)",
+    "x": -40,
+    "y": 5634,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80710-13220037-157956CB-2D104E1F_n_xgrs)",
+    "x": -4730,
+    "y": 3366,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80617-17000039-357FE221-0CE8201D_n_xgrs)",
+    "x": 3245,
+    "y": 5615,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80705-0F370004-7539FFF5-0CE8201D_n_xgrs)",
+    "x": -2155,
+    "y": 6431,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80617-17100034-6E62E3F7-0CE8201D_n_xgrs2)",
+    "x": 6263,
+    "y": 4147,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80705-1000000C-2CA1E46B-0CE8201D_n_xgrs)",
+    "x": -948,
+    "y": 5614,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80710-1400000F-9F002C52-0CE8201D_n_xgrs)",
+    "x": -5982,
+    "y": 3085,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80617-1704002E-BDAA1E17-0CE8201D_n_xgrs2)",
+    "x": 3420,
+    "y": 4069,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "transport",
+    "group": "locations",
+    "label": "이동장치 (07E80617-17150038-23F4BE53-2CEB588C_n_xgrs)",
+    "x": 6257,
+    "y": 5336,
+    "note": null,
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (007C070D-0E030025-7FFFFFFF-68E136D6_n_xgrs)",
+    "x": 166,
+    "y": 6600,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (007C070F-1007002C-7FFFFFFF-68E136D6_n_xgrs)",
+    "x": -320,
+    "y": 6303,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (007C070D-0E0D001C-FFFFFFFF-05E518DF_n_xgrs)",
+    "x": -23,
+    "y": 6227,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (07E80810-0E330030-4A3D2EBC-0CE8201D_n_xgrs)",
+    "x": 4699,
+    "y": 7107,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (07E8080F-0E10002E-77F3D4F7-0CE8201D_n_xgrs)",
+    "x": 4860,
+    "y": 6638,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (007C070D-0D070029-FFFFFFFF-05E518DF_n_xgrs)",
+    "x": -436,
+    "y": 6557,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (07E8081B-1119002D-1DEA67B5-0CE8201D_n_xgrs)",
+    "x": 4537,
+    "y": 6321,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (007C070D-0C25001B-FFFFFFFF-7AF42E96_n_xgrs)",
+    "x": -390,
+    "y": 6366,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (007C070F-0A240027-FFFFFFFF-1B3827B0_n_xgrs)",
+    "x": -330,
+    "y": 6680,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (07E8080F-113A0003-187C27B6-0CE8201D_n_xgrs)",
+    "x": 4600,
+    "y": 6656,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (007C070D-0D070019-7FFFFFFF-68E136D6_n_xgrs)",
+    "x": -99,
+    "y": 6558,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (07E80810-120C0001-42CC3250-0CE8201D_n_xgrs)",
+    "x": 4669,
+    "y": 6897,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (07E80705-11100011-9E7A588B-0CE8201D_n_xgrs)",
+    "x": 4284,
+    "y": 6437,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (07E80810-1224000F-A58C62CC-0CE8201D_n_xgrs)",
+    "x": 4813,
+    "y": 6901,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (007C0415-0B030006-FFFFFFFF-68E136D6_n_xgrs2)",
+    "x": -571,
+    "y": 6600,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (07E8081D-12130034-B16349DA-0CE8201D_n_xgrs)",
+    "x": 4786,
+    "y": 6729,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_01_n_xgrs)",
+    "x": -245,
+    "y": 6813,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_02_n_xgrs)",
+    "x": 74,
+    "y": 7272,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_03_n_xgrs)",
+    "x": -90,
+    "y": 5959,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_04_n_xgrs)",
+    "x": 561,
+    "y": 6288,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_05_n_xgrs)",
+    "x": 1698,
+    "y": 6049,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_06_n_xgrs)",
+    "x": 1863,
+    "y": 6543,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_07_n_xgrs)",
+    "x": 1311,
+    "y": 6718,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_08_n_xgrs)",
+    "x": 1209,
+    "y": 6042,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_09_n_xgrs)",
+    "x": 1709,
+    "y": 5136,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_18_n_xgrs2)",
+    "x": -3078,
+    "y": 5424,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_17_n_xgrs2)",
+    "x": -2169,
+    "y": 5861,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_16_n_xgrs2)",
+    "x": -2803,
+    "y": 6386,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_15_n_xgrs2)",
+    "x": -1393,
+    "y": 6181,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_14_n_xgrs2)",
+    "x": -1927,
+    "y": 4371,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_13_n_xgrs2)",
+    "x": -1469,
+    "y": 4553,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_12_n_xgrs)",
+    "x": -438,
+    "y": 5502,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T8_11_n_xgrs)",
+    "x": 1911,
+    "y": 4720,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T9_18_n_xgrs2)",
+    "x": -4921,
+    "y": 7479,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T9_10_n_xgrs2)",
+    "x": -7249,
+    "y": 5667,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T9_11_n_xgrs2)",
+    "x": -6251,
+    "y": 6488,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T9_12_n_xgrs2)",
+    "x": -6331,
+    "y": 7052,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T9_13_n_xgrs2)",
+    "x": -5379,
+    "y": 6053,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T9_14_n_xgrs2)",
+    "x": -4570,
+    "y": 6318,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T9_15_n_xgrs2)",
+    "x": -4848,
+    "y": 5460,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T9_17_n_xgrs2)",
+    "x": -3576,
+    "y": 5537,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T9_07_n_xgrs2)",
+    "x": -5661,
+    "y": 3986,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T9_06_n_xgrs2)",
+    "x": -5697,
+    "y": 3109,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T9_05_n_xgrs2)",
+    "x": -4289,
+    "y": 3399,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T9_01_n_xgrs2)",
+    "x": -3301,
+    "y": 4080,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T9_09_n_xgrs2)",
+    "x": -6519,
+    "y": 5381,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_01_n_xgrs)",
+    "x": 4840,
+    "y": 3392,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_03_n_xgrs)",
+    "x": 7034,
+    "y": 4088,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_02_n_xgrs)",
+    "x": 4660,
+    "y": 4945,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_05_n_xgrs)",
+    "x": 4385,
+    "y": 5909,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_04_n_xgrs)",
+    "x": 5044,
+    "y": 5529,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_06_n_xgrs)",
+    "x": 3917,
+    "y": 6552,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_18_n_xgrs)",
+    "x": 4257,
+    "y": 5595,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_12_n_xgrs)",
+    "x": 4750,
+    "y": 3922,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_13_n_xgrs)",
+    "x": 5652,
+    "y": 4311,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_10_n_xgrs)",
+    "x": 3163,
+    "y": 4298,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_11_n_xgrs)",
+    "x": 3917,
+    "y": 4107,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_16_n_xgrs)",
+    "x": 6185,
+    "y": 5602,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_17_n_xgrs)",
+    "x": 2667,
+    "y": 6035,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_14_n_xgrs)",
+    "x": 2888,
+    "y": 6749,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "village",
+    "group": "locations",
+    "label": "마을 (T7_15_n_xgrs)",
+    "x": 6000,
+    "y": 3676,
+    "note": "juluo",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "entropy_hub",
+    "group": "locations",
+    "label": "엔트로피 허브 (07E90217-10270035-42B062E7-33F12190_n_xgrs2)",
+    "x": -5626,
+    "y": 5787,
+    "note": "map_cbt2_view_icon_temperature",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "entropy_hub",
+    "group": "locations",
+    "label": "엔트로피 허브 (07E90213-163A002B-7BEC813E-0CE8201D_n_xgrs2)",
+    "x": 7252,
+    "y": 4120,
+    "note": "map_cbt2_view_icon_temperature",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "entropy_hub",
+    "group": "locations",
+    "label": "엔트로피 허브 (07E90217-1025001D-ECCFF31C-01C134FD_n_xgrs2)",
+    "x": -4491,
+    "y": 2970,
+    "note": "map_cbt2_view_icon_temperature",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "entropy_hub",
+    "group": "locations",
+    "label": "엔트로피 허브 (07E9030E-10310008-4116E446-58BA0C35_n_xgrs2)",
+    "x": 6815,
+    "y": 6335,
+    "note": "map_cbt2_view_icon_temperature",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "entropy_hub",
+    "group": "locations",
+    "label": "엔트로피 허브 (07E90217-10180036-2B146D5F-0CE8201D_n_xgrs2)",
+    "x": 4965,
+    "y": 3784,
+    "note": "map_cbt2_view_icon_temperature",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "entropy_hub",
+    "group": "locations",
+    "label": "엔트로피 허브 (07E90217-1020002C-42D041FC-0CE8201D_n_xgrs2)",
+    "x": 166,
+    "y": 7012,
+    "note": "map_cbt2_view_icon_temperature",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "entropy_hub",
+    "group": "locations",
+    "label": "엔트로피 허브 (07E90217-10260006-02F6993A-6EE52100_n_xgrs2)",
+    "x": -6857,
+    "y": 4813,
+    "note": "map_cbt2_view_icon_temperature",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "entropy_hub",
+    "group": "locations",
+    "label": "엔트로피 허브 (07E90217-101F0015-115D7DFF-0CE8201D_n_xgrs2)",
+    "x": 3404,
+    "y": 5706,
+    "note": "map_cbt2_view_icon_temperature",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "entropy_hub",
+    "group": "locations",
+    "label": "엔트로피 허브 (07E90217-1023001E-A60BCF59-0CE8201D_n_xgrs2)",
+    "x": -1923,
+    "y": 4676,
+    "note": "map_cbt2_view_icon_temperature",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "entropy_hub",
+    "group": "locations",
+    "label": "엔트로피 허브 (07E90217-10240019-C718892A-0CE8201D_n_xgrs2)",
+    "x": -3075,
+    "y": 5006,
+    "note": "map_cbt2_view_icon_temperature",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "entropy_hub",
+    "group": "locations",
+    "label": "엔트로피 허브 (07E90217-10220027-879185EA-0CE8201D_n_xgrs2)",
+    "x": -2280,
+    "y": 6686,
+    "note": "map_cbt2_view_icon_temperature",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "entropy_hub",
+    "group": "locations",
+    "label": "엔트로피 허브 (07E90217-1026002B-1901DA35-4D1C58BA_n_xgrs2)",
+    "x": -5323,
+    "y": 6803,
+    "note": "map_cbt2_view_icon_temperature",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "entropy_hub",
+    "group": "locations",
+    "label": "엔트로피 허브 (07E90213-16370025-0C823269-0CE8201D_n_xgrs2)",
+    "x": 4767,
+    "y": 5263,
+    "note": "map_cbt2_view_icon_temperature",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "entropy_hub",
+    "group": "locations",
+    "label": "엔트로피 허브 (07E90217-10210035-6C6DEAE5-0CE8201D_n_xgrs2)",
+    "x": 1302,
+    "y": 6352,
+    "note": "map_cbt2_view_icon_temperature",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #18",
+    "x": -1993,
+    "y": 5812,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #19",
+    "x": -3,
+    "y": 6039,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #20",
+    "x": 3198,
+    "y": 6063,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #21",
+    "x": 3168,
+    "y": 6192,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #22",
+    "x": -3188,
+    "y": 5005,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #23",
+    "x": -3138,
+    "y": 5143,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #24",
+    "x": 6912,
+    "y": 6376,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #25",
+    "x": 6943,
+    "y": 6457,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #26",
+    "x": -6859,
+    "y": 3657,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #27",
+    "x": 3292,
+    "y": 6066,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #28",
+    "x": -6906,
+    "y": 6569,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #29",
+    "x": -6720,
+    "y": 3600,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #30",
+    "x": -6572,
+    "y": 4398,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #31",
+    "x": -6670,
+    "y": 4537,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #32",
+    "x": 6431,
+    "y": 6671,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #33",
+    "x": -2657,
+    "y": 5071,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #34",
+    "x": -7080,
+    "y": 3878,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #35",
+    "x": 3521,
+    "y": 6167,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #36",
+    "x": 440,
+    "y": 4502,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #37",
+    "x": 453,
+    "y": 4556,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #38",
+    "x": -7002,
+    "y": 3651,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #39",
+    "x": -6987,
+    "y": 3768,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #40",
+    "x": -6893,
+    "y": 3816,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #41",
+    "x": 5579,
+    "y": 5628,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #42",
+    "x": 5312,
+    "y": 5607,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #43",
+    "x": 5434,
+    "y": 5650,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #44",
+    "x": 5554,
+    "y": 5351,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #45",
+    "x": 5812,
+    "y": 5281,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #46",
+    "x": -7035,
+    "y": 3904,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #47",
+    "x": 3265,
+    "y": 6154,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #48",
+    "x": -6621,
+    "y": 7056,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #49",
+    "x": 3684,
+    "y": 5822,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #50",
+    "x": -2206,
+    "y": 6329,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #51",
+    "x": -6948,
+    "y": 3785,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #52",
+    "x": -6833,
+    "y": 3716,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #53",
+    "x": -6978,
+    "y": 3823,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #54",
+    "x": -6784,
+    "y": 3747,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #55",
+    "x": -6987,
+    "y": 3426,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #56",
+    "x": -6963,
+    "y": 3893,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #57",
+    "x": -6870,
+    "y": 4397,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #58",
+    "x": -5869,
+    "y": 3927,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #59",
+    "x": -6466,
+    "y": 4286,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #60",
+    "x": 4200,
+    "y": 6050,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #61",
+    "x": -1277,
+    "y": 6022,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #62",
+    "x": -1832,
+    "y": 6303,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #63",
+    "x": -6285,
+    "y": 3929,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #64",
+    "x": -2083,
+    "y": 7165,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #65",
+    "x": -2164,
+    "y": 7120,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #66",
+    "x": -1987,
+    "y": 7154,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #67",
+    "x": -6647,
+    "y": 4320,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #68",
+    "x": -6159,
+    "y": 3888,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #69",
+    "x": 4121,
+    "y": 6381,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #70",
+    "x": -7012,
+    "y": 5311,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #71",
+    "x": 702,
+    "y": 6745,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #72",
+    "x": 2205,
+    "y": 5953,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #73",
+    "x": 2456,
+    "y": 5661,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #74",
+    "x": 2510,
+    "y": 5925,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #75",
+    "x": -4195,
+    "y": 5409,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_mystical",
+    "group": "loot",
+    "label": "비밀 보물상자 #76",
+    "x": 2414,
+    "y": 5949,
+    "note": "mystical_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #39",
+    "x": -39,
+    "y": 5152,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #40",
+    "x": 3066,
+    "y": 4935,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #41",
+    "x": -1191,
+    "y": 5236,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #42",
+    "x": 941,
+    "y": 5903,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #43",
+    "x": 1431,
+    "y": 4564,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #44",
+    "x": 2544,
+    "y": 4365,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #45",
+    "x": -7116,
+    "y": 4638,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #46",
+    "x": -5672,
+    "y": 3981,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #47",
+    "x": 5506,
+    "y": 3096,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #48",
+    "x": -2382,
+    "y": 4887,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #49",
+    "x": -6086,
+    "y": 7144,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #50",
+    "x": -6468,
+    "y": 4534,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #51",
+    "x": 102,
+    "y": 4400,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #52",
+    "x": 2571,
+    "y": 5896,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #53",
+    "x": -1380,
+    "y": 4041,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #54",
+    "x": 657,
+    "y": 6676,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #55",
+    "x": 132,
+    "y": 4563,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #56",
+    "x": 5351,
+    "y": 4586,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #57",
+    "x": -3707,
+    "y": 5702,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #58",
+    "x": 2563,
+    "y": 4451,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #59",
+    "x": -977,
+    "y": 3984,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #60",
+    "x": 2818,
+    "y": 4515,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #61",
+    "x": -682,
+    "y": 4324,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #62",
+    "x": -895,
+    "y": 4068,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #63",
+    "x": 2653,
+    "y": 4243,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #64",
+    "x": 2727,
+    "y": 4134,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #65",
+    "x": -6388,
+    "y": 4609,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #66",
+    "x": -6514,
+    "y": 5446,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #67",
+    "x": -6385,
+    "y": 4684,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #68",
+    "x": -1282,
+    "y": 5105,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #69",
+    "x": 2430,
+    "y": 5934,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_weapon",
+    "group": "loot",
+    "label": "무기 상자 #70",
+    "x": 2578,
+    "y": 4317,
+    "note": "weapon_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #45",
+    "x": -6559,
+    "y": 4640,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #46",
+    "x": -53,
+    "y": 6205,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #47",
+    "x": -2640,
+    "y": 7959,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #48",
+    "x": 1994,
+    "y": 5781,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #49",
+    "x": -6130,
+    "y": 4661,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #50",
+    "x": -103,
+    "y": 4639,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #51",
+    "x": 5342,
+    "y": 4733,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #52",
+    "x": -3683,
+    "y": 5608,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #53",
+    "x": -490,
+    "y": 4065,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #54",
+    "x": -508,
+    "y": 4143,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #55",
+    "x": -1086,
+    "y": 3987,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #56",
+    "x": -7114,
+    "y": 4717,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #57",
+    "x": -847,
+    "y": 4213,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #58",
+    "x": -7049,
+    "y": 5297,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #59",
+    "x": -7007,
+    "y": 5340,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #60",
+    "x": -7005,
+    "y": 5301,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #61",
+    "x": -7051,
+    "y": 5337,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #62",
+    "x": 2274,
+    "y": 4594,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #63",
+    "x": 2727,
+    "y": 4084,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #64",
+    "x": -180,
+    "y": 4084,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #65",
+    "x": 2786,
+    "y": 4663,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #66",
+    "x": -5044,
+    "y": 3132,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #67",
+    "x": -6346,
+    "y": 5681,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #68",
+    "x": 25,
+    "y": 4508,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #69",
+    "x": 829,
+    "y": 6583,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #70",
+    "x": -4996,
+    "y": 3162,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #71",
+    "x": -3437,
+    "y": 3913,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #72",
+    "x": 4533,
+    "y": 6303,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #73",
+    "x": 671,
+    "y": 6621,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #74",
+    "x": -648,
+    "y": 6356,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #75",
+    "x": -1158,
+    "y": 5175,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #76",
+    "x": -1253,
+    "y": 5188,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #77",
+    "x": -1074,
+    "y": 5038,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #78",
+    "x": -1169,
+    "y": 4952,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #79",
+    "x": -1166,
+    "y": 5273,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #80",
+    "x": -645,
+    "y": 6193,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #81",
+    "x": -1096,
+    "y": 5083,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #82",
+    "x": 749,
+    "y": 6918,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #83",
+    "x": -6814,
+    "y": 4248,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #84",
+    "x": -103,
+    "y": 5918,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #85",
+    "x": -1170,
+    "y": 5217,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #86",
+    "x": -5245,
+    "y": 3311,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #87",
+    "x": -5056,
+    "y": 3234,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #88",
+    "x": -5625,
+    "y": 4017,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #89",
+    "x": -30,
+    "y": 4801,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #90",
+    "x": -1676,
+    "y": 3752,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #91",
+    "x": -1728,
+    "y": 3771,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #92",
+    "x": 4879,
+    "y": 6656,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #93",
+    "x": 2195,
+    "y": 5943,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #94",
+    "x": 2214,
+    "y": 5973,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #95",
+    "x": -51,
+    "y": 5924,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #96",
+    "x": 3452,
+    "y": 4076,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #97",
+    "x": -588,
+    "y": 6593,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #98",
+    "x": 831,
+    "y": 6719,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #99",
+    "x": 2431,
+    "y": 5700,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #100",
+    "x": 2482,
+    "y": 5768,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #101",
+    "x": -4686,
+    "y": 4674,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #102",
+    "x": -6597,
+    "y": 4715,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #103",
+    "x": 90,
+    "y": 4188,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #104",
+    "x": -1468,
+    "y": 4435,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #105",
+    "x": -1129,
+    "y": 4051,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #106",
+    "x": -1176,
+    "y": 5132,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #107",
+    "x": 6514,
+    "y": 6345,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #108",
+    "x": 838,
+    "y": 6776,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #109",
+    "x": 3570,
+    "y": 3930,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #110",
+    "x": 738,
+    "y": 6854,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #111",
+    "x": 5146,
+    "y": 4235,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #112",
+    "x": -3065,
+    "y": 5517,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #113",
+    "x": -6519,
+    "y": 5430,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #114",
+    "x": -6925,
+    "y": 4588,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #115",
+    "x": -715,
+    "y": 4294,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #116",
+    "x": 3559,
+    "y": 3796,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #117",
+    "x": 1331,
+    "y": 4165,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #118",
+    "x": -3807,
+    "y": 2536,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #119",
+    "x": 527,
+    "y": 6302,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #120",
+    "x": -4980,
+    "y": 3025,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #121",
+    "x": -4212,
+    "y": 5289,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #122",
+    "x": -6358,
+    "y": 7046,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #123",
+    "x": 7033,
+    "y": 4088,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #124",
+    "x": -3107,
+    "y": 5459,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #125",
+    "x": -3626,
+    "y": 5470,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #126",
+    "x": -6170,
+    "y": 6387,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_gear",
+    "group": "loot",
+    "label": "장비 상자 #127",
+    "x": -5027,
+    "y": 4059,
+    "note": "gear_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #1",
+    "x": 7790,
+    "y": 5866,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #2",
+    "x": 6473,
+    "y": 5462,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #3",
+    "x": 5767,
+    "y": 5423,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #4",
+    "x": 6635,
+    "y": 4265,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #5",
+    "x": 5311,
+    "y": 3718,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #6",
+    "x": 2788,
+    "y": 5253,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #7",
+    "x": 2112,
+    "y": 4779,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #8",
+    "x": 5268,
+    "y": 6158,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #9",
+    "x": 6410,
+    "y": 6564,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #10",
+    "x": 4502,
+    "y": 7245,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #11",
+    "x": 4287,
+    "y": 6693,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #12",
+    "x": 4397,
+    "y": 6071,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #13",
+    "x": 3763,
+    "y": 6452,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #14",
+    "x": 5800,
+    "y": 7274,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #15",
+    "x": 4913,
+    "y": 4753,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #16",
+    "x": 5010,
+    "y": 5175,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #17",
+    "x": 4252,
+    "y": 5159,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #18",
+    "x": 4900,
+    "y": 5481,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #19",
+    "x": 4506,
+    "y": 5535,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #20",
+    "x": 3855,
+    "y": 5231,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #21",
+    "x": 3044,
+    "y": 3978,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #22",
+    "x": 2775,
+    "y": 3958,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #23",
+    "x": 3087,
+    "y": 3838,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #24",
+    "x": 4331,
+    "y": 3392,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #25",
+    "x": 4484,
+    "y": 3225,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #26",
+    "x": 4653,
+    "y": 3156,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #27",
+    "x": 4540,
+    "y": 3064,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #28",
+    "x": 4979,
+    "y": 3328,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #29",
+    "x": 4966,
+    "y": 3565,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #30",
+    "x": 5756,
+    "y": 3648,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #31",
+    "x": -383,
+    "y": 6403,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #32",
+    "x": -614,
+    "y": 6085,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #33",
+    "x": -697,
+    "y": 6347,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #34",
+    "x": -600,
+    "y": 6745,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #35",
+    "x": -722,
+    "y": 5962,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #36",
+    "x": -881,
+    "y": 5660,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #37",
+    "x": -1832,
+    "y": 5148,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #38",
+    "x": -1466,
+    "y": 4944,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #39",
+    "x": -1620,
+    "y": 3653,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #40",
+    "x": -686,
+    "y": 4562,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #41",
+    "x": 1613,
+    "y": 4823,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #42",
+    "x": 745,
+    "y": 4728,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #43",
+    "x": 24,
+    "y": 4658,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #44",
+    "x": 345,
+    "y": 4466,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #45",
+    "x": 316,
+    "y": 5005,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #46",
+    "x": 881,
+    "y": 4869,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #47",
+    "x": 642,
+    "y": 5280,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #48",
+    "x": 998,
+    "y": 5196,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #49",
+    "x": 924,
+    "y": 5517,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #50",
+    "x": 1011,
+    "y": 6034,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #51",
+    "x": 1172,
+    "y": 6674,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #52",
+    "x": -425,
+    "y": 7019,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #53",
+    "x": -587,
+    "y": 6965,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #54",
+    "x": -1258,
+    "y": 6443,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #55",
+    "x": -1375,
+    "y": 6723,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #56",
+    "x": -1893,
+    "y": 7155,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #57",
+    "x": -2284,
+    "y": 5940,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #58",
+    "x": -2568,
+    "y": 4638,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #59",
+    "x": -2220,
+    "y": 4317,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #60",
+    "x": -549,
+    "y": 4300,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #61",
+    "x": -3401,
+    "y": 4246,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #62",
+    "x": -3453,
+    "y": 5737,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #63",
+    "x": -3628,
+    "y": 5931,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #64",
+    "x": -3751,
+    "y": 6489,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #65",
+    "x": -3929,
+    "y": 6560,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #66",
+    "x": -4340,
+    "y": 6613,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #67",
+    "x": -5315,
+    "y": 7316,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #68",
+    "x": -6305,
+    "y": 7202,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #69",
+    "x": -6545,
+    "y": 7480,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #70",
+    "x": -6665,
+    "y": 6986,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #71",
+    "x": -7139,
+    "y": 7245,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #72",
+    "x": -7315,
+    "y": 6295,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #73",
+    "x": -5895,
+    "y": 6623,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #74",
+    "x": -4942,
+    "y": 5588,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #75",
+    "x": -5894,
+    "y": 5795,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #76",
+    "x": -6049,
+    "y": 4771,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #77",
+    "x": -7248,
+    "y": 5222,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #78",
+    "x": -7668,
+    "y": 5664,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #79",
+    "x": -7345,
+    "y": 4609,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #80",
+    "x": -7243,
+    "y": 4108,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #81",
+    "x": -6935,
+    "y": 3766,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #82",
+    "x": -5987,
+    "y": 2936,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #83",
+    "x": -4378,
+    "y": 2855,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #84",
+    "x": -3855,
+    "y": 3495,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #85",
+    "x": -3467,
+    "y": 4490,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #86",
+    "x": -3219,
+    "y": 4563,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #87",
+    "x": -3771,
+    "y": 4765,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #88",
+    "x": -3947,
+    "y": 4545,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #89",
+    "x": -5245,
+    "y": 5335,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #90",
+    "x": -5420,
+    "y": 5013,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #91",
+    "x": -3302,
+    "y": 3087,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #92",
+    "x": -3716,
+    "y": 2721,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "crate_morphic",
+    "group": "loot",
+    "label": "모르픽 상자 #93",
+    "x": -4049,
+    "y": 2385,
+    "note": "morphic_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500004)",
+    "x": 5631,
+    "y": 3269,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500013)",
+    "x": 5323,
+    "y": 4673,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500022)",
+    "x": 4168,
+    "y": 4971,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500025)",
+    "x": 3560,
+    "y": 3901,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500039)",
+    "x": 2577,
+    "y": 5887,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500047)",
+    "x": 707,
+    "y": 7132,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500052)",
+    "x": 1394,
+    "y": 4710,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500058)",
+    "x": -2423,
+    "y": 5001,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500068)",
+    "x": 2225,
+    "y": 5981,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500075)",
+    "x": -2946,
+    "y": 4812,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500088)",
+    "x": -6395,
+    "y": 4673,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500096)",
+    "x": -4809,
+    "y": 4633,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500101)",
+    "x": -5267,
+    "y": 3301,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500107)",
+    "x": -5083,
+    "y": 4435,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "hoard",
+    "group": "loot",
+    "label": "비축물 (hoard_loot_crate_500117)",
+    "x": -5992,
+    "y": 7274,
+    "note": "hoard_loot_crate",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "viewpoint",
+    "group": "knowledge",
+    "label": "전망대 (scenic_viewpoint_500015)",
+    "x": 4612,
+    "y": 6087,
+    "note": "landscape_viewpoint_camera",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "viewpoint",
+    "group": "knowledge",
+    "label": "전망대 (scenic_viewpoint_500028)",
+    "x": -1212,
+    "y": 5181,
+    "note": "landscape_viewpoint_camera",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "viewpoint",
+    "group": "knowledge",
+    "label": "전망대 (scenic_viewpoint_500029)",
+    "x": -801,
+    "y": 6446,
+    "note": "landscape_viewpoint_camera",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "viewpoint",
+    "group": "knowledge",
+    "label": "전망대 (scenic_viewpoint_500032)",
+    "x": -2856,
+    "y": 4851,
+    "note": "landscape_viewpoint_camera",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "viewpoint",
+    "group": "knowledge",
+    "label": "전망대 (scenic_viewpoint_500050)",
+    "x": -7276,
+    "y": 3315,
+    "note": "landscape_viewpoint_camera",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_doll_500011)",
+    "x": 2777,
+    "y": 6009,
+    "note": "riddle_doll",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_doll_500014)",
+    "x": 6551,
+    "y": 6528,
+    "note": "riddle_doll",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_doll_500033)",
+    "x": 1917,
+    "y": 6048,
+    "note": "riddle_doll",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_doll_500043)",
+    "x": 2150,
+    "y": 6099,
+    "note": "riddle_doll",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_doll_500051)",
+    "x": 1453,
+    "y": 6098,
+    "note": "riddle_doll",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_shadow_500003)",
+    "x": -1353,
+    "y": 6095,
+    "note": "riddle_shadow",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_shadow_500005)",
+    "x": 1333,
+    "y": 6631,
+    "note": "riddle_shadow",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_shadow_500007)",
+    "x": -3078,
+    "y": 5576,
+    "note": "riddle_shadow",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_shadow_500008)",
+    "x": -1490,
+    "y": 4503,
+    "note": "riddle_shadow",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_shadow_500009)",
+    "x": 17,
+    "y": 7277,
+    "note": "riddle_shadow",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_shadow_500010)",
+    "x": -6097,
+    "y": 6448,
+    "note": "riddle_shadow",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_shadow_500011)",
+    "x": -3519,
+    "y": 5500,
+    "note": "riddle_shadow",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_shadow_500012)",
+    "x": -4222,
+    "y": 3558,
+    "note": "riddle_shadow",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_shadow_500013)",
+    "x": -3737,
+    "y": 3597,
+    "note": "riddle_shadow",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_shadow_500014)",
+    "x": -4946,
+    "y": 5448,
+    "note": "riddle_shadow",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500002)",
+    "x": 3491,
+    "y": 6107,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500009)",
+    "x": 3137,
+    "y": 6119,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500012)",
+    "x": 2841,
+    "y": 6425,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500014)",
+    "x": 4063,
+    "y": 5072,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500018)",
+    "x": 4345,
+    "y": 5089,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500021)",
+    "x": 4348,
+    "y": 4893,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500023)",
+    "x": 5164,
+    "y": 4846,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500026)",
+    "x": 5496,
+    "y": 4483,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500029)",
+    "x": 5531,
+    "y": 4855,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500033)",
+    "x": 2962,
+    "y": 6636,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500036)",
+    "x": -1548,
+    "y": 5211,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500038)",
+    "x": -2536,
+    "y": 4986,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500041)",
+    "x": -2189,
+    "y": 4810,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500044)",
+    "x": -850,
+    "y": 4754,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500048)",
+    "x": 2265,
+    "y": 5393,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500049)",
+    "x": -3303,
+    "y": 3540,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500053)",
+    "x": -4201,
+    "y": 3241,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500055)",
+    "x": -4274,
+    "y": 2308,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500056)",
+    "x": -3307,
+    "y": 3962,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_ice_500060)",
+    "x": -3344,
+    "y": 3299,
+    "note": "riddle_ice",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_footprint_500023)",
+    "x": -3347,
+    "y": 3528,
+    "note": "riddle_footprint",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_footprint_500060)",
+    "x": -3865,
+    "y": 2604,
+    "note": "riddle_footprint",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_footprint_500066)",
+    "x": -4287,
+    "y": 3396,
+    "note": "riddle_footprint",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_footprint_500092)",
+    "x": -3276,
+    "y": 4100,
+    "note": "riddle_footprint",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_footprint_500122)",
+    "x": -6243,
+    "y": 6469,
+    "note": "riddle_footprint",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_footprint_500138)",
+    "x": -4956,
+    "y": 7532,
+    "note": "riddle_footprint",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_footprint_500147)",
+    "x": -6359,
+    "y": 7017,
+    "note": "riddle_footprint",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_cave_500005)",
+    "x": 4643,
+    "y": 6931,
+    "note": "riddle_cave",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_cave_500006)",
+    "x": 873,
+    "y": 4478,
+    "note": "riddle_cave",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_cave_500012)",
+    "x": -5144,
+    "y": 7548,
+    "note": "riddle_cave",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_cave_500018)",
+    "x": 3335,
+    "y": 4912,
+    "note": "riddle_cave",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_cave_500021)",
+    "x": 1861,
+    "y": 6722,
+    "note": "riddle_cave",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_cave_500022)",
+    "x": -5282,
+    "y": 4844,
+    "note": "riddle_cave",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_balloon_500002)",
+    "x": 2529,
+    "y": 5495,
+    "note": "riddle_balloon",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_balloon_500005)",
+    "x": 2618,
+    "y": 6052,
+    "note": "riddle_balloon",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_balloon_500016)",
+    "x": 2714,
+    "y": 5669,
+    "note": "riddle_balloon",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_balloon_500020)",
+    "x": 5164,
+    "y": 4798,
+    "note": "riddle_balloon",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_balloon_500024)",
+    "x": 5461,
+    "y": 4719,
+    "note": "riddle_balloon",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_balloon_500026)",
+    "x": 1761,
+    "y": 6018,
+    "note": "riddle_balloon",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_balloon_500029)",
+    "x": 2314,
+    "y": 5527,
+    "note": "riddle_balloon",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_balloon_500035)",
+    "x": 1534,
+    "y": 6071,
+    "note": "riddle_balloon",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_balloon_500037)",
+    "x": 1693,
+    "y": 6237,
+    "note": "riddle_balloon",
+    "scenario": "way_of_winter"
+  },
+  {
+    "category": "riddle",
+    "group": "knowledge",
+    "label": "수수께끼 (riddle_balloon_500044)",
+    "x": 1841,
+    "y": 5981,
+    "note": "riddle_balloon",
+    "scenario": "way_of_winter"
+  }
+]

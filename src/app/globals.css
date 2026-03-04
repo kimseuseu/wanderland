@@ -1936,7 +1936,7 @@ option {
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255,255,255,0.06);
   border-radius: 16px;
-  width: 290px;
+  width: 310px;
   max-height: calc(100% - 24px);
   display: flex;
   flex-direction: column;
@@ -1991,16 +1991,6 @@ option {
   font-family: var(--font-display);
   color: var(--text-primary);
 }
-.map-sidebar-count {
-  font-size: 11px;
-  font-weight: 600;
-  font-family: var(--font-mono);
-  color: var(--success);
-  background: rgba(68,255,136,0.08);
-  padding: 2px 8px;
-  border-radius: 20px;
-  margin-left: 4px;
-}
 .map-sidebar-toggle {
   width: 24px;
   height: 24px;
@@ -2023,7 +2013,7 @@ option {
 .map-search-wrap {
   position: relative;
   padding: 0 12px;
-  margin: 10px 0 6px;
+  margin: 8px 0 4px;
   flex-shrink: 0;
 }
 .map-search-icon {
@@ -2076,43 +2066,100 @@ option {
   color: var(--text-primary);
 }
 
-/* ─── Filter Chips ─── */
-.map-filter-row {
+/* ─── Scenario Selector ─── */
+.map-scenario-selector {
   display: flex;
-  gap: 5px;
-  padding: 6px 12px 8px;
-  overflow-x: auto;
+  gap: 3px;
+  padding: 8px 12px;
   flex-shrink: 0;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-.map-filter-row::-webkit-scrollbar {
-  display: none;
-}
-.map-chip {
-  padding: 5px 11px;
-  border-radius: 20px;
+.map-scenario-chip {
+  flex: 1;
+  padding: 5px 0;
+  border-radius: 8px;
   font-size: 11px;
   font-weight: 600;
   font-family: var(--font-body);
   white-space: nowrap;
   cursor: pointer;
-  border: 1px solid rgba(255,255,255,0.06);
+  border: 1px solid transparent;
   background: transparent;
   color: var(--text-muted);
   transition: all 0.2s;
-  flex-shrink: 0;
+  text-align: center;
 }
-.map-chip:hover {
+.map-scenario-chip:hover {
   background: rgba(255,255,255,0.06);
   color: var(--text-secondary);
-  border-color: rgba(255,255,255,0.1);
 }
-.map-chip.active {
-  background: #fff;
-  color: #000;
-  border-color: #fff;
-  box-shadow: 0 2px 10px rgba(255,255,255,0.1);
+.map-scenario-chip.active {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border-color: rgba(255,255,255,0.15);
+  box-shadow: 0 1px 6px rgba(0,0,0,0.2);
+}
+
+/* ─── Tab Bar ─── */
+.map-tab-bar {
+  display: flex;
+  gap: 0;
+  padding: 0 8px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.map-tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 4px 9px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.map-tab:hover {
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.03);
+}
+.map-tab.active {
+  color: #fff;
+  border-bottom-color: #44ff88;
+}
+.map-tab-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+.map-tab-badge {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.06);
+  padding: 1px 5px;
+  border-radius: 8px;
+  min-width: 18px;
+  text-align: center;
+}
+.map-tab.active .map-tab-badge {
+  background: rgba(68,255,136,0.12);
+  color: #44ff88;
+}
+
+/* ─── Tab Content ─── */
+.map-tab-content {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ─── Pin List ─── */
@@ -2466,7 +2513,7 @@ option {
 /* ─── Map Mobile ─── */
 @media (max-width: 640px) {
   .map-sidebar {
-    width: 260px;
+    width: 280px;
     top: 8px;
     left: 8px;
     max-height: calc(100% - 16px);
@@ -2477,6 +2524,14 @@ option {
   .map-sidebar.auto-collapse {
     width: 48px;
     border-radius: 14px;
+  }
+  .map-scenario-chip {
+    font-size: 10px;
+    padding: 4px 0;
+  }
+  .map-tab {
+    font-size: 10px;
+    gap: 3px;
   }
   .map-detail-grid {
     grid-template-columns: 1fr;
@@ -4262,27 +4317,43 @@ option {
 .map-draw-colors { display: flex; gap: 4px; align-items: center; }
 .map-draw-actions { display: flex; gap: 6px; }
 
-.map-route-section {
-  border-top: 1px solid var(--border); margin-top: 8px; padding-top: 8px;
+/* ─── Route Toolbar ─── */
+.map-route-toolbar {
+  padding: 8px 12px;
   flex-shrink: 0;
 }
-.map-route-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 4px 0 6px; font-size: 12px; font-weight: 600;
-  color: var(--text-secondary);
+/* ─── Route List ─── */
+.map-route-list {
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0 8px 8px;
+  scrollbar-width: thin;
 }
-.map-route-header span { display: flex; align-items: center; gap: 4px; }
+.map-route-list::-webkit-scrollbar {
+  width: 3px;
+}
+.map-route-list::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 3px;
+}
 .map-route-draw-btn {
-  display: flex; align-items: center; gap: 3px;
-  padding: 3px 8px; border-radius: 4px; font-size: 11px;
-  background: var(--accent-dim); color: #fff; border: none;
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px; border-radius: 8px; font-size: 12px;
+  background: rgba(68,255,136,0.1); color: #44ff88; border: 1px solid rgba(68,255,136,0.2);
   cursor: pointer; font-family: var(--font-body); font-weight: 600;
-  transition: all 0.15s;
+  transition: all 0.15s; width: 100%;
+  justify-content: center;
 }
 .map-route-draw-btn:hover { filter: brightness(1.2); }
 .map-route-item {
   display: flex; align-items: center; gap: 8px;
-  padding: 6px 0; font-size: 12px;
+  padding: 8px; font-size: 12px;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.map-route-item:hover {
+  background: rgba(255,255,255,0.04);
 }
 .map-route-dot {
   width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0;
@@ -4351,8 +4422,6 @@ option {
 .map-view-toggle {
   display: flex;
   gap: 0;
-  padding: 0 12px;
-  margin-bottom: 6px;
 }
 .map-view-btn {
   flex: 1;
@@ -4387,64 +4456,51 @@ option {
   box-shadow: none;
 }
 
-/* ─── Category Filter ─── */
-.map-category-filter {
-  padding: 0 12px;
-  margin-bottom: 6px;
+/* ─── Pins Controls ─── */
+.map-pins-controls {
+  padding: 6px 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
 }
-.map-category-toggle-btn {
+
+/* ─── Pin Category Chips ─── */
+.map-pin-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+.map-pin-cat-chip {
   display: flex;
   align-items: center;
-  gap: 6px;
-  width: 100%;
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg-tertiary);
-  color: var(--text-secondary);
+  gap: 3px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: transparent;
+  color: var(--text-muted);
   font-size: 11px;
   font-family: var(--font-body);
   cursor: pointer;
   transition: all 0.15s;
 }
-.map-category-toggle-btn:hover {
+.map-pin-cat-chip:hover {
   background: rgba(255,255,255,0.06);
-  border-color: var(--text-muted);
-}
-.map-category-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2px;
-  padding: 6px 0 0;
-}
-.map-category-item {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  border: none;
-  background: transparent;
   color: var(--text-secondary);
-  font-size: 11px;
-  font-family: var(--font-body);
-  cursor: pointer;
-  transition: background 0.12s;
 }
-.map-category-item:hover {
-  background: rgba(255,255,255,0.06);
-}
-.map-cat-check {
-  font-size: 12px;
-  opacity: 0.6;
+.map-pin-cat-chip.on {
+  background: rgba(255,255,255,0.08);
+  color: var(--text-primary);
+  border-color: rgba(255,255,255,0.12);
 }
 
 /* ─── Tools Row ─── */
 .map-tools-row {
   display: flex;
   gap: 4px;
-  padding: 0 12px;
-  margin-bottom: 8px;
+  padding: 4px 12px 0;
+  flex-shrink: 0;
 }
 .map-tool-btn {
   display: flex;
@@ -4470,75 +4526,23 @@ option {
   color: #44ff88;
 }
 
-/* ─── POI Filter Panel ─── */
-.map-poi-filter {
-  padding: 0 12px;
-  margin-bottom: 6px;
-}
-.map-poi-filter-header {
+/* ─── POI Toolbar ─── */
+.map-poi-toolbar {
   display: flex;
   align-items: center;
   gap: 6px;
-  width: 100%;
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg-tertiary);
-  color: var(--text-secondary);
-  font-size: 11px;
-  font-family: var(--font-body);
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.map-poi-filter-header:hover {
-  background: rgba(255,255,255,0.06);
-  border-color: var(--text-muted);
-}
-.map-poi-filter-body {
-  padding: 8px 0 0;
-}
-/* POI 시나리오 필터 탭 */
-.map-poi-scenario-row {
-  display: flex;
-  gap: 3px;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
-}
-.map-poi-scenario-btn {
-  padding: 3px 8px;
-  border-radius: 5px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text-muted);
-  font-size: 10px;
-  font-family: var(--font-body);
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-}
-.map-poi-scenario-btn:hover {
-  background: rgba(255,255,255,0.06);
-  color: var(--text-secondary);
-}
-.map-poi-scenario-btn.active {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-  font-weight: 600;
-}
-.map-poi-toggle-all-row {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-bottom: 6px;
+  padding: 8px 12px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 .map-poi-toggle-all {
-  padding: 3px 10px;
+  padding: 4px 10px;
   border-radius: 6px;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255,255,255,0.1);
   background: transparent;
   color: var(--text-muted);
-  font-size: 10px;
+  font-size: 11px;
+  font-weight: 600;
   font-family: var(--font-body);
   cursor: pointer;
   transition: all 0.15s;
@@ -4547,13 +4551,23 @@ option {
   background: rgba(255,255,255,0.06);
   color: var(--text-secondary);
 }
+.map-poi-stat {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  padding: 2px 7px;
+  border-radius: 4px;
+}
 .map-poi-admin-btn {
-  padding: 3px 10px;
+  padding: 4px 10px;
   border-radius: 6px;
   border: 1px solid rgba(68,255,136,0.3);
   background: rgba(68,255,136,0.08);
   color: #44ff88;
-  font-size: 10px;
+  font-size: 11px;
+  font-weight: 600;
   font-family: var(--font-body);
   cursor: pointer;
   transition: all 0.15s;
@@ -4568,95 +4582,178 @@ option {
   box-shadow: 0 0 8px rgba(68,255,136,0.2);
 }
 
-/* POI Group Accordion */
-.map-poi-group {
-  border-radius: 6px;
-  overflow: hidden;
-  margin-bottom: 2px;
+/* ─── POI Groups (scrollable container) ─── */
+.map-poi-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  flex: 1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
 }
-.map-poi-group-header {
+.map-poi-groups::-webkit-scrollbar {
+  width: 3px;
+}
+.map-poi-groups::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border-radius: 3px;
+}
+
+/* ─── POI Card ─── */
+.map-poi-card {
+  border-radius: 10px;
+  background: rgba(255,255,255,0.025);
+  border: 1px solid rgba(255,255,255,0.04);
+  overflow: hidden;
+  transition: all 0.2s;
+  border-left: 3px solid var(--group-color, #4488ff);
+}
+.map-poi-card:hover {
+  background: rgba(255,255,255,0.04);
+}
+.map-poi-card.expanded {
+  background: rgba(255,255,255,0.035);
+  border-color: rgba(255,255,255,0.08);
+}
+.map-poi-card-header {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   width: 100%;
-  padding: 5px 8px;
+  padding: 8px 10px;
   border: none;
   background: transparent;
   color: var(--text-secondary);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
   font-family: var(--font-body);
   cursor: pointer;
-  transition: background 0.12s;
-  border-radius: 6px;
+  transition: background 0.15s;
 }
-.map-poi-group-header:hover {
-  background: rgba(255,255,255,0.04);
-}
-.map-poi-group-check {
-  font-size: 12px;
-  opacity: 0.6;
-  cursor: pointer;
-  padding: 0 2px;
-}
-.map-poi-group-check:hover {
-  opacity: 1;
-}
-.map-poi-group-label {
-  flex: 1;
-  text-align: left;
-}
-.map-poi-group-count {
-  font-size: 9px;
-  font-family: var(--font-mono);
-  color: var(--text-muted);
-  background: rgba(255,255,255,0.04);
-  padding: 1px 5px;
-  border-radius: 4px;
+.map-poi-card-header:hover {
+  background: rgba(255,255,255,0.03);
 }
 
-/* POI Category Items */
-.map-poi-group-items {
+/* Card Checkbox */
+.map-poi-card-check {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+.map-poi-card-check:hover {
+  border-color: rgba(255,255,255,0.4);
+}
+.map-poi-card-check.on {
+  background: var(--group-color, #4488ff);
+  border-color: var(--group-color, #4488ff);
+}
+.map-poi-card-check.on::after {
+  content: '✓';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 900;
+  color: #000;
+}
+.map-poi-card-check.partial {
+  border-color: var(--group-color, #4488ff);
+  background: rgba(255,255,255,0.06);
+}
+.map-poi-card-check.partial::after {
+  content: '—';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 900;
+  color: var(--group-color, #4488ff);
+}
+
+.map-poi-card-label {
+  flex: 1;
+  text-align: left;
+  font-size: 12px;
+}
+.map-poi-card-count {
+  font-size: 10px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.map-poi-card-chevron {
+  color: var(--text-muted);
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.map-poi-card-chevron.open {
+  transform: rotate(180deg);
+}
+
+/* ─── POI Card Body (expanded categories) ─── */
+.map-poi-card-body {
   display: flex;
   flex-wrap: wrap;
-  gap: 2px;
-  padding: 2px 0 4px 16px;
+  gap: 4px;
+  padding: 4px 8px 8px;
+  border-top: 1px solid rgba(255,255,255,0.04);
 }
-.map-poi-item {
+
+/* ─── POI Category Chip ─── */
+.map-poi-chip {
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 3px 8px;
-  border-radius: 5px;
-  border: none;
-  background: transparent;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  background: rgba(255,255,255,0.03);
   color: var(--text-muted);
-  font-size: 10px;
+  font-size: 11px;
   font-family: var(--font-body);
   cursor: pointer;
-  transition: all 0.12s;
-  opacity: 0.5;
+  transition: all 0.15s;
+  opacity: 0.55;
 }
-.map-poi-item.on {
-  opacity: 1;
-  color: var(--text-secondary);
-  background: rgba(255,255,255,0.04);
-}
-.map-poi-item:hover {
+.map-poi-chip:hover {
   opacity: 1;
   background: rgba(255,255,255,0.06);
+  color: var(--text-secondary);
 }
-.map-poi-item-emoji {
+.map-poi-chip.on {
+  opacity: 1;
+  background: rgba(255,255,255,0.07);
+  color: var(--text-primary);
+  border-color: rgba(255,255,255,0.06);
+}
+.map-poi-chip-emoji {
   font-size: 12px;
+  line-height: 1;
 }
-.map-poi-item-label {
+.map-poi-chip-label {
   white-space: nowrap;
+  font-weight: 500;
 }
-.map-poi-item-count {
+.map-poi-chip-count {
   font-size: 9px;
   font-family: var(--font-mono);
+  font-weight: 700;
   color: var(--text-muted);
-  margin-left: 2px;
+  margin-left: 1px;
 }
 
 /* POI Tooltip */

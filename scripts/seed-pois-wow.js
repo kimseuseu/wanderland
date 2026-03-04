@@ -2,6 +2,18 @@ const { neon } = require('@neondatabase/serverless');
 const fs = require('fs');
 const path = require('path');
 
+// ── th.gl 추가 데이터 로드 ──
+function loadThglAdditions() {
+  const filepath = path.resolve(__dirname, 'seed-pois-wow-additions.json');
+  if (!fs.existsSync(filepath)) {
+    console.log('[seed-wow] th.gl 추가 데이터 파일 없음 (seed-pois-wow-additions.json)');
+    return [];
+  }
+  const data = JSON.parse(fs.readFileSync(filepath, 'utf8'));
+  console.log(`[seed-wow] th.gl 추가 데이터 로드: ${data.length}개`);
+  return data;
+}
+
 function loadEnvFile() {
   const envPath = path.resolve(__dirname, '..', '.env.local');
   if (!fs.existsSync(envPath)) return;
@@ -340,6 +352,10 @@ async function seed() {
 
   const sql = neon(process.env.DATABASE_URL);
 
+  // th.gl 추가 데이터 병합
+  const thglAdditions = loadThglAdditions();
+  const allPois = [...WOW_DATA, ...thglAdditions];
+
   // Remove old WoW data
   const existing = await sql`SELECT COUNT(*) as count FROM pois WHERE scenario = 'way_of_winter'`;
   if (parseInt(existing[0].count) > 0) {
@@ -348,7 +364,7 @@ async function seed() {
   }
 
   let inserted = 0;
-  for (const poi of WOW_DATA) {
+  for (const poi of allPois) {
     try {
       await sql`
         INSERT INTO pois (category, "group", label, x, y, note, scenario)
@@ -360,7 +376,7 @@ async function seed() {
     }
   }
 
-  console.log(`[seed-wow] Inserted ${inserted}/${WOW_DATA.length} Way of Winter POIs`);
+  console.log(`[seed-wow] Inserted ${inserted}/${allPois.length} Way of Winter POIs (수동: ${WOW_DATA.length}, th.gl: ${thglAdditions.length})`);
 
   // Print full summary
   const summary = await sql`

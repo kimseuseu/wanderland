@@ -1,0 +1,5489 @@
+{
+  "source": "https://oncehuman.th.gl/",
+  "cdnBase": "https://cdn.th.gl/once-human",
+  "extractedAt": "2026-03-04T00:06:49.117Z",
+  "versionId": "9fff89764746c6a01aa5682ea67343ee",
+  "versionCreatedAt": "2026-01-12T13:27:07.597Z",
+  "grandTotalSpawns": 252438,
+  "maps": {
+    "default": {
+      "scenarioName": "Manibus & Evolution's Call",
+      "categoryCount": 254,
+      "totalSpawns": 60217,
+      "types": [
+        {
+          "type": "animal_bear",
+          "count": 713
+        },
+        {
+          "type": "animal_corrupted_bear",
+          "count": 42
+        },
+        {
+          "type": "animal_wild_buffalo",
+          "count": 167
+        },
+        {
+          "type": "animal_longbilled_gull",
+          "count": 113
+        },
+        {
+          "type": "animal_polar_bear",
+          "count": 83
+        },
+        {
+          "type": "animal_squirrel",
+          "count": 449
+        },
+        {
+          "type": "animal_flamingo",
+          "count": 104
+        },
+        {
+          "type": "animal_turtle",
+          "count": 264
+        },
+        {
+          "type": "animal_rabbit",
+          "count": 1104
+        },
+        {
+          "type": "animal_pelican",
+          "count": 191
+        },
+        {
+          "type": "animal_deer",
+          "count": 939
+        },
+        {
+          "type": "animal_snow_fox",
+          "count": 26
+        },
+        {
+          "type": "animal_leopard",
+          "count": 379
+        },
+        {
+          "type": "animal_capybara",
+          "count": 74
+        },
+        {
+          "type": "animal_raven",
+          "count": 8
+        },
+        {
+          "type": "animal_fox",
+          "count": 233
+        },
+        {
+          "type": "animal_rat",
+          "count": 2
+        },
+        {
+          "type": "animal_raccoon",
+          "count": 164
+        },
+        {
+          "type": "animal_sheep",
+          "count": 773
+        },
+        {
+          "type": "animal_boar",
+          "count": 745
+        },
+        {
+          "type": "animal_wolf",
+          "count": 1307
+        },
+        {
+          "type": "animal_corrupted_wolf",
+          "count": 24
+        },
+        {
+          "type": "animal_crocodile",
+          "count": 224
+        },
+        {
+          "type": "animal_corrupted_crocodile",
+          "count": 18
+        },
+        {
+          "type": "house_monster",
+          "count": 11
+        },
+        {
+          "type": "monster_charred_maniac",
+          "count": 406
+        },
+        {
+          "type": "monster_tangled_vine",
+          "count": 3
+        },
+        {
+          "type": "monster_gnawer",
+          "count": 1342
+        },
+        {
+          "type": "monster_watcher",
+          "count": 889
+        },
+        {
+          "type": "monster_scarecrow",
+          "count": 39
+        },
+        {
+          "type": "monster_spider_egg",
+          "count": 44
+        },
+        {
+          "type": "monster_star_walker",
+          "count": 868
+        },
+        {
+          "type": "monster_charred_madman",
+          "count": 207
+        },
+        {
+          "type": "monster_agent",
+          "count": 188
+        },
+        {
+          "type": "monster_snatcher",
+          "count": 1105
+        },
+        {
+          "type": "monster_budworm",
+          "count": 757
+        },
+        {
+          "type": "monster_mayhem",
+          "count": 69
+        },
+        {
+          "type": "monster_toy_spider",
+          "count": 24
+        },
+        {
+          "type": "monster_customer",
+          "count": 101
+        },
+        {
+          "type": "monster_ede",
+          "count": 4
+        },
+        {
+          "type": "monster_the_new_hire",
+          "count": 48
+        },
+        {
+          "type": "monster_white_hand",
+          "count": 43
+        },
+        {
+          "type": "monster_spiderling",
+          "count": 259
+        },
+        {
+          "type": "monster_pale_hand",
+          "count": 123
+        },
+        {
+          "type": "monster_fool",
+          "count": 118
+        },
+        {
+          "type": "monster_digger",
+          "count": 34
+        },
+        {
+          "type": "monster_ghoul",
+          "count": 79
+        },
+        {
+          "type": "monster_nightmare_tv",
+          "count": 102
+        },
+        {
+          "type": "monster_nightmare_lair",
+          "count": 1
+        },
+        {
+          "type": "monster_nightmare_guard",
+          "count": 4
+        },
+        {
+          "type": "monster_nightmare_disruptor",
+          "count": 3
+        },
+        {
+          "type": "monster_nightmare_apostle",
+          "count": 1
+        },
+        {
+          "type": "monster_gasbag",
+          "count": 125
+        },
+        {
+          "type": "monster_vocalis",
+          "count": 4
+        },
+        {
+          "type": "monster_lady_in_mirror",
+          "count": 5
+        },
+        {
+          "type": "monster_deviated_tv",
+          "count": 166
+        },
+        {
+          "type": "monster_haloed_petroller",
+          "count": 1
+        },
+        {
+          "type": "monster_peeper",
+          "count": 8
+        },
+        {
+          "type": "monster_perching_tree",
+          "count": 5
+        },
+        {
+          "type": "monster_forge_worker",
+          "count": 38
+        },
+        {
+          "type": "monster_flow_regulator",
+          "count": 4
+        },
+        {
+          "type": "monster_melting_pot",
+          "count": 1
+        },
+        {
+          "type": "monster_chaosium_miner",
+          "count": 201
+        },
+        {
+          "type": "monster_morphic__weapon_crate",
+          "count": 23
+        },
+        {
+          "type": "monster_morphic__armor_crate",
+          "count": 26
+        },
+        {
+          "type": "monster_red_eyeballoon",
+          "count": 67
+        },
+        {
+          "type": "monster_dream_zone_trace_box",
+          "count": 173
+        },
+        {
+          "type": "monster_morphic__crate",
+          "count": 189
+        },
+        {
+          "type": "monster_light",
+          "count": 73
+        },
+        {
+          "type": "monster_migrant_arm",
+          "count": 4
+        },
+        {
+          "type": "monster_spore_tip",
+          "count": 9
+        },
+        {
+          "type": "monster_ignas_messenger",
+          "count": 2
+        },
+        {
+          "type": "monster_ignas_vanguard",
+          "count": 2
+        },
+        {
+          "type": "monster_morphic__fridge",
+          "count": 17
+        },
+        {
+          "type": "monster_rosetta_guard",
+          "count": 41
+        },
+        {
+          "type": "monster_scholar",
+          "count": 7
+        },
+        {
+          "type": "monster_scout",
+          "count": 1
+        },
+        {
+          "type": "monster_mousseville_employee",
+          "count": 12
+        },
+        {
+          "type": "monster_claw_machine_teddy",
+          "count": 10
+        },
+        {
+          "type": "monster_dream_primordial_appearance_test",
+          "count": 255
+        },
+        {
+          "type": "enemy_dutch_van_pelt",
+          "count": 2
+        },
+        {
+          "type": "enemy_rosetta_mechanic",
+          "count": 7
+        },
+        {
+          "type": "enemy_rosetta_heavy",
+          "count": 27
+        },
+        {
+          "type": "enemy_rosetta_sniper",
+          "count": 85
+        },
+        {
+          "type": "enemy_parasitic_maniac",
+          "count": 118
+        },
+        {
+          "type": "enemy_rosetta_bruiser",
+          "count": 5
+        },
+        {
+          "type": "copper_ore",
+          "count": 3288
+        },
+        {
+          "type": "silver_ore",
+          "count": 2006
+        },
+        {
+          "type": "gold_ore",
+          "count": 905
+        },
+        {
+          "type": "stardust_ore",
+          "count": 373
+        },
+        {
+          "type": "tungsten_ore",
+          "count": 2417
+        },
+        {
+          "type": "aluminum_ore",
+          "count": 3339
+        },
+        {
+          "type": "iron_ore",
+          "count": 3392
+        },
+        {
+          "type": "tin_ore",
+          "count": 2890
+        },
+        {
+          "type": "sulfur",
+          "count": 3887
+        },
+        {
+          "type": "seaweed_rock",
+          "count": 141
+        },
+        {
+          "type": "shell_rock",
+          "count": 171
+        },
+        {
+          "type": "deviations_butterfly's_emissary",
+          "count": 8
+        },
+        {
+          "type": "deviations_polar_jelly",
+          "count": 5
+        },
+        {
+          "type": "deviations_frog_the_leaper",
+          "count": 5
+        },
+        {
+          "type": "deviations_festering_gel",
+          "count": 19
+        },
+        {
+          "type": "deviations_lonewolf's_whisper",
+          "count": 1
+        },
+        {
+          "type": "deviations_space_turner",
+          "count": 4
+        },
+        {
+          "type": "deviations_fetch-a-lot_bunny",
+          "count": 11
+        },
+        {
+          "type": "deviations_dr._teddy",
+          "count": 4
+        },
+        {
+          "type": "deviations_chefosaurus_rex",
+          "count": 1
+        },
+        {
+          "type": "deviations_h37",
+          "count": 1
+        },
+        {
+          "type": "deviations_gingerbread_house",
+          "count": 1
+        },
+        {
+          "type": "deviations_logging_beaver",
+          "count": 5
+        },
+        {
+          "type": "deviations_the_digby_boy",
+          "count": 168
+        },
+        {
+          "type": "deviations_pyro_dino",
+          "count": 12
+        },
+        {
+          "type": "deviations_mr._wish",
+          "count": 6
+        },
+        {
+          "type": "deviations_growshroom",
+          "count": 7
+        },
+        {
+          "type": "deviations_strange_door",
+          "count": 3
+        },
+        {
+          "type": "deviations_voodoo_doll",
+          "count": 5
+        },
+        {
+          "type": "deviations_flame_essence",
+          "count": 4
+        },
+        {
+          "type": "deviations_shattered_maiden",
+          "count": 2
+        },
+        {
+          "type": "deviations_mini_wonder",
+          "count": 2
+        },
+        {
+          "type": "deviations_extradimensional_cat",
+          "count": 5
+        },
+        {
+          "type": "deviations_orb_lightning",
+          "count": 3
+        },
+        {
+          "type": "deviations_mini_feaster",
+          "count": 2
+        },
+        {
+          "type": "deviations_paper_doll",
+          "count": 5
+        },
+        {
+          "type": "deviations_lethal_rabbit",
+          "count": 9
+        },
+        {
+          "type": "deviations_snowsprite",
+          "count": 3
+        },
+        {
+          "type": "deviations_zapamander",
+          "count": 2
+        },
+        {
+          "type": "deviations_chaos_zeno-purifier",
+          "count": 10
+        },
+        {
+          "type": "letter",
+          "count": 62
+        },
+        {
+          "type": "sticky_note",
+          "count": 79
+        },
+        {
+          "type": "bible",
+          "count": 24
+        },
+        {
+          "type": "notebook_close",
+          "count": 131
+        },
+        {
+          "type": "laptop",
+          "count": 23
+        },
+        {
+          "type": "announcement",
+          "count": 2
+        },
+        {
+          "type": "recording_pen",
+          "count": 2
+        },
+        {
+          "type": "newspaper",
+          "count": 23
+        },
+        {
+          "type": "mobile_phone",
+          "count": 123
+        },
+        {
+          "type": "notebook_open",
+          "count": 62
+        },
+        {
+          "type": "elite_staff_badges",
+          "count": 9
+        },
+        {
+          "type": "elite_ede",
+          "count": 32
+        },
+        {
+          "type": "elite_senior_employee",
+          "count": 19
+        },
+        {
+          "type": "elite_void__mechanic",
+          "count": 20
+        },
+        {
+          "type": "elite_the_butcher",
+          "count": 8
+        },
+        {
+          "type": "elite_disciple",
+          "count": 374
+        },
+        {
+          "type": "elite_glutton",
+          "count": 69
+        },
+        {
+          "type": "elite_siren",
+          "count": 2
+        },
+        {
+          "type": "elite_airplane_ancient_one",
+          "count": 37
+        },
+        {
+          "type": "elite_star_walker",
+          "count": 148
+        },
+        {
+          "type": "elite_yellow_light",
+          "count": 747
+        },
+        {
+          "type": "elite_cogitarid_boss",
+          "count": 185
+        },
+        {
+          "type": "elite_vulture_charger",
+          "count": 33
+        },
+        {
+          "type": "elite_shepherd",
+          "count": 149
+        },
+        {
+          "type": "elite_destroyer",
+          "count": 364
+        },
+        {
+          "type": "elite_pain",
+          "count": 14
+        },
+        {
+          "type": "elite_frostella",
+          "count": 20
+        },
+        {
+          "type": "elite_the_scorcher",
+          "count": 14
+        },
+        {
+          "type": "elite_luminara",
+          "count": 179
+        },
+        {
+          "type": "elite_rainfall_reaper",
+          "count": 35
+        },
+        {
+          "type": "elite_mother_of_life",
+          "count": 25
+        },
+        {
+          "type": "elite_sorrow",
+          "count": 5
+        },
+        {
+          "type": "elite_chagas_weevil",
+          "count": 440
+        },
+        {
+          "type": "elite_claw_machine",
+          "count": 24
+        },
+        {
+          "type": "elite_innocence",
+          "count": 10
+        },
+        {
+          "type": "elite_dream_node",
+          "count": 339
+        },
+        {
+          "type": "elite_weather_forecaster",
+          "count": 18
+        },
+        {
+          "type": "elite_light_dreamer",
+          "count": 8
+        },
+        {
+          "type": "elite_sinner_sentry",
+          "count": 11
+        },
+        {
+          "type": "elite_cervitaur",
+          "count": 9
+        },
+        {
+          "type": "elite_fear",
+          "count": 5
+        },
+        {
+          "type": "elite_altered_arbiter",
+          "count": 1
+        },
+        {
+          "type": "boss_arachsiam",
+          "count": 3
+        },
+        {
+          "type": "boss_shadow_hound",
+          "count": 20
+        },
+        {
+          "type": "boss_ravenous_hunter",
+          "count": 17
+        },
+        {
+          "type": "boss_flame_stone",
+          "count": 8
+        },
+        {
+          "type": "boss_stone_platform",
+          "count": 7
+        },
+        {
+          "type": "boss_flower_of_life",
+          "count": 76
+        },
+        {
+          "type": "boss_manibus",
+          "count": 3
+        },
+        {
+          "type": "boss_jump_over_flower_bud",
+          "count": 2
+        },
+        {
+          "type": "boss_gaze_of_nightmare",
+          "count": 1
+        },
+        {
+          "type": "riddle_telephone",
+          "count": 2
+        },
+        {
+          "type": "camera",
+          "count": 7
+        },
+        {
+          "type": "eyeballoon",
+          "count": 8
+        },
+        {
+          "type": "bizarre_rocks",
+          "count": 5
+        },
+        {
+          "type": "lotus_leaf",
+          "count": 4
+        },
+        {
+          "type": "the_creeper",
+          "count": 6
+        },
+        {
+          "type": "strange_door",
+          "count": 4
+        },
+        {
+          "type": "treasure_map",
+          "count": 2
+        },
+        {
+          "type": "billboard_judgment_district_defense",
+          "count": 6
+        },
+        {
+          "type": "anticonstruction",
+          "count": 5
+        },
+        {
+          "type": "target_practice",
+          "count": 1
+        },
+        {
+          "type": "painters_cottage",
+          "count": 4
+        },
+        {
+          "type": "strange_statues",
+          "count": 2
+        },
+        {
+          "type": "abandoned_vehicle",
+          "count": 1
+        },
+        {
+          "type": "creepy_painting_loot_crate_spot_defense",
+          "count": 1
+        },
+        {
+          "type": "billboard",
+          "count": 5
+        },
+        {
+          "type": "eyeballoon_ward",
+          "count": 2
+        },
+        {
+          "type": "mountain_rock_defense",
+          "count": 1
+        },
+        {
+          "type": "morphic_crate",
+          "count": 124
+        },
+        {
+          "type": "hoard_loot_crate",
+          "count": 24
+        },
+        {
+          "type": "securement_unit",
+          "count": 76
+        },
+        {
+          "type": "unstable_aggregate",
+          "count": 1
+        },
+        {
+          "type": "advanced_realm_crate",
+          "count": 6
+        },
+        {
+          "type": "basic_realm_crate",
+          "count": 16
+        },
+        {
+          "type": "gear_crate",
+          "count": 317
+        },
+        {
+          "type": "intermediate_realm_crate",
+          "count": 7
+        },
+        {
+          "type": "loot_crate",
+          "count": 5
+        },
+        {
+          "type": "oracle_crate",
+          "count": 174
+        },
+        {
+          "type": "star_advent_loot_crate",
+          "count": 10
+        },
+        {
+          "type": "storage_crate",
+          "count": 5549
+        },
+        {
+          "type": "weapon_crate",
+          "count": 496
+        },
+        {
+          "type": "wooden_crate",
+          "count": 219
+        },
+        {
+          "type": "fruit__veggies",
+          "count": 14
+        },
+        {
+          "type": "vending_machine",
+          "count": 286
+        },
+        {
+          "type": "car_trunk",
+          "count": 5243
+        },
+        {
+          "type": "long_table",
+          "count": 467
+        },
+        {
+          "type": "table",
+          "count": 1226
+        },
+        {
+          "type": "medkit",
+          "count": 161
+        },
+        {
+          "type": "emergency_medkit",
+          "count": 153
+        },
+        {
+          "type": "mystical_crate",
+          "count": 359
+        },
+        {
+          "type": "magazine",
+          "count": 51
+        },
+        {
+          "type": "echoes_of_stardust",
+          "count": 21
+        },
+        {
+          "type": "rareLoot_30341101",
+          "count": 87
+        },
+        {
+          "type": "rareLoot_30341102",
+          "count": 94
+        },
+        {
+          "type": "rareLoot_30341103",
+          "count": 98
+        },
+        {
+          "type": "rareLoot_30341104",
+          "count": 96
+        },
+        {
+          "type": "rareLoot_30341105",
+          "count": 42
+        },
+        {
+          "type": "rareLoot_30341106",
+          "count": 33
+        },
+        {
+          "type": "rareLoot_30341107",
+          "count": 95
+        },
+        {
+          "type": "rareLoot_30341108",
+          "count": 99
+        },
+        {
+          "type": "rareLoot_30341109",
+          "count": 42
+        },
+        {
+          "type": "rareLoot_30341110",
+          "count": 55
+        },
+        {
+          "type": "rareLoot_30341111",
+          "count": 33
+        },
+        {
+          "type": "rareLoot_30341112",
+          "count": 101
+        },
+        {
+          "type": "fanmaiji",
+          "count": 2
+        },
+        {
+          "type": "yingdi",
+          "count": 20
+        },
+        {
+          "type": "scattered",
+          "count": 62
+        },
+        {
+          "type": "transport",
+          "count": 53
+        },
+        {
+          "type": "hud_icon_resourse_null",
+          "count": 84
+        },
+        {
+          "type": "raidlea",
+          "count": 1
+        },
+        {
+          "type": "icon_stronghold_borderlands",
+          "count": 20
+        },
+        {
+          "type": "cistern",
+          "count": 7
+        },
+        {
+          "type": "initial_respawn",
+          "count": 20
+        },
+        {
+          "type": "juxie",
+          "count": 7
+        },
+        {
+          "type": "zhongliyingdi_kechuansong",
+          "count": 5
+        },
+        {
+          "type": "securementsilos",
+          "count": 6
+        },
+        {
+          "type": "juluo",
+          "count": 65
+        },
+        {
+          "type": "zhongzhiyuan",
+          "count": 2
+        },
+        {
+          "type": "gouwuzhongxin",
+          "count": 2
+        },
+        {
+          "type": "chengzhen",
+          "count": 15
+        },
+        {
+          "type": "hospital",
+          "count": 1
+        },
+        {
+          "type": "yanjiusuo",
+          "count": 9
+        },
+        {
+          "type": "gongchang",
+          "count": 8
+        },
+        {
+          "type": "guanniaoyingdi",
+          "count": 2
+        },
+        {
+          "type": "junshijidi",
+          "count": 3
+        },
+        {
+          "type": "school",
+          "count": 1
+        },
+        {
+          "type": "jiaotongshuniu",
+          "count": 2
+        }
+      ]
+    },
+    "east_blackfell_pvp": {
+      "scenarioName": "Prismverse's Clash",
+      "categoryCount": 205,
+      "totalSpawns": 17235,
+      "types": [
+        {
+          "type": "animal_bear",
+          "count": 106
+        },
+        {
+          "type": "animal_corrupted_bear",
+          "count": 6
+        },
+        {
+          "type": "animal_wild_buffalo",
+          "count": 26
+        },
+        {
+          "type": "animal_longbilled_gull",
+          "count": 18
+        },
+        {
+          "type": "animal_polar_bear",
+          "count": 1
+        },
+        {
+          "type": "animal_squirrel",
+          "count": 115
+        },
+        {
+          "type": "animal_flamingo",
+          "count": 1
+        },
+        {
+          "type": "animal_turtle",
+          "count": 53
+        },
+        {
+          "type": "animal_rabbit",
+          "count": 236
+        },
+        {
+          "type": "animal_pelican",
+          "count": 23
+        },
+        {
+          "type": "animal_deer",
+          "count": 480
+        },
+        {
+          "type": "animal_snow_fox",
+          "count": 3
+        },
+        {
+          "type": "animal_leopard",
+          "count": 26
+        },
+        {
+          "type": "animal_capybara",
+          "count": 10
+        },
+        {
+          "type": "animal_raven",
+          "count": 3
+        },
+        {
+          "type": "animal_fox",
+          "count": 9
+        },
+        {
+          "type": "animal_raccoon",
+          "count": 55
+        },
+        {
+          "type": "animal_sheep",
+          "count": 132
+        },
+        {
+          "type": "animal_boar",
+          "count": 168
+        },
+        {
+          "type": "animal_wolf",
+          "count": 206
+        },
+        {
+          "type": "animal_corrupted_wolf",
+          "count": 7
+        },
+        {
+          "type": "animal_crocodile",
+          "count": 19
+        },
+        {
+          "type": "animal_corrupted_crocodile",
+          "count": 1
+        },
+        {
+          "type": "house_monster",
+          "count": 9
+        },
+        {
+          "type": "monster_charred_maniac",
+          "count": 157
+        },
+        {
+          "type": "monster_tangled_vine",
+          "count": 4
+        },
+        {
+          "type": "monster_gnawer",
+          "count": 272
+        },
+        {
+          "type": "monster_watcher",
+          "count": 121
+        },
+        {
+          "type": "monster_scarecrow",
+          "count": 4
+        },
+        {
+          "type": "monster_spider_egg",
+          "count": 3
+        },
+        {
+          "type": "monster_star_walker",
+          "count": 93
+        },
+        {
+          "type": "monster_charred_madman",
+          "count": 72
+        },
+        {
+          "type": "monster_agent",
+          "count": 14
+        },
+        {
+          "type": "monster_snatcher",
+          "count": 147
+        },
+        {
+          "type": "monster_budworm",
+          "count": 104
+        },
+        {
+          "type": "monster_mayhem",
+          "count": 16
+        },
+        {
+          "type": "monster_toy_spider",
+          "count": 12
+        },
+        {
+          "type": "monster_customer",
+          "count": 4
+        },
+        {
+          "type": "monster_white_hand",
+          "count": 23
+        },
+        {
+          "type": "monster_spiderling",
+          "count": 60
+        },
+        {
+          "type": "monster_pale_hand",
+          "count": 21
+        },
+        {
+          "type": "monster_fool",
+          "count": 2
+        },
+        {
+          "type": "monster_digger",
+          "count": 11
+        },
+        {
+          "type": "monster_ghoul",
+          "count": 31
+        },
+        {
+          "type": "monster_nightmare_tv",
+          "count": 11
+        },
+        {
+          "type": "monster_gasbag",
+          "count": 13
+        },
+        {
+          "type": "monster_vocalis",
+          "count": 2
+        },
+        {
+          "type": "monster_lady_in_mirror",
+          "count": 1
+        },
+        {
+          "type": "monster_peeper",
+          "count": 1
+        },
+        {
+          "type": "monster_chaosium_miner",
+          "count": 77
+        },
+        {
+          "type": "monster_morphic__weapon_crate",
+          "count": 12
+        },
+        {
+          "type": "monster_morphic__armor_crate",
+          "count": 11
+        },
+        {
+          "type": "monster_morphic__crate",
+          "count": 74
+        },
+        {
+          "type": "monster_light",
+          "count": 29
+        },
+        {
+          "type": "monster_migrant_arm",
+          "count": 1
+        },
+        {
+          "type": "monster_morphic__fridge",
+          "count": 8
+        },
+        {
+          "type": "monster_rosetta_guard",
+          "count": 16
+        },
+        {
+          "type": "monster_claw_machine_teddy",
+          "count": 1
+        },
+        {
+          "type": "enemy_dutch_van_pelt",
+          "count": 1
+        },
+        {
+          "type": "enemy_rosetta_mechanic",
+          "count": 4
+        },
+        {
+          "type": "enemy_rosetta_heavy",
+          "count": 10
+        },
+        {
+          "type": "enemy_rosetta_sniper",
+          "count": 46
+        },
+        {
+          "type": "enemy_parasitic_maniac",
+          "count": 52
+        },
+        {
+          "type": "enemy_rosetta_bruiser",
+          "count": 3
+        },
+        {
+          "type": "copper_ore",
+          "count": 2013
+        },
+        {
+          "type": "silver_ore",
+          "count": 458
+        },
+        {
+          "type": "gold_ore",
+          "count": 13
+        },
+        {
+          "type": "stardust_ore",
+          "count": 74
+        },
+        {
+          "type": "tungsten_ore",
+          "count": 611
+        },
+        {
+          "type": "aluminum_ore",
+          "count": 742
+        },
+        {
+          "type": "iron_ore",
+          "count": 1545
+        },
+        {
+          "type": "tin_ore",
+          "count": 1971
+        },
+        {
+          "type": "sulfur",
+          "count": 1780
+        },
+        {
+          "type": "seaweed_rock",
+          "count": 11
+        },
+        {
+          "type": "shell_rock",
+          "count": 13
+        },
+        {
+          "type": "deviations_berserkosaurus_rex",
+          "count": 1
+        },
+        {
+          "type": "deviations_butterfly's_emissary",
+          "count": 7
+        },
+        {
+          "type": "deviations_frog_the_leaper",
+          "count": 1
+        },
+        {
+          "type": "deviations_festering_gel",
+          "count": 2
+        },
+        {
+          "type": "deviations_space_turner",
+          "count": 4
+        },
+        {
+          "type": "deviations_dr._teddy",
+          "count": 3
+        },
+        {
+          "type": "deviations_logging_beaver",
+          "count": 1
+        },
+        {
+          "type": "deviations_the_digby_boy",
+          "count": 3
+        },
+        {
+          "type": "deviations_pyro_dino",
+          "count": 1
+        },
+        {
+          "type": "deviations_mr._wish",
+          "count": 5
+        },
+        {
+          "type": "deviations_grumpy_bulb",
+          "count": 2
+        },
+        {
+          "type": "deviations_zapcam",
+          "count": 1
+        },
+        {
+          "type": "deviations_strange_door",
+          "count": 1
+        },
+        {
+          "type": "deviations_atomic_snail",
+          "count": 1
+        },
+        {
+          "type": "deviations_upper_world_spawn",
+          "count": 5
+        },
+        {
+          "type": "deviations_voodoo_doll",
+          "count": 3
+        },
+        {
+          "type": "deviations_flame_essence",
+          "count": 3
+        },
+        {
+          "type": "deviations_mini_wonder",
+          "count": 1
+        },
+        {
+          "type": "deviations_extradimensional_cat",
+          "count": 10
+        },
+        {
+          "type": "deviations_orb_lightning",
+          "count": 2
+        },
+        {
+          "type": "deviations_paper_doll",
+          "count": 1
+        },
+        {
+          "type": "deviations_lethal_rabbit",
+          "count": 1
+        },
+        {
+          "type": "deviations_soul_summoner",
+          "count": 1
+        },
+        {
+          "type": "deviations_chaos_zeno-purifier",
+          "count": 1
+        },
+        {
+          "type": "letter",
+          "count": 35
+        },
+        {
+          "type": "sticky_note",
+          "count": 14
+        },
+        {
+          "type": "bible",
+          "count": 18
+        },
+        {
+          "type": "notebook_close",
+          "count": 75
+        },
+        {
+          "type": "laptop",
+          "count": 14
+        },
+        {
+          "type": "announcement",
+          "count": 2
+        },
+        {
+          "type": "recording_pen",
+          "count": 2
+        },
+        {
+          "type": "newspaper",
+          "count": 16
+        },
+        {
+          "type": "mobile_phone",
+          "count": 89
+        },
+        {
+          "type": "notebook_open",
+          "count": 41
+        },
+        {
+          "type": "elite_ede",
+          "count": 2
+        },
+        {
+          "type": "elite_void__mechanic",
+          "count": 12
+        },
+        {
+          "type": "elite_the_butcher",
+          "count": 3
+        },
+        {
+          "type": "elite_disciple",
+          "count": 36
+        },
+        {
+          "type": "elite_glutton",
+          "count": 14
+        },
+        {
+          "type": "elite_siren",
+          "count": 2
+        },
+        {
+          "type": "elite_star_walker",
+          "count": 77
+        },
+        {
+          "type": "elite_yellow_light",
+          "count": 82
+        },
+        {
+          "type": "elite_cogitarid_boss",
+          "count": 39
+        },
+        {
+          "type": "elite_shepherd",
+          "count": 73
+        },
+        {
+          "type": "elite_destroyer",
+          "count": 34
+        },
+        {
+          "type": "elite_frostella",
+          "count": 1
+        },
+        {
+          "type": "elite_the_scorcher",
+          "count": 3
+        },
+        {
+          "type": "elite_luminara",
+          "count": 84
+        },
+        {
+          "type": "elite_rainfall_reaper",
+          "count": 3
+        },
+        {
+          "type": "elite_mother_of_life",
+          "count": 2
+        },
+        {
+          "type": "elite_chagas_weevil",
+          "count": 27
+        },
+        {
+          "type": "elite_claw_machine",
+          "count": 1
+        },
+        {
+          "type": "elite_weather_forecaster",
+          "count": 2
+        },
+        {
+          "type": "elite_sinner_sentry",
+          "count": 2
+        },
+        {
+          "type": "elite_cervitaur",
+          "count": 4
+        },
+        {
+          "type": "boss_flower_of_life",
+          "count": 16
+        },
+        {
+          "type": "boss_jump_over_flower_bud",
+          "count": 4
+        },
+        {
+          "type": "riddle_telephone",
+          "count": 2
+        },
+        {
+          "type": "camera",
+          "count": 6
+        },
+        {
+          "type": "eyeballoon",
+          "count": 7
+        },
+        {
+          "type": "bizarre_rocks",
+          "count": 4
+        },
+        {
+          "type": "lotus_leaf",
+          "count": 4
+        },
+        {
+          "type": "the_creeper",
+          "count": 5
+        },
+        {
+          "type": "strange_door",
+          "count": 3
+        },
+        {
+          "type": "treasure_map",
+          "count": 2
+        },
+        {
+          "type": "billboard_judgment_district_defense",
+          "count": 5
+        },
+        {
+          "type": "anticonstruction",
+          "count": 5
+        },
+        {
+          "type": "target_practice",
+          "count": 1
+        },
+        {
+          "type": "painters_cottage",
+          "count": 3
+        },
+        {
+          "type": "strange_statues",
+          "count": 2
+        },
+        {
+          "type": "abandoned_vehicle",
+          "count": 1
+        },
+        {
+          "type": "billboard",
+          "count": 4
+        },
+        {
+          "type": "eyeballoon_ward",
+          "count": 2
+        },
+        {
+          "type": "mountain_rock_defense",
+          "count": 1
+        },
+        {
+          "type": "morphic_crate",
+          "count": 100
+        },
+        {
+          "type": "hoard_loot_crate",
+          "count": 22
+        },
+        {
+          "type": "securement_unit",
+          "count": 13
+        },
+        {
+          "type": "gear_crate",
+          "count": 133
+        },
+        {
+          "type": "mayfly_advanced_military_crate",
+          "count": 2
+        },
+        {
+          "type": "mayfly_basic_military_crate",
+          "count": 6
+        },
+        {
+          "type": "oracle_crate",
+          "count": 126
+        },
+        {
+          "type": "rosetta_advanced_military_crate",
+          "count": 3
+        },
+        {
+          "type": "rosetta_basic_military_crate",
+          "count": 3
+        },
+        {
+          "type": "rosetta_premium_military_crate",
+          "count": 2
+        },
+        {
+          "type": "storage_crate",
+          "count": 1074
+        },
+        {
+          "type": "weapon_crate",
+          "count": 88
+        },
+        {
+          "type": "fruit__veggies",
+          "count": 2
+        },
+        {
+          "type": "vending_machine",
+          "count": 77
+        },
+        {
+          "type": "car_trunk",
+          "count": 823
+        },
+        {
+          "type": "long_table",
+          "count": 125
+        },
+        {
+          "type": "table",
+          "count": 279
+        },
+        {
+          "type": "medkit",
+          "count": 54
+        },
+        {
+          "type": "emergency_medkit",
+          "count": 63
+        },
+        {
+          "type": "mystical_crate",
+          "count": 51
+        },
+        {
+          "type": "magazine",
+          "count": 22
+        },
+        {
+          "type": "rareLoot_30341101",
+          "count": 43
+        },
+        {
+          "type": "rareLoot_30341102",
+          "count": 42
+        },
+        {
+          "type": "rareLoot_30341103",
+          "count": 39
+        },
+        {
+          "type": "rareLoot_30341104",
+          "count": 33
+        },
+        {
+          "type": "rareLoot_30341105",
+          "count": 14
+        },
+        {
+          "type": "rareLoot_30341106",
+          "count": 9
+        },
+        {
+          "type": "rareLoot_30341107",
+          "count": 45
+        },
+        {
+          "type": "rareLoot_30341108",
+          "count": 35
+        },
+        {
+          "type": "rareLoot_30341109",
+          "count": 24
+        },
+        {
+          "type": "rareLoot_30341110",
+          "count": 27
+        },
+        {
+          "type": "rareLoot_30341111",
+          "count": 46
+        },
+        {
+          "type": "rareLoot_30341112",
+          "count": 35
+        },
+        {
+          "type": "fanmaiji",
+          "count": 1
+        },
+        {
+          "type": "yingdi",
+          "count": 14
+        },
+        {
+          "type": "scattered",
+          "count": 62
+        },
+        {
+          "type": "transport",
+          "count": 49
+        },
+        {
+          "type": "hud_icon_resourse_null",
+          "count": 55
+        },
+        {
+          "type": "raidlea",
+          "count": 1
+        },
+        {
+          "type": "icon_stronghold_borderlands",
+          "count": 14
+        },
+        {
+          "type": "cistern",
+          "count": 7
+        },
+        {
+          "type": "initial_respawn",
+          "count": 13
+        },
+        {
+          "type": "juxie",
+          "count": 7
+        },
+        {
+          "type": "zhongliyingdi_kechuansong",
+          "count": 5
+        },
+        {
+          "type": "securementsilos",
+          "count": 6
+        },
+        {
+          "type": "juluo",
+          "count": 63
+        },
+        {
+          "type": "zhongzhiyuan",
+          "count": 2
+        },
+        {
+          "type": "gouwuzhongxin",
+          "count": 1
+        },
+        {
+          "type": "chengzhen",
+          "count": 15
+        },
+        {
+          "type": "hospital",
+          "count": 1
+        },
+        {
+          "type": "yanjiusuo",
+          "count": 8
+        },
+        {
+          "type": "gongchang",
+          "count": 8
+        },
+        {
+          "type": "guanniaoyingdi",
+          "count": 2
+        },
+        {
+          "type": "junshijidi",
+          "count": 3
+        },
+        {
+          "type": "school",
+          "count": 1
+        },
+        {
+          "type": "jiaotongshuniu",
+          "count": 2
+        }
+      ]
+    },
+    "north_snow_pve": {
+      "scenarioName": "The Way of Winter",
+      "categoryCount": 197,
+      "totalSpawns": 28417,
+      "types": [
+        {
+          "type": "animal_bear",
+          "count": 364
+        },
+        {
+          "type": "animal_corrupted_bear",
+          "count": 15
+        },
+        {
+          "type": "animal_wild_buffalo",
+          "count": 327
+        },
+        {
+          "type": "animal_eagle",
+          "count": 250
+        },
+        {
+          "type": "animal_longbilled_gull",
+          "count": 149
+        },
+        {
+          "type": "animal_swan",
+          "count": 3
+        },
+        {
+          "type": "animal_polar_bear",
+          "count": 173
+        },
+        {
+          "type": "animal_squirrel",
+          "count": 8
+        },
+        {
+          "type": "animal_flamingo",
+          "count": 84
+        },
+        {
+          "type": "animal_turtle",
+          "count": 35
+        },
+        {
+          "type": "animal_seal",
+          "count": 67
+        },
+        {
+          "type": "animal_rabbit",
+          "count": 661
+        },
+        {
+          "type": "animal_deer",
+          "count": 738
+        },
+        {
+          "type": "animal_snow_fox",
+          "count": 90
+        },
+        {
+          "type": "animal_leopard",
+          "count": 208
+        },
+        {
+          "type": "animal_capybara",
+          "count": 40
+        },
+        {
+          "type": "animal_raven",
+          "count": 165
+        },
+        {
+          "type": "animal_fox",
+          "count": 27
+        },
+        {
+          "type": "animal_rat",
+          "count": 1
+        },
+        {
+          "type": "animal_raccoon",
+          "count": 1
+        },
+        {
+          "type": "animal_sheep",
+          "count": 229
+        },
+        {
+          "type": "animal_boar",
+          "count": 288
+        },
+        {
+          "type": "animal_wolf",
+          "count": 511
+        },
+        {
+          "type": "animal_corrupted_wolf",
+          "count": 16
+        },
+        {
+          "type": "animal_crocodile",
+          "count": 110
+        },
+        {
+          "type": "animal_corrupted_crocodile",
+          "count": 2
+        },
+        {
+          "type": "monster_charred_maniac",
+          "count": 131
+        },
+        {
+          "type": "monster_tangled_vine",
+          "count": 1
+        },
+        {
+          "type": "monster_gnawer",
+          "count": 594
+        },
+        {
+          "type": "monster_watcher",
+          "count": 299
+        },
+        {
+          "type": "monster_scarecrow",
+          "count": 3
+        },
+        {
+          "type": "monster_spider_egg",
+          "count": 18
+        },
+        {
+          "type": "monster_star_walker",
+          "count": 323
+        },
+        {
+          "type": "monster_charred_madman",
+          "count": 38
+        },
+        {
+          "type": "monster_agent",
+          "count": 15
+        },
+        {
+          "type": "monster_snatcher",
+          "count": 467
+        },
+        {
+          "type": "monster_budworm",
+          "count": 254
+        },
+        {
+          "type": "monster_mayhem",
+          "count": 20
+        },
+        {
+          "type": "monster_toy_spider",
+          "count": 8
+        },
+        {
+          "type": "monster_customer",
+          "count": 44
+        },
+        {
+          "type": "monster_the_new_hire",
+          "count": 18
+        },
+        {
+          "type": "monster_white_hand",
+          "count": 28
+        },
+        {
+          "type": "monster_spiderling",
+          "count": 60
+        },
+        {
+          "type": "monster_pale_hand",
+          "count": 62
+        },
+        {
+          "type": "monster_fool",
+          "count": 93
+        },
+        {
+          "type": "monster_digger",
+          "count": 6
+        },
+        {
+          "type": "monster_ghoul",
+          "count": 17
+        },
+        {
+          "type": "monster_nightmare_tv",
+          "count": 34
+        },
+        {
+          "type": "monster_gasbag",
+          "count": 35
+        },
+        {
+          "type": "monster_vocalis",
+          "count": 1
+        },
+        {
+          "type": "monster_lady_in_mirror",
+          "count": 3
+        },
+        {
+          "type": "monster_peeper",
+          "count": 3
+        },
+        {
+          "type": "monster_forge_worker",
+          "count": 16
+        },
+        {
+          "type": "monster_flow_regulator",
+          "count": 27
+        },
+        {
+          "type": "monster_melting_pot",
+          "count": 11
+        },
+        {
+          "type": "monster_chaosium_miner",
+          "count": 66
+        },
+        {
+          "type": "monster_morphic__weapon_crate",
+          "count": 3
+        },
+        {
+          "type": "monster_morphic__armor_crate",
+          "count": 8
+        },
+        {
+          "type": "monster_morphic__crate",
+          "count": 109
+        },
+        {
+          "type": "monster_light",
+          "count": 18
+        },
+        {
+          "type": "monster_migrant_arm",
+          "count": 4
+        },
+        {
+          "type": "monster_spore_tip",
+          "count": 12
+        },
+        {
+          "type": "monster_ignas_messenger",
+          "count": 10
+        },
+        {
+          "type": "monster_ignas_vanguard",
+          "count": 10
+        },
+        {
+          "type": "monster_morphic__fridge",
+          "count": 9
+        },
+        {
+          "type": "monster_rosetta_guard",
+          "count": 9
+        },
+        {
+          "type": "monster_scholar",
+          "count": 27
+        },
+        {
+          "type": "monster_scout",
+          "count": 33
+        },
+        {
+          "type": "monster_weathervane",
+          "count": 43
+        },
+        {
+          "type": "monster_mousseville_employee",
+          "count": 31
+        },
+        {
+          "type": "monster_portal",
+          "count": 6
+        },
+        {
+          "type": "monster_claw_machine_teddy",
+          "count": 4
+        },
+        {
+          "type": "monster_dream_primordial_appearance_test",
+          "count": 14
+        },
+        {
+          "type": "enemy_dutch_van_pelt",
+          "count": 10
+        },
+        {
+          "type": "enemy_rosetta_mechanic",
+          "count": 4
+        },
+        {
+          "type": "enemy_rosetta_heavy",
+          "count": 8
+        },
+        {
+          "type": "enemy_rosetta_sniper",
+          "count": 30
+        },
+        {
+          "type": "enemy_vulture_tremble_guard",
+          "count": 9
+        },
+        {
+          "type": "enemy_vulture_conqueror",
+          "count": 16
+        },
+        {
+          "type": "enemy_vulture_point_man",
+          "count": 56
+        },
+        {
+          "type": "enemy_vulture_incinerator",
+          "count": 98
+        },
+        {
+          "type": "enemy_vulture_chaosiumspawn",
+          "count": 36
+        },
+        {
+          "type": "enemy_vulture_barrier_breaker",
+          "count": 29
+        },
+        {
+          "type": "enemy_parasitic_maniac",
+          "count": 31
+        },
+        {
+          "type": "enemy_mrwish1",
+          "count": 1
+        },
+        {
+          "type": "enemy_vulture_tracker",
+          "count": 45
+        },
+        {
+          "type": "copper_ore",
+          "count": 2538
+        },
+        {
+          "type": "hot_ore",
+          "count": 210
+        },
+        {
+          "type": "ice_ore",
+          "count": 111
+        },
+        {
+          "type": "silver_ore",
+          "count": 1155
+        },
+        {
+          "type": "gold_ore",
+          "count": 729
+        },
+        {
+          "type": "stardust_ore",
+          "count": 354
+        },
+        {
+          "type": "tungsten_ore",
+          "count": 1664
+        },
+        {
+          "type": "aluminum_ore",
+          "count": 2025
+        },
+        {
+          "type": "iron_ore",
+          "count": 1817
+        },
+        {
+          "type": "tin_ore",
+          "count": 1458
+        },
+        {
+          "type": "sulfur",
+          "count": 1757
+        },
+        {
+          "type": "shell_rock",
+          "count": 639
+        },
+        {
+          "type": "deviations_butterfly's_emissary",
+          "count": 2
+        },
+        {
+          "type": "deviations_festering_gel",
+          "count": 1
+        },
+        {
+          "type": "deviations_ice_pot",
+          "count": 1
+        },
+        {
+          "type": "deviations_dr._teddy",
+          "count": 2
+        },
+        {
+          "type": "deviations_invincible_sun",
+          "count": 1
+        },
+        {
+          "type": "deviations_the_digby_boy",
+          "count": 76
+        },
+        {
+          "type": "deviations_snowsprite",
+          "count": 1
+        },
+        {
+          "type": "letter",
+          "count": 34
+        },
+        {
+          "type": "sticky_note",
+          "count": 20
+        },
+        {
+          "type": "notebook_close",
+          "count": 16
+        },
+        {
+          "type": "laptop",
+          "count": 7
+        },
+        {
+          "type": "newspaper",
+          "count": 3
+        },
+        {
+          "type": "mobile_phone",
+          "count": 20
+        },
+        {
+          "type": "notebook_open",
+          "count": 1
+        },
+        {
+          "type": "elite_staff_badges",
+          "count": 4
+        },
+        {
+          "type": "elite_ede",
+          "count": 3
+        },
+        {
+          "type": "elite_senior_employee",
+          "count": 8
+        },
+        {
+          "type": "elite_void__mechanic",
+          "count": 4
+        },
+        {
+          "type": "elite_the_butcher",
+          "count": 2
+        },
+        {
+          "type": "elite_disciple",
+          "count": 123
+        },
+        {
+          "type": "elite_glutton",
+          "count": 20
+        },
+        {
+          "type": "elite_siren",
+          "count": 6
+        },
+        {
+          "type": "elite_star_walker",
+          "count": 44
+        },
+        {
+          "type": "elite_yellow_light",
+          "count": 270
+        },
+        {
+          "type": "elite_cogitarid_boss",
+          "count": 29
+        },
+        {
+          "type": "elite_shepherd",
+          "count": 44
+        },
+        {
+          "type": "elite_destroyer",
+          "count": 132
+        },
+        {
+          "type": "elite_frostella",
+          "count": 28
+        },
+        {
+          "type": "elite_the_scorcher",
+          "count": 100
+        },
+        {
+          "type": "elite_luminara",
+          "count": 61
+        },
+        {
+          "type": "elite_rainfall_reaper",
+          "count": 6
+        },
+        {
+          "type": "elite_mother_of_life",
+          "count": 7
+        },
+        {
+          "type": "elite_chagas_weevil",
+          "count": 145
+        },
+        {
+          "type": "elite_claw_machine",
+          "count": 4
+        },
+        {
+          "type": "elite_weather_forecaster",
+          "count": 15
+        },
+        {
+          "type": "elite_sinner_sentry",
+          "count": 17
+        },
+        {
+          "type": "elite_cervitaur",
+          "count": 1
+        },
+        {
+          "type": "boss_chaosweaver",
+          "count": 45
+        },
+        {
+          "type": "boss_arachsiam",
+          "count": 1
+        },
+        {
+          "type": "boss_flame_stone",
+          "count": 22
+        },
+        {
+          "type": "boss_flower_of_life",
+          "count": 23
+        },
+        {
+          "type": "boss_ores",
+          "count": 18
+        },
+        {
+          "type": "boss_jump_over_flower_bud",
+          "count": 1
+        },
+        {
+          "type": "riddle_doll",
+          "count": 5
+        },
+        {
+          "type": "riddle_shadow",
+          "count": 10
+        },
+        {
+          "type": "riddle_ice",
+          "count": 20
+        },
+        {
+          "type": "riddle_footprint",
+          "count": 7
+        },
+        {
+          "type": "riddle_cave",
+          "count": 6
+        },
+        {
+          "type": "riddle_balloon",
+          "count": 10
+        },
+        {
+          "type": "morphic_crate",
+          "count": 93
+        },
+        {
+          "type": "hoard_loot_crate",
+          "count": 15
+        },
+        {
+          "type": "securement_unit",
+          "count": 32
+        },
+        {
+          "type": "gear_crate",
+          "count": 160
+        },
+        {
+          "type": "oracle_crate",
+          "count": 55
+        },
+        {
+          "type": "storage_crate",
+          "count": 1008
+        },
+        {
+          "type": "weapon_crate",
+          "count": 83
+        },
+        {
+          "type": "vending_machine",
+          "count": 144
+        },
+        {
+          "type": "car_trunk",
+          "count": 1763
+        },
+        {
+          "type": "long_table",
+          "count": 61
+        },
+        {
+          "type": "table",
+          "count": 254
+        },
+        {
+          "type": "medkit",
+          "count": 71
+        },
+        {
+          "type": "emergency_medkit",
+          "count": 112
+        },
+        {
+          "type": "mystical_crate",
+          "count": 85
+        },
+        {
+          "type": "magazine",
+          "count": 21
+        },
+        {
+          "type": "landscape_viewpoint_camera",
+          "count": 30
+        },
+        {
+          "type": "rareLoot_30341101",
+          "count": 50
+        },
+        {
+          "type": "rareLoot_30341102",
+          "count": 53
+        },
+        {
+          "type": "rareLoot_30341103",
+          "count": 47
+        },
+        {
+          "type": "rareLoot_30341104",
+          "count": 44
+        },
+        {
+          "type": "rareLoot_30341105",
+          "count": 5
+        },
+        {
+          "type": "rareLoot_30341106",
+          "count": 14
+        },
+        {
+          "type": "rareLoot_30341107",
+          "count": 44
+        },
+        {
+          "type": "rareLoot_30341108",
+          "count": 45
+        },
+        {
+          "type": "rareLoot_30341109",
+          "count": 13
+        },
+        {
+          "type": "rareLoot_30341110",
+          "count": 35
+        },
+        {
+          "type": "rareLoot_30341111",
+          "count": 18
+        },
+        {
+          "type": "rareLoot_30341112",
+          "count": 46
+        },
+        {
+          "type": "juluo",
+          "count": 64
+        },
+        {
+          "type": "transport",
+          "count": 37
+        },
+        {
+          "type": "map_cbt2_view_icon_temperature",
+          "count": 14
+        },
+        {
+          "type": "juxie",
+          "count": 3
+        },
+        {
+          "type": "zhongliyingdi_kechuansong",
+          "count": 6
+        },
+        {
+          "type": "cistern",
+          "count": 6
+        },
+        {
+          "type": "securementsilos",
+          "count": 4
+        },
+        {
+          "type": "raidlea",
+          "count": 1
+        },
+        {
+          "type": "fanmaiji",
+          "count": 1
+        },
+        {
+          "type": "yanjiusuo",
+          "count": 5
+        },
+        {
+          "type": "north_ronglu",
+          "count": 1
+        },
+        {
+          "type": "north_haigang",
+          "count": 1
+        },
+        {
+          "type": "north_youleyuan2",
+          "count": 1
+        },
+        {
+          "type": "guanniaoyingdi",
+          "count": 1
+        },
+        {
+          "type": "north_huoshanjidi",
+          "count": 1
+        },
+        {
+          "type": "north_shantijidi",
+          "count": 1
+        },
+        {
+          "type": "north_musishi",
+          "count": 1
+        },
+        {
+          "type": "gongchang",
+          "count": 1
+        },
+        {
+          "type": "north_youleyuan1",
+          "count": 1
+        },
+        {
+          "type": "north_pobaichengshi",
+          "count": 1
+        },
+        {
+          "type": "north_dongxue",
+          "count": 1
+        },
+        {
+          "type": "chengzhen",
+          "count": 1
+        }
+      ]
+    },
+    "raid": {
+      "scenarioName": "Raids & Dungeons",
+      "categoryCount": 170,
+      "totalSpawns": 10140,
+      "types": [
+        {
+          "type": "animal_bear",
+          "count": 355
+        },
+        {
+          "type": "animal_corrupted_bear",
+          "count": 25
+        },
+        {
+          "type": "animal_wild_buffalo",
+          "count": 9
+        },
+        {
+          "type": "animal_polar_bear",
+          "count": 75
+        },
+        {
+          "type": "animal_turtle",
+          "count": 3
+        },
+        {
+          "type": "animal_rabbit",
+          "count": 2
+        },
+        {
+          "type": "animal_deer",
+          "count": 12
+        },
+        {
+          "type": "animal_snow_fox",
+          "count": 11
+        },
+        {
+          "type": "animal_leopard",
+          "count": 284
+        },
+        {
+          "type": "animal_capybara",
+          "count": 1
+        },
+        {
+          "type": "animal_fox",
+          "count": 9
+        },
+        {
+          "type": "animal_sheep",
+          "count": 9
+        },
+        {
+          "type": "animal_boar",
+          "count": 62
+        },
+        {
+          "type": "animal_wolf",
+          "count": 1076
+        },
+        {
+          "type": "animal_corrupted_wolf",
+          "count": 45
+        },
+        {
+          "type": "animal_crocodile",
+          "count": 5
+        },
+        {
+          "type": "monster_charred_maniac",
+          "count": 176
+        },
+        {
+          "type": "monster_tangled_vine",
+          "count": 12
+        },
+        {
+          "type": "monster_gnawer",
+          "count": 1186
+        },
+        {
+          "type": "monster_watcher",
+          "count": 200
+        },
+        {
+          "type": "monster_spider_egg",
+          "count": 55
+        },
+        {
+          "type": "monster_star_walker",
+          "count": 446
+        },
+        {
+          "type": "monster_charred_madman",
+          "count": 74
+        },
+        {
+          "type": "monster_agent",
+          "count": 21
+        },
+        {
+          "type": "monster_snatcher",
+          "count": 328
+        },
+        {
+          "type": "monster_budworm",
+          "count": 26
+        },
+        {
+          "type": "monster_mayhem",
+          "count": 72
+        },
+        {
+          "type": "monster_toy_spider",
+          "count": 47
+        },
+        {
+          "type": "monster_customer",
+          "count": 50
+        },
+        {
+          "type": "monster_the_new_hire",
+          "count": 145
+        },
+        {
+          "type": "monster_white_hand",
+          "count": 32
+        },
+        {
+          "type": "monster_spiderling",
+          "count": 215
+        },
+        {
+          "type": "monster_pale_hand",
+          "count": 114
+        },
+        {
+          "type": "monster_digger",
+          "count": 38
+        },
+        {
+          "type": "monster_ghoul",
+          "count": 333
+        },
+        {
+          "type": "monster_vanguard",
+          "count": 40
+        },
+        {
+          "type": "monster_gasbag",
+          "count": 357
+        },
+        {
+          "type": "monster_vocalis",
+          "count": 18
+        },
+        {
+          "type": "monster_lady_in_mirror",
+          "count": 4
+        },
+        {
+          "type": "monster_deviated_tv",
+          "count": 85
+        },
+        {
+          "type": "monster_haloed_petroller",
+          "count": 35
+        },
+        {
+          "type": "monster_deviated_desk_lamp",
+          "count": 82
+        },
+        {
+          "type": "monster_giant_drummer",
+          "count": 2
+        },
+        {
+          "type": "monster_peeper",
+          "count": 10
+        },
+        {
+          "type": "monster_perching_tree",
+          "count": 48
+        },
+        {
+          "type": "monster_forge_worker",
+          "count": 9
+        },
+        {
+          "type": "monster_flow_regulator",
+          "count": 14
+        },
+        {
+          "type": "monster_melting_pot",
+          "count": 24
+        },
+        {
+          "type": "monster_chaosium_miner",
+          "count": 30
+        },
+        {
+          "type": "monster_red_eyeballoon",
+          "count": 19
+        },
+        {
+          "type": "monster_radar",
+          "count": 11
+        },
+        {
+          "type": "monster_light",
+          "count": 15
+        },
+        {
+          "type": "monster_spore_tip",
+          "count": 114
+        },
+        {
+          "type": "monster_ignas_messenger",
+          "count": 9
+        },
+        {
+          "type": "monster_morphic__fridge",
+          "count": 1
+        },
+        {
+          "type": "monster_rosetta_guard",
+          "count": 87
+        },
+        {
+          "type": "monster_scholar",
+          "count": 85
+        },
+        {
+          "type": "monster_scout",
+          "count": 9
+        },
+        {
+          "type": "monster_weathervane",
+          "count": 12
+        },
+        {
+          "type": "monster_mousseville_employee",
+          "count": 27
+        },
+        {
+          "type": "monster_portal",
+          "count": 23
+        },
+        {
+          "type": "monster_claw_machine_teddy",
+          "count": 38
+        },
+        {
+          "type": "monster_totem",
+          "count": 95
+        },
+        {
+          "type": "enemy_dutch_van_pelt",
+          "count": 25
+        },
+        {
+          "type": "enemy_rosetta_mechanic",
+          "count": 74
+        },
+        {
+          "type": "enemy_rosetta_heavy",
+          "count": 250
+        },
+        {
+          "type": "enemy_rosetta_sniper",
+          "count": 29
+        },
+        {
+          "type": "enemy_vulture_tremble_guard",
+          "count": 28
+        },
+        {
+          "type": "enemy_vulture_conqueror",
+          "count": 56
+        },
+        {
+          "type": "enemy_vulture_point_man",
+          "count": 137
+        },
+        {
+          "type": "enemy_vulture_incinerator",
+          "count": 181
+        },
+        {
+          "type": "enemy_vulture_chaosiumspawn",
+          "count": 144
+        },
+        {
+          "type": "enemy_vulture_barrier_breaker",
+          "count": 35
+        },
+        {
+          "type": "enemy_mrwish1",
+          "count": 5
+        },
+        {
+          "type": "enemy_vulture_tracker",
+          "count": 38
+        },
+        {
+          "type": "enemy_rosetta_bruiser",
+          "count": 17
+        },
+        {
+          "type": "copper_ore",
+          "count": 16
+        },
+        {
+          "type": "silver_ore",
+          "count": 2
+        },
+        {
+          "type": "tungsten_ore",
+          "count": 9
+        },
+        {
+          "type": "aluminum_ore",
+          "count": 4
+        },
+        {
+          "type": "iron_ore",
+          "count": 7
+        },
+        {
+          "type": "sulfur",
+          "count": 6
+        },
+        {
+          "type": "shell_rock",
+          "count": 3
+        },
+        {
+          "type": "deviations_butterfly's_emissary",
+          "count": 9
+        },
+        {
+          "type": "deviations_polar_jelly",
+          "count": 3
+        },
+        {
+          "type": "deviations_frog_the_leaper",
+          "count": 2
+        },
+        {
+          "type": "deviations_festering_gel",
+          "count": 11
+        },
+        {
+          "type": "deviations_harveseed",
+          "count": 1
+        },
+        {
+          "type": "deviations_dreamcatcher",
+          "count": 1
+        },
+        {
+          "type": "deviations_lonewolf's_whisper",
+          "count": 2
+        },
+        {
+          "type": "deviations_space_turner",
+          "count": 2
+        },
+        {
+          "type": "deviations_fetch-a-lot_bunny",
+          "count": 4
+        },
+        {
+          "type": "deviations_ice_pot",
+          "count": 1
+        },
+        {
+          "type": "deviations_dr._teddy",
+          "count": 1
+        },
+        {
+          "type": "deviations_buzzy_bee",
+          "count": 7
+        },
+        {
+          "type": "deviations_h37",
+          "count": 1
+        },
+        {
+          "type": "deviations_atomic_lighter",
+          "count": 1
+        },
+        {
+          "type": "deviations_enchanting_void",
+          "count": 1
+        },
+        {
+          "type": "deviations_invincible_sun",
+          "count": 3
+        },
+        {
+          "type": "deviations_nutcracker",
+          "count": 1
+        },
+        {
+          "type": "deviations_pyro_dino",
+          "count": 11
+        },
+        {
+          "type": "deviations_mr._wish",
+          "count": 1
+        },
+        {
+          "type": "deviations_snow_globe",
+          "count": 1
+        },
+        {
+          "type": "deviations_zapcam",
+          "count": 9
+        },
+        {
+          "type": "deviations_strange_door",
+          "count": 9
+        },
+        {
+          "type": "deviations_hydronaut_fish",
+          "count": 1
+        },
+        {
+          "type": "deviations_voodoo_doll",
+          "count": 4
+        },
+        {
+          "type": "deviations_flame_essence",
+          "count": 3
+        },
+        {
+          "type": "deviations_shattered_maiden",
+          "count": 1
+        },
+        {
+          "type": "deviations_extradimensional_cat",
+          "count": 7
+        },
+        {
+          "type": "deviations_orb_lightning",
+          "count": 5
+        },
+        {
+          "type": "deviations_mini_feaster",
+          "count": 4
+        },
+        {
+          "type": "deviations_paper_doll",
+          "count": 2
+        },
+        {
+          "type": "deviations_lethal_rabbit",
+          "count": 1
+        },
+        {
+          "type": "deviations_tar_pudding",
+          "count": 1
+        },
+        {
+          "type": "deviations_snowsprite",
+          "count": 5
+        },
+        {
+          "type": "deviations_zapamander",
+          "count": 2
+        },
+        {
+          "type": "deviations_whalepup",
+          "count": 2
+        },
+        {
+          "type": "deviations_chaos_zeno-purifier",
+          "count": 6
+        },
+        {
+          "type": "sticky_note",
+          "count": 2
+        },
+        {
+          "type": "mobile_phone",
+          "count": 1
+        },
+        {
+          "type": "elite_symbiont",
+          "count": 5
+        },
+        {
+          "type": "elite_ede",
+          "count": 18
+        },
+        {
+          "type": "elite_senior_employee",
+          "count": 28
+        },
+        {
+          "type": "elite_void__mechanic",
+          "count": 70
+        },
+        {
+          "type": "elite_disciple",
+          "count": 64
+        },
+        {
+          "type": "elite_glutton",
+          "count": 92
+        },
+        {
+          "type": "elite_siren",
+          "count": 1
+        },
+        {
+          "type": "elite_yellow_light",
+          "count": 370
+        },
+        {
+          "type": "elite_cogitarid_boss",
+          "count": 180
+        },
+        {
+          "type": "elite_destroyer",
+          "count": 173
+        },
+        {
+          "type": "elite_frostella",
+          "count": 3
+        },
+        {
+          "type": "elite_the_scorcher",
+          "count": 25
+        },
+        {
+          "type": "elite_luminara",
+          "count": 156
+        },
+        {
+          "type": "elite_rainfall_reaper",
+          "count": 10
+        },
+        {
+          "type": "elite_mother_of_life",
+          "count": 21
+        },
+        {
+          "type": "elite_chagas_weevil",
+          "count": 5
+        },
+        {
+          "type": "elite_claw_machine",
+          "count": 1
+        },
+        {
+          "type": "elite_light_dreamer",
+          "count": 2
+        },
+        {
+          "type": "elite_sinner_sentry",
+          "count": 3
+        },
+        {
+          "type": "boss_arachsiam",
+          "count": 57
+        },
+        {
+          "type": "boss_shadow_hound",
+          "count": 91
+        },
+        {
+          "type": "boss_treant",
+          "count": 4
+        },
+        {
+          "type": "boss_ravenous_hunter",
+          "count": 23
+        },
+        {
+          "type": "boss_secret_servitor",
+          "count": 7
+        },
+        {
+          "type": "boss_flame_stone",
+          "count": 147
+        },
+        {
+          "type": "boss_the_forsaken_giant",
+          "count": 2
+        },
+        {
+          "type": "boss_jump_over_flower_bud",
+          "count": 11
+        },
+        {
+          "type": "gear_crate",
+          "count": 25
+        },
+        {
+          "type": "loot_crate",
+          "count": 207
+        },
+        {
+          "type": "storage_crate",
+          "count": 84
+        },
+        {
+          "type": "weapon_crate",
+          "count": 10
+        },
+        {
+          "type": "vending_machine",
+          "count": 27
+        },
+        {
+          "type": "car_trunk",
+          "count": 2
+        },
+        {
+          "type": "long_table",
+          "count": 4
+        },
+        {
+          "type": "table",
+          "count": 22
+        },
+        {
+          "type": "medkit",
+          "count": 4
+        },
+        {
+          "type": "emergency_medkit",
+          "count": 30
+        },
+        {
+          "type": "rareLoot_30341101",
+          "count": 12
+        },
+        {
+          "type": "rareLoot_30341102",
+          "count": 7
+        },
+        {
+          "type": "rareLoot_30341103",
+          "count": 11
+        },
+        {
+          "type": "rareLoot_30341104",
+          "count": 14
+        },
+        {
+          "type": "rareLoot_30341105",
+          "count": 3
+        },
+        {
+          "type": "rareLoot_30341106",
+          "count": 12
+        },
+        {
+          "type": "rareLoot_30341107",
+          "count": 10
+        },
+        {
+          "type": "rareLoot_30341108",
+          "count": 11
+        },
+        {
+          "type": "rareLoot_30341109",
+          "count": 6
+        },
+        {
+          "type": "rareLoot_30341110",
+          "count": 5
+        },
+        {
+          "type": "rareLoot_30341111",
+          "count": 1
+        },
+        {
+          "type": "rareLoot_30341112",
+          "count": 13
+        }
+      ]
+    },
+    "eternaland": {
+      "scenarioName": "Eternaland",
+      "categoryCount": 0,
+      "totalSpawns": 0,
+      "types": []
+    },
+    "once_human_raid_zone": {
+      "scenarioName": "Once Human: RaidZone",
+      "categoryCount": 32,
+      "totalSpawns": 549,
+      "types": [
+        {
+          "type": "morphic_crate",
+          "count": 217
+        },
+        {
+          "type": "fanmaiji",
+          "count": 3
+        },
+        {
+          "type": "yingdi",
+          "count": 10
+        },
+        {
+          "type": "juluo",
+          "count": 140
+        },
+        {
+          "type": "scattered",
+          "count": 63
+        },
+        {
+          "type": "raidlea",
+          "count": 2
+        },
+        {
+          "type": "cistern",
+          "count": 13
+        },
+        {
+          "type": "juxie",
+          "count": 10
+        },
+        {
+          "type": "transport",
+          "count": 1
+        },
+        {
+          "type": "initial_respawn",
+          "count": 1
+        },
+        {
+          "type": "zhongliyingdi_kechuansong",
+          "count": 11
+        },
+        {
+          "type": "excavation",
+          "count": 6
+        },
+        {
+          "type": "securementsilos",
+          "count": 10
+        },
+        {
+          "type": "yanjiusuo",
+          "count": 14
+        },
+        {
+          "type": "zhongzhiyuan",
+          "count": 2
+        },
+        {
+          "type": "gouwuzhongxin",
+          "count": 2
+        },
+        {
+          "type": "chengzhen",
+          "count": 16
+        },
+        {
+          "type": "hospital",
+          "count": 1
+        },
+        {
+          "type": "north_ronglu",
+          "count": 1
+        },
+        {
+          "type": "north_haigang",
+          "count": 1
+        },
+        {
+          "type": "north_youleyuan2",
+          "count": 1
+        },
+        {
+          "type": "guanniaoyingdi",
+          "count": 3
+        },
+        {
+          "type": "north_huoshanjidi",
+          "count": 1
+        },
+        {
+          "type": "gongchang",
+          "count": 9
+        },
+        {
+          "type": "north_shantijidi",
+          "count": 1
+        },
+        {
+          "type": "north_musishi",
+          "count": 1
+        },
+        {
+          "type": "north_youleyuan1",
+          "count": 1
+        },
+        {
+          "type": "north_pobaichengshi",
+          "count": 1
+        },
+        {
+          "type": "north_dongxue",
+          "count": 1
+        },
+        {
+          "type": "junshijidi",
+          "count": 3
+        },
+        {
+          "type": "school",
+          "count": 1
+        },
+        {
+          "type": "jiaotongshuniu",
+          "count": 2
+        }
+      ]
+    },
+    "endless_dream": {
+      "scenarioName": "Endless Dream",
+      "categoryCount": 261,
+      "totalSpawns": 110542,
+      "types": [
+        {
+          "type": "animal_bear",
+          "count": 606
+        },
+        {
+          "type": "animal_corrupted_bear",
+          "count": 33
+        },
+        {
+          "type": "animal_wild_buffalo",
+          "count": 305
+        },
+        {
+          "type": "animal_eagle",
+          "count": 168
+        },
+        {
+          "type": "animal_longbilled_gull",
+          "count": 192
+        },
+        {
+          "type": "animal_swan",
+          "count": 5
+        },
+        {
+          "type": "animal_polar_bear",
+          "count": 163
+        },
+        {
+          "type": "animal_squirrel",
+          "count": 265
+        },
+        {
+          "type": "animal_flamingo",
+          "count": 76
+        },
+        {
+          "type": "animal_turtle",
+          "count": 152
+        },
+        {
+          "type": "animal_seal",
+          "count": 31
+        },
+        {
+          "type": "animal_rabbit",
+          "count": 1321
+        },
+        {
+          "type": "animal_pelican",
+          "count": 109
+        },
+        {
+          "type": "animal_deer",
+          "count": 1278
+        },
+        {
+          "type": "animal_snow_fox",
+          "count": 105
+        },
+        {
+          "type": "animal_leopard",
+          "count": 537
+        },
+        {
+          "type": "animal_capybara",
+          "count": 60
+        },
+        {
+          "type": "animal_raven",
+          "count": 115
+        },
+        {
+          "type": "animal_fox",
+          "count": 106
+        },
+        {
+          "type": "animal_rat",
+          "count": 2
+        },
+        {
+          "type": "animal_raccoon",
+          "count": 113
+        },
+        {
+          "type": "animal_sheep",
+          "count": 617
+        },
+        {
+          "type": "animal_boar",
+          "count": 513
+        },
+        {
+          "type": "animal_wolf",
+          "count": 1531
+        },
+        {
+          "type": "animal_corrupted_wolf",
+          "count": 15
+        },
+        {
+          "type": "animal_crocodile",
+          "count": 152
+        },
+        {
+          "type": "animal_corrupted_crocodile",
+          "count": 6
+        },
+        {
+          "type": "house_monster",
+          "count": 10
+        },
+        {
+          "type": "monster_charred_maniac",
+          "count": 1684
+        },
+        {
+          "type": "monster_tangled_vine",
+          "count": 4
+        },
+        {
+          "type": "monster_gnawer",
+          "count": 1953
+        },
+        {
+          "type": "monster_watcher",
+          "count": 2059
+        },
+        {
+          "type": "monster_scarecrow",
+          "count": 453
+        },
+        {
+          "type": "monster_spider_egg",
+          "count": 34
+        },
+        {
+          "type": "monster_star_walker",
+          "count": 691
+        },
+        {
+          "type": "monster_charred_madman",
+          "count": 1340
+        },
+        {
+          "type": "monster_agent",
+          "count": 1051
+        },
+        {
+          "type": "monster_snatcher",
+          "count": 1452
+        },
+        {
+          "type": "monster_budworm",
+          "count": 1191
+        },
+        {
+          "type": "monster_mayhem",
+          "count": 332
+        },
+        {
+          "type": "monster_toy_spider",
+          "count": 23
+        },
+        {
+          "type": "monster_customer",
+          "count": 1979
+        },
+        {
+          "type": "monster_ede",
+          "count": 734
+        },
+        {
+          "type": "monster_the_new_hire",
+          "count": 1352
+        },
+        {
+          "type": "monster_white_hand",
+          "count": 51
+        },
+        {
+          "type": "monster_spiderling",
+          "count": 1052
+        },
+        {
+          "type": "monster_pale_hand",
+          "count": 1521
+        },
+        {
+          "type": "monster_fool",
+          "count": 367
+        },
+        {
+          "type": "monster_digger",
+          "count": 636
+        },
+        {
+          "type": "monster_ghoul",
+          "count": 898
+        },
+        {
+          "type": "monster_nightmare_tv",
+          "count": 315
+        },
+        {
+          "type": "monster_the_scorcher",
+          "count": 49
+        },
+        {
+          "type": "monster_nightmare_lair",
+          "count": 457
+        },
+        {
+          "type": "monster_mist_grasp",
+          "count": 386
+        },
+        {
+          "type": "monster_nightmare_guard",
+          "count": 568
+        },
+        {
+          "type": "monster_nightmare_disruptor",
+          "count": 381
+        },
+        {
+          "type": "monster_nightmare_apostle",
+          "count": 276
+        },
+        {
+          "type": "monster_gasbag",
+          "count": 1042
+        },
+        {
+          "type": "monster_vocalis",
+          "count": 2
+        },
+        {
+          "type": "monster_lady_in_mirror",
+          "count": 6
+        },
+        {
+          "type": "monster_deviated_tv",
+          "count": 3164
+        },
+        {
+          "type": "monster_haloed_petroller",
+          "count": 2
+        },
+        {
+          "type": "monster_peeper",
+          "count": 7
+        },
+        {
+          "type": "monster_perching_tree",
+          "count": 1011
+        },
+        {
+          "type": "monster_forge_worker",
+          "count": 597
+        },
+        {
+          "type": "monster_flow_regulator",
+          "count": 309
+        },
+        {
+          "type": "monster_chaosium_miner",
+          "count": 198
+        },
+        {
+          "type": "monster_morphic__weapon_crate",
+          "count": 21
+        },
+        {
+          "type": "monster_morphic__armor_crate",
+          "count": 22
+        },
+        {
+          "type": "monster_red_eyeballoon",
+          "count": 40
+        },
+        {
+          "type": "monster_radar",
+          "count": 47
+        },
+        {
+          "type": "monster_dream_zone_trace_box",
+          "count": 2771
+        },
+        {
+          "type": "monster_smile_tv",
+          "count": 217
+        },
+        {
+          "type": "monster_morphic__crate",
+          "count": 251
+        },
+        {
+          "type": "monster_light",
+          "count": 595
+        },
+        {
+          "type": "monster_migrant_arm",
+          "count": 4
+        },
+        {
+          "type": "monster_spore_tip",
+          "count": 10
+        },
+        {
+          "type": "monster_ignas_messenger",
+          "count": 3
+        },
+        {
+          "type": "monster_ignas_vanguard",
+          "count": 2
+        },
+        {
+          "type": "monster_morphic__fridge",
+          "count": 16
+        },
+        {
+          "type": "monster_rosetta_guard",
+          "count": 34
+        },
+        {
+          "type": "monster_scholar",
+          "count": 22
+        },
+        {
+          "type": "monster_scout",
+          "count": 9
+        },
+        {
+          "type": "monster_weathervane",
+          "count": 10
+        },
+        {
+          "type": "monster_mousseville_employee",
+          "count": 171
+        },
+        {
+          "type": "monster_portal",
+          "count": 5
+        },
+        {
+          "type": "monster_claw_machine_teddy",
+          "count": 205
+        },
+        {
+          "type": "monster_dream_primordial_appearance_test",
+          "count": 829
+        },
+        {
+          "type": "enemy_dutch_van_pelt",
+          "count": 8
+        },
+        {
+          "type": "enemy_rosetta_mechanic",
+          "count": 7
+        },
+        {
+          "type": "enemy_rosetta_heavy",
+          "count": 20
+        },
+        {
+          "type": "enemy_rosetta_sniper",
+          "count": 81
+        },
+        {
+          "type": "enemy_vulture_tremble_guard",
+          "count": 9
+        },
+        {
+          "type": "enemy_vulture_conqueror",
+          "count": 8
+        },
+        {
+          "type": "enemy_vulture_point_man",
+          "count": 35
+        },
+        {
+          "type": "enemy_vulture_incinerator",
+          "count": 60
+        },
+        {
+          "type": "enemy_vulture_chaosiumspawn",
+          "count": 15
+        },
+        {
+          "type": "enemy_vulture_barrier_breaker",
+          "count": 20
+        },
+        {
+          "type": "enemy_parasitic_maniac",
+          "count": 112
+        },
+        {
+          "type": "enemy_vulture_tracker",
+          "count": 32
+        },
+        {
+          "type": "enemy_rosetta_bruiser",
+          "count": 3
+        },
+        {
+          "type": "copper_ore",
+          "count": 5367
+        },
+        {
+          "type": "hot_ore",
+          "count": 149
+        },
+        {
+          "type": "ice_ore",
+          "count": 86
+        },
+        {
+          "type": "silver_ore",
+          "count": 2219
+        },
+        {
+          "type": "gold_ore",
+          "count": 1473
+        },
+        {
+          "type": "stardust_ore",
+          "count": 510
+        },
+        {
+          "type": "tungsten_ore",
+          "count": 4548
+        },
+        {
+          "type": "aluminum_ore",
+          "count": 5094
+        },
+        {
+          "type": "iron_ore",
+          "count": 5132
+        },
+        {
+          "type": "tin_ore",
+          "count": 3932
+        },
+        {
+          "type": "sulfur",
+          "count": 5404
+        },
+        {
+          "type": "seaweed_rock",
+          "count": 61
+        },
+        {
+          "type": "shell_rock",
+          "count": 82
+        },
+        {
+          "type": "deviations_festering_gel",
+          "count": 4
+        },
+        {
+          "type": "deviations_fetch-a-lot_bunny",
+          "count": 2
+        },
+        {
+          "type": "deviations_dr._teddy",
+          "count": 1
+        },
+        {
+          "type": "deviations_h37",
+          "count": 3
+        },
+        {
+          "type": "deviations_invincible_sun",
+          "count": 1
+        },
+        {
+          "type": "deviations_the_digby_boy",
+          "count": 65
+        },
+        {
+          "type": "deviations_pyro_dino",
+          "count": 1
+        },
+        {
+          "type": "deviations_growshroom",
+          "count": 6
+        },
+        {
+          "type": "deviations_lethal_rabbit",
+          "count": 4
+        },
+        {
+          "type": "deviations_zapamander",
+          "count": 1
+        },
+        {
+          "type": "deviations_soul_summoner",
+          "count": 1
+        },
+        {
+          "type": "letter",
+          "count": 64
+        },
+        {
+          "type": "sticky_note",
+          "count": 47
+        },
+        {
+          "type": "bible",
+          "count": 19
+        },
+        {
+          "type": "notebook_close",
+          "count": 107
+        },
+        {
+          "type": "laptop",
+          "count": 23
+        },
+        {
+          "type": "announcement",
+          "count": 3
+        },
+        {
+          "type": "recording_pen",
+          "count": 4
+        },
+        {
+          "type": "newspaper",
+          "count": 22
+        },
+        {
+          "type": "mobile_phone",
+          "count": 121
+        },
+        {
+          "type": "notebook_open",
+          "count": 46
+        },
+        {
+          "type": "elite_staff_badges",
+          "count": 230
+        },
+        {
+          "type": "elite_ede",
+          "count": 983
+        },
+        {
+          "type": "elite_senior_employee",
+          "count": 461
+        },
+        {
+          "type": "elite_void__mechanic",
+          "count": 15
+        },
+        {
+          "type": "elite_the_butcher",
+          "count": 8
+        },
+        {
+          "type": "elite_disciple",
+          "count": 211
+        },
+        {
+          "type": "elite_glutton",
+          "count": 194
+        },
+        {
+          "type": "elite_siren",
+          "count": 10
+        },
+        {
+          "type": "elite_airplane_ancient_one",
+          "count": 30
+        },
+        {
+          "type": "elite_star_walker",
+          "count": 151
+        },
+        {
+          "type": "elite_yellow_light",
+          "count": 1590
+        },
+        {
+          "type": "elite_cogitarid_boss",
+          "count": 1982
+        },
+        {
+          "type": "elite_vulture_charger",
+          "count": 1411
+        },
+        {
+          "type": "elite_shepherd",
+          "count": 162
+        },
+        {
+          "type": "elite_destroyer",
+          "count": 205
+        },
+        {
+          "type": "elite_pain",
+          "count": 736
+        },
+        {
+          "type": "elite_frostella",
+          "count": 459
+        },
+        {
+          "type": "elite_the_scorcher",
+          "count": 561
+        },
+        {
+          "type": "elite_luminara",
+          "count": 312
+        },
+        {
+          "type": "elite_rainfall_reaper",
+          "count": 19
+        },
+        {
+          "type": "elite_mother_of_life",
+          "count": 231
+        },
+        {
+          "type": "elite_sorrow",
+          "count": 745
+        },
+        {
+          "type": "elite_chagas_weevil",
+          "count": 943
+        },
+        {
+          "type": "elite_claw_machine",
+          "count": 446
+        },
+        {
+          "type": "elite_innocence",
+          "count": 768
+        },
+        {
+          "type": "elite_dream_node",
+          "count": 5144
+        },
+        {
+          "type": "elite_weather_forecaster",
+          "count": 538
+        },
+        {
+          "type": "elite_light_dreamer",
+          "count": 693
+        },
+        {
+          "type": "elite_sinner_sentry",
+          "count": 176
+        },
+        {
+          "type": "elite_cervitaur",
+          "count": 4
+        },
+        {
+          "type": "elite_fear",
+          "count": 860
+        },
+        {
+          "type": "boss_arachsiam",
+          "count": 7
+        },
+        {
+          "type": "boss_treant",
+          "count": 48
+        },
+        {
+          "type": "boss_ravenous_hunter",
+          "count": 8
+        },
+        {
+          "type": "boss_secret_servitor",
+          "count": 63
+        },
+        {
+          "type": "boss_flame_stone",
+          "count": 373
+        },
+        {
+          "type": "boss_stone_platform",
+          "count": 789
+        },
+        {
+          "type": "boss_manibus",
+          "count": 461
+        },
+        {
+          "type": "boss_deep_dream_tentacles",
+          "count": 35
+        },
+        {
+          "type": "boss_jump_over_flower_bud",
+          "count": 2
+        },
+        {
+          "type": "boss_gaze_of_nightmare",
+          "count": 13
+        },
+        {
+          "type": "riddle_doll",
+          "count": 6
+        },
+        {
+          "type": "riddle_telephone",
+          "count": 2
+        },
+        {
+          "type": "riddle_shadow",
+          "count": 10
+        },
+        {
+          "type": "riddle_ice",
+          "count": 19
+        },
+        {
+          "type": "riddle_footprint",
+          "count": 8
+        },
+        {
+          "type": "riddle_cave",
+          "count": 5
+        },
+        {
+          "type": "riddle_balloon",
+          "count": 10
+        },
+        {
+          "type": "camera",
+          "count": 6
+        },
+        {
+          "type": "eyeballoon",
+          "count": 8
+        },
+        {
+          "type": "bizarre_rocks",
+          "count": 5
+        },
+        {
+          "type": "lotus_leaf",
+          "count": 4
+        },
+        {
+          "type": "the_creeper",
+          "count": 5
+        },
+        {
+          "type": "strange_door",
+          "count": 4
+        },
+        {
+          "type": "treasure_map",
+          "count": 2
+        },
+        {
+          "type": "billboard_judgment_district_defense",
+          "count": 5
+        },
+        {
+          "type": "anticonstruction",
+          "count": 3
+        },
+        {
+          "type": "target_practice",
+          "count": 1
+        },
+        {
+          "type": "painters_cottage",
+          "count": 3
+        },
+        {
+          "type": "strange_statues",
+          "count": 2
+        },
+        {
+          "type": "abandoned_vehicle",
+          "count": 1
+        },
+        {
+          "type": "creepy_painting_loot_crate_spot_defense",
+          "count": 1
+        },
+        {
+          "type": "billboard",
+          "count": 5
+        },
+        {
+          "type": "mountain_rock_defense",
+          "count": 1
+        },
+        {
+          "type": "morphic_crate",
+          "count": 209
+        },
+        {
+          "type": "hoard_loot_crate",
+          "count": 36
+        },
+        {
+          "type": "securement_unit",
+          "count": 60
+        },
+        {
+          "type": "gear_crate",
+          "count": 312
+        },
+        {
+          "type": "loot_crate",
+          "count": 304
+        },
+        {
+          "type": "mayfly_basic_military_crate",
+          "count": 2
+        },
+        {
+          "type": "oracle_crate",
+          "count": 185
+        },
+        {
+          "type": "storage_crate",
+          "count": 2235
+        },
+        {
+          "type": "weapon_crate",
+          "count": 171
+        },
+        {
+          "type": "fruit__veggies",
+          "count": 4
+        },
+        {
+          "type": "vending_machine",
+          "count": 215
+        },
+        {
+          "type": "car_trunk",
+          "count": 3200
+        },
+        {
+          "type": "long_table",
+          "count": 234
+        },
+        {
+          "type": "table",
+          "count": 608
+        },
+        {
+          "type": "medkit",
+          "count": 116
+        },
+        {
+          "type": "emergency_medkit",
+          "count": 151
+        },
+        {
+          "type": "mystical_crate",
+          "count": 238
+        },
+        {
+          "type": "magazine",
+          "count": 49
+        },
+        {
+          "type": "landscape_viewpoint_camera",
+          "count": 28
+        },
+        {
+          "type": "rareLoot_30341101",
+          "count": 113
+        },
+        {
+          "type": "rareLoot_30341102",
+          "count": 108
+        },
+        {
+          "type": "rareLoot_30341103",
+          "count": 101
+        },
+        {
+          "type": "rareLoot_30341104",
+          "count": 111
+        },
+        {
+          "type": "rareLoot_30341105",
+          "count": 29
+        },
+        {
+          "type": "rareLoot_30341106",
+          "count": 71
+        },
+        {
+          "type": "rareLoot_30341107",
+          "count": 107
+        },
+        {
+          "type": "rareLoot_30341108",
+          "count": 111
+        },
+        {
+          "type": "rareLoot_30341109",
+          "count": 63
+        },
+        {
+          "type": "rareLoot_30341110",
+          "count": 46
+        },
+        {
+          "type": "rareLoot_30341111",
+          "count": 16
+        },
+        {
+          "type": "rareLoot_30341112",
+          "count": 104
+        },
+        {
+          "type": "fanmaiji",
+          "count": 1
+        },
+        {
+          "type": "yingdi",
+          "count": 19
+        },
+        {
+          "type": "juluo",
+          "count": 126
+        },
+        {
+          "type": "scattered",
+          "count": 55
+        },
+        {
+          "type": "transport",
+          "count": 84
+        },
+        {
+          "type": "hud_icon_resourse_null",
+          "count": 78
+        },
+        {
+          "type": "raidlea",
+          "count": 2
+        },
+        {
+          "type": "icon_stronghold_borderlands",
+          "count": 19
+        },
+        {
+          "type": "cistern",
+          "count": 13
+        },
+        {
+          "type": "initial_respawn",
+          "count": 19
+        },
+        {
+          "type": "juxie",
+          "count": 8
+        },
+        {
+          "type": "zhongliyingdi_kechuansong",
+          "count": 11
+        },
+        {
+          "type": "securementsilos",
+          "count": 10
+        },
+        {
+          "type": "yanjiusuo",
+          "count": 14
+        },
+        {
+          "type": "zhongzhiyuan",
+          "count": 2
+        },
+        {
+          "type": "gouwuzhongxin",
+          "count": 2
+        },
+        {
+          "type": "chengzhen",
+          "count": 15
+        },
+        {
+          "type": "hospital",
+          "count": 1
+        },
+        {
+          "type": "north_ronglu",
+          "count": 1
+        },
+        {
+          "type": "north_haigang",
+          "count": 1
+        },
+        {
+          "type": "north_youleyuan2",
+          "count": 1
+        },
+        {
+          "type": "guanniaoyingdi",
+          "count": 2
+        },
+        {
+          "type": "gongchang",
+          "count": 9
+        },
+        {
+          "type": "north_shantijidi",
+          "count": 1
+        },
+        {
+          "type": "north_musishi",
+          "count": 1
+        },
+        {
+          "type": "north_youleyuan1",
+          "count": 1
+        },
+        {
+          "type": "north_pobaichengshi",
+          "count": 1
+        },
+        {
+          "type": "north_dongxue",
+          "count": 1
+        },
+        {
+          "type": "junshijidi",
+          "count": 2
+        },
+        {
+          "type": "school",
+          "count": 1
+        },
+        {
+          "type": "jiaotongshuniu",
+          "count": 2
+        }
+      ]
+    },
+    "deviation_secure": {
+      "scenarioName": "Deviation Secure",
+      "categoryCount": 237,
+      "totalSpawns": 25338,
+      "types": [
+        {
+          "type": "npc_jonathan",
+          "count": 1
+        },
+        {
+          "type": "npc_patche",
+          "count": 1
+        },
+        {
+          "type": "npc_lacey",
+          "count": 1
+        },
+        {
+          "type": "npc_severin_ⅶ-s2041",
+          "count": 3
+        },
+        {
+          "type": "npc_nisa",
+          "count": 3
+        },
+        {
+          "type": "npc_loretta",
+          "count": 1
+        },
+        {
+          "type": "npc_pauline",
+          "count": 1
+        },
+        {
+          "type": "npc_emily",
+          "count": 1
+        },
+        {
+          "type": "npc_anne",
+          "count": 1
+        },
+        {
+          "type": "npc_silla",
+          "count": 1
+        },
+        {
+          "type": "npc_chaos_snowsprite",
+          "count": 1
+        },
+        {
+          "type": "npc_chaotic_extradimensional_cat",
+          "count": 1
+        },
+        {
+          "type": "npc_chaosaurus",
+          "count": 1
+        },
+        {
+          "type": "npc_chaos_mr._wish",
+          "count": 1
+        },
+        {
+          "type": "npc_resting_tourist",
+          "count": 1
+        },
+        {
+          "type": "npc_waiting_visitor",
+          "count": 1
+        },
+        {
+          "type": "npc_procurement_manny",
+          "count": 3
+        },
+        {
+          "type": "npc_quickbuy_manny",
+          "count": 3
+        },
+        {
+          "type": "animal_bear",
+          "count": 277
+        },
+        {
+          "type": "animal_corrupted_bear",
+          "count": 2
+        },
+        {
+          "type": "animal_wild_buffalo",
+          "count": 130
+        },
+        {
+          "type": "animal_eagle",
+          "count": 9
+        },
+        {
+          "type": "animal_longbilled_gull",
+          "count": 1
+        },
+        {
+          "type": "animal_polar_bear",
+          "count": 51
+        },
+        {
+          "type": "animal_squirrel",
+          "count": 1
+        },
+        {
+          "type": "animal_turtle",
+          "count": 27
+        },
+        {
+          "type": "animal_seal",
+          "count": 16
+        },
+        {
+          "type": "animal_rabbit",
+          "count": 8
+        },
+        {
+          "type": "animal_pelican",
+          "count": 18
+        },
+        {
+          "type": "animal_deer",
+          "count": 756
+        },
+        {
+          "type": "animal_snow_fox",
+          "count": 19
+        },
+        {
+          "type": "animal_leopard",
+          "count": 223
+        },
+        {
+          "type": "animal_capybara",
+          "count": 1
+        },
+        {
+          "type": "animal_raven",
+          "count": 3
+        },
+        {
+          "type": "animal_fox",
+          "count": 78
+        },
+        {
+          "type": "animal_rat",
+          "count": 1
+        },
+        {
+          "type": "animal_raccoon",
+          "count": 8
+        },
+        {
+          "type": "animal_sheep",
+          "count": 497
+        },
+        {
+          "type": "animal_boar",
+          "count": 250
+        },
+        {
+          "type": "animal_wolf",
+          "count": 559
+        },
+        {
+          "type": "animal_corrupted_wolf",
+          "count": 3
+        },
+        {
+          "type": "animal_crocodile",
+          "count": 2
+        },
+        {
+          "type": "animal_corrupted_crocodile",
+          "count": 3
+        },
+        {
+          "type": "monster_charred_maniac",
+          "count": 122
+        },
+        {
+          "type": "monster_tangled_vine",
+          "count": 1
+        },
+        {
+          "type": "monster_gnawer",
+          "count": 329
+        },
+        {
+          "type": "monster_watcher",
+          "count": 45
+        },
+        {
+          "type": "monster_scarecrow",
+          "count": 3
+        },
+        {
+          "type": "monster_spider_egg",
+          "count": 13
+        },
+        {
+          "type": "monster_star_walker",
+          "count": 65
+        },
+        {
+          "type": "monster_charred_madman",
+          "count": 37
+        },
+        {
+          "type": "monster_agent",
+          "count": 9
+        },
+        {
+          "type": "monster_snatcher",
+          "count": 226
+        },
+        {
+          "type": "monster_budworm",
+          "count": 49
+        },
+        {
+          "type": "monster_mayhem",
+          "count": 23
+        },
+        {
+          "type": "monster_toy_spider",
+          "count": 6
+        },
+        {
+          "type": "monster_customer",
+          "count": 22
+        },
+        {
+          "type": "monster_ede",
+          "count": 1
+        },
+        {
+          "type": "monster_the_new_hire",
+          "count": 8
+        },
+        {
+          "type": "monster_white_hand",
+          "count": 25
+        },
+        {
+          "type": "monster_spiderling",
+          "count": 63
+        },
+        {
+          "type": "monster_pale_hand",
+          "count": 17
+        },
+        {
+          "type": "monster_fool",
+          "count": 3
+        },
+        {
+          "type": "monster_digger",
+          "count": 7
+        },
+        {
+          "type": "monster_ghoul",
+          "count": 37
+        },
+        {
+          "type": "monster_gasbag",
+          "count": 8
+        },
+        {
+          "type": "monster_lady_in_mirror",
+          "count": 1
+        },
+        {
+          "type": "monster_deviated_tv",
+          "count": 9
+        },
+        {
+          "type": "monster_peeper",
+          "count": 3
+        },
+        {
+          "type": "monster_perching_tree",
+          "count": 2
+        },
+        {
+          "type": "monster_chaosium_miner",
+          "count": 61
+        },
+        {
+          "type": "monster_morphic__weapon_crate",
+          "count": 4
+        },
+        {
+          "type": "monster_morphic__armor_crate",
+          "count": 6
+        },
+        {
+          "type": "monster_red_eyeballoon",
+          "count": 32
+        },
+        {
+          "type": "monster_dream_zone_trace_box",
+          "count": 4
+        },
+        {
+          "type": "monster_morphic__crate",
+          "count": 96
+        },
+        {
+          "type": "monster_light",
+          "count": 13
+        },
+        {
+          "type": "monster_migrant_arm",
+          "count": 2
+        },
+        {
+          "type": "monster_spore_tip",
+          "count": 1
+        },
+        {
+          "type": "monster_ignas_messenger",
+          "count": 1
+        },
+        {
+          "type": "monster_morphic__fridge",
+          "count": 6
+        },
+        {
+          "type": "monster_rosetta_guard",
+          "count": 15
+        },
+        {
+          "type": "monster_scholar",
+          "count": 7
+        },
+        {
+          "type": "monster_scout",
+          "count": 7
+        },
+        {
+          "type": "monster_weathervane",
+          "count": 6
+        },
+        {
+          "type": "monster_mousseville_employee",
+          "count": 8
+        },
+        {
+          "type": "monster_portal",
+          "count": 6
+        },
+        {
+          "type": "monster_claw_machine_teddy",
+          "count": 2
+        },
+        {
+          "type": "monster_dream_primordial_appearance_test",
+          "count": 4
+        },
+        {
+          "type": "enemy_dutch_van_pelt",
+          "count": 2
+        },
+        {
+          "type": "enemy_rosetta_mechanic",
+          "count": 1
+        },
+        {
+          "type": "enemy_rosetta_heavy",
+          "count": 6
+        },
+        {
+          "type": "enemy_rosetta_sniper",
+          "count": 35
+        },
+        {
+          "type": "enemy_vulture_conqueror",
+          "count": 1
+        },
+        {
+          "type": "enemy_vulture_point_man",
+          "count": 13
+        },
+        {
+          "type": "enemy_vulture_incinerator",
+          "count": 20
+        },
+        {
+          "type": "enemy_vulture_chaosiumspawn",
+          "count": 5
+        },
+        {
+          "type": "enemy_vulture_barrier_breaker",
+          "count": 7
+        },
+        {
+          "type": "enemy_parasitic_maniac",
+          "count": 31
+        },
+        {
+          "type": "enemy_vulture_tracker",
+          "count": 11
+        },
+        {
+          "type": "enemy_rosetta_bruiser",
+          "count": 1
+        },
+        {
+          "type": "copper_ore",
+          "count": 2796
+        },
+        {
+          "type": "ice_ore",
+          "count": 5
+        },
+        {
+          "type": "silver_ore",
+          "count": 26
+        },
+        {
+          "type": "gold_ore",
+          "count": 348
+        },
+        {
+          "type": "stardust_ore",
+          "count": 382
+        },
+        {
+          "type": "tungsten_ore",
+          "count": 1017
+        },
+        {
+          "type": "aluminum_ore",
+          "count": 1514
+        },
+        {
+          "type": "iron_ore",
+          "count": 2689
+        },
+        {
+          "type": "tin_ore",
+          "count": 2317
+        },
+        {
+          "type": "sulfur",
+          "count": 2685
+        },
+        {
+          "type": "seaweed_rock",
+          "count": 18
+        },
+        {
+          "type": "shell_rock",
+          "count": 304
+        },
+        {
+          "type": "deviations_butterfly's_emissary",
+          "count": 175
+        },
+        {
+          "type": "deviations_polar_jelly",
+          "count": 77
+        },
+        {
+          "type": "deviations_frog_the_leaper",
+          "count": 89
+        },
+        {
+          "type": "deviations_lonewolf's_whisper",
+          "count": 94
+        },
+        {
+          "type": "deviations_buzzy_bee",
+          "count": 95
+        },
+        {
+          "type": "deviations_logging_beaver",
+          "count": 172
+        },
+        {
+          "type": "deviations_the_digby_boy",
+          "count": 255
+        },
+        {
+          "type": "deviations_grumpy_bulb",
+          "count": 99
+        },
+        {
+          "type": "deviations_growshroom",
+          "count": 98
+        },
+        {
+          "type": "deviations_rain_man",
+          "count": 95
+        },
+        {
+          "type": "deviations_atomic_snail",
+          "count": 95
+        },
+        {
+          "type": "deviations_hydronaut_fish",
+          "count": 70
+        },
+        {
+          "type": "deviations_flame_essence",
+          "count": 98
+        },
+        {
+          "type": "deviations_orb_lightning",
+          "count": 96
+        },
+        {
+          "type": "deviations_lethal_rabbit",
+          "count": 92
+        },
+        {
+          "type": "deviations_tar_pudding",
+          "count": 98
+        },
+        {
+          "type": "deviations_whalepup",
+          "count": 96
+        },
+        {
+          "type": "deviations_soul_summoner",
+          "count": 80
+        },
+        {
+          "type": "deviations_director_fox",
+          "count": 92
+        },
+        {
+          "type": "letter",
+          "count": 26
+        },
+        {
+          "type": "sticky_note",
+          "count": 20
+        },
+        {
+          "type": "bible",
+          "count": 6
+        },
+        {
+          "type": "notebook_close",
+          "count": 20
+        },
+        {
+          "type": "laptop",
+          "count": 17
+        },
+        {
+          "type": "newspaper",
+          "count": 10
+        },
+        {
+          "type": "mobile_phone",
+          "count": 40
+        },
+        {
+          "type": "notebook_open",
+          "count": 15
+        },
+        {
+          "type": "elite_ede",
+          "count": 3
+        },
+        {
+          "type": "elite_senior_employee",
+          "count": 1
+        },
+        {
+          "type": "elite_void__mechanic",
+          "count": 8
+        },
+        {
+          "type": "elite_disciple",
+          "count": 6
+        },
+        {
+          "type": "elite_glutton",
+          "count": 10
+        },
+        {
+          "type": "elite_siren",
+          "count": 2
+        },
+        {
+          "type": "elite_yellow_light",
+          "count": 11
+        },
+        {
+          "type": "elite_cogitarid_boss",
+          "count": 25
+        },
+        {
+          "type": "elite_vulture_charger",
+          "count": 1
+        },
+        {
+          "type": "elite_destroyer",
+          "count": 3
+        },
+        {
+          "type": "elite_frostella",
+          "count": 4
+        },
+        {
+          "type": "elite_the_scorcher",
+          "count": 3
+        },
+        {
+          "type": "elite_rainfall_reaper",
+          "count": 1
+        },
+        {
+          "type": "elite_sorrow",
+          "count": 1
+        },
+        {
+          "type": "elite_chagas_weevil",
+          "count": 5
+        },
+        {
+          "type": "elite_claw_machine",
+          "count": 2
+        },
+        {
+          "type": "elite_innocence",
+          "count": 1
+        },
+        {
+          "type": "elite_dream_node",
+          "count": 16
+        },
+        {
+          "type": "elite_fear",
+          "count": 2
+        },
+        {
+          "type": "boss_manibus",
+          "count": 2
+        },
+        {
+          "type": "riddle_doll",
+          "count": 6
+        },
+        {
+          "type": "riddle_shadow",
+          "count": 2
+        },
+        {
+          "type": "riddle_ice",
+          "count": 11
+        },
+        {
+          "type": "riddle_cave",
+          "count": 4
+        },
+        {
+          "type": "riddle_balloon",
+          "count": 10
+        },
+        {
+          "type": "morphic_crate",
+          "count": 98
+        },
+        {
+          "type": "hoard_loot_crate",
+          "count": 8
+        },
+        {
+          "type": "securement_unit",
+          "count": 19
+        },
+        {
+          "type": "gear_crate",
+          "count": 108
+        },
+        {
+          "type": "oracle_crate",
+          "count": 87
+        },
+        {
+          "type": "storage_crate",
+          "count": 1025
+        },
+        {
+          "type": "weapon_crate",
+          "count": 71
+        },
+        {
+          "type": "fruit__veggies",
+          "count": 3
+        },
+        {
+          "type": "vending_machine",
+          "count": 109
+        },
+        {
+          "type": "car_trunk",
+          "count": 1707
+        },
+        {
+          "type": "long_table",
+          "count": 65
+        },
+        {
+          "type": "table",
+          "count": 200
+        },
+        {
+          "type": "medkit",
+          "count": 69
+        },
+        {
+          "type": "emergency_medkit",
+          "count": 59
+        },
+        {
+          "type": "mystical_crate",
+          "count": 34
+        },
+        {
+          "type": "magazine",
+          "count": 17
+        },
+        {
+          "type": "landscape_viewpoint_camera",
+          "count": 15
+        },
+        {
+          "type": "rareLoot_30341101",
+          "count": 57
+        },
+        {
+          "type": "rareLoot_30341102",
+          "count": 54
+        },
+        {
+          "type": "rareLoot_30341103",
+          "count": 55
+        },
+        {
+          "type": "rareLoot_30341104",
+          "count": 61
+        },
+        {
+          "type": "rareLoot_30341105",
+          "count": 18
+        },
+        {
+          "type": "rareLoot_30341106",
+          "count": 29
+        },
+        {
+          "type": "rareLoot_30341107",
+          "count": 45
+        },
+        {
+          "type": "rareLoot_30341108",
+          "count": 56
+        },
+        {
+          "type": "rareLoot_30341109",
+          "count": 17
+        },
+        {
+          "type": "rareLoot_30341110",
+          "count": 31
+        },
+        {
+          "type": "rareLoot_30341111",
+          "count": 12
+        },
+        {
+          "type": "rareLoot_30341112",
+          "count": 48
+        },
+        {
+          "type": "event_cargo_truck",
+          "count": 4
+        },
+        {
+          "type": "event_highway_chaser",
+          "count": 1
+        },
+        {
+          "type": "event_nest",
+          "count": 3
+        },
+        {
+          "type": "event_stronghold_114083011",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114053071",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114053001",
+          "count": 1
+        },
+        {
+          "type": "event_taxi",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114053041",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114063011",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114063021",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114072041",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114073031",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114053021",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114053061",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114033031",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114083061",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114053031",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114033061",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114033001",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114331101",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114331171",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114331081",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114331121",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114083051",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114073051",
+          "count": 1
+        },
+        {
+          "type": "event_stronghold_114073053",
+          "count": 1
+        },
+        {
+          "type": "juluo",
+          "count": 57
+        },
+        {
+          "type": "dv_arena_small",
+          "count": 28
+        },
+        {
+          "type": "transport",
+          "count": 25
+        },
+        {
+          "type": "cistern",
+          "count": 6
+        },
+        {
+          "type": "juxie",
+          "count": 5
+        },
+        {
+          "type": "dv_arena_large",
+          "count": 4
+        },
+        {
+          "type": "zhongliyingdi_kechuansong",
+          "count": 2
+        },
+        {
+          "type": "fanmaiji",
+          "count": 1
+        },
+        {
+          "type": "yanjiusuo",
+          "count": 8
+        },
+        {
+          "type": "north_haigang",
+          "count": 1
+        },
+        {
+          "type": "gongchang",
+          "count": 5
+        },
+        {
+          "type": "north_shantijidi",
+          "count": 1
+        },
+        {
+          "type": "north_musishi",
+          "count": 1
+        },
+        {
+          "type": "chengzhen",
+          "count": 5
+        },
+        {
+          "type": "jiaotongshuniu",
+          "count": 1
+        },
+        {
+          "type": "junshijidi",
+          "count": 1
+        },
+        {
+          "type": "guanniaoyingdi",
+          "count": 1
+        }
+      ]
+    }
+  }
+}
