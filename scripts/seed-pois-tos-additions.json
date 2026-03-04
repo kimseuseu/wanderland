@@ -2,7 +2,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A09-100A002A-274CD641-68E136D6)",
+    "label": "세계석 1",
     "x": 5074,
     "y": 2483,
     "note": "hud_icon_resourse_null",
@@ -11,7 +11,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7091C-0F350003-8655036B-0CE8201D)",
+    "label": "세계석 2",
     "x": 2998,
     "y": 121,
     "note": "hud_icon_resourse_null",
@@ -20,7 +20,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70903-0B22000D-AC860796-0CE8201D)",
+    "label": "세계석 3",
     "x": 4153,
     "y": -6878,
     "note": "hud_icon_resourse_null",
@@ -29,7 +29,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70912-1039003A-4F9AB2E2-0CE8201D)",
+    "label": "세계석 4",
     "x": 7523,
     "y": -7008,
     "note": "hud_icon_resourse_null",
@@ -38,7 +38,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70913-0A2C0038-5CDCE262-0CE8201D)",
+    "label": "세계석 5",
     "x": 7342,
     "y": -5927,
     "note": "hud_icon_resourse_null",
@@ -47,7 +47,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E60812-13370005-C12F78CE-0CE8201D)",
+    "label": "세계석 6",
     "x": 4115,
     "y": -7323,
     "note": "hud_icon_resourse_null",
@@ -56,7 +56,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70908-14030028-28FE3C83-68E136D6)",
+    "label": "세계석 7",
     "x": 1545,
     "y": -2249,
     "note": "hud_icon_resourse_null",
@@ -65,7 +65,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E60812-1336001F-ACC97C3C-0CE8201D)",
+    "label": "세계석 8",
     "x": 4307,
     "y": -7000,
     "note": "hud_icon_resourse_null",
@@ -74,7 +74,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A09-100B0003-33DDA41C-1EB05372)",
+    "label": "세계석 9",
     "x": 4946,
     "y": 2923,
     "note": "hud_icon_resourse_null",
@@ -83,7 +83,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A08-0A24001C-4A84A46B-0CE8201D)",
+    "label": "세계석 10",
     "x": 1692,
     "y": -183,
     "note": "hud_icon_resourse_null",
@@ -92,7 +92,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70903-0B270016-64805AD4-1B3827B0)",
+    "label": "세계석 11",
     "x": 4079,
     "y": -3517,
     "note": "hud_icon_resourse_null",
@@ -101,7 +101,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A09-100B0013-3DA9B053-68E136D6)",
+    "label": "세계석 12",
     "x": 5212,
     "y": 2831,
     "note": "hud_icon_resourse_null",
@@ -110,7 +110,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70906-1612001D-6FF2C154-68E136D6)",
+    "label": "세계석 13",
     "x": 3504,
     "y": -992,
     "note": "hud_icon_resourse_null",
@@ -119,7 +119,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70914-0A0F0002-5B6A0AF1-68E136D6)",
+    "label": "세계석 14",
     "x": 2987,
     "y": -3690,
     "note": "hud_icon_resourse_null",
@@ -128,7 +128,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7091B-110F0005-D09286C8-05E518DF)",
+    "label": "세계석 15",
     "x": 4122,
     "y": 1538,
     "note": "hud_icon_resourse_null",
@@ -137,7 +137,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A09-100A0036-2EFF5D5D-05E518DF)",
+    "label": "세계석 16",
     "x": 4942,
     "y": 2492,
     "note": "hud_icon_resourse_null",
@@ -146,7 +146,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70903-0B240013-F744F982-0CE8201D)",
+    "label": "세계석 17",
     "x": 3954,
     "y": -6947,
     "note": "hud_icon_resourse_null",
@@ -155,7 +155,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A08-0A240020-4C9AE5DD-68E136D6)",
+    "label": "세계석 18",
     "x": 1585,
     "y": -70,
     "note": "hud_icon_resourse_null",
@@ -164,7 +164,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70908-14030028-28FEB589-05E518DF)",
+    "label": "세계석 19",
     "x": 1552,
     "y": -1953,
     "note": "hud_icon_resourse_null",
@@ -173,7 +173,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70913-0F100023-5111D15D-05E518DF)",
+    "label": "세계석 20",
     "x": 7031,
     "y": -2301,
     "note": "hud_icon_resourse_null",
@@ -182,7 +182,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7091C-0F0E002F-2E2C3331-68E136D6)",
+    "label": "세계석 21",
     "x": 6820,
     "y": 1728,
     "note": "hud_icon_resourse_null",
@@ -191,7 +191,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A09-100B0010-3BA01EC6-0CE8201D)",
+    "label": "세계석 22",
     "x": 5058,
     "y": 2829,
     "note": "hud_icon_resourse_null",
@@ -200,7 +200,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70913-0F100008-40E2FA37-68E136D6)",
+    "label": "세계석 23",
     "x": 7235,
     "y": -2447,
     "note": "hud_icon_resourse_null",
@@ -209,7 +209,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70903-0B250016-1D1AD90B-0CE8201D)",
+    "label": "세계석 24",
     "x": 3914,
     "y": -7153,
     "note": "hud_icon_resourse_null",
@@ -218,7 +218,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E60913-11150018-5EAC3A93-1B3827B0)",
+    "label": "세계석 25",
     "x": 6014,
     "y": -369,
     "note": "hud_icon_resourse_null",
@@ -227,7 +227,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70906-151F001B-DDA7CD96-1EB05372)",
+    "label": "세계석 26",
     "x": 2483,
     "y": -1139,
     "note": "hud_icon_resourse_null",
@@ -236,7 +236,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E60A11-13120022-CADEF575-1EB05372)",
+    "label": "세계석 27",
     "x": 1300,
     "y": -6870,
     "note": "hud_icon_resourse_null",
@@ -245,7 +245,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A0C-0B1F0015-E78866E7-0CE8201D)",
+    "label": "세계석 28",
     "x": 6410,
     "y": -3738,
     "note": "hud_icon_resourse_null",
@@ -254,7 +254,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70903-0B270016-6467C51B-0CE8201D)",
+    "label": "세계석 29",
     "x": 4200,
     "y": -3245,
     "note": "hud_icon_resourse_null",
@@ -263,7 +263,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E6090E-0A03001A-3853D1FF-1A435B66)",
+    "label": "세계석 30",
     "x": 6442,
     "y": -4153,
     "note": "hud_icon_resourse_null",
@@ -272,7 +272,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70914-0A0F0009-5FFD95EE-05E518DF)",
+    "label": "세계석 31",
     "x": 2715,
     "y": -3696,
     "note": "hud_icon_resourse_null",
@@ -281,7 +281,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A0C-0B270007-FD779467-0CE8201D)",
+    "label": "세계석 32",
     "x": 1288,
     "y": -6673,
     "note": "hud_icon_resourse_null",
@@ -290,7 +290,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7090F-0F250015-8DE2D503-05E518DF)",
+    "label": "세계석 33",
     "x": 7570,
     "y": -4674,
     "note": "hud_icon_resourse_null",
@@ -299,7 +299,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E60812-1336003B-BDF37DE3-0CE8201D)",
+    "label": "세계석 34",
     "x": 4310,
     "y": -7219,
     "note": "hud_icon_resourse_null",
@@ -308,7 +308,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70914-0E1B0011-99272B2A-0CE8201D)",
+    "label": "세계석 35",
     "x": 448,
     "y": -2953,
     "note": "hud_icon_resourse_null",
@@ -317,7 +317,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A08-0A23002F-31F5F41B-05E518DF)",
+    "label": "세계석 36",
     "x": 1940,
     "y": 12,
     "note": "hud_icon_resourse_null",
@@ -326,7 +326,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E60913-11150018-5EABBD3E-05E518DF)",
+    "label": "세계석 37",
     "x": 6010,
     "y": -51,
     "note": "hud_icon_resourse_null",
@@ -335,7 +335,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E6090E-0A03001A-38537BEB-75DB5264)",
+    "label": "세계석 38",
     "x": 6614,
     "y": -4053,
     "note": "hud_icon_resourse_null",
@@ -344,7 +344,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70914-0E1B0015-9BCC8C12-68E136D6)",
+    "label": "세계석 39",
     "x": 582,
     "y": -2606,
     "note": "hud_icon_resourse_null",
@@ -353,7 +353,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70906-151F001B-DDA92302-551B19D3)",
+    "label": "세계석 40",
     "x": 2448,
     "y": -1418,
     "note": "hud_icon_resourse_null",
@@ -362,7 +362,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7091B-110E0037-CA719F1A-0CE8201D)",
+    "label": "세계석 41",
     "x": 4184,
     "y": 1315,
     "note": "hud_icon_resourse_null",
@@ -371,7 +371,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A0C-0B27000D-0156F79D-0CE8201D)",
+    "label": "세계석 42",
     "x": 969,
     "y": -6833,
     "note": "hud_icon_resourse_null",
@@ -380,7 +380,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E60913-11150018-5EABFDDC-1EB05372)",
+    "label": "세계석 43",
     "x": 6114,
     "y": -192,
     "note": "hud_icon_resourse_null",
@@ -389,7 +389,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7091C-0F0E0039-33C18BEF-05E518DF)",
+    "label": "세계석 44",
     "x": 6662,
     "y": 1433,
     "note": "hud_icon_resourse_null",
@@ -398,7 +398,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70906-1612001D-6FF23B22-0CE8201D)",
+    "label": "세계석 45",
     "x": 3613,
     "y": -712,
     "note": "hud_icon_resourse_null",
@@ -407,7 +407,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70913-0A2B0035-3782C634-05E518DF)",
+    "label": "세계석 46",
     "x": 7424,
     "y": -5864,
     "note": "hud_icon_resourse_null",
@@ -416,7 +416,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70914-0A0F000C-61ADE0A0-1EB05372)",
+    "label": "세계석 47",
     "x": 2850,
     "y": -4070,
     "note": "hud_icon_resourse_null",
@@ -425,7 +425,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70913-0A2D0039-81A605CF-0CE8201D)",
+    "label": "세계석 48",
     "x": 7428,
     "y": -6271,
     "note": "hud_icon_resourse_null",
@@ -434,7 +434,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70913-0A2E0024-98C092DE-68E136D6)",
+    "label": "세계석 49",
     "x": 7538,
     "y": -6065,
     "note": "hud_icon_resourse_null",
@@ -443,7 +443,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A0C-0B260038-F6F6F0AF-0CE8201D)",
+    "label": "세계석 50",
     "x": 1113,
     "y": -6983,
     "note": "hud_icon_resourse_null",
@@ -452,7 +452,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70903-132C0001-19175587-68E136D6)",
+    "label": "세계석 51",
     "x": 5725,
     "y": -202,
     "note": "hud_icon_resourse_null",
@@ -461,7 +461,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70906-151F001B-DDA87B89-1B3827B0)",
+    "label": "세계석 52",
     "x": 2751,
     "y": -1312,
     "note": "hud_icon_resourse_null",
@@ -470,7 +470,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7091C-0F0D0021-01DB3C99-0CE8201D)",
+    "label": "세계석 53",
     "x": 6615,
     "y": 1767,
     "note": "hud_icon_resourse_null",
@@ -479,7 +479,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70913-0A2F000A-ACD07868-0CE8201D)",
+    "label": "세계석 54",
     "x": 7220,
     "y": -6179,
     "note": "hud_icon_resourse_null",
@@ -488,7 +488,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70903-0B270016-646FA21A-68E136D6)",
+    "label": "세계석 55",
     "x": 4379,
     "y": -3327,
     "note": "hud_icon_resourse_null",
@@ -497,7 +497,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70903-132C0001-1916FD9B-0CE8201D)",
+    "label": "세계석 56",
     "x": 5819,
     "y": -374,
     "note": "hud_icon_resourse_null",
@@ -506,7 +506,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A08-0A240016-46E4706C-1EB05372)",
+    "label": "세계석 57",
     "x": 1578,
     "y": 110,
     "note": "hud_icon_resourse_null",
@@ -515,7 +515,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A09-100A0024-240926CE-0CE8201D)",
+    "label": "세계석 58",
     "x": 5269,
     "y": 2644,
     "note": "hud_icon_resourse_null",
@@ -524,7 +524,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7091C-0E1E0015-F89D160C-1EB05372)",
+    "label": "세계석 59",
     "x": 5733,
     "y": 1748,
     "note": "hud_icon_resourse_null",
@@ -533,7 +533,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70903-132C0001-1917A285-05E518DF)",
+    "label": "세계석 60",
     "x": 5808,
     "y": -38,
     "note": "hud_icon_resourse_null",
@@ -542,7 +542,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70908-14030028-28FDB969-0CE8201D)",
+    "label": "세계석 61",
     "x": 1824,
     "y": -2107,
     "note": "hud_icon_resourse_null",
@@ -551,7 +551,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7091B-110F0003-CEE693B9-68E136D6)",
+    "label": "세계석 62",
     "x": 4480,
     "y": 1531,
     "note": "hud_icon_resourse_null",
@@ -560,7 +560,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70912-10380027-20BCC8B9-68E136D6)",
+    "label": "세계석 63",
     "x": 7227,
     "y": -7048,
     "note": "hud_icon_resourse_null",
@@ -569,7 +569,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7091C-0E1E0006-EFFE2FE1-05E518DF)",
+    "label": "세계석 64",
     "x": 5910,
     "y": 2010,
     "note": "hud_icon_resourse_null",
@@ -578,7 +578,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7091C-0E1D0032-E6481564-68E136D6)",
+    "label": "세계석 65",
     "x": 5708,
     "y": 2059,
     "note": "hud_icon_resourse_null",
@@ -587,7 +587,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E60A11-13120022-CADE64F1-68E136D6)",
+    "label": "세계석 66",
     "x": 1129,
     "y": -6547,
     "note": "hud_icon_resourse_null",
@@ -596,7 +596,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70903-0B270016-6481350A-551B19D3)",
+    "label": "세계석 67",
     "x": 4279,
     "y": -3616,
     "note": "hud_icon_resourse_null",
@@ -605,7 +605,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7091C-0F350006-8870270E-68E136D6)",
+    "label": "세계석 68",
     "x": 2666,
     "y": 348,
     "note": "hud_icon_resourse_null",
@@ -614,7 +614,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A08-0A230029-2E456A5D-68E136D6)",
+    "label": "세계석 69",
     "x": 1940,
     "y": -147,
     "note": "hud_icon_resourse_null",
@@ -623,7 +623,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7090F-0F250010-8AF315D1-68E136D6)",
+    "label": "세계석 70",
     "x": 7478,
     "y": -4391,
     "note": "hud_icon_resourse_null",
@@ -632,7 +632,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70903-0B270016-647E916F-05E518DF)",
+    "label": "세계석 71",
     "x": 4383,
     "y": -3515,
     "note": "hud_icon_resourse_null",
@@ -641,7 +641,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A0C-0B200025-14E7FAA3-0CE8201D)",
+    "label": "세계석 72",
     "x": 6251,
     "y": -3853,
     "note": "hud_icon_resourse_null",
@@ -650,7 +650,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E60A14-0B120030-496084AC-0CE8201D)",
+    "label": "세계석 73",
     "x": 934,
     "y": -6627,
     "note": "hud_icon_resourse_null",
@@ -659,7 +659,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70906-1612001D-6FF336C1-05E518DF)",
+    "label": "세계석 74",
     "x": 3352,
     "y": -735,
     "note": "hud_icon_resourse_null",
@@ -668,7 +668,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70903-0B270016-647F8115-1EB05372)",
+    "label": "세계석 75",
     "x": 4123,
     "y": -3291,
     "note": "hud_icon_resourse_null",
@@ -677,7 +677,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7090F-0F250009-872E98C3-0CE8201D)",
+    "label": "세계석 76",
     "x": 7686,
     "y": -4368,
     "note": "hud_icon_resourse_null",
@@ -686,7 +686,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70913-0F100026-52DD6BCF-1EB05372)",
+    "label": "세계석 77",
     "x": 7055,
     "y": -2568,
     "note": "hud_icon_resourse_null",
@@ -695,7 +695,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E7091C-0F35000A-8AEE1F1B-05E518DF)",
+    "label": "세계석 78",
     "x": 3018,
     "y": 440,
     "note": "hud_icon_resourse_null",
@@ -704,7 +704,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E6090E-0A03001A-38532E37-27F41E89)",
+    "label": "세계석 79",
     "x": 6591,
     "y": -3895,
     "note": "hud_icon_resourse_null",
@@ -713,7 +713,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A08-0A230026-2CC250E4-0CE8201D)",
+    "label": "세계석 80",
     "x": 1675,
     "y": 184,
     "note": "hud_icon_resourse_null",
@@ -722,7 +722,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70A0C-0B200006-02A05449-0CE8201D)",
+    "label": "세계석 81",
     "x": 6261,
     "y": -4066,
     "note": "hud_icon_resourse_null",
@@ -731,7 +731,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70913-0A2F0032-C4EB4BE9-0CE8201D)",
+    "label": "세계석 82",
     "x": 7204,
     "y": -5979,
     "note": "hud_icon_resourse_null",
@@ -740,7 +740,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70914-0E1B001E-A111314D-05E518DF)",
+    "label": "세계석 83",
     "x": 408,
     "y": -2618,
     "note": "hud_icon_resourse_null",
@@ -749,7 +749,7 @@
   {
     "category": "worldstone",
     "group": "locations",
-    "label": "세계석 (07E70912-103A0015-5D46C50C-68E136D6)",
+    "label": "세계석 84",
     "x": 7284,
     "y": -6773,
     "note": "hud_icon_resourse_null",
@@ -758,7 +758,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-16360019-07F07BC2-551B19D3)",
+    "label": "쉐도우 케이프 세계석",
     "x": 7380,
     "y": -868,
     "note": null,
@@ -767,7 +767,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E60A14-141E003B-8D510C6B-0CE8201D)",
+    "label": "하이뱅크 남쪽 세계석",
     "x": 5170,
     "y": -5891,
     "note": null,
@@ -776,7 +776,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-161A0037-306D1299-68E136D6)",
+    "label": "인스티튜트 남쪽 세계석",
     "x": 6737,
     "y": -2243,
     "note": null,
@@ -785,7 +785,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-16170022-B8AC1961-0CE8201D)",
+    "label": "아이언 리버 어귀 세계석",
     "x": 7467,
     "y": -4317,
     "note": null,
@@ -794,7 +794,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70912-1309003A-06397F56-05E518DF)",
+    "label": "블랙펠 중앙 세계석",
     "x": 4804,
     "y": -1918,
     "note": null,
@@ -803,7 +803,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-16380013-4C02CEF1-58BA0C35)",
+    "label": "배런 크래그 세계석",
     "x": 2344,
     "y": -2553,
     "note": null,
@@ -812,7 +812,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70912-11300020-A61280A2-0CE8201D)",
+    "label": "실버쇼어 북쪽 세계석",
     "x": 384,
     "y": -6986,
     "note": null,
@@ -821,7 +821,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-16310001-47063100-551B19D3)",
+    "label": "헤븐스 게이트 세계석",
     "x": 2477,
     "y": -5602,
     "note": null,
@@ -830,7 +830,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70912-120D0033-2F7AA2A8-5D5C16C4)",
+    "label": "가이아 서쪽 세계석",
     "x": 2750,
     "y": -5650,
     "note": null,
@@ -839,7 +839,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E60A14-132D0002-21E51E57-50A62DBC)",
+    "label": "시그마 세계석",
     "x": 5222,
     "y": -5543,
     "note": null,
@@ -848,7 +848,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70A10-0E300020-931CEE17-0CE8201D)",
+    "label": "블랙하트 베이 세계석",
     "x": 5979,
     "y": 469,
     "note": null,
@@ -857,7 +857,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70909-102B0020-0C9E4D49-65CF470F)",
+    "label": "하이뱅크 서쪽 세계석",
     "x": 4558,
     "y": -4294,
     "note": null,
@@ -866,7 +866,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70A10-111C0005-DD946F8F-0CE8201D)",
+    "label": "그린레이크 북쪽 세계석",
     "x": 1050,
     "y": -4179,
     "note": null,
@@ -875,7 +875,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E60B02-111B0039-25D939D2-11E0634C)",
+    "label": "오버룩 타운 세계석",
     "x": 6906,
     "y": -5848,
     "note": null,
@@ -884,7 +884,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-16300008-2737DB0D-1B3827B0)",
+    "label": "임팩트 존 세계석",
     "x": 3277,
     "y": -6726,
     "note": null,
@@ -893,7 +893,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-16320019-78C9F02B-68E136D6)",
+    "label": "초크 피크 서쪽 세계석",
     "x": 1210,
     "y": -4397,
     "note": null,
@@ -902,7 +902,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-1631002C-60C042B6-0CE8201D)",
+    "label": "로튼 새들 서쪽 세계석",
     "x": 1542,
     "y": -6013,
     "note": null,
@@ -911,7 +911,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70A19-0E0A0022-8D7423D9-0CE8201D)",
+    "label": "리플비 북쪽 세계석",
     "x": 7066,
     "y": -3610,
     "note": null,
@@ -920,7 +920,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70919-0E150021-A8165A0F-0CE8201D)",
+    "label": "알파 세계석",
     "x": 317,
     "y": -3725,
     "note": null,
@@ -929,7 +929,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-1637000B-23AA8A0E-54727B2F)",
+    "label": "유전 남쪽 세계석",
     "x": 5700,
     "y": -2272,
     "note": null,
@@ -938,7 +938,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E60A14-14020038-A1B441DD-0CE8201D)",
+    "label": "브루컴 동쪽 세계석",
     "x": 6708,
     "y": -4416,
     "note": null,
@@ -947,7 +947,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70912-13050009-5A473206-0CE8201D)",
+    "label": "포트 에이리 남쪽 세계석",
     "x": 3668,
     "y": -3170,
     "note": null,
@@ -956,7 +956,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70912-1213003B-0AEB58A4-68E136D6)",
+    "label": "내해 세계석",
     "x": 1958,
     "y": -6946,
     "note": null,
@@ -965,7 +965,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80301-0C050007-354DD3FA-0CE8201D)",
+    "label": "포세이큰 모노리스 세계석",
     "x": 1964,
     "y": -1373,
     "note": null,
@@ -974,7 +974,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-162E002E-F69A350B-1EB05372)",
+    "label": "브릿지뷰 세계석",
     "x": 4392,
     "y": -4633,
     "note": null,
@@ -983,7 +983,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70B01-130C001D-663C407B-0B7D5641)",
+    "label": "갈증의 모노리스 세계석",
     "x": 1663,
     "y": -4805,
     "note": null,
@@ -992,7 +992,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70912-1306001C-89828207-0CE8201D)",
+    "label": "세타 세계석",
     "x": 5638,
     "y": -900,
     "note": null,
@@ -1001,7 +1001,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-16340016-BEAB2CB2-1EB05372)",
+    "label": "문레이크 동쪽 세계석",
     "x": 718,
     "y": -2745,
     "note": null,
@@ -1010,7 +1010,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70919-0E120001-29CDE760-0CE8201D)",
+    "label": "문레이크 세계석",
     "x": 332,
     "y": -2501,
     "note": null,
@@ -1019,7 +1019,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-162D000D-BF4642A1-05E518DF)",
+    "label": "에버그린 사우스뱅크 세계석",
     "x": 4506,
     "y": -2843,
     "note": null,
@@ -1028,7 +1028,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E60A14-140B002D-DD45B75D-68E136D6)",
+    "label": "들개 섬 세계석",
     "x": 6804,
     "y": -7150,
     "note": null,
@@ -1037,7 +1037,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70912-13030026-24092806-3A021F5A)",
+    "label": "포트 에이리 북쪽 세계석",
     "x": 2790,
     "y": -2293,
     "note": null,
@@ -1046,7 +1046,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70A10-0E2D001C-25BC2FED-60C0559E)",
+    "label": "자이언트 계단 세계석",
     "x": 3347,
     "y": 212,
     "note": null,
@@ -1055,7 +1055,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E60B10-0A150019-87400204-0CE8201D)",
+    "label": "와인딩 리지 세계석",
     "x": 6265,
     "y": -3457,
     "note": null,
@@ -1064,7 +1064,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70912-1308000D-C7FD9B66-68E136D6)",
+    "label": "사우스 밸리 세계석",
     "x": 6596,
     "y": -1468,
     "note": null,
@@ -1073,7 +1073,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E60B10-0A2D0014-DE199BC2-2651768A)",
+    "label": "선버리 중앙 세계석",
     "x": 5152,
     "y": -6850,
     "note": null,
@@ -1082,7 +1082,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-16330031-AADD98A5-05E518DF)",
+    "label": "퍼니스 레어 세계석",
     "x": 2043,
     "y": -3767,
     "note": null,
@@ -1091,7 +1091,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70912-1212000D-CB8E7D10-0CE8201D)",
+    "label": "로튼 새들 세계석",
     "x": 1311,
     "y": -6176,
     "note": null,
@@ -1100,7 +1100,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E60A14-13240038-00440B77-0CE8201D)",
+    "label": "코스트사이드 광장 세계석",
     "x": 7635,
     "y": -4791,
     "note": null,
@@ -1109,7 +1109,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-16390022-78DED92C-3A807382)",
+    "label": "리프트 밸리 세계석",
     "x": 3655,
     "y": -430,
     "note": null,
@@ -1118,7 +1118,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70912-1137001D-9EADE6DD-0CE8201D)",
+    "label": "그린레이크 남쪽 세계석",
     "x": 137,
     "y": -4869,
     "note": null,
@@ -1127,7 +1127,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E60A14-1335000D-46ADA2AE-0CE8201D)",
+    "label": "탐욕의 모노리스 세계석",
     "x": 6015,
     "y": -4639,
     "note": null,
@@ -1136,7 +1136,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E60A14-13370034-A5085D4A-0CE8201D)",
+    "label": "데이턴 검문소 세계석",
     "x": 6997,
     "y": -5031,
     "note": null,
@@ -1145,7 +1145,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-1637002B-3670E270-705C4D1C)",
+    "label": "폭포 세계석",
     "x": 3318,
     "y": -3202,
     "note": null,
@@ -1154,7 +1154,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E60B10-0A100007-C9AF1B15-0CE8201D)",
+    "label": "가이아 절벽 모노리스 세계석",
     "x": 4501,
     "y": -6007,
     "note": null,
@@ -1163,7 +1163,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E60B10-0A1C000D-7A2CAE50-41D87BBC)",
+    "label": "가이아 절벽 세계석",
     "x": 3370,
     "y": -6374,
     "note": null,
@@ -1172,7 +1172,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70909-10300036-CC7DB26C-1A7B3C29)",
+    "label": "윈드워드 세계석",
     "x": 7397,
     "y": -2437,
     "note": null,
@@ -1181,7 +1181,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E60B10-0A0B0025-286FC7AD-66ED6EFC)",
+    "label": "데이턴 북쪽 세계석",
     "x": 5540,
     "y": -4115,
     "note": null,
@@ -1190,7 +1190,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E60B10-0A24001A-A015328C-3BCD2CC6)",
+    "label": "사우스 델타 세계석",
     "x": 3864,
     "y": -7360,
     "note": null,
@@ -1199,7 +1199,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70B01-13140016-80588C8D-54727B2F)",
+    "label": "미라지 모노리스 세계석",
     "x": 6620,
     "y": -2733,
     "note": null,
@@ -1208,7 +1208,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E70912-12070037-5B33343C-05E518DF)",
+    "label": "매너 동쪽 세계석",
     "x": 2000,
     "y": -3454,
     "note": null,
@@ -1217,7 +1217,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E9030D-0A1E0013-29E1FF01-0CE8201D)",
+    "label": "델타 세계석",
     "x": 3006,
     "y": -1108,
     "note": null,
@@ -1226,7 +1226,7 @@
   {
     "category": "transport",
     "group": "locations",
-    "label": "이동장치 (07E80719-1635001E-E784937F-1B3827B0)",
+    "label": "유전 북쪽 세계석",
     "x": 5001,
     "y": -609,
     "note": null,
@@ -1235,7 +1235,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50C10-101B0002-BC9D6F8A-0CE8201D)",
+    "label": "절벽 아래 벙커",
     "x": 5338,
     "y": -4974,
     "note": "scattered",
@@ -1244,7 +1244,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60A15-0B1A000E-680337BD-2CCD0F3A)",
+    "label": "퍼니스 풍차 1",
     "x": 2434,
     "y": -4504,
     "note": "scattered",
@@ -1253,7 +1253,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60804-0A29001E-4F0D159E-54727B2F)",
+    "label": "레이크쇼어 캠프",
     "x": 4366,
     "y": -6492,
     "note": "scattered",
@@ -1262,7 +1262,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50814-0A170009-A991824F-63CE2ED3)",
+    "label": "간이 창고",
     "x": 5245,
     "y": -6104,
     "note": "scattered",
@@ -1271,7 +1271,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60813-0B160033-940C0B57-0CE8201D)",
+    "label": "등대",
     "x": 1768,
     "y": -7014,
     "note": "scattered",
@@ -1280,7 +1280,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E5070E-15030028-B44C27B8-1AF84388)",
+    "label": "리버하트 캠프",
     "x": 7387,
     "y": -5222,
     "note": "scattered",
@@ -1289,7 +1289,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E6031E-0F37000A-2E6F68A8-0CE8201D)",
+    "label": "레드쇼어 발전소",
     "x": 3861,
     "y": -3491,
     "note": "scattered",
@@ -1298,7 +1298,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E70613-0F1F0007-A8DA38C6-0CE8201D)",
+    "label": "신호소",
     "x": 6955,
     "y": -4982,
     "note": "scattered",
@@ -1307,7 +1307,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50818-14320004-E7713D54-0B130AEC)",
+    "label": "팩토리 센트리",
     "x": 6262,
     "y": -3706,
     "note": "scattered",
@@ -1316,7 +1316,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50818-0A250039-64781DF1-619E2BB6)",
+    "label": "와일드레인 캠프",
     "x": 5895,
     "y": -2237,
     "note": "scattered",
@@ -1325,7 +1325,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60819-0B070004-F7EC5265-24327FC4)",
+    "label": "해상 스타더스트 관측소",
     "x": 7570,
     "y": -4803,
     "note": "scattered",
@@ -1334,7 +1334,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (007B031A-0A3A000C-7FFFFFFF-66EF5102)",
+    "label": "오버룩 타운 부두",
     "x": 6546,
     "y": -5869,
     "note": "scattered",
@@ -1343,7 +1343,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50818-14390001-E077427D-58925F5E)",
+    "label": "생존자의 캠프",
     "x": 6915,
     "y": -3315,
     "note": "scattered",
@@ -1352,7 +1352,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50C0F-0A24002D-A25AC19D-0CE8201D)",
+    "label": "폐 은신처",
     "x": 5684,
     "y": -6995,
     "note": "scattered",
@@ -1361,7 +1361,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60812-0A260011-2F4C9E3A-05E518DF)",
+    "label": "산길 캠프",
     "x": 3484,
     "y": -6242,
     "note": "scattered",
@@ -1370,7 +1370,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E70817-11250024-D8BE3C45-0CE8201D)",
+    "label": "침몰한 집",
     "x": 3941,
     "y": -7631,
     "note": "scattered",
@@ -1379,7 +1379,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50814-0A040021-1094957B-244036B7)",
+    "label": "선버리 캠프",
     "x": 5523,
     "y": -6880,
     "note": "scattered",
@@ -1388,7 +1388,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60A0A-15220031-71D10001-0CE8201D)",
+    "label": "스켈센 과수원 1",
     "x": 713,
     "y": -5809,
     "note": "scattered",
@@ -1397,7 +1397,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50818-143A0031-206A2F25-2ABF4F05)",
+    "label": "산길",
     "x": 5797,
     "y": -3376,
     "note": "scattered",
@@ -1406,7 +1406,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60A0A-15240019-AB34924E-0CE8201D)",
+    "label": "스켈센 과수원 2",
     "x": 785,
     "y": -5836,
     "note": "scattered",
@@ -1415,7 +1415,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60B0B-121F001D-42583419-66EF5102)",
+    "label": "모노리스 베이스 캠프",
     "x": 5854,
     "y": -4821,
     "note": "scattered",
@@ -1424,7 +1424,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50713-0C150016-950DBFA6-0CE8201D)",
+    "label": "레이크프론트 오두막",
     "x": 6761,
     "y": -4810,
     "note": "scattered",
@@ -1433,7 +1433,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60B05-100D0032-4DE037F9-0CE8201D)",
+    "label": "신호소 캠프",
     "x": 6868,
     "y": -4991,
     "note": "scattered",
@@ -1442,7 +1442,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50713-0B2B0020-4C3C6EB8-0CE8201D)",
+    "label": "서덜랜드 가문 과수원",
     "x": 7383,
     "y": -5298,
     "note": "scattered",
@@ -1451,7 +1451,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50813-110C0006-A0D84D7F-50C825F8)",
+    "label": "들개 은신처",
     "x": 7681,
     "y": -6962,
     "note": "scattered",
@@ -1460,7 +1460,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E5080D-10080004-F6283D59-0CE8201D)",
+    "label": "야생 캠프",
     "x": 7347,
     "y": -5099,
     "note": "scattered",
@@ -1469,7 +1469,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60A1C-0D36002B-8C877E3D-54727B2F)",
+    "label": "프로스펙트 하이츠",
     "x": 6295,
     "y": -5062,
     "note": "scattered",
@@ -1478,7 +1478,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50712-10380005-F8B89F0F-0CE8201D)",
+    "label": "브루컴 캠프",
     "x": 6712,
     "y": -4492,
     "note": "scattered",
@@ -1487,7 +1487,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E6070E-10030031-8D22217E-0CE8201D)",
+    "label": "컨테이너 식당",
     "x": 6833,
     "y": -4489,
     "note": "scattered",
@@ -1496,7 +1496,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50814-0A01001D-A304169A-74C105AB)",
+    "label": "선버리 캠프",
     "x": 5562,
     "y": -6674,
     "note": "scattered",
@@ -1505,7 +1505,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60A15-0B1A0029-7831A638-25A97EA9)",
+    "label": "퍼니스 풍차 2",
     "x": 2506,
     "y": -4593,
     "note": "scattered",
@@ -1514,7 +1514,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50814-0F01001C-8B2543EC-07342DD8)",
+    "label": "스키즈 캠프",
     "x": 5829,
     "y": -4133,
     "note": "scattered",
@@ -1523,7 +1523,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (007B0917-0F0E001B-FFFFFFFF-0CE8201D)",
+    "label": "모노리스 유적 전환구역",
     "x": 6653,
     "y": -5470,
     "note": "scattered",
@@ -1532,7 +1532,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50818-0A240001-1F4CCDAE-53972F60)",
+    "label": "알커크 풍력발전소",
     "x": 6120,
     "y": -2349,
     "note": "scattered",
@@ -1541,7 +1541,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50818-0F0B0038-A6EDD5C6-75486AC7)",
+    "label": "그레이워터 풍차",
     "x": 4808,
     "y": -3721,
     "note": "scattered",
@@ -1550,7 +1550,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60315-0B010027-63B7782C-0CE8201D)",
+    "label": "선버리 정비소",
     "x": 5453,
     "y": -6760,
     "note": "scattered",
@@ -1559,7 +1559,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60A0A-09390038-1776054D-0CE8201D)",
+    "label": "샌드뷰",
     "x": 2808,
     "y": -3372,
     "note": "scattered",
@@ -1568,7 +1568,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50712-1005001B-E5B7144F-0CE8201D)",
+    "label": "길거리 음식점",
     "x": 7244,
     "y": -4594,
     "note": "scattered",
@@ -1577,7 +1577,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E6091C-14280021-F9E149AE-1B3827B0)",
+    "label": "낡은 캠프",
     "x": 6504,
     "y": -5459,
     "note": "scattered",
@@ -1586,7 +1586,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50813-10190039-2E8F59CD-189D1969)",
+    "label": "생츄어리 캠프",
     "x": 6659,
     "y": -4283,
     "note": "scattered",
@@ -1595,7 +1595,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60B07-1012000C-DABB0762-05E518DF)",
+    "label": "신호소 캠프",
     "x": 6645,
     "y": -4852,
     "note": "scattered",
@@ -1604,7 +1604,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50C0F-132D003B-CF1040D2-0CE8201D)",
+    "label": "레이크사이드 마켓",
     "x": 5627,
     "y": -2157,
     "note": "scattered",
@@ -1613,7 +1613,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50C10-0E1B000D-FF775F38-0CE8201D)",
+    "label": "폭포 아래 벙커",
     "x": 4502,
     "y": -7254,
     "note": "scattered",
@@ -1622,7 +1622,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60804-0A260002-D2D894E1-551B19D3)",
+    "label": "블랙 레이크 항구",
     "x": 4419,
     "y": -6504,
     "note": "scattered",
@@ -1631,7 +1631,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60A0A-15230021-8C2E431F-68E136D6)",
+    "label": "스켈센 과수원 3",
     "x": 715,
     "y": -5918,
     "note": "scattered",
@@ -1640,7 +1640,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50814-0A0E000A-68140978-4E1C0F43)",
+    "label": "컨테이너 식당",
     "x": 5334,
     "y": -6077,
     "note": "scattered",
@@ -1649,7 +1649,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (007B051D-16000001-FFFFFFFF-363E7617)",
+    "label": "시트러스 카운티 캠프",
     "x": 5707,
     "y": -5089,
     "note": "scattered",
@@ -1658,7 +1658,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60A1C-0D36002B-8C877CBA-551B19D3)",
+    "label": "프로스펙트 관측소",
     "x": 6296,
     "y": -5113,
     "note": "scattered",
@@ -1667,7 +1667,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50712-0E2F0039-11FD27BC-0CE8201D)",
+    "label": "서덜랜드 과수원 급수탑 캠프",
     "x": 7454,
     "y": -5504,
     "note": "scattered",
@@ -1676,7 +1676,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50C10-0A0D0020-58DFB2AC-0CE8201D)",
+    "label": "로스트 하버",
     "x": 5744,
     "y": -7185,
     "note": "scattered",
@@ -1685,7 +1685,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60A0A-151A0013-41DDFB97-0CE8201D)",
+    "label": "스켈센 과수원 4",
     "x": 599,
     "y": -5746,
     "note": "scattered",
@@ -1694,7 +1694,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60A15-0B190031-596569B0-04F57672)",
+    "label": "퍼니스 풍차 3",
     "x": 2492,
     "y": -4468,
     "note": "scattered",
@@ -1703,7 +1703,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60A0A-0937002C-C8F935B0-0CE8201D)",
+    "label": "샌드뷰",
     "x": 2833,
     "y": -3335,
     "note": "scattered",
@@ -1712,7 +1712,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50812-0A2F0022-BEB4CDF4-5B0C7039)",
+    "label": "그랜드뷰 맨션",
     "x": 6684,
     "y": -4141,
     "note": "scattered",
@@ -1721,7 +1721,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E70C0F-0B360009-7A9723E6-68E136D6)",
+    "label": "스켈센 과수원 5",
     "x": 547,
     "y": -5741,
     "note": "scattered",
@@ -1730,7 +1730,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60819-0B240025-19326E6F-38360E19)",
+    "label": "해상 풍력발전소",
     "x": 7387,
     "y": -5008,
     "note": "scattered",
@@ -1739,7 +1739,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60812-0A230023-CEE92322-68E136D6)",
+    "label": "산길",
     "x": 3550,
     "y": -6229,
     "note": "scattered",
@@ -1748,7 +1748,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50818-0A1D0017-3209F0B3-1ED33922)",
+    "label": "스프링댐 하우스",
     "x": 5971,
     "y": -2074,
     "note": "scattered",
@@ -1757,7 +1757,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50813-12110004-B416AED7-05E518DF)",
+    "label": "임시 야영지",
     "x": 5810,
     "y": -5668,
     "note": "scattered",
@@ -1766,7 +1766,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50713-0F2B0006-2963B1C4-0CE8201D)",
+    "label": "오버룩 타운 근처 컨테이너",
     "x": 6481,
     "y": -5703,
     "note": "scattered",
@@ -1775,7 +1775,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E50813-120C0016-0C3BA5A3-0CE8201D)",
+    "label": "시뷰 맨션",
     "x": 6507,
     "y": -7748,
     "note": "scattered",
@@ -1784,7 +1784,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (07E60812-0A230002-BB56406B-0CE8201D)",
+    "label": "산길 캠프",
     "x": 3506,
     "y": -6212,
     "note": "scattered",
@@ -1793,7 +1793,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T1_8)",
+    "label": "검문소 7802",
     "x": 6624,
     "y": -5147,
     "note": "juluo",
@@ -1802,7 +1802,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T1_9)",
+    "label": "스루빌 변전소",
     "x": 6083,
     "y": -5177,
     "note": "juluo",
@@ -1811,7 +1811,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T1_2)",
+    "label": "검문소 3771",
     "x": 6392,
     "y": -5430,
     "note": "juluo",
@@ -1820,7 +1820,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T1_6)",
+    "label": "에이든의 정비소",
     "x": 7102,
     "y": -4529,
     "note": "juluo",
@@ -1829,7 +1829,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T1_7)",
+    "label": "에이든의 은신처",
     "x": 6709,
     "y": -4918,
     "note": "juluo",
@@ -1838,7 +1838,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_8)",
+    "label": "마운트 구엘 발전소",
     "x": 265,
     "y": -6781,
     "note": "juluo",
@@ -1847,7 +1847,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_6)",
+    "label": "검문소 091",
     "x": 1063,
     "y": -6259,
     "note": "juluo",
@@ -1856,7 +1856,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_5)",
+    "label": "어부의 부두",
     "x": 1633,
     "y": -7286,
     "note": "juluo",
@@ -1865,7 +1865,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_4)",
+    "label": "검문소 266",
     "x": 2706,
     "y": -5362,
     "note": "juluo",
@@ -1874,7 +1874,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_3)",
+    "label": "새들프론트 캠프",
     "x": 2104,
     "y": -5995,
     "note": "juluo",
@@ -1883,7 +1883,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_2)",
+    "label": "데이비스 포인트",
     "x": 2923,
     "y": -6657,
     "note": "juluo",
@@ -1892,7 +1892,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_1)",
+    "label": "가이아 통신 시설",
     "x": 3357,
     "y": -5524,
     "note": "juluo",
@@ -1901,7 +1901,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T2_7)",
+    "label": "선버리 농장",
     "x": 5068,
     "y": -6598,
     "note": "juluo",
@@ -1910,7 +1910,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T2_1)",
+    "label": "하이 뱅크스 둥지",
     "x": 5296,
     "y": -5398,
     "note": "juluo",
@@ -1919,7 +1919,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T2_3)",
+    "label": "마이어",
     "x": 5626,
     "y": -6312,
     "note": "juluo",
@@ -1928,7 +1928,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T2_2)",
+    "label": "레이크하트 캠프",
     "x": 5893,
     "y": -5840,
     "note": "juluo",
@@ -1937,7 +1937,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T2_8)",
+    "label": "폭포 광장",
     "x": 4719,
     "y": -7175,
     "note": "juluo",
@@ -1946,7 +1946,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T2_19)",
+    "label": "침몰한 집",
     "x": 3434,
     "y": -7155,
     "note": "juluo",
@@ -1955,7 +1955,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T2_15)",
+    "label": "폐 은신처",
     "x": 5015,
     "y": -5368,
     "note": "juluo",
@@ -1964,7 +1964,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T2_14)",
+    "label": "리지 캠프",
     "x": 5052,
     "y": -5868,
     "note": "juluo",
@@ -1973,7 +1973,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T2_17)",
+    "label": "TAB-6A 캠프",
     "x": 4028,
     "y": -5714,
     "note": "juluo",
@@ -1982,7 +1982,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T2_16)",
+    "label": "나이트 차량 정비소",
     "x": 4741,
     "y": -5652,
     "note": "juluo",
@@ -1991,7 +1991,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T2_10)",
+    "label": "검문소 024",
     "x": 3948,
     "y": -6817,
     "note": "juluo",
@@ -2000,7 +2000,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T2_13)",
+    "label": "리지 환승역",
     "x": 4964,
     "y": -5738,
     "note": "juluo",
@@ -2009,7 +2009,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T2_12)",
+    "label": "검문소 9043",
     "x": 4569,
     "y": -6335,
     "note": "juluo",
@@ -2018,7 +2018,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T1_10)",
+    "label": "노스 쇼어 캠프",
     "x": 4990,
     "y": -5093,
     "note": "juluo",
@@ -2027,7 +2027,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T1_11)",
+    "label": "절벽 캠프",
     "x": 5504,
     "y": -4807,
     "note": "juluo",
@@ -2036,7 +2036,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T1_13)",
+    "label": "브루컴 초소",
     "x": 6146,
     "y": -4479,
     "note": "juluo",
@@ -2045,7 +2045,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T1_14)",
+    "label": "프티 하버",
     "x": 7776,
     "y": -4967,
     "note": "juluo",
@@ -2054,7 +2054,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_8)",
+    "label": "리버사이드 기념품점",
     "x": 5527,
     "y": -2931,
     "note": "juluo",
@@ -2063,7 +2063,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_9)",
+    "label": "고갈된 유정",
     "x": 5868,
     "y": -2890,
     "note": "juluo",
@@ -2072,7 +2072,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_5)",
+    "label": "오염 검문소 77",
     "x": 5419,
     "y": -3632,
     "note": "juluo",
@@ -2081,7 +2081,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_6)",
+    "label": "리버하트 항구",
     "x": 5616,
     "y": -3728,
     "note": "juluo",
@@ -2090,7 +2090,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_1)",
+    "label": "오버룩 제재소",
     "x": 5248,
     "y": -4269,
     "note": "juluo",
@@ -2099,7 +2099,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_2)",
+    "label": "하이랜드 주거지구",
     "x": 5064,
     "y": -4850,
     "note": "juluo",
@@ -2108,7 +2108,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_3)",
+    "label": "약탈된 캠프",
     "x": 4523,
     "y": -4096,
     "note": "juluo",
@@ -2117,7 +2117,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_19)",
+    "label": "그린레이크 방문자센터",
     "x": -132,
     "y": -4339,
     "note": "juluo",
@@ -2126,7 +2126,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_18)",
+    "label": "광산 마을",
     "x": 1306,
     "y": -4978,
     "note": "juluo",
@@ -2135,7 +2135,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_13)",
+    "label": "힐리 홈스테드",
     "x": 3453,
     "y": -5016,
     "note": "juluo",
@@ -2144,7 +2144,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_11)",
+    "label": "검문소 384",
     "x": 1029,
     "y": -5283,
     "note": "juluo",
@@ -2153,7 +2153,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_10)",
+    "label": "할머니 니나의 식당",
     "x": 972,
     "y": -5880,
     "note": "juluo",
@@ -2162,7 +2162,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_17)",
+    "label": "신도 식민지",
     "x": 2293,
     "y": -4921,
     "note": "juluo",
@@ -2171,7 +2171,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_16)",
+    "label": "페이즐리 광장",
     "x": 2907,
     "y": -4454,
     "note": "juluo",
@@ -2180,7 +2180,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_15)",
+    "label": "노턴 농장",
     "x": 3791,
     "y": -3872,
     "note": "juluo",
@@ -2189,7 +2189,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_14)",
+    "label": "홀트 발전소",
     "x": 3260,
     "y": -4209,
     "note": "juluo",
@@ -2198,7 +2198,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_22)",
+    "label": "그린데일",
     "x": 1257,
     "y": -3634,
     "note": "juluo",
@@ -2207,7 +2207,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_23)",
+    "label": "양조장 에스테이트",
     "x": 1939,
     "y": -3045,
     "note": "juluo",
@@ -2216,7 +2216,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_20)",
+    "label": "하이 뱅크스 검문소",
     "x": 2467,
     "y": -3116,
     "note": "juluo",
@@ -2225,7 +2225,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T4_21)",
+    "label": "보스의 놀이터",
     "x": 1845,
     "y": -3480,
     "note": "juluo",
@@ -2234,7 +2234,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T5_1)",
+    "label": "수몰된 유적",
     "x": 3732,
     "y": -1332,
     "note": "juluo",
@@ -2243,7 +2243,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_16)",
+    "label": "검문소 023",
     "x": 6649,
     "y": -3232,
     "note": "juluo",
@@ -2252,7 +2252,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_17)",
+    "label": "클리프턴",
     "x": 6862,
     "y": -2790,
     "note": "juluo",
@@ -2261,7 +2261,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_14)",
+    "label": "풍력발전소",
     "x": 6934,
     "y": -3917,
     "note": "juluo",
@@ -2270,7 +2270,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_15)",
+    "label": "시크릿 하버",
     "x": 7206,
     "y": -3291,
     "note": "juluo",
@@ -2279,7 +2279,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_12)",
+    "label": "숄 파크",
     "x": 6221,
     "y": -4325,
     "note": "juluo",
@@ -2288,7 +2288,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_13)",
+    "label": "리플비 마켓",
     "x": 6969,
     "y": -4298,
     "note": "juluo",
@@ -2297,7 +2297,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_11)",
+    "label": "와인딩 리지 농지",
     "x": 6095,
     "y": -3652,
     "note": "juluo",
@@ -2306,7 +2306,7 @@
   {
     "category": "village",
     "group": "locations",
-    "label": "마을 (T3_18)",
+    "label": "브리지 쇼어스 리조트",
     "x": 7198,
     "y": -2637,
     "note": "juluo",
@@ -2315,7 +2315,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E60901-11060012-5BCC3955-0CE8201D)",
+    "label": "캠프 1",
     "x": 3976,
     "y": -7314,
     "note": "yingdi",
@@ -2324,7 +2324,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E70906-151F001B-DDA9CC9E-54727B2F)",
+    "label": "캠프 2",
     "x": 2704,
     "y": -1209,
     "note": "yingdi",
@@ -2333,7 +2333,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E70912-103B002D-8F89D7FB-0CE8201D)",
+    "label": "캠프 3",
     "x": 7374,
     "y": -7120,
     "note": "yingdi",
@@ -2342,7 +2342,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E70914-0E1C0004-B538A42D-1EB05372)",
+    "label": "캠프 4",
     "x": 269,
     "y": -2790,
     "note": "yingdi",
@@ -2351,7 +2351,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E70914-0A10002F-99FE3BF2-1B3827B0)",
+    "label": "캠프 5",
     "x": 2675,
     "y": -3981,
     "note": "yingdi",
@@ -2360,7 +2360,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E70903-0B270016-648215E6-54727B2F)",
+    "label": "캠프 6",
     "x": 4292,
     "y": -3335,
     "note": "yingdi",
@@ -2369,7 +2369,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E60A11-13120022-CADF3908-1B3827B0)",
+    "label": "캠프 7",
     "x": 1228,
     "y": -6975,
     "note": "yingdi",
@@ -2378,7 +2378,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E80712-112F0039-3F3E5D97-645A5CD6)",
+    "label": "캠프 8",
     "x": 5610,
     "y": 1869,
     "note": "yingdi",
@@ -2387,7 +2387,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E70913-0F110002-60FA5FB9-1B3827B0)",
+    "label": "캠프 9",
     "x": 7185,
     "y": -2258,
     "note": "yingdi",
@@ -2396,7 +2396,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E70906-1612001D-6FF3ACA9-1EB05372)",
+    "label": "캠프 10",
     "x": 3370,
     "y": -862,
     "note": "yingdi",
@@ -2405,7 +2405,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E6090E-0A03001A-38556277-756E0A8E)",
+    "label": "캠프 11",
     "x": 6533,
     "y": -3789,
     "note": "yingdi",
@@ -2414,7 +2414,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E70908-14030028-28FF2935-1EB05372)",
+    "label": "캠프 12",
     "x": 1679,
     "y": -2205,
     "note": "yingdi",
@@ -2423,7 +2423,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E7090F-0F27000C-D0359C42-0CE8201D)",
+    "label": "캠프 13",
     "x": 7433,
     "y": -4574,
     "note": "yingdi",
@@ -2432,7 +2432,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E7091B-11100007-F563BA3E-1EB05372)",
+    "label": "캠프 14",
     "x": 4358,
     "y": 1306,
     "note": "yingdi",
@@ -2441,7 +2441,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E70A09-100B0032-4FE86D37-05E518DF)",
+    "label": "캠프 15",
     "x": 4920,
     "y": 2665,
     "note": "yingdi",
@@ -2450,7 +2450,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E7091C-0F070031-3519994F-0CE8201D)",
+    "label": "캠프 16",
     "x": 6496,
     "y": 1619,
     "note": "yingdi",
@@ -2459,7 +2459,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E60913-11150018-5EAD31D2-58BA0C35)",
+    "label": "캠프 17",
     "x": 5915,
     "y": -390,
     "note": "yingdi",
@@ -2468,7 +2468,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E70A08-0A260017-8F03E92E-05E518DF)",
+    "label": "캠프 18",
     "x": 1763,
     "y": -234,
     "note": "yingdi",
@@ -2477,7 +2477,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E70913-0A0C0008-C7CD7343-0CE8201D)",
+    "label": "캠프 19",
     "x": 7104,
     "y": -6116,
     "note": "yingdi",
@@ -2486,7 +2486,7 @@
   {
     "category": "camp",
     "group": "locations",
-    "label": "캠프 (07E7091C-0F360039-CA4A6E2D-0CE8201D)",
+    "label": "캠프 20",
     "x": 2805,
     "y": 151,
     "note": "yingdi",
@@ -10910,7 +10910,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500031)",
+    "label": "비축물 1",
     "x": 6628,
     "y": -5415,
     "note": "hoard_loot_crate",
@@ -10919,7 +10919,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500117)",
+    "label": "비축물 2",
     "x": 5623,
     "y": -5209,
     "note": "hoard_loot_crate",
@@ -10928,7 +10928,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500129)",
+    "label": "비축물 3",
     "x": 7267,
     "y": -5316,
     "note": "hoard_loot_crate",
@@ -10937,7 +10937,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500136)",
+    "label": "비축물 4",
     "x": 7423,
     "y": -7262,
     "note": "hoard_loot_crate",
@@ -10946,7 +10946,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500140)",
+    "label": "비축물 5",
     "x": 5991,
     "y": -5985,
     "note": "hoard_loot_crate",
@@ -10955,7 +10955,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500148)",
+    "label": "비축물 6",
     "x": 6064,
     "y": -6927,
     "note": "hoard_loot_crate",
@@ -10964,7 +10964,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500155)",
+    "label": "비축물 7",
     "x": 4556,
     "y": -5214,
     "note": "hoard_loot_crate",
@@ -10973,7 +10973,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500206)",
+    "label": "비축물 8",
     "x": 6579,
     "y": -3478,
     "note": "hoard_loot_crate",
@@ -10982,7 +10982,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500210)",
+    "label": "비축물 9",
     "x": 6148,
     "y": -3075,
     "note": "hoard_loot_crate",
@@ -10991,7 +10991,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500229)",
+    "label": "비축물 10",
     "x": 5678,
     "y": -3224,
     "note": "hoard_loot_crate",
@@ -11000,7 +11000,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500257)",
+    "label": "비축물 11",
     "x": 5170,
     "y": -3641,
     "note": "hoard_loot_crate",
@@ -11009,7 +11009,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500300)",
+    "label": "비축물 12",
     "x": 1874,
     "y": -5794,
     "note": "hoard_loot_crate",
@@ -11018,7 +11018,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500321)",
+    "label": "비축물 13",
     "x": 6005,
     "y": -5128,
     "note": "hoard_loot_crate",
@@ -11027,7 +11027,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500398)",
+    "label": "비축물 14",
     "x": 2446,
     "y": -4081,
     "note": "hoard_loot_crate",
@@ -11036,7 +11036,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500410)",
+    "label": "비축물 15",
     "x": 2720,
     "y": -5349,
     "note": "hoard_loot_crate",
@@ -11045,7 +11045,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500418)",
+    "label": "비축물 16",
     "x": 3728,
     "y": -4533,
     "note": "hoard_loot_crate",
@@ -11054,7 +11054,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500427)",
+    "label": "비축물 17",
     "x": 5164,
     "y": -1337,
     "note": "hoard_loot_crate",
@@ -11063,7 +11063,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500430)",
+    "label": "비축물 18",
     "x": 2783,
     "y": -1625,
     "note": "hoard_loot_crate",
@@ -11072,7 +11072,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500437)",
+    "label": "비축물 19",
     "x": 4534,
     "y": -2293,
     "note": "hoard_loot_crate",
@@ -11081,7 +11081,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500450)",
+    "label": "비축물 20",
     "x": 6128,
     "y": -1099,
     "note": "hoard_loot_crate",
@@ -11090,7 +11090,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500458)",
+    "label": "비축물 21",
     "x": 5156,
     "y": 1561,
     "note": "hoard_loot_crate",
@@ -11099,7 +11099,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500467)",
+    "label": "비축물 22",
     "x": 5995,
     "y": 525,
     "note": "hoard_loot_crate",
@@ -11108,7 +11108,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500474)",
+    "label": "비축물 23",
     "x": 3496,
     "y": -549,
     "note": "hoard_loot_crate",
@@ -11117,7 +11117,7 @@
   {
     "category": "hoard",
     "group": "loot",
-    "label": "비축물 (hoard_loot_crate_500482)",
+    "label": "비축물 24",
     "x": 2485,
     "y": -77,
     "note": "hoard_loot_crate",
@@ -11126,7 +11126,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_301027)",
+    "label": "임계점을 넘어",
     "x": 7350,
     "y": -4729,
     "note": "echoes_of_stardust",
@@ -11135,7 +11135,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_301080)",
+    "label": "새로운 시작",
     "x": 7092,
     "y": -4564,
     "note": "echoes_of_stardust",
@@ -11144,7 +11144,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_301092)",
+    "label": "블러드비크의 부상",
     "x": 5516,
     "y": -4786,
     "note": "echoes_of_stardust",
@@ -11153,7 +11153,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_301097)",
+    "label": "모든 것이 잘못되다",
     "x": 6021,
     "y": -4524,
     "note": "echoes_of_stardust",
@@ -11162,7 +11162,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_302148)",
+    "label": "데니스 쿠퍼의 일지",
     "x": 6580,
     "y": -6954,
     "note": "echoes_of_stardust",
@@ -11171,7 +11171,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_303027)",
+    "label": "탐사 메모",
     "x": 4635,
     "y": -3035,
     "note": "echoes_of_stardust",
@@ -11180,7 +11180,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_304184)",
+    "label": "낯선 고향",
     "x": 2236,
     "y": -4931,
     "note": "echoes_of_stardust",
@@ -11189,7 +11189,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_304221)",
+    "label": "장애물",
     "x": 1244,
     "y": -4990,
     "note": "echoes_of_stardust",
@@ -11198,7 +11198,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_302008)",
+    "label": "새장 속 새",
     "x": 6061,
     "y": -6154,
     "note": "echoes_of_stardust",
@@ -11207,7 +11207,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_302063)",
+    "label": "묘비",
     "x": 5567,
     "y": -6304,
     "note": "echoes_of_stardust",
@@ -11216,7 +11216,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_302066)",
+    "label": "많은 것이 변했다",
     "x": 5661,
     "y": -6332,
     "note": "echoes_of_stardust",
@@ -11225,7 +11225,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_302120)",
+    "label": "비밀 작전",
     "x": 3989,
     "y": -5707,
     "note": "echoes_of_stardust",
@@ -11234,7 +11234,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_301094)",
+    "label": "확보 임무",
     "x": 5639,
     "y": -4621,
     "note": "echoes_of_stardust",
@@ -11243,7 +11243,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_302043)",
+    "label": "유망한 시작",
     "x": 3966,
     "y": -6348,
     "note": "echoes_of_stardust",
@@ -11252,7 +11252,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_303048)",
+    "label": "임시 공지",
     "x": 6594,
     "y": -3393,
     "note": "echoes_of_stardust",
@@ -11261,7 +11261,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_303121)",
+    "label": "스타-0427",
     "x": 7151,
     "y": -2590,
     "note": "echoes_of_stardust",
@@ -11270,7 +11270,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_304066)",
+    "label": "목표 없는",
     "x": 298,
     "y": -7148,
     "note": "echoes_of_stardust",
@@ -11279,7 +11279,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_304139)",
+    "label": "공생이 가능한가?",
     "x": 2996,
     "y": -6646,
     "note": "echoes_of_stardust",
@@ -11288,7 +11288,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_303033)",
+    "label": "변절한 형제",
     "x": 6250,
     "y": -2536,
     "note": "echoes_of_stardust",
@@ -11297,7 +11297,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_303034)",
+    "label": "떠나기로 한 선택",
     "x": 6301,
     "y": -2500,
     "note": "echoes_of_stardust",
@@ -11306,7 +11306,7 @@
   {
     "category": "echo",
     "group": "knowledge",
-    "label": "별빛 메아리 (book_book_303062)",
+    "label": "안정된 흐름",
     "x": 5036,
     "y": -4862,
     "note": "echoes_of_stardust",
@@ -11315,7 +11315,7 @@
   {
     "category": "riddle",
     "group": "knowledge",
-    "label": "수수께끼 (riddle_telephone_500196)",
+    "label": "수수께끼",
     "x": 2863,
     "y": -4429,
     "note": "riddle_telephone",
@@ -11324,7 +11324,7 @@
   {
     "category": "riddle",
     "group": "knowledge",
-    "label": "수수께끼 (riddle_telephone_500205)",
+    "label": "수수께끼",
     "x": 1317,
     "y": -5064,
     "note": "riddle_telephone",
