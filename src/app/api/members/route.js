@@ -15,6 +15,12 @@ async function getFromDB() {
 }
 
 export async function GET() {
+  const { requireMember } = await import('@/lib/auth');
+  const session = await requireMember();
+  if (!session) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const dbData = await getFromDB();
   if (dbData) return NextResponse.json(dbData);
   return NextResponse.json(MEMBERS);

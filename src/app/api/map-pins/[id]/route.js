@@ -13,6 +13,7 @@ export async function PUT(req, { params }) {
   try {
     const { id } = await params;
     const parsedId = parseInt(id);
+    if (isNaN(parsedId)) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
 
     const existing = await db.select().from(mapPins).where(eq(mapPins.id, parsedId));
     if (existing.length === 0) {
@@ -53,6 +54,7 @@ export async function DELETE(req, { params }) {
   try {
     const { id } = await params;
     const parsedId = parseInt(id);
+    if (isNaN(parsedId)) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
 
     const existing = await db.select().from(mapPins).where(eq(mapPins.id, parsedId));
     if (existing.length === 0) {

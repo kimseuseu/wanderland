@@ -40,10 +40,13 @@ export async function POST(req) {
     const { db } = await import('@/db');
     const { mapPins } = await import('@/db/schema');
     const body = await req.json();
+    if (!body.label || typeof body.label !== 'string' || body.x == null || body.y == null || isNaN(Number(body.x)) || isNaN(Number(body.y))) {
+      return NextResponse.json({ error: 'Missing or invalid required fields (label, x, y)' }, { status: 400 });
+    }
     const result = await db.insert(mapPins).values({
-      x: body.x,
-      y: body.y,
-      label: body.label,
+      x: Number(body.x),
+      y: Number(body.y),
+      label: body.label.trim(),
       author: body.author || session.user?.name || '익명',
       discordId: session.discordId || null,
       note: body.note || '',

@@ -205,20 +205,11 @@ async function handleBlacklistSearch(interaction) {
 }
 
 /**
- * GET: 진단용 엔드포인트
+ * GET: 상태 확인용 엔드포인트
  */
 export async function GET() {
-  const envCheck = {
-    DISCORD_PUBLIC_KEY: !!process.env.DISCORD_PUBLIC_KEY,
-    DISCORD_APP_ID: !!process.env.DISCORD_APP_ID,
-    DISCORD_GUILD_ID: process.env.DISCORD_GUILD_ID || '(not set)',
-    DISCORD_BOT_GUILD_ID_2: process.env.DISCORD_BOT_GUILD_ID_2 || '(not set)',
-    DATABASE_URL: !!process.env.DATABASE_URL,
-  };
-
   return NextResponse.json({
     status: 'ok',
-    env: envCheck,
     commands: ['blacklist-channel', 'blacklist'],
   });
 }

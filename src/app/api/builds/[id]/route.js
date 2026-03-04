@@ -20,7 +20,9 @@ function mapBuild(r) {
 export async function GET(req, { params }) {
   try {
     const { id } = await params;
-    const rows = await db.select().from(builds).where(eq(builds.id, parseInt(id)));
+    const parsedId = parseInt(id);
+    if (isNaN(parsedId)) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
+    const rows = await db.select().from(builds).where(eq(builds.id, parsedId));
     if (rows.length === 0) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
@@ -40,6 +42,7 @@ export async function PUT(req, { params }) {
   try {
     const { id } = await params;
     const parsedId = parseInt(id);
+    if (isNaN(parsedId)) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
 
     const existing = await db.select().from(builds).where(eq(builds.id, parsedId));
     if (existing.length === 0) {
@@ -90,6 +93,7 @@ export async function DELETE(req, { params }) {
   try {
     const { id } = await params;
     const parsedId = parseInt(id);
+    if (isNaN(parsedId)) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
 
     const existing = await db.select().from(builds).where(eq(builds.id, parsedId));
     if (existing.length === 0) {

@@ -32,7 +32,7 @@ export function useNicknames() {
     }
 
     // 2순위: 저장된 이름으로 역조회 (discordId 없는 기존 데이터)
-    if (fallback) {
+    if (fallback && typeof fallback === 'string') {
       const found = byName.get(fallback.toLowerCase());
       if (found) return found;
     }

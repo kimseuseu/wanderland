@@ -13,6 +13,7 @@ export async function GET(req, { params }) {
   try {
     const { id } = await params;
     const parsedId = parseInt(id);
+    if (isNaN(parsedId)) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
     const result = await db.select().from(guides).where(eq(guides.id, parsedId));
     if (result.length === 0) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
@@ -39,6 +40,7 @@ export async function PUT(req, { params }) {
   try {
     const { id } = await params;
     const parsedId = parseInt(id);
+    if (isNaN(parsedId)) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
 
     const existing = await db.select().from(guides).where(eq(guides.id, parsedId));
     if (existing.length === 0) {
@@ -79,6 +81,7 @@ export async function DELETE(req, { params }) {
   try {
     const { id } = await params;
     const parsedId = parseInt(id);
+    if (isNaN(parsedId)) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
 
     const existing = await db.select().from(guides).where(eq(guides.id, parsedId));
     if (existing.length === 0) {

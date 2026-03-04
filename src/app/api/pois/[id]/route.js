@@ -16,6 +16,7 @@ export async function PUT(req, { params }) {
   try {
     const { id } = await params;
     const parsedId = parseInt(id);
+    if (isNaN(parsedId)) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
 
     const existing = await db.select().from(pois).where(eq(pois.id, parsedId));
     if (existing.length === 0) {
@@ -28,6 +29,8 @@ export async function PUT(req, { params }) {
         category: body.category || existing[0].category,
         group: body.group || existing[0].group,
         label: body.label || existing[0].label,
+        x: body.x != null && !isNaN(Number(body.x)) ? Number(body.x) : existing[0].x,
+        y: body.y != null && !isNaN(Number(body.y)) ? Number(body.y) : existing[0].y,
         note: body.note ?? existing[0].note,
         scenario: body.scenario ?? existing[0].scenario,
       })
@@ -53,6 +56,7 @@ export async function DELETE(req, { params }) {
   try {
     const { id } = await params;
     const parsedId = parseInt(id);
+    if (isNaN(parsedId)) return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
 
     const existing = await db.select().from(pois).where(eq(pois.id, parsedId));
     if (existing.length === 0) {

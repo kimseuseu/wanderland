@@ -6,6 +6,9 @@ export function Modal({ open, onClose, title, children }) {
   if (!open) return null;
   return (
     <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={title}
       style={{
         position: 'fixed', inset: 0, zIndex: 9999,
         display: 'flex', flexDirection: 'column', alignItems: 'center',
@@ -30,6 +33,7 @@ export function Modal({ open, onClose, title, children }) {
           <h3 style={{ fontSize: 17, fontFamily: 'var(--font-display)', fontWeight: 800 }}>{title}</h3>
           <button
             onClick={onClose}
+            aria-label="닫기"
             style={{ background: 'none', border: 'none', color: 'var(--text-muted)', cursor: 'pointer', padding: 4 }}
           >
             <Icons.X />
