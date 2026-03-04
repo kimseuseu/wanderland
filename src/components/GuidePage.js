@@ -38,8 +38,15 @@ const CATEGORIES = {
   tips: { label: '팁', color: '#88ddff' },
 };
 
+const SCENARIOS = {
+  '무한의꿈': { short: '무한', color: '#66bbff' },
+  '혹독한겨울': { short: '혹겨', color: '#88ddff' },
+  '터치오브스카이': { short: '터스', color: '#ffaa44' },
+  '비정상수용': { short: '비수', color: '#cc66ff' },
+};
+
 const DEFAULT_FORM = {
-  title: '', category: 'tips', content: '', summary: '', tags: '',
+  title: '', category: 'tips', scenario: '', content: '', summary: '', tags: '',
 };
 
 /* ── Markdown Editor ── */
@@ -123,6 +130,7 @@ export default function GuidePage() {
   const [editId, setEditId] = useState(null);
   const [search, setSearch] = useState('');
   const [filterCat, setFilterCat] = useState('all');
+  const [filterScenario, setFilterScenario] = useState('all');
   const [coverFile, setCoverFile] = useState(null);
   const [coverPreview, setCoverPreview] = useState(null);
 
@@ -130,6 +138,7 @@ export default function GuidePage() {
     if (!list) return [];
     return list.filter((g) => {
       if (filterCat !== 'all' && g.category !== filterCat) return false;
+      if (filterScenario !== 'all' && g.scenario !== filterScenario) return false;
       if (search) {
         const q = search.toLowerCase();
         return g.title.toLowerCase().includes(q) ||
@@ -139,7 +148,7 @@ export default function GuidePage() {
       }
       return true;
     });
-  }, [list, filterCat, search]);
+  }, [list, filterCat, filterScenario, search]);
 
   const checkOwner = (entry) => {
     if (!session || !entry) return false;
@@ -171,6 +180,7 @@ export default function GuidePage() {
       const tags = form.tags ? form.tags.split(',').map((t) => t.trim()).filter(Boolean) : [];
       const body = {
         title: form.title, category: form.category,
+        scenario: form.scenario || null,
         content: form.content, summary: form.summary,
         image: imageUrl, tags,
       };
@@ -205,6 +215,7 @@ export default function GuidePage() {
   const openEdit = (guide) => {
     setForm({
       title: guide.title, category: guide.category,
+      scenario: guide.scenario || '',
       content: guide.content || '', summary: guide.summary || '',
       tags: (guide.tags || []).join(', '),
     });
@@ -224,6 +235,7 @@ export default function GuidePage() {
   /* ── Detail View ── */
   if (view === 'detail' && sel) {
     const cat = CATEGORIES[sel.category] || CATEGORIES.tips;
+    const scn = sel.scenario ? SCENARIOS[sel.scenario] : null;
     return (
       <div className="guide-page">
         <button className="guide-back-btn" onClick={() => { setView('list'); setSel(null); }}>
@@ -238,9 +250,16 @@ export default function GuidePage() {
           )}
 
           <div className="guide-detail-header">
-            <span className="guide-cat-badge" style={{ background: `${cat.color}18`, color: cat.color }}>
-              {cat.label}
-            </span>
+            <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', alignItems: 'center' }}>
+              <span className="guide-cat-badge" style={{ background: `${cat.color}18`, color: cat.color }}>
+                {cat.label}
+              </span>
+              {scn && (
+                <span className="guide-cat-badge" style={{ background: `${scn.color}18`, color: scn.color }}>
+                  {sel.scenario}
+                </span>
+              )}
+            </div>
             <h1 className="guide-detail-title">{sel.title}</h1>
             <div className="guide-detail-meta">
               <span>{resolveNick(sel.discordId, sel.author)}</span>
@@ -294,6 +313,24 @@ export default function GuidePage() {
                   style={form.category === key ? { background: `${cfg.color}18`, color: cfg.color, borderColor: cfg.color } : {}}
                   onClick={() => setForm({ ...form, category: key })}
                 >{cfg.label}</button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label style={{ fontSize: 12, color: 'var(--text-muted)', display: 'block', marginBottom: 4 }}>시나리오 (선택)</label>
+            <div className="guide-cat-select">
+              <button
+                className={`guide-cat-btn ${!form.scenario ? 'active' : ''}`}
+                style={!form.scenario ? { background: 'var(--bg-tertiary)', color: 'var(--text-secondary)', borderColor: 'var(--border-hover)' } : {}}
+                onClick={() => setForm({ ...form, scenario: '' })}
+              >없음</button>
+              {Object.entries(SCENARIOS).map(([name, cfg]) => (
+                <button key={name}
+                  className={`guide-cat-btn ${form.scenario === name ? 'active' : ''}`}
+                  style={form.scenario === name ? { background: `${cfg.color}18`, color: cfg.color, borderColor: cfg.color } : {}}
+                  onClick={() => setForm({ ...form, scenario: name })}
+                >{cfg.short}</button>
               ))}
             </div>
           </div>
@@ -368,6 +405,21 @@ export default function GuidePage() {
         </div>
       </div>
 
+      {/* Scenario Filter */}
+      <div className="guide-scenario-filter">
+        <button
+          className={`guide-scenario-btn ${filterScenario === 'all' ? 'active' : ''}`}
+          onClick={() => setFilterScenario('all')}
+        >전체</button>
+        {Object.entries(SCENARIOS).map(([name, cfg]) => (
+          <button key={name}
+            className={`guide-scenario-btn ${filterScenario === name ? 'active' : ''}`}
+            style={filterScenario === name ? { color: cfg.color, borderColor: cfg.color } : {}}
+            onClick={() => setFilterScenario(name)}
+          >{cfg.short}</button>
+        ))}
+      </div>
+
       {/* Grid */}
       {loading ? (
         <div className="guide-loading">
@@ -382,6 +434,7 @@ export default function GuidePage() {
         <div className="guide-grid">
           {filtered.map((g) => {
             const cat = CATEGORIES[g.category] || CATEGORIES.tips;
+            const scn = g.scenario ? SCENARIOS[g.scenario] : null;
             return (
               <div key={g.id} className="guide-card" onClick={() => openDetail(g)}>
                 {g.image && (
@@ -392,6 +445,9 @@ export default function GuidePage() {
                 <div className="guide-card-body">
                   <div className="guide-card-top">
                     <span className="guide-cat-badge" style={{ background: `${cat.color}18`, color: cat.color }}>{cat.label}</span>
+                    {scn && (
+                      <span className="guide-cat-badge" style={{ background: `${scn.color}18`, color: scn.color }}>{scn.short}</span>
+                    )}
                   </div>
                   <h3 className="guide-card-title">{g.title}</h3>
                   {g.summary && <p className="guide-card-summary">{g.summary}</p>}

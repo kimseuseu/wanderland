@@ -36,6 +36,7 @@ export async function POST(req) {
     const result = await db.insert(guides).values({
       title: body.title,
       category: body.category || 'tips',
+      scenario: body.scenario || null,
       content: body.content || '',
       summary: body.summary || '',
       image: body.image || null,

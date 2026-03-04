@@ -56,6 +56,7 @@ export async function PUT(req, { params }) {
       .set({
         title: body.title ?? existing[0].title,
         category: body.category ?? existing[0].category,
+        scenario: body.scenario !== undefined ? body.scenario : existing[0].scenario,
         content: body.content !== undefined ? body.content : existing[0].content,
         summary: body.summary !== undefined ? body.summary : existing[0].summary,
         image: body.image !== undefined ? body.image : existing[0].image,

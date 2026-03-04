@@ -86,6 +86,7 @@ export const guides = pgTable('guides', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),
   category: text('category').notNull(), // 'beginner' | 'weapon' | 'scenario' | 'boss' | 'cradle' | 'tips'
+  scenario: text('scenario'), // '무한의꿈' | '혹독한겨울' | '터치오브스카이' | '비정상수용'
   content: text('content').notNull(), // markdown
   summary: text('summary'),
   image: text('image'),

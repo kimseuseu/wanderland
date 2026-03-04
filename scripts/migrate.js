@@ -102,6 +102,13 @@ async function migrate() {
     console.log('[migrate] bot_channels:', err.message);
   }
 
+  try {
+    await sql`ALTER TABLE guides ADD COLUMN IF NOT EXISTS scenario text`;
+    console.log('[migrate] Added guides scenario column');
+  } catch (err) {
+    console.log('[migrate] guides scenario:', err.message);
+  }
+
   console.log('[migrate] Done');
 }
 
